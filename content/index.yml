@@ -1,0 +1,12 @@
+seo:
+  title: Knecht
+  description: Knecht is a self-hostable orchestration tool that connects to your GitHub repos and uses your own AI code agent to boot environments, fix issues, and deliver finished pull requests.
+title: "Your repos.\nYour agent. Your server."
+description: Knecht is a self-hostable orchestration tool that connects to your GitHub repos and uses your own AI code agent to boot environments, fix issues, and deliver finished pull requests — your code never leaves your machine.
+hero:
+  headline: "Beta coming soon"
+  links:
+    - label: Get notified
+      color: primary
+      size: xl
+      to: '#'
