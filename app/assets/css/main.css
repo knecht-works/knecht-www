@@ -189,6 +189,30 @@ picture {
   opacity: 0.6;
 }
 
+/* Hero on-load intro: hidden pre-paint on every motion-ok device (incl. mobile).
+   AppReveal drives the reveal via the Web Animations API, whose `fill: both`
+   overrides this opacity:0 and pins the final visible state. */
+html.motion-ok .app-reveal-appear {
+  opacity: 0;
+  will-change: opacity, transform;
+}
+
+/* Scroll-section reveals: desktop only (pointer-fine). Hidden pre-paint, then
+   AppReveal adds `.is-visible` on scroll to play one smooth CSS transition. */
+html.reveal-on .app-reveal-section {
+  opacity: 0;
+  transform: translateY(var(--reveal-y, 14px));
+  transition:
+    opacity var(--reveal-duration, 0.6s) cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0s),
+    transform var(--reveal-duration, 0.6s) cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0s);
+  will-change: opacity, transform;
+}
+
+html.reveal-on .app-reveal-section.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
 /* ---------- smooth scrolling (scroll reveals handled by motion-v) ---------- */
 @media (prefers-reduced-motion: no-preference) {
   html {

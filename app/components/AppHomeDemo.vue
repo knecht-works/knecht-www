@@ -42,7 +42,7 @@ const stats = [
               height="853"
               loading="lazy"
               format="avif,webp"
-              sizes="100vw lg:1152px"
+              sizes="xs:100vw sm:100vw md:100vw lg:1152px"
               :img-attrs="{ class: 'block w-full' }"
             />
             <!-- fade the screenshot into the panel -->

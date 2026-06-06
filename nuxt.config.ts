@@ -27,6 +27,19 @@ export default defineNuxtConfig({
       ],
       meta: [
         { name: 'apple-mobile-web-app-title', content: 'Knecht' }
+      ],
+
+      script: [
+        {
+          // Set animation flags on <html> BEFORE first paint, so reveal targets
+          // start hidden (no FOUC) only where they'll actually animate. See
+          // AppReveal.vue. `motion-ok`: any non-reduced-motion device — gates the
+          // hero on-load intro (incl. mobile). `reveal-on`: additionally requires a
+          // fine pointer — gates scroll-section reveals (desktop only), so nothing
+          // pops in while scrolling on touch.
+          innerHTML: 'try{if(!matchMedia("(prefers-reduced-motion: reduce)").matches){var d=document.documentElement;d.classList.add("motion-ok");if(matchMedia("(pointer: fine)").matches)d.classList.add("reveal-on")}}catch(e){}',
+          tagPosition: 'head'
+        }
       ]
     }
   },
@@ -36,7 +49,6 @@ export default defineNuxtConfig({
   site: {
     url: process.env.NUXT_SITE_URL || 'https://knecht.works',
     name: 'Knecht',
-    // German site — drives <html lang> (via nuxt-seo-utils) and og:locale.
     defaultLocale: 'de'
   },
 
@@ -53,20 +65,28 @@ export default defineNuxtConfig({
   },
 
   ui: {
-    colorMode: false
+    colorMode: false,
+    experimental: {
+      componentDetection: true
+    }
   },
 
-  // Server-only secrets — set via NUXT_RESEND_API_KEY etc. in the environment.
   runtimeConfig: {
     resendApiKey: '',
     resendAudienceUpdates: '',
     resendAudienceBeta: ''
   },
 
+  routeRules: {
+    '/_ipx/**': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
+    '/assets/**': { headers: { 'cache-control': 'public, max-age=604800' } }
+  },
+
   compatibilityDate: '2025-01-15',
 
   nitro: {
-    preset: 'cloudflare-pages',
+    preset: process.env.CF_PAGES ? 'cloudflare-pages' : undefined,
+    compressPublicAssets: { gzip: true, brotli: true },
     prerender: {
       crawlLinks: true,
       failOnError: true,
@@ -105,13 +125,17 @@ export default defineNuxtConfig({
   },
 
   image: {
+    // `ipxStatic` only transforms at build/prerender time (correct for the
+    // Cloudflare Pages deploy, which has no sharp runtime). In dev there is no
+    // `/_ipx/` handler, so use on-demand `ipx` there to preview optimized images.
+    provider: process.env.NODE_ENV === 'development' ? 'ipx' : 'ipxStatic',
     quality: 78
   },
 
   llms: {
     domain: 'https://knecht.works',
     title: 'Knecht',
-    description: 'Knecht is a self-hostable orchestration tool that connects to your GitHub repos and uses your own AI code agent to boot environments, fix issues, and deliver finished pull requests.',
+    description: 'Knecht is a self-hostable orchestration tool that connects to your GitHub repos and uses workflows to boot up complete projects so that agents can fix and test in functional environments.',
     full: {
       title: 'Knecht — Full website content',
       description: 'The complete content of the Knecht website as a single document.'
@@ -119,7 +143,7 @@ export default defineNuxtConfig({
     sections: [
       {
         title: 'Legal',
-        description: 'Legal pages (Impressum, Datenschutz).',
+        description: 'Legal pages',
         contentCollection: 'pages',
         contentFilters: [
           { field: 'extension', operator: '=', value: 'md' }
@@ -135,6 +159,8 @@ export default defineNuxtConfig({
       }
     ]
   },
+
+  ogImage: { zeroRuntime: true },
 
   sitemap: {
     sources: ['/api/__sitemap__/urls']

@@ -2,6 +2,8 @@
 const headEl = useTemplateRef<HTMLImageElement>('headEl')
 
 const MAX_TILT = 14 // degrees
+const MOBILE_TILT_UP = 16 // degrees the head looks up at the top of the page (mobile)
+const MOBILE_TILT_DOWN = 16 // degrees the head tilts down after scrolling SCROLL_RANGE
 const SCROLL_RANGE = 600 // px of scroll that maps to the full downward tilt
 const SHAKE_AMP = 13 // peak shake angle in degrees
 const SHAKE_FREQ = 32 // shake speed (rad/s) → ~3 head turns
@@ -70,12 +72,17 @@ onMounted(() => {
     window.addEventListener('mousemove', onMove, { passive: true })
     cleanup = () => window.removeEventListener('mousemove', onMove)
   } else {
+    // Look up at the top of the page, then tilt down as the user scrolls.
+    const rotForScroll = () => {
+      const p = clamp(window.scrollY / SCROLL_RANGE, 0, 1)
+      return MOBILE_TILT_UP - p * (MOBILE_TILT_UP + MOBILE_TILT_DOWN)
+    }
     const onScroll = () => {
-      targetRot = clamp(-(window.scrollY / SCROLL_RANGE) * MAX_TILT, -MAX_TILT, 0)
+      targetRot = rotForScroll()
       kick()
     }
     // Snap to the current scroll position on load without animating in.
-    curRot = targetRot = clamp(-(window.scrollY / SCROLL_RANGE) * MAX_TILT, -MAX_TILT, 0)
+    curRot = targetRot = rotForScroll()
     el.style.transform = `rotate(${curRot.toFixed(2)}deg)`
     window.addEventListener('scroll', onScroll, { passive: true })
     cleanup = () => window.removeEventListener('scroll', onScroll)
