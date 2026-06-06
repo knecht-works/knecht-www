@@ -1,4 +1,92 @@
 <script setup lang="ts">
+const headEl = useTemplateRef<HTMLImageElement>('headEl')
+
+const MAX_TILT = 14 // degrees
+const SCROLL_RANGE = 600 // px of scroll that maps to the full downward tilt
+const SHAKE_AMP = 13 // peak shake angle in degrees
+const SHAKE_FREQ = 32 // shake speed (rad/s) → ~3 head turns
+const SHAKE_DUR = 0.6 // seconds
+let triggerShake = () => {}
+const onMascotClick = () => triggerShake()
+
+onMounted(() => {
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  const el = headEl.value
+  if (reduce || !el) return
+
+  const fine = window.matchMedia('(pointer: fine)').matches
+  const clamp = (v: number, min: number, max: number) => Math.min(max, Math.max(min, v))
+
+  let targetRot = 0
+  let curRot = 0
+  let raf = 0
+  let running = false
+  let shakeT0 = 0
+  let shaking = false
+
+  const tick = () => {
+    curRot += (targetRot - curRot) * 0.12
+
+    // Damped "no" shake layered on top of the tracked tilt.
+    let shake = 0
+    if (shaking) {
+      const t = (performance.now() - shakeT0) / 1000
+      if (t >= SHAKE_DUR) {
+        shaking = false
+      } else {
+        shake = SHAKE_AMP * Math.sin(t * SHAKE_FREQ) * (1 - t / SHAKE_DUR)
+      }
+    }
+
+    el.style.transform = `rotate(${(curRot + shake).toFixed(2)}deg)`
+    if (Math.abs(targetRot - curRot) > 0.01 || shaking) {
+      raf = requestAnimationFrame(tick)
+    } else {
+      running = false
+    }
+  }
+  const kick = () => {
+    if (!running) {
+      running = true
+      raf = requestAnimationFrame(tick)
+    }
+  }
+
+  triggerShake = () => {
+    shakeT0 = performance.now()
+    shaking = true
+    kick()
+  }
+
+  let cleanup: () => void
+
+  if (fine) {
+    const onMove = (e: MouseEvent) => {
+      const r = el.getBoundingClientRect()
+      const dy = e.clientY - (r.top + r.height * 0.322) // cursor offset from the neck pivot
+      targetRot = clamp(-dy / 28, -MAX_TILT, MAX_TILT) // mouse lower → head tilts further down
+      kick()
+    }
+    window.addEventListener('mousemove', onMove, { passive: true })
+    cleanup = () => window.removeEventListener('mousemove', onMove)
+  } else {
+    const onScroll = () => {
+      targetRot = clamp(-(window.scrollY / SCROLL_RANGE) * MAX_TILT, -MAX_TILT, 0)
+      kick()
+    }
+    // Snap to the current scroll position on load without animating in.
+    curRot = targetRot = clamp(-(window.scrollY / SCROLL_RANGE) * MAX_TILT, -MAX_TILT, 0)
+    el.style.transform = `rotate(${curRot.toFixed(2)}deg)`
+    window.addEventListener('scroll', onScroll, { passive: true })
+    cleanup = () => window.removeEventListener('scroll', onScroll)
+  }
+
+  onBeforeUnmount(() => {
+    triggerShake = () => {}
+    cleanup()
+    cancelAnimationFrame(raf)
+  })
+})
 </script>
 
 <template>
@@ -99,19 +187,32 @@
         :delay="0.2"
         :y="24"
         :duration="0.8"
-        class="col-span-full max-md:mt-16 md:col-span-4 md:relative ml-10"
+        class="col-span-full max-md:mt-16 md:col-span-4 md:relative md:ml-10"
       >
-        <NuxtImg
-          src="/assets/mascotLeft.png"
-          alt="Knecht – der Roboter-Knecht mit Röhren-TV-Kopf"
-          width="299"
-          height="560"
-          format="webp"
-          quality="80"
-          densities="1x 2x"
-          fetchpriority="high"
-          class="drop-shadow-mascot w-1/3 h-auto object-contain md:absolute md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:w-auto md:h-full"
-        />
+        <div
+          class="drop-shadow-mascot relative max-md:mx-auto aspect-[654/1199] w-1/2 cursor-pointer select-none md:absolute md:left-1/2 md:top-1/2 md:h-full md:w-auto md:-translate-x-1/2 md:-translate-y-1/2"
+          @click="onMascotClick"
+        >
+          <img
+            :src="'/assets/mascotLeft-body.svg'"
+            alt="Knecht – der Roboter-Knecht mit Röhren-TV-Kopf"
+            width="654"
+            height="1199"
+            fetchpriority="high"
+            class="absolute inset-0 h-full w-full object-contain"
+          >
+          <img
+            ref="headEl"
+            :src="'/assets/mascotLeft-head.svg'"
+            alt=""
+            aria-hidden="true"
+            width="654"
+            height="1199"
+            fetchpriority="high"
+            class="absolute inset-0 h-full w-full object-contain will-change-transform"
+            style="transform-origin: 49.4% 32.2%"
+          >
+        </div>
       </AppReveal>
     </div>
   </section>

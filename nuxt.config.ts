@@ -34,10 +34,6 @@ export default defineNuxtConfig({
 
   css: ['~/assets/css/main.css'],
 
-  ui: {
-    colorMode: false
-  },
-
   site: {
     url: process.env.NUXT_SITE_URL || 'https://knecht.works',
     name: 'Knecht',
@@ -55,6 +51,10 @@ export default defineNuxtConfig({
     highlight: {
       noApiRoute: false
     }
+  },
+
+  ui: {
+    colorMode: false
   },
 
   compatibilityDate: '2025-01-15',

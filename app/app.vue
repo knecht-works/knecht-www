@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 useHead({
   meta: [
     { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -15,8 +14,6 @@ useSeoMeta({
   twitterCard: 'summary_large_image'
 })
 
-// Site-wide default preview image. Pages override it by calling defineOgImage
-// again with their own title/description.
 defineOgImage('Knecht')
 </script>
 
