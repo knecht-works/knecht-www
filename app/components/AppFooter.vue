@@ -5,18 +5,18 @@ const columns = [
   {
     heading: 'Knecht',
     links: [
-      { label: 'Die Idee', to: '#idee' },
-      { label: 'Vorschau', to: '#dashboard' },
-      { label: 'Roadmap', to: '#roadmap' },
-      { label: 'Updates', to: '#updates' }
+      { label: 'Die Idee', to: '/#idee' },
+      { label: 'Vorschau', to: '/#dashboard' },
+      { label: 'Roadmap', to: '/#roadmap' },
+      { label: 'Updates', to: '/#updates' }
     ]
   },
   {
     heading: 'Mitmachen',
     links: [
-      { label: 'Warteliste', to: '#cta' },
-      { label: 'Beta-Tester werden', to: '#cta' },
-      { label: 'Feedback geben', to: '#cta' }
+      { label: 'Beta-Tester werden', to: '/#cta' },
+      { label: 'Updates abonnieren', to: '/#cta' },
+      { label: 'Feedback geben', to: `mailto:${CONTACT_EMAIL}` }
     ]
   },
   {
@@ -31,7 +31,7 @@ const columns = [
 
 <template>
   <footer class="border-t border-default mt-20 lg:mt-24">
-    <div class="container py-10 lg:py-16">
+    <div class="container pt-10 lg:pt-16">
       <div class="col-span-full flex flex-col justify-between gap-12 border-b border-default pb-12 lg:flex-row lg:gap-16">
         <!-- Brand -->
         <div class="max-w-xs">
@@ -50,7 +50,7 @@ const columns = [
             <AppBadge
               dot-color="orange"
               :pulse="false"
-              label="Self-hosted"
+              label="EU"
             />
           </div>
         </div>
@@ -78,9 +78,28 @@ const columns = [
       </div>
 
       <!-- Bottom bar -->
-      <div class="col-span-full flex flex-col gap-3 pt-6 font-mono text-xs text-dimmed sm:flex-row sm:justify-between">
-        <span>© {{ year }} Knecht – in Entwicklung, gebaut für Agenturen und Devs.</span>
-        <span>Building in Public · made with ❤️</span>
+      <div class="col-span-full flex flex-col gap-5 py-6 sm:flex-row sm:items-center sm:justify-between">
+        <div class="flex flex-col gap-1 font-mono text-xs text-dimmed">
+          <span>© {{ year }} Knecht - in Entwicklung</span>
+        </div>
+
+        <!-- Socials (right) -->
+        <div class="flex items-center gap-4">
+          <NuxtLink
+            v-for="social in SOCIAL_LINKS"
+            :key="social.label"
+            :to="social.to"
+            :aria-label="social.label"
+            :target="social.to.startsWith('http') ? '_blank' : undefined"
+            rel="noopener noreferrer"
+            class="text-dimmed transition-colors hover:text-white"
+          >
+            <UIcon
+              :name="social.icon"
+              class="size-5"
+            />
+          </NuxtLink>
+        </div>
       </div>
     </div>
   </footer>

@@ -146,7 +146,7 @@ onMounted(() => {
           class="mt-8 flex flex-wrap items-center gap-3"
         >
           <UButton
-            label="Auf die Warteliste"
+            label="Beta-Tester werden"
             color="neutral"
             size="lg"
             to="#cta"

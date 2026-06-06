@@ -1,12 +1,11 @@
 <script setup lang="ts">
 import type { NavigationMenuItem } from '@nuxt/ui'
 
-// Order matches the on-page scroll order of the sections.
 const items: NavigationMenuItem[] = [
-  { label: 'Die Idee', to: '#idee' },
-  { label: 'Vorschau', to: '#dashboard' },
-  { label: 'Roadmap', to: '#roadmap' },
-  { label: 'Updates', to: '#updates' }
+  { label: 'Die Idee', to: '/#idee', active: false },
+  { label: 'Vorschau', to: '/#dashboard', active: false },
+  { label: 'Roadmap', to: '/#roadmap', active: false },
+  { label: 'Updates', to: '/#updates', active: false }
 ]
 
 // Transparent at the very top (so the background grid shows through), then a
@@ -49,11 +48,11 @@ onUnmounted(() => {
         class="hidden lg:flex"
       />
       <UButton
-        label="Auf die Warteliste"
+        label="Beta-Tester werden"
         color="neutral"
         class="hidden lg:flex"
         size="lg"
-        to="#cta"
+        to="/#cta"
       />
     </template>
 
@@ -64,11 +63,11 @@ onUnmounted(() => {
         class="-mx-2.5"
       />
       <UButton
-        label="Auf die Warteliste"
+        label="Beta-Tester werden"
         color="neutral"
         block
         class="mt-4"
-        to="#cta"
+        to="/#cta"
       />
     </template>
   </UHeader>

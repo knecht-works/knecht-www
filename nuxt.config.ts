@@ -16,7 +16,6 @@ export default defineNuxtConfig({
 
   app: {
     pageTransition: { name: 'page', mode: 'out-in' },
-    layoutTransition: { name: 'page', mode: 'out-in' },
 
     head: {
       link: [
@@ -57,9 +56,17 @@ export default defineNuxtConfig({
     colorMode: false
   },
 
+  // Server-only secrets — set via NUXT_RESEND_API_KEY etc. in the environment.
+  runtimeConfig: {
+    resendApiKey: '',
+    resendAudienceUpdates: '',
+    resendAudienceBeta: ''
+  },
+
   compatibilityDate: '2025-01-15',
 
   nitro: {
+    preset: 'cloudflare-pages',
     prerender: {
       crawlLinks: true,
       failOnError: true,

@@ -1,10 +1,6 @@
 <script setup lang="ts">
 import type { MotionProps } from 'motion-v'
 
-// Subtle, consistent reveal built on motion-v. Renders AS the given element
-// (no extra wrapper node) so it can carry layout classes like `col-span-full`
-// directly. Defaults to a scroll-triggered fade-rise; pass `appear` for an
-// on-mount entrance (used above the fold in the hero).
 const props = withDefaults(defineProps<{
   as?: string
   delay?: number
@@ -19,6 +15,11 @@ const props = withDefaults(defineProps<{
   appear: false
 })
 
+const isTouch = ref(false)
+onMounted(() => {
+  isTouch.value = window.matchMedia('(pointer: coarse)').matches
+})
+
 // Typed as MotionProps so the object (incl. the cubic-bezier `ease` tuple) is
 // contextually checked instead of widening — keeps <Motion> strictly typed.
 // `<string>` because `as` is a dynamic tag (MotionProps<T> types `as` as T).
@@ -28,8 +29,12 @@ const motionProps = computed<MotionProps<string>>(() => ({
   ...(props.appear
     ? { animate: { opacity: 1, y: 0 } }
     : { whileInView: { opacity: 1, y: 0 } }),
-  inViewOptions: { once: true, margin: '-80px' },
-  transition: { duration: props.duration, delay: props.delay, ease: [0.22, 1, 0.36, 1] }
+  inViewOptions: { once: true, margin: isTouch.value ? '0px 0px 10% 0px' : '0px 0px -10% 0px' },
+  transition: {
+    duration: isTouch.value ? Math.min(props.duration, 0.4) : props.duration,
+    delay: props.delay,
+    ease: [0.22, 1, 0.36, 1]
+  }
 }))
 </script>
 

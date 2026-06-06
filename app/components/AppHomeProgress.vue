@@ -109,7 +109,7 @@ const phases = [
         </div>
 
         <p class="mt-5 font-mono text-xs text-dimmed">
-          Ziel: öffentliche Beta in Q4 2026 · Early-Access für Warteliste früher
+          Ziel: öffentliche Beta in Q4 2026 · Early-Access für Beta-Tester früher
         </p>
       </AppReveal>
 

@@ -15,12 +15,25 @@ useSeoMeta({
 })
 
 defineOgImage('Knecht')
+
+const pageTransition = {
+  name: 'page',
+  mode: 'out-in' as const,
+  onBeforeEnter() {
+    if (!window.location.hash) {
+      window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior })
+    }
+  }
+}
 </script>
 
 <template>
   <UApp :toaster="{ expand: false }">
     <NuxtLayout>
-      <NuxtPage />
+      <NuxtPage
+        :transition="pageTransition"
+        :page-key="route => route.path"
+      />
     </NuxtLayout>
   </UApp>
 </template>
