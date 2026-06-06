@@ -8,27 +8,24 @@ useHead({
     { name: 'viewport', content: 'width=device-width, initial-scale=1' },
     { key: 'theme-color', name: 'theme-color', content: color }
   ],
-  link: [
-    { rel: 'icon', href: '/favicon.ico' }
-  ],
   htmlAttrs: {
-    lang: 'en'
+    lang: 'de'
   }
 })
 
 useSeoMeta({
   twitterCard: 'summary_large_image'
 })
+
+// Site-wide default preview image. Pages override it by calling defineOgImage
+// again with their own title/description.
+defineOgImage('Knecht')
 </script>
 
 <template>
   <UApp :toaster="{ expand: false }">
-    <AppHeader />
-
-    <UMain>
+    <NuxtLayout>
       <NuxtPage />
-    </UMain>
-
-    <AppFooter />
+    </NuxtLayout>
   </UApp>
 </template>

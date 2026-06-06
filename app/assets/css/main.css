@@ -3,27 +3,234 @@
 
 @source "../../../content/**/*";
 
-@theme static {
-  --font-sans: 'Instrument Sans', -apple-system, sans-serif;
-  --font-mono: 'IBM Plex Mono', monospace;
+:root {
+  --font-sans: 'Geist', -apple-system, sans-serif;
+  --font-mono: 'Geist Mono', monospace;
 
-  --color-lime-50: #fbfde8;
-  --color-lime-100: #f5fbb3;
-  --color-lime-200: #eef87e;
-  --color-lime-300: #ddf34c;
-  --color-lime-400: #c8f031;
-  --color-lime-500: #a9d316;
-  --color-lime-600: #84a70e;
-  --color-lime-700: #647f11;
-  --color-lime-800: #4f6413;
-  --color-lime-900: #435514;
-  --color-lime-950: #232f06;
+  /* Primary scale built around the logo green (highlight #B7F8A2, body #6BA96D). */
+  --color-lime-50: #f5fef1;
+  --color-lime-100: #ecfde6;
+  --color-lime-200: #ddfdd2;
+  --color-lime-300: #ccfcbb;
+  --color-lime-400: #b7f8a2;
+  --color-lime-500: #93d585;
+  --color-lime-600: #6ba96d;
+  --color-lime-700: #527f54;
+  --color-lime-800: #3e5e40;
+  --color-lime-900: #314931;
+  --color-lime-950: #16220f;
+
+  /* Brand accents — taken straight from the logo's embedded hex colors. */
+  --accent-mint: #b7f8a2;
+  --accent-orange: #fa7a2c;
+  --accent-violet: #fcc46e;
+  --accent-ink: #16220f;
+
+
+  --container-margin-x: 1rem;
+  --text-width: 800px;
+  --ui-container: 1920px;
+
+  @variant lg {
+  --container-margin-x: 2rem;
+}
 }
 
 .dark {
   --ui-bg: var(--ui-color-neutral-950);
-  --ui-bg-muted: var(--ui-color-neutral-900);
+  --ui-bg-muted: oklch(0.142 0 0);
   --ui-bg-elevated: var(--ui-color-neutral-900);
   --ui-bg-accented: var(--ui-color-neutral-800);
-  --ui-border: var(--ui-color-neutral-900);
+  --ui-border: oklch(1 0 0 / 0.09);
+  --ui-border-muted: oklch(1 0 0 / 0.06);
+  --ui-border-accented: oklch(1 0 0 / 0.16);
 }
+
+@utility outside-container {
+  padding-inline: var(--container-margin-x);
+}
+
+@utility container-grid {
+  @apply grid grid-cols-12 mx-auto;
+}
+
+@utility container {
+  max-width: var(--ui-container);
+  width: 100%;
+  padding-inline: var(--container-margin-x);
+  @apply grid grid-cols-12 mx-auto;
+}
+
+/* Depth — neutral (non-colored) shadows tuned for the near-black surfaces. */
+@utility shadow-panel {
+  box-shadow:
+    0 1px 2px -1px oklch(0 0 0 / 0.5),
+    0 10px 24px -14px oklch(0 0 0 / 0.65);
+}
+
+@utility shadow-panel-lg {
+  box-shadow:
+    inset 0 1px 0 0 oklch(1 0 0 / 0.05),
+    0 2px 6px -2px oklch(0 0 0 / 0.5),
+    0 30px 60px -28px oklch(0 0 0 / 0.8);
+}
+
+@utility shadow-browser {
+  box-shadow:
+    inset 0 1px 0 0 oklch(1 0 0 / 0.08),
+    0 18px 40px -24px oklch(0 0 0 / 0.65),
+    0 50px 90px -40px oklch(0 0 0 / 0.85);
+}
+
+@utility drop-shadow-mascot {
+  filter: drop-shadow(0 26px 42px oklch(0 0 0 / 0.6));
+}
+
+@utility pt-default {
+  @apply pt-20 sm:pt-24;
+}
+
+@utility pt-hero {
+  @apply pt-8 sm:pt-12 lg:pt-18;
+}
+
+h1.mega {
+  line-height: 1.05;
+  font-size: clamp(2.625rem, 6vw, 3.5rem);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+}
+
+h1 {
+  line-height: 1.05;
+  font-size: clamp(2.625rem, 4.4vw, 3rem);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+}
+
+h2 {
+  font-size: clamp(2rem, 2.5vw, 2.5rem);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+h3 {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+*::selection {
+  background-color: var(--color-lime-400);
+  color: var(--accent-ink);
+}
+
+/* ---------- background field: grid + accent glows ---------- */
+.bg-field {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, oklch(1 0 0 / 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, oklch(1 0 0 / 0.02) 1px, transparent 1px);
+  background-size: 72px 72px;
+  -webkit-mask-image: radial-gradient(ellipse 85% 65% at 50% 0%, #000 25%, transparent 72%);
+  mask-image: radial-gradient(ellipse 85% 65% at 50% 0%, #000 25%, transparent 72%);
+}
+
+.glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+}
+
+.glow-a {
+  width: 1000px;
+  height: 680px;
+  top: -360px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse, oklch(1 0 0 / 0.05), transparent 70%);
+}
+
+.glow-b {
+  width: 520px;
+  height: 520px;
+  top: -120px;
+  right: -120px;
+  background: radial-gradient(circle, color-mix(in oklab, var(--accent-mint) 26%, transparent), transparent 70%);
+  opacity: 0.28;
+}
+
+/* ---------- CTA accent glow ---------- */
+.cta-glow {
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  right: -160px;
+  top: -200px;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle, color-mix(in oklab, var(--accent-mint) 45%, transparent), transparent 65%);
+  filter: blur(60px);
+  opacity: 0.6;
+}
+
+/* ---------- smooth scrolling (scroll reveals handled by motion-v) ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* ---------- page transitions (Nuxt pageTransition, mode: out-in) ----------
+     Subtle fade + slight rise & blur. Asymmetric timing: the old page exits
+     quickly, the new one settles in slower for a calm, dialed-in feel. */
+  .page-enter-active {
+    transition:
+      opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+      filter 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .page-leave-active {
+    transition:
+      opacity 0.2s ease,
+      filter 0.2s ease,
+      transform 0.25s ease;
+  }
+
+  .page-enter-from {
+    opacity: 0;
+    transform: translateY(10px);
+    filter: blur(6px);
+  }
+
+  .page-leave-to {
+    opacity: 0;
+    transform: translateY(-6px);
+    filter: blur(4px);
+  }
+}
+
+/* Reduced motion: keep a barely-there crossfade, no movement or blur. */
+@media (prefers-reduced-motion: reduce) {
+  .page-enter-active,
+  .page-leave-active {
+    transition: opacity 0.2s ease;
+  }
+
+  .page-enter-from,
+  .page-leave-to {
+    opacity: 0;
+  }
+}
+
