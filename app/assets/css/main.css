@@ -127,6 +127,10 @@ h3 {
   color: var(--accent-ink);
 }
 
+picture {
+  display: contents;
+}
+
 /* ---------- background field: grid + accent glows ---------- */
 .bg-field {
   position: fixed;

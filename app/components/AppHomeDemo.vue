@@ -35,14 +35,16 @@ const stats = [
       >
         <AppBrowserFrame>
           <div class="relative">
-            <img
-              :src="'/assets/demo.png'"
+            <NuxtPicture
+              src="/assets/demo.png"
               alt="Knecht Dashboard mit allen gebooteten Projekten und ihrem Status"
               width="1788"
               height="853"
               loading="lazy"
-              class="block w-full"
-            >
+              format="avif,webp"
+              sizes="100vw lg:1152px"
+              :img-attrs="{ class: 'block w-full' }"
+            />
             <!-- fade the screenshot into the panel -->
             <div class="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[var(--ui-bg)] to-transparent" />
           </div>

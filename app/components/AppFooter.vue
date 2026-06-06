@@ -69,7 +69,7 @@ const columns = [
               v-for="link in column.links"
               :key="link.label"
               :to="link.to"
-              class="text-sm text-muted transition-colors hover:text-primary"
+              class="text-sm text-muted transition-colors hover:text-white"
             >
               {{ link.label }}
             </NuxtLink>

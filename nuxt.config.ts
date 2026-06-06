@@ -3,6 +3,7 @@ export default defineNuxtConfig({
   modules: [
     '@nuxt/eslint',
     '@nuxt/content',
+    '@nuxt/image',
     '@nuxt/ui',
     '@nuxtjs/seo',
     'nuxt-llms',
@@ -34,7 +35,7 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
 
   site: {
-    url: 'https://knecht.works',
+    url: process.env.NUXT_SITE_URL || 'https://knecht.works',
     name: 'Knecht'
   },
 
@@ -81,6 +82,17 @@ export default defineNuxtConfig({
         braceStyle: '1tbs'
       }
     }
+  },
+
+  fonts: {
+    defaults: {
+      subsets: ['latin'],
+      preload: true
+    }
+  },
+
+  image: {
+    quality: 78
   },
 
   llms: {

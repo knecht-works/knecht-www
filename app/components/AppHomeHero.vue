@@ -101,13 +101,17 @@
         :duration="0.8"
         class="col-span-full max-md:mt-16 md:col-span-4 md:relative ml-10"
       >
-        <img
-          :src="'/assets/mascotLeft.png'"
+        <NuxtImg
+          src="/assets/mascotLeft.png"
           alt="Knecht – der Roboter-Knecht mit Röhren-TV-Kopf"
           width="299"
           height="560"
+          format="webp"
+          quality="80"
+          densities="1x 2x"
+          fetchpriority="high"
           class="drop-shadow-mascot w-1/3 h-auto object-contain md:absolute md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:w-auto md:h-full"
-        >
+        />
       </AppReveal>
     </div>
   </section>

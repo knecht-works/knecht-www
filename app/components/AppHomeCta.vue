@@ -28,15 +28,18 @@ const submit = () => {
         <div class="relative flex flex-col items-center gap-8 px-4 py-6 text-center lg:flex-row lg:gap-12 lg:p-14 lg:text-left">
           <!-- Mascot -->
           <div class="shrink-0">
-            <img
-              :src="'/assets/mascotRight.png'"
+            <NuxtImg
+              src="/assets/mascotRight.png"
               alt=""
               aria-hidden="true"
               width="299"
               height="560"
               loading="lazy"
+              format="webp"
+              quality="80"
+              densities="1x 2x"
               class="drop-shadow-mascot h-auto w-36 select-none lg:w-44"
-            >
+            />
           </div>
 
           <!-- Content -->
