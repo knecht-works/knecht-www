@@ -34,9 +34,15 @@ export default defineNuxtConfig({
 
   css: ['~/assets/css/main.css'],
 
+  ui: {
+    colorMode: false
+  },
+
   site: {
     url: process.env.NUXT_SITE_URL || 'https://knecht.works',
-    name: 'Knecht'
+    name: 'Knecht',
+    // German site — drives <html lang> (via nuxt-seo-utils) and og:locale.
+    defaultLocale: 'de'
   },
 
   content: {
