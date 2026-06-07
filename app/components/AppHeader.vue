@@ -1,14 +1,25 @@
 <script setup lang="ts">
 import type { NavigationMenuItem } from '@nuxt/ui'
 
-// Minimal header to isolate the mobile nav bug: no custom mode, no active-state,
-// no scroll/backdrop logic. Plain UHeader defaults + plain anchor items.
-const items: NavigationMenuItem[] = [
+const { isActive } = useNavActive()
+
+const baseItems = [
   { label: 'Die Idee', to: '/#idee' },
   { label: 'Vorschau', to: '/#dashboard' },
   { label: 'Roadmap', to: '/#roadmap' },
   { label: 'Updates', to: '/#updates' }
 ]
+
+// Highlight only the section currently in view. Without this explicit `active`,
+// NavigationMenu's auto route-matching marks every item active on the home page
+// (they all resolve to path '/'), which renders them all highlighted.
+const items = computed<NavigationMenuItem[]>(() =>
+  baseItems.map(item => ({
+    ...item,
+    active: isActive(item.to),
+    class: isActive(item.to) ? 'text-highlighted' : undefined
+  }))
+)
 </script>
 
 <template>
