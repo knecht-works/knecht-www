@@ -16,8 +16,8 @@ const columns = [
   {
     heading: 'Mitmachen',
     links: [
-      { label: 'Beta-Tester werden', to: '#cta' },
-      { label: 'Updates abonnieren', to: '#cta' },
+      { label: 'Beta-Tester werden', to: '/#cta' },
+      { label: 'Updates abonnieren', to: '/#cta' },
       { label: 'Alle Updates', to: '/updates' },
       { label: 'Feedback geben', to: `mailto:${CONTACT_EMAIL}` }
     ]

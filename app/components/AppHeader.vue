@@ -59,7 +59,7 @@ const items = computed<NavigationMenuItem[]>(() =>
         color="neutral"
         class="hidden lg:flex"
         size="lg"
-        to="#cta"
+        to="/#cta"
       />
     </template>
 
@@ -77,7 +77,7 @@ const items = computed<NavigationMenuItem[]>(() =>
         block
         size="lg"
         class="mt-4"
-        to="#cta"
+        to="/#cta"
       />
     </template>
   </UHeader>

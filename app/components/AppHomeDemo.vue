@@ -61,7 +61,7 @@ const activeTab = computed(() => tabs.find(t => t.id === activeId.value) ?? tabs
             role="tab"
             :aria-selected="activeId === tab.id"
             :class="[
-              'flex shrink-0 items-center gap-2.5 rounded-lg border px-4 py-2.5 text-sm font-medium transition-colors duration-200',
+              'flex shrink-0 items-center gap-2.5 rounded-lg border px-4 py-2.5 text-sm font-medium transition-colors duration-200 cursor-pointer',
               activeId === tab.id
                 ? 'border-default bg-elevated text-highlighted shadow-sm'
                 : 'border-transparent text-muted hover:text-highlighted'

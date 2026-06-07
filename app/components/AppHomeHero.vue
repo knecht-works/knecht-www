@@ -107,7 +107,7 @@ onMounted(() => {
           :delay="0.05"
         >
           <NuxtLink
-            to="#roadmap"
+            to="/#roadmap"
             class="inline-flex items-center gap-3 rounded-full border border-default bg-elevated py-1.5 pl-3 pr-4 text-sm transition-colors hover:border-accented group"
           >
             <span class="flex items-center gap-2 font-medium text-muted">
@@ -155,14 +155,14 @@ onMounted(() => {
             label="Beta-Tester werden"
             color="neutral"
             size="lg"
-            to="#cta"
+            to="/#cta"
           />
           <UButton
             label="Fortschritt verfolgen"
             color="neutral"
             variant="outline"
             size="lg"
-            to="#updates"
+            to="/#updates"
           />
         </AppReveal>
 
