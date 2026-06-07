@@ -203,13 +203,33 @@ picture {
   order: 1; /* DOM-order is span-then-text; push it after the text */
 }
 
-/* Reveal targets only START hidden via CSS; AppReveal animates them in via the
-   Web Animations API (`fill: both` overrides this opacity:0 and pins the final
-   visible state). No transition/transform here on purpose - that keeps the
-   element's own Tailwind hover transitions (translate, border, shadow) intact.
-   `app-reveal-appear` = hero on-load intro, on every motion-ok device incl. mobile.
-   `app-reveal-section` = scroll reveals, desktop only (pointer-fine). */
-html.motion-ok .app-reveal-appear,
+/* `app-reveal-appear` = hero on-load intro. Driven purely via CSS so it runs at
+   first paint, without waiting for the JS bundle to load and hydrate (the
+   motion-ok flag is set synchronously in <head>). The stagger delay, distance
+   and duration come from inline custom properties set by AppReveal. */
+html.motion-ok .app-reveal-appear {
+  opacity: 0;
+  animation: app-reveal-appear var(--reveal-duration, 0.6s)
+    cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0s) both;
+}
+
+@keyframes app-reveal-appear {
+  from {
+    opacity: 0;
+    transform: translateY(var(--reveal-y, 14px));
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* `app-reveal-section` = scroll reveals, desktop only (pointer-fine). These only
+   START hidden here; AppReveal animates them in via the Web Animations API when
+   they enter the viewport (`fill: both` pins the final visible state). No
+   transition/transform here on purpose - that keeps the element's own Tailwind
+   hover transitions (translate, border, shadow) intact. */
 html.reveal-on .app-reveal-section {
   opacity: 0;
   will-change: opacity, transform;

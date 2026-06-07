@@ -15,17 +15,35 @@ const props = withDefaults(defineProps<{
 
 const el = useTemplateRef<HTMLElement>('el')
 
+// `appear` (the above-the-fold hero intro) is driven purely via CSS (see
+// main.css). The `motion-ok` flag is set synchronously in <head>, so the CSS
+// animation runs at first paint - the content does NOT wait for the JS bundle to
+// download and hydrate. These inline custom properties feed the stagger delay,
+// distance and duration into that animation.
+const appearStyle = computed(() => props.appear
+  ? {
+      '--reveal-delay': `${props.delay}s`,
+      '--reveal-y': `${props.y}px`,
+      '--reveal-duration': `${props.duration}s`
+    }
+  : undefined
+)
+
 onMounted(() => {
+  // Only the scroll reveal needs JS. `appear` already ran via CSS.
+  if (props.appear) return
+
   const node = el.value
   if (!node) return
   const flags = document.documentElement.classList
 
-  // One reveal, driven entirely via the Web Animations API. This keeps the CSS off
-  // the element's `transition`/`transform` - so any Tailwind hover transitions
-  // (e.g. `translate`, border, shadow) on the same element stay intact - and is
-  // robust to the stylesheet load order (Vite injects CSS as JS in dev). The
-  // element only starts hidden via CSS (opacity:0); `fill: both` holds opacity:0
-  // through the (stagger) delay and pins the final visible state.
+  // Scroll reveal: desktop only (flag `reveal-on` = pointer-fine + motion-ok). On
+  // touch/mobile we skip it entirely so nothing pops in while scrolling.
+  if (!flags.contains('reveal-on')) return
+
+  // Driven via the Web Animations API. This keeps the CSS off the element's
+  // `transition`/`transform` - so any Tailwind hover transitions stay intact -
+  // and `fill: both` pins the final visible state.
   const reveal = () => node.animate(
     [
       { opacity: 0, transform: `translateY(${props.y}px)` },
@@ -38,18 +56,6 @@ onMounted(() => {
       fill: 'both'
     }
   )
-
-  // `appear` = on-load intro (hero). Runs on every non-reduced-motion device
-  // (flag `motion-ok`), incl. mobile - it's above-the-fold and on-load, so there's
-  // no scroll jank.
-  if (props.appear) {
-    if (flags.contains('motion-ok')) reveal()
-    return
-  }
-
-  // Scroll reveal: desktop only (flag `reveal-on` = pointer-fine + motion-ok). On
-  // touch/mobile we skip it entirely so nothing pops in while scrolling.
-  if (!flags.contains('reveal-on')) return
 
   // Reveal once, when the section comfortably enters the viewport.
   const io = new IntersectionObserver((entries) => {
@@ -69,6 +75,7 @@ onMounted(() => {
     :is="as"
     ref="el"
     :class="appear ? 'app-reveal-appear' : 'app-reveal-section'"
+    :style="appearStyle"
   >
     <slot />
   </component>
