@@ -74,7 +74,10 @@ export default defineNuxtConfig({
 
   routeRules: {
     '/_ipx/**': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
-    '/assets/**': { headers: { 'cache-control': 'public, max-age=604800' } }
+    // Long-lived cache for static assets. Filenames are stable, so bump the name
+    // (or add ?v=) when you replace an asset, otherwise returning visitors keep
+    // the cached version for up to a year.
+    '/assets/**': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } }
   },
 
   compatibilityDate: '2025-01-15',

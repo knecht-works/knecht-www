@@ -94,15 +94,16 @@ const activeTab = computed(() => tabs.find(t => t.id === activeId.value) ?? tabs
               enter-from-class="opacity-0"
               leave-to-class="opacity-0"
             >
-              <img
+              <NuxtImg
                 :key="activeTab.id"
                 :src="activeTab.image"
                 :alt="`Knecht ${activeTab.label} Vorschau`"
-                width="4320"
-                height="3120"
+                sizes="sm:100vw lg:1520px"
+                format="webp"
+                quality="82"
                 loading="lazy"
                 class="aspect-18/13 w-full object-cover object-top"
-              >
+              />
             </Transition>
           </div>
         </AppBrowserFrame>
