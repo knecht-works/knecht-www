@@ -253,38 +253,3 @@ html.reveal-on .app-reveal-section {
     background: oklch(1 0 0 / 0.28);
   }
 }
-
-/* ---------- page transitions: native View Transitions API ----------
-   Enabled via experimental.viewTransition (nuxt.config). Replicates the old
-   out-in feel: the previous page fades out quickly, the next fades in with a
-   slight rise + blur. Operates on the document root, so it also animates layout
-   swaps (e.g. updates -> default), which the JS pageTransition did not. */
-@media (prefers-reduced-motion: no-preference) {
-  ::view-transition-old(root) {
-    animation: vt-out 0.2s ease both;
-  }
-
-  ::view-transition-new(root) {
-    animation: vt-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
-  }
-}
-
-@keyframes vt-out {
-  to {
-    opacity: 0;
-    transform: translateY(-6px);
-    filter: blur(4px);
-  }
-}
-
-@keyframes vt-in {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-    filter: blur(6px);
-  }
-}
-
-/* Reduced motion: the browser's plain crossfade stays (no movement or blur),
-   since the custom animations above are gated behind no-preference. */
-
