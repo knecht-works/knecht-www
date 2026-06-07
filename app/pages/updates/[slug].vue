@@ -56,8 +56,7 @@ const formattedDate = computed(() =>
       {{ update.description }}
     </p>
 
-    <!-- Full blog body - styled by Nuxt UI's built-in Prose components.
-         Hash-anchor offset is handled globally via html scroll-padding-top. -->
+    <!-- Full blog body - styled by Nuxt UI's built-in Prose components. -->
     <div class="richtext mt-8 max-w-(--text-width) border-t border-default pt-4">
       <ContentRenderer :value="update" />
     </div>

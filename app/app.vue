@@ -15,10 +15,6 @@ useSeoMeta({
 })
 
 defineOgImage('Knecht')
-
-// Page transitions: native View Transitions API, enabled via
-// experimental.viewTransition in nuxt.config. No :transition prop here.
-// Scroll-to-top / hash / back-forward is left to Nuxt's default scrollBehavior.
 </script>
 
 <template>

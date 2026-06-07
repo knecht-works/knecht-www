@@ -15,9 +15,6 @@ export default defineNuxtConfig({
   },
 
   app: {
-    // Native View Transitions (experimental.viewTransition) handle the page
-    // crossfade, so the JS out-in transitions are off. out-in delayed the DOM
-    // swap and fought scroll-to-top; the native API has no such delay.
     pageTransition: false,
     layoutTransition: false,
 
@@ -78,12 +75,6 @@ export default defineNuxtConfig({
   routeRules: {
     '/_ipx/**': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
     '/assets/**': { headers: { 'cache-control': 'public, max-age=604800' } }
-  },
-
-  // Browser-native cross-document-style transition between routes. Replaces the
-  // JS pageTransition (see app.pageTransition) and avoids the out-in scroll bug.
-  experimental: {
-    viewTransition: true
   },
 
   compatibilityDate: '2025-01-15',
