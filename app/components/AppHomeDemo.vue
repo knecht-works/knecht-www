@@ -86,24 +86,25 @@ const activeTab = computed(() => tabs.find(t => t.id === activeId.value) ?? tabs
         class="col-span-full mt-6 w-full"
       >
         <AppBrowserFrame :url="activeTab.url">
-          <div class="relative">
-            <Transition
-              mode="out-in"
-              enter-active-class="transition-opacity duration-300 ease-out"
-              leave-active-class="transition-opacity duration-150 ease-in"
-              enter-from-class="opacity-0"
-              leave-to-class="opacity-0"
-            >
-              <img
-                :key="activeTab.id"
-                :src="activeTab.image"
-                :alt="`Knecht ${activeTab.label} Vorschau`"
-                width="4320"
-                height="3120"
-                loading="lazy"
-                class="aspect-18/13 w-full object-cover object-top"
-              >
-            </Transition>
+          <!-- Render all three screenshots (stacked, crossfaded via opacity) so
+               the ipxStatic prerender generates an optimized /_ipx/ variant for
+               each. With the previous single-image swap only the preselected tab
+               was in the prerendered HTML, so the other two had no static variant
+               and 404'd at runtime (Cloudflare Pages has no IPX runtime). -->
+          <div class="relative aspect-18/13">
+            <NuxtImg
+              v-for="tab in tabs"
+              :key="tab.id"
+              :src="tab.image"
+              :alt="`Knecht ${tab.label} Vorschau`"
+              :aria-hidden="tab.id === activeId ? undefined : 'true'"
+              sizes="sm:100vw lg:1520px"
+              format="webp"
+              quality="82"
+              loading="lazy"
+              class="absolute inset-0 h-full w-full object-cover object-top transition-opacity duration-300 ease-out"
+              :class="tab.id === activeId ? 'opacity-100' : 'opacity-0 pointer-events-none'"
+            />
           </div>
         </AppBrowserFrame>
       </AppReveal>
