@@ -19,12 +19,6 @@ const items = computed<NavigationMenuItem[]>(() =>
   }))
 )
 
-// Mobile slideover open state. We control it so a tap always closes the menu.
-// UHeader's built-in auto-close only fires when route.fullPath changes, so
-// tapping a link to the section you are already on (same fullPath) left the menu
-// stuck open and looked like "nothing happens".
-const open = ref(false)
-
 // Transparent at the very top (so the background grid shows through), then a
 // muted, blurred bar once the user scrolls a few pixels.
 const scrolled = ref(false)
@@ -44,7 +38,6 @@ onUnmounted(() => {
 
 <template>
   <UHeader
-    v-model:open="open"
     mode="slideover"
     :menu="{ transition: false }"
     :class="[
@@ -76,13 +69,10 @@ onUnmounted(() => {
     </template>
 
     <template #body>
-      <!-- Close on any tap inside the menu, even when the link target equals the
-           current fullPath (UHeader's auto-close would not fire then). -->
       <UNavigationMenu
         :items="items"
         orientation="vertical"
         class="-mx-2.5"
-        @click="open = false"
       />
       <UButton
         label="Beta-Tester werden"
@@ -90,7 +80,6 @@ onUnmounted(() => {
         block
         class="mt-4"
         to="#cta"
-        @click="open = false"
       />
     </template>
   </UHeader>
