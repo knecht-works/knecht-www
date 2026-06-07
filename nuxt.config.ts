@@ -15,7 +15,11 @@ export default defineNuxtConfig({
   },
 
   app: {
-    pageTransition: { name: 'page', mode: 'out-in' },
+    // Native View Transitions (experimental.viewTransition) handle the page
+    // crossfade, so the JS out-in transitions are off. out-in delayed the DOM
+    // swap and fought scroll-to-top; the native API has no such delay.
+    pageTransition: false,
+    layoutTransition: false,
 
     head: {
       link: [
@@ -31,12 +35,6 @@ export default defineNuxtConfig({
 
       script: [
         {
-          // Set animation flags on <html> BEFORE first paint, so reveal targets
-          // start hidden (no FOUC) only where they'll actually animate. See
-          // AppReveal.vue. `motion-ok`: any non-reduced-motion device — gates the
-          // hero on-load intro (incl. mobile). `reveal-on`: additionally requires a
-          // fine pointer — gates scroll-section reveals (desktop only), so nothing
-          // pops in while scrolling on touch.
           innerHTML: 'try{if(!matchMedia("(prefers-reduced-motion: reduce)").matches){var d=document.documentElement;d.classList.add("motion-ok");if(matchMedia("(pointer: fine)").matches)d.classList.add("reveal-on")}}catch(e){}',
           tagPosition: 'head'
         }
@@ -82,6 +80,12 @@ export default defineNuxtConfig({
     '/assets/**': { headers: { 'cache-control': 'public, max-age=604800' } }
   },
 
+  // Browser-native cross-document-style transition between routes. Replaces the
+  // JS pageTransition (see app.pageTransition) and avoids the out-in scroll bug.
+  experimental: {
+    viewTransition: true
+  },
+
   compatibilityDate: '2025-01-15',
 
   nitro: {
@@ -102,6 +106,7 @@ export default defineNuxtConfig({
   vite: {
     optimizeDeps: {
       include: [
+        '@unhead/schema-org/vue',
         '@vue/devtools-core',
         '@vue/devtools-kit'
       ]
@@ -137,7 +142,7 @@ export default defineNuxtConfig({
     title: 'Knecht',
     description: 'Knecht is a self-hostable orchestration tool that connects to your GitHub repos and uses workflows to boot up complete projects so that agents can fix and test in functional environments.',
     full: {
-      title: 'Knecht — Full website content',
+      title: 'Knecht - Full website content',
       description: 'The complete content of the Knecht website as a single document.'
     },
     sections: [

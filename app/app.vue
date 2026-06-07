@@ -16,24 +16,15 @@ useSeoMeta({
 
 defineOgImage('Knecht')
 
-const pageTransition = {
-  name: 'page',
-  mode: 'out-in' as const,
-  onBeforeEnter() {
-    if (!window.location.hash) {
-      window.scrollTo({ top: 0, behavior: 'instant' as ScrollBehavior })
-    }
-  }
-}
+// Page transitions: native View Transitions API, enabled via
+// experimental.viewTransition in nuxt.config. No :transition prop here.
+// Scroll-to-top / hash / back-forward is left to Nuxt's default scrollBehavior.
 </script>
 
 <template>
   <UApp :toaster="{ expand: false }">
     <NuxtLayout>
-      <NuxtPage
-        :transition="pageTransition"
-        :page-key="route => route.path"
-      />
+      <NuxtPage />
     </NuxtLayout>
   </UApp>
 </template>

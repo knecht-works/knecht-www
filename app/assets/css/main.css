@@ -20,7 +20,7 @@
   --color-lime-900: #314931;
   --color-lime-950: #16220f;
 
-  /* Brand accents — taken straight from the logo's embedded hex colors. */
+  /* Brand accents - taken straight from the logo's embedded hex colors. */
   --accent-mint: #b7f8a2;
   --accent-orange: #fa7a2c;
   --accent-violet: #fcc46e;
@@ -61,7 +61,7 @@
   @apply grid grid-cols-12 mx-auto;
 }
 
-/* Depth — neutral (non-colored) shadows tuned for the near-black surfaces. */
+/* Depth - neutral (non-colored) shadows tuned for the near-black surfaces. */
 @utility shadow-panel {
   box-shadow:
     0 1px 2px -1px oklch(0 0 0 / 0.5),
@@ -103,23 +103,23 @@ h1.mega {
 
 h1 {
   line-height: 1.05;
-  font-size: clamp(2.625rem, 4.4vw, 3rem);
+  font-size: clamp(2.4rem, 4.4vw, 3rem);
   font-weight: 600;
   letter-spacing: -0.04em;
 }
 
 h2 {
-  font-size: clamp(2rem, 2.5vw, 2.5rem);
+  font-size: clamp(1.625rem, 2.4vw, 2rem);
   font-weight: 600;
-  line-height: 1.05;
-  letter-spacing: -0.03em;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
 }
 
 h3 {
-  font-size: var(--text-lg);
+  font-size: clamp(1.25rem, 1.8vw, 1.5rem);
   font-weight: 600;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
 }
 
 *::selection {
@@ -189,76 +189,102 @@ picture {
   opacity: 0.6;
 }
 
-/* Hero on-load intro: hidden pre-paint on every motion-ok device (incl. mobile).
-   AppReveal drives the reveal via the Web Animations API, whose `fill: both`
-   overrides this opacity:0 and pins the final visible state. */
-html.motion-ok .app-reveal-appear {
-  opacity: 0;
-  will-change: opacity, transform;
+/* ---------- Markdown Styling ---------- */
+.richtext :deep(:is(h1, h2, h3, h4) > a) {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
 }
 
-/* Scroll-section reveals: desktop only (pointer-fine). Hidden pre-paint, then
-   AppReveal adds `.is-visible` on scroll to play one smooth CSS transition. */
+.richtext :deep(:is(h1, h2, h3, h4) > a > span) {
+  position: static;
+  inset: auto;
+  margin: 0;
+  order: 1; /* DOM-order is span-then-text; push it after the text */
+}
+
+/* Reveal targets only START hidden via CSS; AppReveal animates them in via the
+   Web Animations API (`fill: both` overrides this opacity:0 and pins the final
+   visible state). No transition/transform here on purpose - that keeps the
+   element's own Tailwind hover transitions (translate, border, shadow) intact.
+   `app-reveal-appear` = hero on-load intro, on every motion-ok device incl. mobile.
+   `app-reveal-section` = scroll reveals, desktop only (pointer-fine). */
+html.motion-ok .app-reveal-appear,
 html.reveal-on .app-reveal-section {
   opacity: 0;
-  transform: translateY(var(--reveal-y, 14px));
-  transition:
-    opacity var(--reveal-duration, 0.6s) cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0s),
-    transform var(--reveal-duration, 0.6s) cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0s);
   will-change: opacity, transform;
 }
 
-html.reveal-on .app-reveal-section.is-visible {
-  opacity: 1;
-  transform: none;
+/* ---------- thin branded scrollbar for horizontal sliders ---------- */
+.slider-scrollbar {
+  --scrollbar-thumb: oklch(1 0 0 / 0.16);
+  --scrollbar-track: transparent;
 }
 
-/* ---------- smooth scrolling (scroll reveals handled by motion-v) ---------- */
+/* Standard properties - only where scrollbar-color is supported (Chrome/Edge 121+,
+   Firefox, Safari 26.2+). NOTE: scrollbar-width must NOT be set unconditionally,
+   because WebKit ignores ::-webkit-scrollbar as soon as scrollbar-width is present
+   - which broke styling in Safari < 26.2. */
+@supports (scrollbar-color: auto) {
+  .slider-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+  }
+}
+
+/* WebKit/Blink without scrollbar-color (incl. Safari < 26.2): use the legacy
+   pseudo-elements only. */
+@supports not (scrollbar-color: auto) {
+  .slider-scrollbar::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  .slider-scrollbar::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+    border-radius: 9999px;
+  }
+
+  .slider-scrollbar::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: 9999px;
+  }
+
+  .slider-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: oklch(1 0 0 / 0.28);
+  }
+}
+
+/* ---------- page transitions: native View Transitions API ----------
+   Enabled via experimental.viewTransition (nuxt.config). Replicates the old
+   out-in feel: the previous page fades out quickly, the next fades in with a
+   slight rise + blur. Operates on the document root, so it also animates layout
+   swaps (e.g. updates -> default), which the JS pageTransition did not. */
 @media (prefers-reduced-motion: no-preference) {
-  html {
-    scroll-behavior: smooth;
+  ::view-transition-old(root) {
+    animation: vt-out 0.2s ease both;
   }
 
-  /* ---------- page transitions (Nuxt pageTransition, mode: out-in) ----------
-     Subtle fade + slight rise & blur. Asymmetric timing: the old page exits
-     quickly, the new one settles in slower for a calm, dialed-in feel. */
-  .page-enter-active {
-    transition:
-      opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-      filter 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-      transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  ::view-transition-new(root) {
+    animation: vt-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
+}
 
-  .page-leave-active {
-    transition:
-      opacity 0.2s ease,
-      filter 0.2s ease,
-      transform 0.25s ease;
-  }
-
-  .page-enter-from {
-    opacity: 0;
-    transform: translateY(10px);
-    filter: blur(6px);
-  }
-
-  .page-leave-to {
+@keyframes vt-out {
+  to {
     opacity: 0;
     transform: translateY(-6px);
     filter: blur(4px);
   }
 }
 
-/* Reduced motion: keep a barely-there crossfade, no movement or blur. */
-@media (prefers-reduced-motion: reduce) {
-  .page-enter-active,
-  .page-leave-active {
-    transition: opacity 0.2s ease;
-  }
-
-  .page-enter-from,
-  .page-leave-to {
+@keyframes vt-in {
+  from {
     opacity: 0;
+    transform: translateY(10px);
+    filter: blur(6px);
   }
 }
+
+/* Reduced motion: the browser's plain crossfade stays (no movement or blur),
+   since the custom animations above are gated behind no-preference. */
 

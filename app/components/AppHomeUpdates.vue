@@ -20,8 +20,7 @@ const { data: updates } = await useAsyncData('home-updates', () =>
         </h2>
 
         <p class="mt-5 text-pretty text-base leading-relaxed text-muted sm:text-lg">
-          Wir bauen Knecht offen. Jeder Meilenstein landet hier – kein Marketing,
-          nur ehrlicher Fortschritt.
+          Wir bauen Knecht offen. Jeder Meilenstein landet hier.
         </p>
       </AppReveal>
 

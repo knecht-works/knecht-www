@@ -2,24 +2,24 @@
 const steps = [
   {
     number: '01',
-    block: 'knecht boot',
+    block: 'Projekte',
     accent: 'var(--accent-mint)',
     title: 'Ein Klick, ganzes Projekt',
-    text: 'Knecht startet dein DDEV-Setup als komplette Umgebung – Web, Services und Datenbank inklusive. Kein Mocking, keine halben Sachen.'
+    text: 'Knecht startet dein DDEV-Setup als komplette Umgebung, Web, Services und Datenbank inklusive. Jedes Projekt enthält alle Informationen die es für einen Vollständigen Boot braucht.'
   },
   {
     number: '02',
-    block: 'knecht test',
+    block: 'Workflows',
     accent: 'var(--accent-orange)',
-    title: 'Agents testen die echte App',
-    text: 'Statt gegen Stubs laufen die Agents gegen dein laufendes Projekt mit echten Daten – und finden genau die Bugs, die im Prod weh tun.'
+    title: 'Deterministische Workflows',
+    text: 'Abläufe aus Bausteinen, die immer gleich passieren, statt einen Agent wild loszuschicken. Getriggert per Hand oder Webhook, etwa aus einem Github Issue oder Jira Ticket.'
   },
   {
     number: '03',
-    block: 'knecht fix',
+    block: 'Knecht',
     accent: 'var(--accent-violet)',
-    title: 'Fehler werden gefixt, nicht nur gemeldet',
-    text: 'Reproduzieren, Patch schreiben, gegen die App verifizieren, PR öffnen. Du bekommst keinen Bug-Report, du bekommst die Lösung.'
+    title: 'AI Agent',
+    text: 'Mit einem API Key von Opencode kann der AI Agent in Workflows Bugs in der laufenden Umgebung reproduzieren, fixen und direkt gegen die echte App testen – ganz ohne raten, ob die Änderung wirklich funktioniert.'
   }
 ]
 </script>
@@ -33,13 +33,8 @@ const steps = [
       <AppReveal class="col-span-full max-w-2xl">
         <AppEyebrow label="Die Idee" />
 
-        <h2 class="mt-6 text-balance text-highlighted">
-          Drei Schritte.<br>Null Babysitting.
-        </h2>
-
         <p class="mt-5 text-pretty text-base leading-relaxed text-muted sm:text-lg">
-          So soll Knecht funktionieren, wenn er fertig ist – ein Agent, der dein
-          Projekt nicht nur anschaut, sondern wirklich laufen lässt.
+          AI Agents sollten nicht raten müssen ob Änderungen die gemacht wurden auch wirklich funktionieren.
         </p>
       </AppReveal>
 

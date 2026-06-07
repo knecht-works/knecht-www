@@ -141,9 +141,8 @@ onMounted(() => {
           :delay="0.21"
           class="mt-6 max-w-(--text-width) text-base leading-relaxed text-muted sm:text-lg"
         >
-          Knecht soll jedes DDEV-Projekt als komplett lauffähige Umgebung booten –
-          inklusive Datenbank. Agents testen dann gegen die echte App, finden Bugs und
-          fixen sie. Wir bauen gerade daran. Sei von Anfang an dabei.
+          Knecht soll jedes DDEV-Projekt als komplett lauffähige Umgebung booten.
+          Agents testen dann gegen die echte App, finden Bugs und fixen sie.
         </AppReveal>
 
         <!-- CTAs -->

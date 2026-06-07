@@ -1,5 +1,5 @@
 <script setup lang="ts">
-// The home page is a pure Vue composition — no markdown collection backing it.
+// The home page is a pure Vue composition - no markdown collection backing it.
 const title = 'Booten. Fixen. Testen. Vollautomatisch.'
 const description = 'Knecht bootet jedes DDEV-Projekt als komplett lauffähige '
   + 'Umgebung – inklusive Datenbank. Agents testen gegen die echte App, finden '
@@ -22,6 +22,5 @@ defineOgImage('Knecht', { title, description })
     <AppHomeDemo />
     <AppHomeProgress />
     <AppHomeUpdates />
-    <AppHomeCta />
   </div>
 </template>

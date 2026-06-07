@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const { isActive } = useNavActive()
+
 const year = new Date().getFullYear()
 
 const columns = [
@@ -14,8 +16,9 @@ const columns = [
   {
     heading: 'Mitmachen',
     links: [
-      { label: 'Beta-Tester werden', to: '/#cta' },
-      { label: 'Updates abonnieren', to: '/#cta' },
+      { label: 'Beta-Tester werden', to: '#cta' },
+      { label: 'Updates abonnieren', to: '#cta' },
+      { label: 'Alle Updates', to: '/updates' },
       { label: 'Feedback geben', to: `mailto:${CONTACT_EMAIL}` }
     ]
   },
@@ -69,7 +72,8 @@ const columns = [
               v-for="link in column.links"
               :key="link.label"
               :to="link.to"
-              class="text-sm text-muted transition-colors hover:text-white"
+              class="text-sm transition-colors"
+              :class="isActive(link.to) ? 'text-white' : 'text-muted hover:text-white'"
             >
               {{ link.label }}
             </NuxtLink>

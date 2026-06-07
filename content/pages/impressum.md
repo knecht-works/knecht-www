@@ -6,26 +6,23 @@ updatedAt: 2026-06-06
 
 ## Angaben gemäß § 5 TMG
 
-**[Firmenname / Name]**
-[Straße und Hausnummer]
-[PLZ und Ort]
+**Knecht**<br>
+Leonfeldner Straße 90a<br>
+4040 Linz<br>
 
 ## Kontakt
 
-E-Mail: [kontakt@knecht.works]
+E-Mail: [hallo@knecht.works](mailto:hallo@knecht.works)
 
 ## Vertreten durch
 
-[Name der vertretungsberechtigten Person]
+[Samuel Reichör](https://samuelreichor.at)<br>
+Leonfeldner Straße 90a<br>
+4040 Linz<br>
 
 ## Umsatzsteuer-ID
 
 Umsatzsteuer-Identifikationsnummer gemäß § 27a Umsatzsteuergesetz:
-[USt-IdNr.]
 
-## Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV
-
-[Name]
-[Anschrift]
-
-> Hinweis: Dies ist ein Platzhalter. Bitte vor dem Livegang durch die echten Angaben ersetzen.
+USt-Id Nr.: ATU82964259
+Steuer Nr.: 52 392/4660

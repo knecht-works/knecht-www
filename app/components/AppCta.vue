@@ -2,7 +2,7 @@
 type Mode = 'beta' | 'updates'
 
 const email = ref('')
-// Beta is the default — active testers + feedback are the primary goal.
+// Beta is the default - active testers + feedback are the primary goal.
 const mode = ref<Mode>('beta')
 const done = ref(false)
 const loading = ref(false)
@@ -150,7 +150,7 @@ const submit = async () => {
             </template>
 
             <p class="mt-4 font-mono text-xs text-dimmed">
-              Kein Spam · nur Fortschritt · jederzeit abbestellbar
+              nur Fortschritt · jederzeit abbestellbar
             </p>
           </div>
         </div>

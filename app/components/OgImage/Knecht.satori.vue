@@ -1,7 +1,7 @@
 <script setup>
 // OG / social preview template (1200×630), rendered to PNG via Satori.
 // Satori only supports flexbox and is strict: every <div> with more than one
-// child MUST declare display:flex explicitly — so this uses inline styles
+// child MUST declare display:flex explicitly - so this uses inline styles
 // throughout (no reliance on Tailwind class translation) and brand hex colors.
 //
 // Props use the runtime object form (not the type-only generic): nuxt-og-image

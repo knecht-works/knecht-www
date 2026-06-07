@@ -54,7 +54,7 @@ const updatedAt = computed(() =>
         Zuletzt aktualisiert: {{ updatedAt }}
       </p>
 
-      <div class="mt-6 max-w-(--text-width)">
+      <div class="mt-6 max-w-(--text-width) richtext">
         <ContentRenderer :value="page" />
       </div>
     </article>

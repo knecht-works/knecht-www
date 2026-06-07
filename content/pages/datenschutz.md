@@ -8,9 +8,7 @@ updatedAt: 2026-06-06
 
 Verantwortlich für die Datenverarbeitung auf dieser Website ist:
 
-**[Firmenname / Name]**
-[Anschrift]
-E-Mail: [kontakt@knecht.works]
+E-Mail: [hallo@knecht.works](mailto:hallo@knecht.works)
 
 ## Erhebung und Verarbeitung personenbezogener Daten
 
@@ -30,8 +28,5 @@ Verarbeitung, Datenübertragbarkeit sowie Widerspruch gegen die Verarbeitung.
 
 ## Hosting
 
-Diese Website wird bei [Hosting-Anbieter] gehostet. Details zur Datenverarbeitung
+Diese Website wird bei [Cloudflare](https://cloudflare.com) gehostet. Details zur Datenverarbeitung
 durch den Anbieter findest du in dessen Datenschutzerklärung.
-
-> Hinweis: Dies ist ein Platzhalter. Bitte vor dem Livegang durch eine
-> rechtssichere Datenschutzerklärung ersetzen.

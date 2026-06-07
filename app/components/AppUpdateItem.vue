@@ -21,12 +21,10 @@ const formattedDate = computed(() =>
   >
     <div class="flex items-center gap-4 lg:flex-col lg:items-start lg:gap-3">
       <span class="font-mono text-sm text-muted">{{ formattedDate }}</span>
-      <span
+      <AppTag
         v-if="update.tag"
-        class="rounded-full border border-primary/30 px-2.5 py-0.5 font-mono text-[11px] uppercase tracking-[0.08em] text-primary"
-      >
-        {{ update.tag }}
-      </span>
+        :label="update.tag"
+      />
     </div>
 
     <div class="max-w-2xl">
