@@ -29,7 +29,7 @@
 
   --container-margin-x: 1rem;
   --text-width: 800px;
-  --ui-container: 1920px;
+  --ui-container: 1560px;
 
   @variant lg {
   --container-margin-x: 2rem;
@@ -48,6 +48,18 @@
 
 @utility outside-container {
   padding-inline: var(--container-margin-x);
+}
+
+/* Full-bleed horizontal slider: the track spans the whole viewport, while its
+   content and scroll-snap stops stay aligned to the container's content edge. On
+   screens wider than the container this lets cards scroll into the side gutters
+   instead of being clipped at the max-width box. Needs an ancestor with
+   overflow-x: clip so the 100vw width can't trigger page-level horizontal scroll. */
+@utility slider-bleed {
+  --slider-edge: calc((100vw - min(100vw, var(--ui-container))) / 2 + var(--container-margin-x));
+  margin-inline: calc(50% - 50vw);
+  padding-inline: var(--slider-edge);
+  scroll-padding-inline: var(--slider-edge);
 }
 
 @utility container-grid {

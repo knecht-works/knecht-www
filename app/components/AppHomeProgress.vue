@@ -43,56 +43,91 @@ const statusMeta: Record<Status, { label: string, dot: 'primary' | 'orange' | 'n
 const phases: { status: Status, title: string, text: string }[] = [
   {
     status: 'done',
-    title: 'Idee Validierung',
-    text: 'Idee ist in einem vereinfachten Umfang validiert und funktioniert.'
+    title: 'Idee-Validierung',
+    text: 'Das Konzept ist in vereinfachtem Umfang getestet und funktioniert.'
   },
   {
     status: 'done',
     title: 'Branding & Organisation',
-    text: 'Name, Logo, Branding Website, Social Media und alles drum herum wurde erstellt.'
+    text: 'Name, Logo, Website und Social-Media-Auftritt stehen, inklusive allem drum herum.'
   },
   {
     status: 'done',
-    title: 'Tech Stack & Archtektur',
-    text: 'Grobe Technologie Entscheidungen sind getroffen und validiert.'
+    title: 'Tech-Stack & Architektur',
+    text: 'Die grundlegenden Technologie-Entscheidungen sind getroffen und validiert.'
+  },
+  {
+    status: 'done',
+    title: 'Dashboard-Design',
+    text: 'Das Design für das Dashboard, in dem Projekte und Workflows entstehen, steht.'
   },
   {
     status: 'progress',
     title: 'Prototyp bauen',
-    text: 'Ein Prototyp worin schon Projekte, Workflows inkl. AI Agent. erstellt werden können ist erstellt'
+    text: 'Ein Prototyp entsteht, in dem sich Projekte und Workflows inklusive AI-Agent erstellen lassen.'
   },
   {
     status: 'progress',
-    title: 'Beta Tester finden',
-    text: 'Es sind genügend Beta Tester gefunden um Probleme zu identifzieren und das finale Produkt bauen zu können.'
+    title: 'Beta-Tester finden',
+    text: 'Wir suchen genügend Beta-Tester, um Probleme früh zu erkennen und das finale Produkt zu bauen.'
   },
   {
     status: 'rest',
-    title: 'Architektur re-check',
-    text: 'Es ist verifiziert ob ursprüngliche Annahmen so übernommen werden können.'
+    title: 'Architektur-Re-Check',
+    text: 'Wir prüfen, ob sich die ursprünglichen Annahmen so übernehmen lassen.'
   }
 ]
 
 const trackEl = useTemplateRef<HTMLElement>('trackEl')
 
+// Arrow nav state: the scrollbar is hidden, so these buttons are the only
+// pointer affordance for mouse users without a trackpad.
+const canPrev = ref(false)
+const canNext = ref(false)
+
+function updateArrows() {
+  const track = trackEl.value
+  if (!track) return
+  canPrev.value = track.scrollLeft > 1
+  canNext.value = track.scrollLeft < track.scrollWidth - track.clientWidth - 1
+}
+
+function scrollByCards(dir: 1 | -1) {
+  const track = trackEl.value
+  if (!track) return
+  const card = track.querySelector('article')
+  const gap = 16 // gap-4
+  const amount = card ? card.offsetWidth + gap : track.clientWidth * 0.8
+  track.scrollBy({ left: dir * amount, behavior: 'smooth' })
+}
+
 onMounted(() => {
   const track = trackEl.value
   if (!track) return
+
+  track.addEventListener('scroll', updateArrows, { passive: true })
+  const ro = new ResizeObserver(updateArrows)
+  ro.observe(track)
+  onBeforeUnmount(() => {
+    track.removeEventListener('scroll', updateArrows)
+    ro.disconnect()
+  })
 
   let lastDone = -1
   phases.forEach((p, i) => {
     if (p.status === 'done') lastDone = i
   })
-  if (lastDone < 1) return // none, or already at the start
 
-  const card = track.children[lastDone] as HTMLElement | undefined
-  if (!card) return
+  const card = lastDone > 0 ? (track.children[lastDone] as HTMLElement | undefined) : undefined
 
   requestAnimationFrame(() => {
-    // Align the card to the content edge (track's inner padding), not the bled-out
-    // border edge.
-    const padLeft = parseFloat(getComputedStyle(track).paddingInlineStart) || 0
-    track.scrollLeft += card.getBoundingClientRect().left - track.getBoundingClientRect().left - padLeft
+    if (card) {
+      // Align the card to the content edge (track's inner padding), not the bled-out
+      // border edge.
+      const padLeft = parseFloat(getComputedStyle(track).paddingInlineStart) || 0
+      track.scrollLeft += card.getBoundingClientRect().left - track.getBoundingClientRect().left - padLeft
+    }
+    updateArrows()
   })
 })
 </script>
@@ -100,6 +135,7 @@ onMounted(() => {
 <template>
   <section
     id="roadmap"
+    class="overflow-x-clip"
   >
     <div class="container pt-default ">
       <!-- Heading -->
@@ -149,7 +185,7 @@ onMounted(() => {
       <div class="col-span-full mt-4">
         <div
           ref="trackEl"
-          class="slider-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto pt-5 pb-3 -mt-5 -mb-3 -mx-[var(--container-margin-x)] px-[var(--container-margin-x)] scroll-px-[var(--container-margin-x)]"
+          class="scrollbar-none slider-bleed flex snap-x snap-mandatory gap-4 overflow-x-auto pt-5 pb-3 -mt-5 -mb-3"
         >
           <AppReveal
             v-for="(phase, i) in phases"
@@ -192,6 +228,38 @@ onMounted(() => {
             </p>
           </AppReveal>
         </div>
+      </div>
+
+      <!-- Minimal arrow nav below the slider (the scrollbar is hidden). Shown
+           only while the track actually overflows. -->
+      <div
+        v-show="canPrev || canNext"
+        class="col-span-full mt-5 flex gap-2"
+      >
+        <button
+          type="button"
+          aria-label="Vorherige"
+          :disabled="!canPrev"
+          class="grid size-9 place-items-center rounded-lg border border-default text-muted transition-colors duration-200 hover:text-highlighted disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:text-muted"
+          @click="scrollByCards(-1)"
+        >
+          <UIcon
+            name="i-lucide-arrow-left"
+            class="size-4"
+          />
+        </button>
+        <button
+          type="button"
+          aria-label="Nächste"
+          :disabled="!canNext"
+          class="grid size-9 place-items-center rounded-lg border border-default text-muted transition-colors duration-200 hover:text-highlighted disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:text-muted"
+          @click="scrollByCards(1)"
+        >
+          <UIcon
+            name="i-lucide-arrow-right"
+            class="size-4"
+          />
+        </button>
       </div>
     </div>
   </section>
