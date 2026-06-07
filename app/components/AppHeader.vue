@@ -3,6 +3,21 @@ import type { NavigationMenuItem } from '@nuxt/ui'
 
 const { isActive } = useNavActive()
 
+const scrolled = ref(false)
+
+function onScroll() {
+  scrolled.value = window.scrollY > 20
+}
+
+onMounted(() => {
+  onScroll()
+  window.addEventListener('scroll', onScroll, { passive: true })
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('scroll', onScroll)
+})
+
 const baseItems = [
   { label: 'Die Idee', to: '/#idee' },
   { label: 'Vorschau', to: '/#dashboard' },
@@ -20,7 +35,12 @@ const items = computed<NavigationMenuItem[]>(() =>
 </script>
 
 <template>
-  <UHeader>
+  <UHeader
+    :class="[
+      'border-b-0 transition-colors duration-300',
+      scrolled ? 'bg-default/75 backdrop-blur' : 'bg-transparent backdrop-blur-none'
+    ]"
+  >
     <template #left>
       <NuxtLink to="/">
         <AppLogo class="w-auto shrink-0" />
