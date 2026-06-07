@@ -5,21 +5,21 @@ const steps = [
     block: 'Projekte',
     accent: 'var(--accent-mint)',
     title: 'Ein Klick, ganzes Projekt',
-    text: 'Knecht startet dein DDEV-Setup als komplette Umgebung, Web, Services und Datenbank inklusive. Jedes Projekt enthält alle Informationen die es für einen Vollständigen Boot braucht.'
+    text: 'Knecht startet dein DDEV-Setup als komplette Umgebung, inklusive Web, Services und Datenbank. Jedes Projekt enthält alle Informationen, die es für einen vollständigen Boot braucht.'
   },
   {
     number: '02',
     block: 'Workflows',
     accent: 'var(--accent-orange)',
     title: 'Deterministische Workflows',
-    text: 'Abläufe aus Bausteinen, die immer gleich passieren, statt einen Agent wild loszuschicken. Getriggert per Hand oder Webhook, etwa aus einem Github Issue oder Jira Ticket.'
+    text: 'Abläufe aus Bausteinen, die immer gleich passieren, statt einen Agenten wild loszuschicken. Getriggert per Hand oder Webhook, etwa aus einem GitHub-Issue oder Jira-Ticket.'
   },
   {
     number: '03',
     block: 'Knecht',
     accent: 'var(--accent-violet)',
     title: 'AI Agent',
-    text: 'Mit einem API Key von Opencode kann der AI Agent in Workflows Bugs in der laufenden Umgebung reproduzieren, fixen und direkt gegen die echte App testen – ganz ohne raten, ob die Änderung wirklich funktioniert.'
+    text: 'Mit einem API-Key von Opencode kann der AI-Agent in Workflows Bugs in der laufenden Umgebung reproduzieren, fixen und direkt gegen die echte App testen, ganz ohne zu raten, ob die Änderung wirklich funktioniert.'
   }
 ]
 </script>
@@ -34,7 +34,7 @@ const steps = [
         <AppEyebrow label="Die Idee" />
 
         <p class="mt-5 text-pretty text-base leading-relaxed text-muted sm:text-lg">
-          AI Agents sollten nicht raten müssen ob Änderungen die gemacht wurden auch wirklich funktionieren.
+          AI-Agenten sollten nicht raten müssen, ob ihre Änderungen wirklich funktionieren.
         </p>
       </AppReveal>
 

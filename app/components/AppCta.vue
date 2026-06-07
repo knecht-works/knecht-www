@@ -17,17 +17,17 @@ const modeItems = [
   {
     value: 'updates',
     label: 'Nur Updates bekommen',
-    description: 'Reine Fortschritts-Updates – kein Testen nötig.'
+    description: 'Reine Fortschritts-Updates, kein Testen nötig.'
   }
 ]
 
 const submitLabel = computed(() =>
-  mode.value === 'beta' ? 'Als Beta-Tester eintragen' : 'Updates abonnieren'
+  mode.value === 'beta' ? 'Beta-Tester werden' : 'Updates abonnieren'
 )
 
 const doneMessage = computed(() =>
   mode.value === 'beta'
-    ? 'Drin! Du bist Beta-Tester der ersten Stunde – wir melden uns mit deinem Zugang.'
+    ? 'Drin! Du bist Beta-Tester der ersten Stunde, wir melden uns mit mehr Informationen.'
     : 'Drin! Du bekommst ab jetzt jedes Update.'
 )
 
@@ -45,7 +45,7 @@ const submit = async () => {
     })
     done.value = true
   } catch {
-    error.value = 'Hat nicht geklappt – bitte später nochmal versuchen.'
+    error.value = 'Hat nicht geklappt, bitte später nochmal versuchen.'
   } finally {
     loading.value = false
   }
@@ -88,8 +88,7 @@ const submit = async () => {
 
             <p class="mx-auto mt-5 max-w-2xl text-pretty text-base leading-relaxed text-muted sm:text-lg lg:mx-0">
               Knecht ist noch in Entwicklung. Werde Beta-Tester und gib direkt
-              Feedback, oder bleib einfach per Update auf dem Laufenden – du
-              entscheidest.
+              Feedback, oder bleib einfach per Update auf dem Laufenden.
             </p>
 
             <div
