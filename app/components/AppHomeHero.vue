@@ -17,6 +17,10 @@ onMounted(() => {
   if (reduce || !el) return
 
   const fine = window.matchMedia('(pointer: fine)').matches
+  // On mobile, prefer the CSS scroll-driven tilt (see main.css): it runs on the
+  // compositor thread, so the URL bar resizing the viewport never janks it. Only
+  // fall back to the JS scroll handler when the browser lacks support.
+  const cssTilt = !fine && CSS.supports('(animation-timeline: scroll()) and (animation-range: 0% 100%)')
   const clamp = (v: number, min: number, max: number) => Math.min(max, Math.max(min, v))
 
   let targetRot = 0
@@ -62,7 +66,11 @@ onMounted(() => {
 
   let cleanup: () => void
 
-  if (fine) {
+  if (cssTilt) {
+    // CSS drives the tilt via the `rotate` property; JS only adds the click
+    // shake on top through `transform`. Nothing to wire up here.
+    cleanup = () => {}
+  } else if (fine) {
     const onMove = (e: MouseEvent) => {
       const r = el.getBoundingClientRect()
       const dy = e.clientY - (r.top + r.height * 0.322) // cursor offset from the neck pivot
@@ -215,7 +223,7 @@ onMounted(() => {
             width="654"
             height="1199"
             fetchpriority="high"
-            class="absolute inset-0 h-full w-full object-contain will-change-transform"
+            class="mascot-head-scroll absolute inset-0 h-full w-full object-contain will-change-transform"
             style="transform-origin: 49.4% 32.2%"
           >
         </div>

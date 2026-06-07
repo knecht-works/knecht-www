@@ -98,6 +98,32 @@
   filter: drop-shadow(0 26px 42px oklch(0 0 0 / 0.6));
 }
 
+/* Mobile: tilt the mascot head from looking up to looking down, driven by the
+   scroll progress on the compositor thread. This stays smooth even while the
+   mobile URL bar shows/hides and resizes the viewport. Values mirror the JS
+   constants in AppHomeHero.vue (MOBILE_TILT_UP, MOBILE_TILT_DOWN, SCROLL_RANGE).
+   Uses the `rotate` property so the JS click shake (written to `transform`)
+   composes on top of it. */
+@keyframes mascot-tilt {
+  from {
+    rotate: 16deg;
+  }
+  to {
+    rotate: -16deg;
+  }
+}
+
+@media (pointer: coarse) and (prefers-reduced-motion: no-preference) {
+  @supports ((animation-timeline: scroll()) and (animation-range: 0% 100%)) {
+    .mascot-head-scroll {
+      animation: mascot-tilt auto linear both;
+      animation-timeline: scroll(block root);
+      animation-range: 0px 600px;
+      will-change: transform, rotate;
+    }
+  }
+}
+
 @utility pt-default {
   @apply pt-20 sm:pt-24;
 }
@@ -199,6 +225,19 @@ picture {
   background: radial-gradient(circle, color-mix(in oklab, var(--accent-mint) 45%, transparent), transparent 65%);
   filter: blur(60px);
   opacity: 0.6;
+}
+
+/* Mobile/weak-GPU: the large blur() filters on the fixed background blow the
+   layer budget on low-end GPUs, which drops the initial paint until a scroll
+   forces a re-raster (blank-until-scroll bug). The radial-gradients are already
+   soft on their own, so we drop the filter on coarse-pointer devices. Desktop
+   keeps the blurred glows. Must stay AFTER the .glow / .cta-glow rules above:
+   same specificity, so source order decides. */
+@media (pointer: coarse) {
+  .glow,
+  .cta-glow {
+    filter: none;
+  }
 }
 
 /* ---------- Markdown Styling ---------- */
