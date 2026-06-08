@@ -7,8 +7,8 @@ const is404 = computed(() => code.value === 404)
 
 const heading = computed(() => is404.value ? 'Seite nicht gefunden' : 'Da ist was schiefgelaufen')
 const message = computed(() => is404.value
-  ? 'Diese Seite gibt es nicht – vielleicht ist der Knecht hier noch nicht fertig. Geh zurück zur Startseite.'
-  : 'Auf unserer Seite ist ein unerwarteter Fehler aufgetreten. Der Knecht kümmert sich darum – versuch es gleich noch einmal.')
+  ? 'Diese Seite gibt es nicht. Vielleicht ist der Knecht hier noch nicht fertig. Geh zurück zur Startseite.'
+  : 'Auf unserer Seite ist ein unerwarteter Fehler aufgetreten. Der Knecht kümmert sich darum, versuch es gleich noch einmal.')
 
 useHead({ htmlAttrs: { lang: 'de' } })
 useSeoMeta({ title: () => `${code.value} – ${heading.value}` })

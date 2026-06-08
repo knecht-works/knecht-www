@@ -5,12 +5,12 @@ const { data: updates } = await useAsyncData('updates-index', () =>
 
 useSeoMeta({
   title: 'Updates',
-  description: 'Building in Public – jeder Meilenstein von Knecht, ehrlich dokumentiert.'
+  description: 'Building in Public, jeder Meilenstein von Knecht wird ehrlich dokumentiert.'
 })
 
 defineOgImage('Knecht', {
   title: 'Updates',
-  description: 'Building in Public – jeder Meilenstein von Knecht, ehrlich dokumentiert.'
+  description: 'Building in Public, jeder Meilenstein von Knecht wird ehrlich dokumentiert.'
 })
 </script>
 
