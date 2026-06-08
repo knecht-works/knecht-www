@@ -186,7 +186,7 @@ onMounted(() => {
           />
           <AppBadge
             dot-color="orange"
-            label="EU · Self-hosted"
+            label="EU · Self-hostable"
           />
           <AppBadge
             dot-color="violet"
