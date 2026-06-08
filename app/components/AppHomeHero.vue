@@ -204,7 +204,7 @@ onMounted(() => {
         class="col-span-full max-md:mt-16 md:col-span-4 md:relative md:ml-10"
       >
         <div
-          class="drop-shadow-mascot relative max-md:mx-auto aspect-[654/1199] w-1/2 cursor-pointer select-none md:absolute md:left-1/2 md:top-1/2 md:h-full md:w-auto md:-translate-x-1/2 md:-translate-y-1/2"
+          class="relative max-md:mx-auto aspect-[654/1199] w-1/2 cursor-pointer select-none md:absolute md:left-1/2 md:top-1/2 md:h-full md:w-auto md:-translate-x-1/2 md:-translate-y-1/2"
           @click="onMascotClick"
         >
           <img
@@ -213,7 +213,7 @@ onMounted(() => {
             width="654"
             height="1199"
             fetchpriority="high"
-            class="absolute inset-0 h-full w-full object-contain"
+            class="drop-shadow-mascot absolute inset-0 h-full w-full object-contain"
           >
           <img
             ref="headEl"

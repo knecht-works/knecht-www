@@ -38,7 +38,7 @@ const items = computed<NavigationMenuItem[]>(() =>
   <UHeader
     :class="[
       'border-b-0 transition-colors duration-300',
-      scrolled ? 'bg-default/75 backdrop-blur' : 'bg-transparent backdrop-blur-none'
+      scrolled ? 'bg-default/90' : 'bg-transparent'
     ]"
   >
     <template #left>
