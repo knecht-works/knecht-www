@@ -149,8 +149,7 @@ onMounted(() => {
           :delay="0.21"
           class="mt-6 max-w-(--text-width) text-base leading-relaxed text-muted sm:text-lg"
         >
-          Knecht soll jedes DDEV-Projekt als komplett lauffähige Umgebung booten.
-          Agenten testen dann gegen die echte App, finden Bugs und fixen sie.
+          Du verbindest ein Repository, Knecht startet das Projekt als laufende App. Agenten reproduzieren Bugs darin, fixen sie und öffnen einen fertigen Pull Request.
         </AppReveal>
 
         <!-- CTAs -->
