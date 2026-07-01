@@ -11,9 +11,7 @@ Knecht läuft selbst als Docker Container, muss aber DDEV-Projekte hochfahren, d
 
 Kurz zum Hintergrund: Docker besteht aus zwei Teilen. Der [Docker Daemon](https://docs.docker.com/get-started/docker-overview/#docker-architecture) ist der Dienst, der Container tatsächlich erstellt und verwaltet. Die Docker CLI ist nur ein Client, der über einen Unix-Socket (`/var/run/docker.sock`) mit dem Daemon spricht. Wer den Socket hat, steuert den Daemon.
 
-Genau das nutzt Knecht: Der Container startet keinen eigenen Daemon, sondern mountet den Socket des Hosts und steuert damit den Host-Daemon. Das Muster heißt Docker-out-of-Docker (DooD). Die DDEV-Container laufen dann als Geschwister neben dem Knecht-Container auf dem Host, nicht verschachtelt in ihm. [Coolify](https://coolify.io) und viele CI-Runner arbeiten genauso.
-
-Ein Detail ist dabei entscheidend: der Projektpfad. Führt DDEV im Container `ddev start` aus, erstellt der Host-Daemon die Container und löst die [Bind Mounts](https://docs.docker.com/engine/storage/bind-mounts/) gegen das Host-Dateisystem auf, nicht gegen das des Containers. Der Pfad zum Source Code muss also innen und außen identisch sein. Deshalb diktiert Knecht einen festen Pfad (`/data/knecht/projects`), statt ihn konfigurierbar zu machen.
+Genau das nutzt Knecht: Der Container startet keinen eigenen Daemon, sondern mountet den Socket des Hosts und steuert damit den Host-Daemon. Das Muster heißt [Docker-out-of-Docker](https://www.avonture.be/blog/docker-out-of-docker-dood/) (DooD). Die DDEV-Container laufen dann als Geschwister neben dem Knecht-Container auf dem Host, nicht verschachtelt in ihm. [Coolify](https://coolify.io) und viele CI-Runner arbeiten genauso.
 
 ## Der Test
 
