@@ -23,10 +23,14 @@
   --kit-bg: #09090b;
   --kit-surface: #17171a;
   --kit-surface-2: #202024;
+  /* Card fill = the site's bg-muted; the tag chip = bg-elevated. */
+  --kit-bg-muted: #111113;
+  --kit-bg-elevated: #18181b;
   --kit-border: rgba(255, 255, 255, 0.09);
   --kit-border-strong: rgba(255, 255, 255, 0.15);
   --kit-ink: #f4f4f5;
   --kit-ink-muted: #a1a1aa;
+  --kit-ink-dimmed: #71717a;
 
   /* The "inverted" solid: a near-white button on the dark theme, matching Nuxt
      UI's bg-inverted / text-inverted (see the app's solid buttons). */
@@ -42,6 +46,10 @@
   --kit-shadow-panel:
     0 1px 2px -1px rgba(0, 0, 0, 0.5),
     0 10px 24px -14px rgba(0, 0, 0, 0.65);
+  --kit-shadow-panel-lg:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.05),
+    0 2px 6px -2px rgba(0, 0, 0, 0.5),
+    0 30px 60px -28px rgba(0, 0, 0, 0.8);
 }
 
 *,
@@ -131,14 +139,31 @@
   font-size: clamp(1.2rem, 1.8vw, 1.5rem);
 }
 
+/* Feature card: flat muted surface, hairline border, panel shadow, and the
+   site's signature hover lift (translate up, border brightens, deeper shadow).
+   Set a per-card accent with a `kit-accent-*` class to color `--a` inside it. */
 .kit-card {
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 120px),
-    var(--kit-surface);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--kit-bg-muted);
   border: 1px solid var(--kit-border);
   border-radius: var(--kit-radius);
-  padding: 1.5rem 1.75rem;
+  padding: 1.5rem;
   box-shadow: var(--kit-shadow-panel);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.kit-card:hover {
+  border-color: var(--kit-border-strong);
+  box-shadow: var(--kit-shadow-panel-lg);
+}
+
+@media (min-width: 1024px) {
+  .kit-card {
+    padding: 1.75rem;
+  }
 }
 
 /* Matches the app's Nuxt UI buttons exactly: px-5 py-2.5, text-sm, font-medium,
@@ -247,6 +272,39 @@
 *::selection {
   background-color: var(--kit-mint);
   color: var(--kit-accent-ink);
+}
+
+/* Key/value description list: label left, mono value right, hairline rows. */
+.kit-dl {
+  margin: 0;
+  display: grid;
+  gap: 0;
+}
+
+.kit-dl-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.55rem 0;
+  border-top: 1px solid var(--kit-border);
+}
+
+.kit-dl-row:first-child {
+  border-top: 0;
+}
+
+.kit-dl-row dt {
+  color: var(--kit-ink-muted);
+  font-size: 0.85rem;
+}
+
+.kit-dl-row dd {
+  margin: 0;
+  font-family: var(--kit-font-mono);
+  font-size: 0.85rem;
+  text-align: right;
+  word-break: break-all;
 }
 
 /* Toast host, wired up by kit.js */
@@ -398,6 +456,11 @@
 .kit-w-fit { width: fit-content; }
 .kit-h-full { height: 100%; }
 .kit-h-auto { height: auto; }
+.kit-h-5 { height: 1.25rem; }
+.kit-h-6 { height: 1.5rem; }
+.kit-h-7 { height: 1.75rem; }
+.kit-h-8 { height: 2rem; }
+.kit-h-10 { height: 2.5rem; }
 .kit-min-h-screen { min-height: 100vh; }
 
 .kit-max-w-xs { max-width: 20rem; }
@@ -435,21 +498,33 @@
 .kit-uppercase { text-transform: uppercase; }
 .kit-tracking-tight { letter-spacing: -0.03em; }
 .kit-tracking-wide { letter-spacing: 0.02em; }
+.kit-tracking-wider { letter-spacing: 0.05em; }
 .kit-leading-tight { line-height: 1.15; }
 .kit-leading-relaxed { line-height: 1.7; }
 
 /* ---- color ---- */
+.kit-text-highlighted { color: var(--kit-ink); }
 .kit-text-ink { color: var(--kit-ink); }
 .kit-text-muted { color: var(--kit-ink-muted); }
+.kit-text-dimmed { color: var(--kit-ink-dimmed); }
 .kit-text-accent { color: var(--kit-accent-strong); }
 .kit-text-mint { color: var(--kit-mint); }
 .kit-text-inverted { color: var(--kit-inverted-ink); }
+/* Per-card accent: reads the `--a` set by a kit-accent-* class (mint default). */
+.kit-text-a { color: var(--a, var(--kit-mint)); }
 
 .kit-bg-transparent { background: transparent; }
+.kit-bg-muted { background: var(--kit-bg-muted); }
+.kit-bg-elevated { background: var(--kit-bg-elevated); }
 .kit-bg-surface { background: var(--kit-surface); }
 .kit-bg-surface-2 { background: var(--kit-surface-2); }
 .kit-bg-accent { background: var(--kit-accent); color: var(--kit-accent-ink); }
 .kit-bg-inverted { background: var(--kit-inverted); color: var(--kit-inverted-ink); }
+
+/* Per-instance accent tokens, e.g. on a kit-card, consumed by kit-text-a. */
+.kit-accent-mint { --a: var(--kit-mint); }
+.kit-accent-orange { --a: var(--kit-orange); }
+.kit-accent-amber { --a: var(--kit-amber); }
 
 /* ---- border / radius ---- */
 .kit-border { border: 1px solid var(--kit-border); }

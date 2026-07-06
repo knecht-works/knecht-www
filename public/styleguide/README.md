@@ -21,8 +21,11 @@ In local dev the same files are served from the running app:
 ## What's inside
 
 - `kit.css` - design tokens (CSS variables), `kit-`prefixed component classes
-  (`kit-body`, `kit-container`, `kit-stack`, `kit-card`, `kit-button`
-  (`--solid`/`--ghost`), `kit-badge`, `kit-code`, `kit-mascot`, `kit-toast`),
+  (`kit-body`, `kit-container`, `kit-stack`, `kit-card` (feature card with
+  hover lift; set a per-card accent with `kit-accent-mint`/`-orange`/`-amber`
+  and read it via `kit-text-a`), `kit-button` (`--solid`/`--ghost`),
+  `kit-badge`, `kit-dl` (key/value list), `kit-code`, `kit-mascot`,
+  `kit-toast`),
   plus a `kit-` utility layer so a fixture can compose any layout with classes
   alone, no inline `style`: display/flex/grid (`kit-flex`, `kit-flex-col`,
   `kit-items-center`, `kit-justify-between`, `kit-gap-4`, `kit-grid-cols-3`),
