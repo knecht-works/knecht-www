@@ -12,38 +12,38 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/styleguide/favicon/apple-touch-icon.png" />
   <meta name="apple-mobile-web-app-title" content="Knecht" />
   <link rel="manifest" href="/styleguide/favicon/site.webmanifest" />
-   <meta name="robots" content="noindex,follow" />
+  <meta name="robots" content="noindex,follow" />
 </head>
 <body class="kit-body">
   <main class="kit-container">
-    <header style="display:flex;justify-content:center;margin-bottom:clamp(2rem,6vw,3.5rem)">
-      <img src="/styleguide/assets/knecht-logo-dark.svg" alt="Knecht" height="30" style="height:30px;width:auto">
+    <header class="kit-flex kit-justify-center kit-mb-12">
+      <img class="kit-h-auto kit-w-auto" src="/styleguide/assets/knecht-logo-dark.svg" alt="Knecht" height="30">
     </header>
 
-    <section style="display:flex;flex-direction:column;align-items:center;text-align:center">
-      <img class="kit-mascot" src="/styleguide/assets/knecht-head.svg" alt="Knecht mascot" width="116" height="116" style="margin-bottom:1.5rem">
-      <span class="kit-badge" style="margin-bottom:1.25rem">styleguide</span>
-      <h1 style="margin:0 0 1rem;font-size:clamp(2.5rem,6vw,3.5rem)">Knecht <span class="kit-accent-text">Styleguide</span></h1>
-      <p class="kit-muted" style="max-width:52ch;margin:0 0 1.75rem;font-size:1.05rem">
+    <section class="kit-flex kit-flex-col kit-items-center kit-text-center">
+      <img class="kit-mascot kit-mb-6" src="/styleguide/assets/knecht-head.svg" alt="Knecht mascot" width="116" height="116">
+      <span class="kit-badge kit-mb-5">styleguide</span>
+      <h1 class="kit-text-5xl kit-mt-0 kit-mb-4">Knecht <span class="kit-text-mint">Styleguide</span></h1>
+      <p class="kit-text-muted kit-text-lg kit-max-w-measure kit-mx-auto kit-mt-0 kit-mb-7">
         Shared styles, assets and JS for Knecht test fixtures. Defined once, served
         globally from <code class="kit-code">knecht.works</code>, imported by every
         fixture with two lines.
       </p>
-      <div style="display:flex;flex-wrap:wrap;gap:0.6rem;justify-content:center">
+      <div class="kit-flex kit-flex-wrap kit-gap-3 kit-justify-center">
         <button class="kit-button" data-kit-toast="Hello from KnechtKit">Show toast</button>
         <button class="kit-button kit-button--solid" id="kit-copy">Copy install snippet</button>
         <a class="kit-button kit-button--ghost" href="/styleguide/kit.css">View kit.css</a>
       </div>
     </section>
 
-    <div class="kit-card kit-stack" style="margin-top:clamp(2.75rem,8vw,4.5rem)">
-      <h3 style="margin:0">Add it to a fixture</h3>
-      <p class="kit-muted">Drop these two lines into the fixture's <code class="kit-code">&lt;head&gt;</code>:</p>
-      <pre style="margin:0;overflow-x:auto"><code class="kit-code" style="display:block;padding:0.9rem 1rem;border-radius:0.5rem">&lt;link rel="stylesheet" href="https://knecht.works/styleguide/kit.css"&gt;
+    <div class="kit-card kit-stack kit-mt-16">
+      <h3 class="kit-m-0">Add it to a fixture</h3>
+      <p class="kit-text-muted">Drop these two lines into the fixture's <code class="kit-code">&lt;head&gt;</code>:</p>
+      <pre class="kit-m-0 kit-overflow-x-auto"><code class="kit-code kit-block kit-p-4 kit-rounded-sm">&lt;link rel="stylesheet" href="https://knecht.works/styleguide/kit.css"&gt;
 &lt;script src="https://knecht.works/styleguide/kit.js" defer&gt;&lt;/script&gt;</code></pre>
     </div>
 
-    <footer class="kit-muted" style="text-align:center;margin-top:2.5rem;font-size:0.85rem">
+    <footer class="kit-text-muted kit-text-center kit-text-sm kit-mt-10">
       Served globally from knecht.works · MIT
     </footer>
   </main>
