@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { animate, inView } from 'motion-v'
 
-const progress = 10
+const progress = 60
 
 // Bar fill + percentage count up together from a single value, kicked off the
 // first time the panel scrolls into view (jumps straight to the target when the
@@ -62,9 +62,19 @@ const phases: { status: Status, title: string, text: string }[] = [
     text: 'Das Design für das Dashboard, in dem Projekte und Workflows entstehen, steht.'
   },
   {
-    status: 'progress',
+    status: 'done',
     title: 'Prototyp bauen',
     text: 'Ein Prototyp entsteht, in dem sich Projekte und Workflows inklusive AI-Agent erstellen lassen.'
+  },
+  {
+    status: 'progress',
+    title: 'Installer',
+    text: 'Das Dashboard kann auf jedem Linux Server installiert werden'
+  },
+  {
+    status: 'progress',
+    title: 'Update Service',
+    text: 'Es können automatische Updates eingestellt werden.'
   },
   {
     status: 'progress',
