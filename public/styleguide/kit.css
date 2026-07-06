@@ -1,0 +1,275 @@
+/*
+ * Knecht Styleguide - shared styles for test fixtures.
+ * Served globally from knecht.works. Include in a fixture with:
+ *   <link rel="stylesheet" href="https://knecht.works/styleguide/kit.css">
+ * All classes are prefixed with `kit-` to avoid collisions with fixture code.
+ * The look mirrors knecht.works: dark zinc surfaces, the lime brand green,
+ * Geist, and the signature grid + mint glow background.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=Geist:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Primary = Nuxt UI's dark-mode bg-primary, i.e. lime-400. Text on it is the
+     dark ink, matching text-inverted. (#6ba96d is lime-600, the body green.) */
+  --kit-accent: #b7f8a2;
+  --kit-accent-strong: #93d585;
+  --kit-accent-ink: #16220f;
+  --kit-mint: #b7f8a2;
+  --kit-orange: #fa7a2c;
+  --kit-amber: #fcc46e;
+
+  /* Dark zinc surfaces, matching the site's near-black neutral scale. */
+  --kit-bg: #09090b;
+  --kit-surface: #17171a;
+  --kit-surface-2: #202024;
+  --kit-border: rgba(255, 255, 255, 0.09);
+  --kit-border-strong: rgba(255, 255, 255, 0.15);
+  --kit-ink: #f4f4f5;
+  --kit-ink-muted: #a1a1aa;
+
+  /* The "inverted" solid: a near-white button on the dark theme, matching Nuxt
+     UI's bg-inverted / text-inverted (see the app's solid buttons). */
+  --kit-inverted: #fafafa;
+  --kit-inverted-ink: #18181b;
+
+  --kit-radius: 0.75rem;
+  --kit-radius-sm: 0.5rem;
+  --kit-gap: 1rem;
+  --kit-font: 'Geist', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --kit-font-mono: 'Geist Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  --kit-shadow-panel:
+    0 1px 2px -1px rgba(0, 0, 0, 0.5),
+    0 10px 24px -14px rgba(0, 0, 0, 0.65);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.kit-body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--kit-font);
+  color: var(--kit-ink);
+  background: var(--kit-bg);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Signature background: a faint grid masked toward the top, plus a mint glow
+   bleeding in from the top-right. Fixed and non-interactive; content sits above
+   it via .kit-container's stacking context. */
+.kit-body::before,
+.kit-body::after {
+  content: '';
+  position: fixed;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.kit-body::before {
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 72px 72px;
+  -webkit-mask-image: radial-gradient(ellipse 85% 60% at 50% 0%, #000 25%, transparent 72%);
+  mask-image: radial-gradient(ellipse 85% 60% at 50% 0%, #000 25%, transparent 72%);
+}
+
+.kit-body::after {
+  width: 620px;
+  height: 620px;
+  top: -260px;
+  right: -180px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    color-mix(in oklab, var(--kit-mint) 30%, transparent) 0%,
+    color-mix(in oklab, var(--kit-mint) 10%, transparent) 38%,
+    transparent 70%
+  );
+  opacity: 0.5;
+}
+
+.kit-container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 720px;
+  margin-inline: auto;
+  padding: clamp(2rem, 6vw, 4.5rem) 1.25rem 3rem;
+}
+
+.kit-stack > * + * {
+  margin-top: var(--kit-gap);
+}
+
+/* Headings: mirror the site's tight, heavier display type. */
+.kit-body :is(h1, h2, h3) {
+  margin: 0;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.kit-body h1 {
+  font-size: clamp(2.25rem, 4.4vw, 3rem);
+  letter-spacing: -0.04em;
+}
+
+.kit-body h2 {
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+}
+
+.kit-body h3 {
+  font-size: clamp(1.2rem, 1.8vw, 1.5rem);
+}
+
+.kit-card {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 120px),
+    var(--kit-surface);
+  border: 1px solid var(--kit-border);
+  border-radius: var(--kit-radius);
+  padding: 1.5rem 1.75rem;
+  box-shadow: var(--kit-shadow-panel);
+}
+
+/* Matches the app's Nuxt UI buttons exactly: px-5 py-2.5, text-sm, font-medium,
+   rounded-lg, gap-1.5, shadow-sm transitioning to shadow-md on hover, and a
+   hover that drops the fill to 75% alpha. */
+.kit-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.625rem 1.25rem;
+  border: 0;
+  border-radius: 0.5rem;
+  background: var(--kit-accent);
+  color: var(--kit-accent-ink);
+  font-family: var(--kit-font);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  transition: background 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.kit-button:hover {
+  background: color-mix(in oklab, var(--kit-accent) 75%, transparent);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.35), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
+}
+
+.kit-button:focus-visible {
+  outline: 2px solid var(--kit-accent);
+  outline-offset: 2px;
+}
+
+/* Near-white solid, the app's bg-inverted button. */
+.kit-button--solid {
+  background: var(--kit-inverted);
+  color: var(--kit-inverted-ink);
+}
+
+.kit-button--solid:hover {
+  background: color-mix(in oklab, var(--kit-inverted) 90%, transparent);
+}
+
+.kit-button--solid:focus-visible {
+  outline-color: var(--kit-inverted);
+}
+
+/* Outline/ghost secondary (not one of the app's solids, but handy in fixtures). */
+.kit-button--ghost {
+  background: transparent;
+  color: var(--kit-ink);
+  border: 1px solid var(--kit-border-strong);
+  padding: calc(0.625rem - 1px) calc(1.25rem - 1px);
+  box-shadow: none;
+}
+
+.kit-button--ghost:hover {
+  background: var(--kit-surface-2);
+  box-shadow: none;
+}
+
+.kit-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in oklab, var(--kit-mint) 30%, transparent);
+  background: color-mix(in oklab, var(--kit-mint) 12%, transparent);
+  color: var(--kit-mint);
+  font-family: var(--kit-font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+.kit-muted {
+  color: var(--kit-ink-muted);
+}
+
+.kit-accent-text {
+  color: var(--kit-mint);
+}
+
+/* Mascot with the site's grounding drop shadow. */
+.kit-mascot {
+  display: block;
+  filter: drop-shadow(0 22px 38px rgba(0, 0, 0, 0.55));
+}
+
+.kit-code {
+  font-family: var(--kit-font-mono);
+  font-size: 0.85em;
+  padding: 0.1rem 0.4rem;
+  border-radius: 0.35rem;
+  border: 1px solid var(--kit-border);
+  background: var(--kit-surface-2);
+  color: var(--kit-ink);
+}
+
+.kit-body a:not(.kit-button) {
+  color: var(--kit-accent-strong);
+  text-underline-offset: 3px;
+}
+
+*::selection {
+  background-color: var(--kit-mint);
+  color: var(--kit-accent-ink);
+}
+
+/* Toast host, wired up by kit.js */
+.kit-toast {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(1rem);
+  padding: 0.75rem 1.15rem;
+  border-radius: var(--kit-radius-sm);
+  border: 1px solid var(--kit-border-strong);
+  background: var(--kit-surface-2);
+  color: var(--kit-ink);
+  font-family: var(--kit-font);
+  font-size: 0.9rem;
+  box-shadow: var(--kit-shadow-panel);
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.kit-toast.is-visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
