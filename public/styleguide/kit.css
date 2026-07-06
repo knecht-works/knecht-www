@@ -32,6 +32,9 @@
   --kit-ink-muted: #a1a1aa;
   --kit-ink-dimmed: #71717a;
 
+  /* Faint background grid lines; flipped to dark ink in light mode. */
+  --kit-grid-line: rgba(255, 255, 255, 0.025);
+
   /* The "inverted" solid: a near-white button on the dark theme, matching Nuxt
      UI's bg-inverted / text-inverted (see the app's solid buttons). */
   --kit-inverted: #fafafa;
@@ -50,6 +53,39 @@
     inset 0 1px 0 0 rgba(255, 255, 255, 0.05),
     0 2px 6px -2px rgba(0, 0, 0, 0.5),
     0 30px 60px -28px rgba(0, 0, 0, 0.8);
+}
+
+/* Light mode: add `kit-light` to the body (or any wrapper) to flip the whole
+   token set. Dark stays the default, mirroring the site. */
+.kit-light {
+  --kit-accent: #b7f8a2;
+  --kit-accent-strong: #527f54;
+  --kit-accent-ink: #16220f;
+  --kit-mint: #6ba96d;
+
+  --kit-bg: #ffffff;
+  --kit-surface: #fafafa;
+  --kit-surface-2: #f4f4f5;
+  --kit-bg-muted: #fafafa;
+  --kit-bg-elevated: #ffffff;
+  --kit-border: rgba(0, 0, 0, 0.08);
+  --kit-border-strong: rgba(0, 0, 0, 0.14);
+  --kit-ink: #18181b;
+  --kit-ink-muted: #52525b;
+  --kit-ink-dimmed: #71717a;
+
+  --kit-inverted: #18181b;
+  --kit-inverted-ink: #fafafa;
+
+  --kit-grid-line: rgba(0, 0, 0, 0.045);
+
+  --kit-shadow-panel:
+    0 1px 2px -1px rgba(0, 0, 0, 0.08),
+    0 10px 24px -14px rgba(0, 0, 0, 0.12);
+  --kit-shadow-panel-lg:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.7),
+    0 2px 6px -2px rgba(0, 0, 0, 0.08),
+    0 30px 60px -28px rgba(0, 0, 0, 0.16);
 }
 
 *,
@@ -83,8 +119,8 @@
 .kit-body::before {
   inset: 0;
   background-image:
-    linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+    linear-gradient(to right, var(--kit-grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--kit-grid-line) 1px, transparent 1px);
   background-size: 72px 72px;
   -webkit-mask-image: radial-gradient(ellipse 85% 60% at 50% 0%, #000 25%, transparent 72%);
   mask-image: radial-gradient(ellipse 85% 60% at 50% 0%, #000 25%, transparent 72%);
@@ -184,13 +220,11 @@
   font-weight: 500;
   cursor: pointer;
   text-decoration: none;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
-  transition: background 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  transition: background 0.15s ease, border-color 0.15s ease;
 }
 
 .kit-button:hover {
   background: color-mix(in oklab, var(--kit-accent) 75%, transparent);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.35), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
 }
 
 .kit-button:focus-visible {
@@ -248,10 +282,8 @@
   color: var(--kit-mint);
 }
 
-/* Mascot with the site's grounding drop shadow. */
 .kit-mascot {
   display: block;
-  filter: drop-shadow(0 22px 38px rgba(0, 0, 0, 0.55));
 }
 
 .kit-code {

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="light">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,8 +16,9 @@
 </head>
 <body class="kit-body">
   <main class="kit-container">
-    <header class="kit-flex kit-justify-start kit-mb-12">
-      <img class="kit-h-7 kit-w-auto" src="/styleguide/assets/knecht-logo-dark.svg" alt="Knecht" height="30">
+    <header class="kit-flex kit-items-center kit-justify-between kit-mb-12">
+      <img id="kit-logo" class="kit-h-7 kit-w-auto" src="/styleguide/assets/knecht-logo-dark.svg" alt="Knecht" height="30">
+      <button class="kit-button kit-button--ghost" id="kit-theme">Light mode</button>
     </header>
 
     <section class="kit-flex kit-flex-col kit-items-center kit-text-center">
@@ -82,6 +83,15 @@
         window.KnechtKit.copy(snippet).then(function () {
           window.KnechtKit.toast('Install snippet copied')
         })
+      })
+
+      var logo = document.getElementById('kit-logo')
+      var themeBtn = document.getElementById('kit-theme')
+      themeBtn.addEventListener('click', function () {
+        var mode = window.KnechtKit.toggleTheme()
+        var light = mode === 'light'
+        logo.src = '/styleguide/assets/knecht-logo-' + (light ? 'light' : 'dark') + '.svg'
+        themeBtn.textContent = light ? 'Dark mode' : 'Light mode'
       })
     })
   </script>

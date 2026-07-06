@@ -34,8 +34,12 @@ In local dev the same files are served from the running app:
   `kit-font-semibold`, `kit-font-mono`), color (`kit-text-muted`,
   `kit-text-mint`, `kit-bg-surface`) and border/radius (`kit-border`,
   `kit-rounded`). See `demo.html` for a page built entirely from utilities.
+- Light mode - dark is the default. Add `kit-light` to the body (or any
+  wrapper) to flip the whole token set: `<body class="kit-body kit-light">`.
+  Swap `knecht-logo-dark.svg` for `knecht-logo-light.svg` on light backgrounds.
 - `kit.js` - the global `KnechtKit` namespace: `ready(fn)`, `toast(msg)`,
-  `copy(text)`, plus auto-wiring for any `[data-kit-toast]` element.
+  `copy(text)`, `toggleTheme(force?)` (flips `kit-light` on the body), plus
+  auto-wiring for any `[data-kit-toast]` element.
 - `assets/` - shared images (e.g. `knecht-head.svg`).
 - `demo.html` - open `/styleguide/demo.html` to see everything render.
 

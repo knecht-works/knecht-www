@@ -34,6 +34,16 @@
       }, duration || 2500)
     },
 
+    /** Toggle light mode on <body>. Pass true/false to force a mode.
+        Returns 'light' or 'dark'. */
+    toggleTheme: function (force) {
+      var on = typeof force === 'boolean'
+        ? force
+        : !document.body.classList.contains('kit-light')
+      document.body.classList.toggle('kit-light', on)
+      return on ? 'light' : 'dark'
+    },
+
     /** Copy text to the clipboard, falling back gracefully. */
     copy: function (text) {
       if (window.navigator.clipboard) {
