@@ -4,6 +4,10 @@ export const CONTACT_EMAIL = 'hallo@knecht.works'
 /** Public GitHub organisation. */
 export const GITHUB_URL = 'https://github.com/knecht-works'
 
+/** Main public repository, shown with its star count in the header. */
+export const GITHUB_REPO = 'knecht-works/knecht-cloud'
+export const GITHUB_REPO_URL = `https://github.com/${GITHUB_REPO}`
+
 export interface SocialLink {
   label: string
   to: string

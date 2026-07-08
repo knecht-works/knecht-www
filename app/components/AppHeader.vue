@@ -36,10 +36,16 @@ const items = computed<NavigationMenuItem[]>(() =>
 
 <template>
   <UHeader
-    :class="[
-      'border-b-0 transition-colors duration-300',
-      scrolled ? 'bg-default/90' : 'bg-transparent'
-    ]"
+    class="lg:h-20 border-b-0 bg-transparent backdrop-blur-none"
+    :ui="{
+      right: 'gap-2.5 lg:gap-3',
+      container: [
+        'h-full rounded-b-xl border transition-all duration-300',
+        scrolled
+          ? 'border-default bg-default/95 shadow-panel'
+          : 'border-transparent'
+      ].join(' ')
+    }"
   >
     <template #left>
       <NuxtLink to="/">
@@ -47,13 +53,14 @@ const items = computed<NavigationMenuItem[]>(() =>
       </NuxtLink>
     </template>
 
+    <UNavigationMenu
+      :items="items"
+      variant="link"
+      color="neutral"
+    />
+
     <template #right>
-      <UNavigationMenu
-        :items="items"
-        variant="link"
-        color="neutral"
-        class="hidden lg:flex"
-      />
+      <AppGithubStars />
       <UButton
         label="Beta-Tester werden"
         color="neutral"
