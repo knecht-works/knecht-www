@@ -47,7 +47,7 @@ Alles läuft auf einem gemeinsamen Daemon. Knecht soll aber mehrere Previews par
 
 ### Fremder Code am Host-Socket
 
-Der Agent führt Code aus, und schon ein `npm install` startet [Install-Skripte](https://docs.npmjs.com/cli/v11/using-npm/scripts#life-cycle-scripts) aus Dependencies. Eine kompromittierte Dependency mit Zugriff auf den Host-Socket hat faktisch Root auf dem Server, denn wer den Daemon steuert, kann jeden Container mit jedem Mount starten. Supply-Chain-Angriffe über npm-Pakete sind [kein theoretisches Szenario](https://en.wikipedia.org/wiki/Npm_left-pad_incident).
+Der Agent führt Code aus, und wir kontrollieren nicht vollständig, was er tut. Ein Agent lässt sich über [Prompt Injection](https://simonwillison.net/series/prompt-injection/) kapern, etwa durch manipulierte Inhalte im Repo oder in einer Datenquelle, und macht dann nicht mehr das, was wir wollten. Wer an dieser Stelle an den Host-Socket kommt, steuert den Daemon, und wer den Daemon steuert, kann jeden Container mit jedem Mount starten. Das ist faktisch Root auf dem Server.
 
 ## Die Lösung: eine Sandbox pro Run
  
