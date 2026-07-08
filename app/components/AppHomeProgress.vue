@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { animate, inView } from 'motion-v'
 
-const progress = 60
+const progress = 69
 
 // Bar fill + percentage count up together from a single value, kicked off the
 // first time the panel scrolls into view (jumps straight to the target when the
@@ -67,14 +67,29 @@ const phases: { status: Status, title: string, text: string }[] = [
     text: 'Ein Prototyp entsteht, in dem sich Projekte und Workflows inklusive AI-Agent erstellen lassen.'
   },
   {
-    status: 'progress',
+    status: 'done',
     title: 'Installer',
     text: 'Das Dashboard kann auf jedem Linux Server installiert werden'
   },
   {
-    status: 'progress',
+    status: 'done',
     title: 'Update Service',
-    text: 'Es können automatische Updates eingestellt werden.'
+    text: 'Es können Updates im Control panel gemacht werden.'
+  },
+  {
+    status: 'done',
+    title: 'Github Trigger',
+    text: 'Es können Github Trigger eingestellt werden für Workflows.'
+  },
+  {
+    status: 'done',
+    title: 'Der Knecht lebt',
+    text: 'Das Knecht Dashboard kann auf Linux Server einfach installiert werden und bekommt Updates.'
+  },
+  {
+    status: 'progress',
+    title: 'Jira Trigger',
+    text: 'Workflows können von Jira Tickets getriggert werden.'
   },
   {
     status: 'progress',
@@ -82,9 +97,29 @@ const phases: { status: Status, title: string, text: string }[] = [
     text: 'Wir suchen genügend Beta-Tester, um Probleme früh zu erkennen und das finale Produkt zu bauen.'
   },
   {
+    status: 'progress',
+    title: 'Test-Actions',
+    text: 'Workflows können Tests für Projekte ausführen. Ein Fix gilt erst als fertig, wenn sie grün sind.'
+  },
+  {
     status: 'rest',
-    title: 'Architektur-Re-Check',
-    text: 'Wir prüfen, ob sich die ursprünglichen Annahmen so übernehmen lassen.'
+    title: 'Browser-Validierung',
+    text: 'Der Agent klickt den Bug im Preview selbst nach und liefert Screenshots als Beweis mit.'
+  },
+  {
+    status: 'rest',
+    title: 'Benachrichtigungen',
+    text: 'Slack oder E-Mail meldet sich, sobald ein Run fertig ist oder fehlschlägt.'
+  },
+  {
+    status: 'rest',
+    title: 'Doku & Onboarding',
+    text: 'Eine Dokumentation, die Setup, Workflows und Troubleshooting komplett abdeckt.'
+  },
+  {
+    status: 'rest',
+    title: 'Preismodell & Lizenzen',
+    text: 'Knecht kann offiziell gekauft werden: Preismodell, Lizenz und Bezahlung stehen.'
   }
 ]
 
