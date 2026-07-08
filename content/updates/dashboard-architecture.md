@@ -5,6 +5,10 @@ tag: Architektur
 description: Knecht kann aus einem Container heraus echte DDEV-Projekte booten. Was der Test gezeigt hat und warum jeder Run künftig seine eigene Sandbox bekommt.
 ---
 
+::note
+Dieser Post ist ein Blick unter die Haube. Die Container-Architektur ist der Unterbau, damit parallele Previews mit DDEV-Projekten funktionieren, nicht das Produkt selbst. Was Knecht macht und für wen er gedacht ist, steht auf der [Startseite](/) und in [Was macht der Knecht](/updates/was-macht-knecht).
+::
+
 Knecht läuft selbst als Docker Container, muss aber DDEV-Projekte hochfahren, die wieder aus Containern bestehen. Ob das überhaupt funktioniert, war die riskanteste Annahme der ganzen Architektur. Deshalb haben wir sie zuerst getestet, noch bevor der eigentliche Code entsteht.
 
 ## Der Ansatz

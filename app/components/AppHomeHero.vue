@@ -149,7 +149,7 @@ onMounted(() => {
           :delay="0.21"
           class="mt-6 max-w-(--text-width) text-base leading-relaxed text-muted sm:text-lg"
         >
-          Du verbindest ein Repository, Knecht startet das Projekt als laufende App. Agenten reproduzieren Bugs darin, fixen sie und öffnen einen fertigen Pull Request.
+          Knecht ist ein Dashboard auf deinem eigenen Server, gebaut für Agenturen mit vielen DDEV-Projekten. Er bootet jedes Projekt als komplett lauffähige Umgebung, erledigt Aufgaben mit Workflows und liefert fertige Pull Requests mit Preview.
         </AppReveal>
 
         <!-- CTAs -->

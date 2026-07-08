@@ -34,7 +34,8 @@ const steps = [
         <AppEyebrow label="Die Idee" />
 
         <p class="mt-5 text-pretty text-base leading-relaxed text-muted sm:text-lg">
-          AI-Agenten sollten nicht raten müssen, ob ihre Änderungen wirklich funktionieren.
+          Laufende Betreuung heißt Updates einspielen, Bugs reproduzieren, alles testen. Knecht macht daraus Workflows, die immer
+          gleich ablaufen, und holt AI nur da rein, wo sie wirklich hilft.
         </p>
       </AppReveal>
 

@@ -1,9 +1,10 @@
 <script setup lang="ts">
 // The home page is a pure Vue composition - no markdown collection backing it.
 const title = 'Booten. Fixen. Testen. Vollautomatisch.'
-const description = 'Knecht bootet jedes DDEV-Projekt als komplett lauffähige '
-  + 'Umgebung. Agents testen gegen die echte App, finden '
-  + 'Bugs und fixen sie.'
+const description = 'Knecht ist ein Dashboard auf deinem eigenen Server für '
+  + 'Agenturen mit vielen DDEV-Projekten. Er bootet jedes Projekt als '
+  + 'lauffähige Umgebung, erledigt Aufgaben in Workflows und '
+  + 'liefert fertige Pull Requests mit Preview.'
 
 useSeoMeta({
   title,
@@ -19,7 +20,9 @@ defineOgImage('Knecht', { title, description })
   <div>
     <AppHomeHero />
     <AppHomeInfo />
+    <AppHomeUseCase />
     <AppHomeDemo />
+    <AppHomeFit />
     <AppHomeProgress />
     <AppHomeUpdates />
   </div>

@@ -60,5 +60,7 @@ const formattedDate = computed(() =>
     <div class="richtext mt-8 max-w-(--text-width) border-t border-default pt-4">
       <ContentRenderer :value="update" />
     </div>
+
+    <AppUpdateAbout class="max-w-(--text-width)" />
   </article>
 </template>
