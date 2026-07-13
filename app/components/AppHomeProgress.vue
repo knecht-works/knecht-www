@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { animate, inView } from 'motion-v'
 
-const progress = 69
+const progress = 72
 
 // Bar fill + percentage count up together from a single value, kicked off the
 // first time the panel scrolls into view (jumps straight to the target when the
@@ -87,9 +87,14 @@ const phases: { status: Status, title: string, text: string }[] = [
     text: 'Das Knecht Dashboard kann auf Linux Server einfach installiert werden und bekommt Updates.'
   },
   {
-    status: 'progress',
+    status: 'done',
     title: 'Jira Trigger',
     text: 'Workflows können von Jira Tickets getriggert werden.'
+  },
+  {
+    status: 'progress',
+    title: 'Feedback loop',
+    text: 'Nachdem Workflows ausgeführ wurden, braucht es diverse Feedback Möglichkeiten um Output zu verbessern.'
   },
   {
     status: 'progress',
