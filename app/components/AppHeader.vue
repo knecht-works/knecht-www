@@ -38,6 +38,7 @@ const items = computed<NavigationMenuItem[]>(() =>
   <UHeader
     class="lg:h-20 border-b-0 bg-transparent backdrop-blur-none"
     :ui="{
+      left: 'gap-2.5 lg:gap-3 items-center',
       right: 'gap-2.5 lg:gap-3',
       container: [
         'h-full rounded-b-xl border transition-all duration-300',
@@ -48,9 +49,10 @@ const items = computed<NavigationMenuItem[]>(() =>
     }"
   >
     <template #left>
-      <NuxtLink to="/">
+      <NuxtLink to="/" class="flex items-center">
         <AppLogo class="w-auto shrink-0" />
       </NuxtLink>
+      <AppReleasePill />
     </template>
 
     <UNavigationMenu

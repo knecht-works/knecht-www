@@ -149,7 +149,7 @@ onMounted(() => {
           :delay="0.21"
           class="mt-6 max-w-(--text-width) text-base leading-relaxed text-muted sm:text-lg"
         >
-          Knecht ist ein Dashboard auf deinem eigenen Server, gebaut für Agenturen mit vielen DDEV-Projekten. Er bootet jedes Projekt als komplett lauffähige Umgebung, erledigt Aufgaben mit Workflows und liefert fertige Pull Requests mit Preview.
+          Knecht ist ein Dashboard auf deinem Server, gebaut für Agenturen mit vielen DDEV-Projekten. Er bootet jedes Projekt als komplett lauffähige Umgebung, erledigt Aufgaben und liefert fertige Pull Requests mit Preview.
         </AppReveal>
 
         <!-- CTAs -->

@@ -4,7 +4,7 @@
 <template>
   <span class="text-2xl font-bold tracking-tight text-highlighted inline-flex gap-2 items-center">
     <svg
-      height="32"
+      height="40"
       viewBox="0 0 518 518"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
