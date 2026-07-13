@@ -3,7 +3,17 @@ type Mode = 'beta' | 'updates'
 
 const email = ref('')
 // Beta is the default - active testers + feedback are the primary goal.
-const mode = ref<Mode>('beta')
+// ?signup=updates|beta preselects the mode, e.g. from newsletter teasers.
+const route = useRoute()
+const signupParam = computed<Mode | null>(() =>
+  route.query.signup === 'updates' || route.query.signup === 'beta'
+    ? route.query.signup
+    : null
+)
+const mode = ref<Mode>(signupParam.value ?? 'beta')
+watch(signupParam, (value) => {
+  if (value) mode.value = value
+})
 const done = ref(false)
 const loading = ref(false)
 const error = ref('')
