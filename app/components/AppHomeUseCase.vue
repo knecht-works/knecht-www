@@ -16,12 +16,12 @@ const steps = [
   {
     label: 'Update',
     title: 'Composer-Update mit Migrations',
-    text: 'composer update läuft im echten Projekt. Migrations laufen gegen die Datenbank und schreiben ihre Files, die mit committet werden.'
+    text: 'Update läuft im echten Projekt. Migrations laufen gegen die Datenbank und schreiben ihre Files, die mit committet werden.'
   },
   {
     label: 'Test',
     title: 'Gegen die laufende App testen',
-    text: 'Tests und Screenshots laufen gegen die gebootete App, nicht gegen eine Vermutung.'
+    text: 'Tests können in der gebooteten Umgebung laufen und mit der Preview kann auch manuell nochmal getestet werden.'
   },
   {
     label: 'Ergebnis',
