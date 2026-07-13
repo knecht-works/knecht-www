@@ -27,7 +27,7 @@ const formatted = computed(() =>
         class="size-3.5"
       />
       <span
-        class="min-w-[1ch] text-left transition-opacity duration-300"
+        class="min-w-[1ch] text-left leading-none transition-opacity duration-300"
         :class="formatted ? 'opacity-100' : 'opacity-0'"
       >{{ formatted }}</span>
     </span>
