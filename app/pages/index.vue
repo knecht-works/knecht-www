@@ -22,7 +22,6 @@ defineOgImage('Knecht', { title, description })
     <AppHomeInfo />
     <AppHomeUseCase />
     <AppHomeDemo />
-    <AppHomeFit />
     <AppHomeProgress />
     <AppHomeUpdates />
   </div>
