@@ -4,6 +4,14 @@ export default defineAppConfig({
       primary: 'lime',
       neutral: 'zinc'
     },
+    prose: {
+      img: {
+        slots: {
+          base: 'rounded-lg border border-default shadow-panel',
+          zoomedImage: 'rounded-lg border border-default w-auto! h-full!'
+        }
+      }
+    },
     button: {
       slots: {
         base: 'rounded-lg'
