@@ -1,0 +1,65 @@
+name: newsletter
+
+on:
+  schedule:
+    # 1st and 15th, 06:00 UTC.
+    - cron: '0 6 1,15 * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Nur HTML erzeugen, nichts senden'
+        type: boolean
+        default: true
+      test:
+        description: 'An die Test-Audience senden statt an alle'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          # Full history is required for git describe on the newsletter tags.
+          fetch-depth: 0
+          fetch-tags: true
+
+      - name: Install node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build and send newsletter
+        id: send
+        run: node scripts/newsletter.ts ${{ inputs.dry_run == true && '--dry-run' || '' }} ${{ inputs.test == true && '--test' || '' }}
+        env:
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          RESEND_SEGMENT_ID: ${{ secrets.RESEND_SEGMENT_ID }}
+          RESEND_TEST_SEGMENT_ID: ${{ secrets.RESEND_TEST_SEGMENT_ID }}
+          NEWSLETTER_FROM: ${{ vars.NEWSLETTER_FROM }}
+
+      - name: Upload dry-run HTML
+        if: inputs.dry_run == true
+        uses: actions/upload-artifact@v4
+        with:
+          name: newsletter
+          path: out/
+
+      # Only after a real broadcast, otherwise the marker moves and posts
+      # would be skipped on the next run.
+      - name: Tag last send
+        if: steps.send.outputs.sent == 'true'
+        run: |
+          TAG="newsletter-$(date +%F)"
+          git tag "$TAG"
+          git push origin "$TAG"
