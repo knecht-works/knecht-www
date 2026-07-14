@@ -60,7 +60,7 @@ function renderPost(post: NewsletterPost, isLast: boolean): string {
           </h2>
           ${post.description ? `<p style="margin:10px 0 0 0;font-family:${FONT_SANS};font-size:15px;line-height:1.6;color:${C.text};">${escapeHtml(post.description)}</p>` : ''}
           <p class="mono" style="margin:14px 0 0 0;font-family:${FONT_MONO};font-size:14px;">
-            <a href="${post.url}" style="color:${C.title};text-decoration:underline;">Weiterlesen &rarr;</a>
+            <a href="${post.url}" style="color:${C.title};text-decoration:underline;">Weiterlesen</a>
           </p>
           ${isLast ? '' : `<hr style="margin:24px 0 0 0;border:none;border-top:1px solid ${C.divider};">`}
         </td>
