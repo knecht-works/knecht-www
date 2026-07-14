@@ -12,7 +12,10 @@ export interface NewsletterPost {
 }
 
 const FOOTER_LINE = 'Knecht Works · Made in the EU 🇪🇺'
-const LOGO_URL = 'https://knecht.works/assets/logo-mail.png'
+// Own filename for the mail logo. /assets/** ships with an immutable one-year
+// cache and Gmail proxies images through its own cache, so bump the name
+// whenever the image changes.
+export const LOGO_URL = 'https://knecht.works/assets/logo-wordmark.png'
 
 // Geist is the site font but rarely installed, the fallbacks carry the look.
 const FONT_SANS = `'Geist', Helvetica, Arial, sans-serif`

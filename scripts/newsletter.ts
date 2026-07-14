@@ -17,7 +17,7 @@ import { execSync } from 'node:child_process'
 import { appendFileSync, copyFileSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs'
 import { basename, join } from 'node:path'
 import matter from 'gray-matter'
-import { renderNewsletter, renderNewsletterText, type NewsletterPost } from './newsletter-template.ts'
+import { LOGO_URL, renderNewsletter, renderNewsletterText, type NewsletterPost } from './newsletter-template.ts'
 
 const SITE_URL = 'https://knecht.works'
 const CONTENT_DIR = 'content/updates'
@@ -138,13 +138,13 @@ if (dryRun) {
 
   // Self-contained preview that works without a deploy, the logo is inlined
   // and the fonts are loaded from a local copy instead of knecht.works.
-  const logo = readFileSync('public/assets/logo-mail.png').toString('base64')
+  const logo = readFileSync('public/assets/logo-wordmark.png').toString('base64')
   mkdirSync('out/fonts', { recursive: true })
   for (const font of ['geist-400.woff2', 'geist-700.woff2', 'geist-mono-400.woff2']) {
     copyFileSync(`public/assets/fonts/${font}`, `out/fonts/${font}`)
   }
   const preview = html
-    .replace('https://knecht.works/assets/logo-mail.png', `data:image/png;base64,${logo}`)
+    .replace(LOGO_URL, `data:image/png;base64,${logo}`)
     .replaceAll('https://knecht.works/assets/fonts/', 'fonts/')
   writeFileSync('out/newsletter-preview.html', preview)
 
