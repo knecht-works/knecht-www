@@ -97,13 +97,22 @@ export function renderNewsletter(posts: NewsletterPost[]): string {
     font-weight: 400;
     src: url(https://knecht.works/assets/fonts/geist-mono-400.woff2) format('woff2');
   }
+  /* Gmail dark mode inverts even dark emails. "u + .body" only matches in
+     Gmail. The gradient locks pin the backgrounds (Gmail leaves
+     background-image alone), the blend modes cancel the color inversion on
+     the content. Everywhere else these rules never apply. */
+  u + .body .bg-page { background-image: linear-gradient(${C.page}, ${C.page}); }
+  u + .body .bg-card { background-image: linear-gradient(${C.card}, ${C.card}); }
+  u + .body .gmail-blend-screen { background: #000; mix-blend-mode: screen; }
+  u + .body .gmail-blend-difference { background: #000; mix-blend-mode: difference; }
 </style>
 </head>
-<body style="margin:0;padding:0;background-color:${C.page};">
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" bgcolor="${C.page}" style="background-color:${C.page};padding:40px 16px;">
+<body class="body" style="margin:0;padding:0;background-color:${C.page};">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" bgcolor="${C.page}" class="bg-page" style="background-color:${C.page};padding:40px 16px;">
   <tr>
     <td align="center">
-      <table role="presentation" width="600" cellpadding="0" cellspacing="0" bgcolor="${C.card}" style="max-width:600px;width:100%;background-color:${C.card};border:1px solid ${C.border};border-radius:16px;">
+      <div class="gmail-blend-screen"><div class="gmail-blend-difference">
+      <table role="presentation" width="600" cellpadding="0" cellspacing="0" bgcolor="${C.card}" class="bg-card" style="max-width:600px;width:100%;background-color:${C.card};border:1px solid ${C.border};border-radius:16px;">
         <tr>
           <td style="padding:36px 36px 0 36px;">
             <a href="https://knecht.works" style="text-decoration:none;">
@@ -136,6 +145,7 @@ ${posts.map((post, index) => renderPost(post, index === posts.length - 1)).join(
           </td>
         </tr>
       </table>
+      </div></div>
     </td>
   </tr>
 </table>
