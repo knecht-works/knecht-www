@@ -50,7 +50,8 @@ function renderPost(post: NewsletterPost, isLast: boolean): string {
 
   return `
         <tr>
-          <td style="padding:28px 36px ${isLast ? '36px' : '0'} 36px;">
+          <td style="padding:22px 24px ${isLast ? '26px' : '0'} 24px;">
+            <div class="gmail-blend-screen"><div class="gmail-blend-difference">
             <p style="margin:0;font-family:${FONT_MONO};font-size:13px;color:${C.dimmed};">${formatDate(post.date)}${tagPill}</p>
             <h2 style="margin:10px 0 0 0;font-family:${FONT_SANS};font-size:19px;line-height:1.35;font-weight:bold;">
               <a href="${post.url}" style="color:${C.highlighted};text-decoration:none;">${escapeHtml(post.title)}</a>
@@ -59,7 +60,8 @@ function renderPost(post: NewsletterPost, isLast: boolean): string {
             <p style="margin:14px 0 0 0;font-family:${FONT_MONO};font-size:14px;">
               <a href="${post.url}" style="color:${C.primary};text-decoration:none;">Weiterlesen &rarr;</a>
             </p>
-            ${isLast ? '' : `<hr style="margin:28px 0 0 0;border:none;border-top:1px solid ${C.divider};">`}
+            ${isLast ? '' : `<hr style="margin:22px 0 0 0;border:none;border-top:1px solid ${C.divider};">`}
+            </div></div>
           </td>
         </tr>`
 }
@@ -108,41 +110,42 @@ export function renderNewsletter(posts: NewsletterPost[]): string {
 </style>
 </head>
 <body class="body" style="margin:0;padding:0;background-color:${C.page};">
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" bgcolor="${C.page}" class="bg-page" style="background-color:${C.page};padding:40px 16px;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" bgcolor="${C.page}" class="bg-page" style="background-color:${C.page};padding:16px 8px;">
   <tr>
     <td align="center">
-      <div class="gmail-blend-screen"><div class="gmail-blend-difference">
       <table role="presentation" width="600" cellpadding="0" cellspacing="0" bgcolor="${C.card}" class="bg-card" style="max-width:600px;width:100%;background-color:${C.card};border:1px solid ${C.border};border-radius:16px;">
         <tr>
-          <td style="padding:36px 36px 0 36px;">
+          <td style="padding:24px 24px 0 24px;">
             <a href="https://knecht.works" style="text-decoration:none;">
-              <img src="${LOGO_URL}" width="36" height="36" alt="Knecht" style="vertical-align:middle;border:0;">
-              <span style="font-family:${FONT_SANS};font-size:20px;font-weight:bold;color:${C.highlighted};vertical-align:middle;">&nbsp;Knecht</span>
+              <img src="${LOGO_URL}" width="82" height="32" alt="Knecht" style="border:0;">
             </a>
           </td>
         </tr>
         <tr>
-          <td style="padding:24px 36px 0 36px;">
+          <td style="padding:18px 24px 0 24px;">
+            <div class="gmail-blend-screen"><div class="gmail-blend-difference">
             <p style="margin:0;font-family:${FONT_SANS};font-size:15px;line-height:1.6;color:${C.muted};">
               ${intro}
             </p>
+            </div></div>
           </td>
         </tr>
 ${posts.map((post, index) => renderPost(post, index === posts.length - 1)).join('\n')}
       </table>
       <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;">
         <tr>
-          <td style="padding:24px 36px;font-family:${FONT_SANS};font-size:12px;line-height:1.9;color:${C.dimmed};text-align:center;">
+          <td style="padding:16px 24px;font-family:${FONT_SANS};font-size:12px;line-height:1.9;color:${C.dimmed};text-align:center;">
+            <div class="gmail-blend-screen"><div class="gmail-blend-difference">
             Du bekommst diese Mail, weil du dich auf
             <a href="https://knecht.works" style="color:${C.muted};">knecht.works</a> angemeldet hast.<br>
             <a href="{{{RESEND_UNSUBSCRIBE_URL}}}" style="color:${C.muted};">Newsletter abbestellen</a> ·
             <a href="https://knecht.works/impressum" style="color:${C.muted};">Impressum</a> ·
             <a href="https://knecht.works/datenschutz" style="color:${C.muted};">Datenschutz</a><br>
             ${FOOTER_LINE}
+            </div></div>
           </td>
         </tr>
       </table>
-      </div></div>
     </td>
   </tr>
 </table>
