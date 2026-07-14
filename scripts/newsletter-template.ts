@@ -1,7 +1,9 @@
-// Newsletter HTML for Resend broadcasts, styled after the site: dark panel,
-// mono accents, mint highlights. Table layout with inline styles only, mail
-// clients ignore stylesheets and modern CSS. Image and link URLs must be
-// absolute. {{{RESEND_UNSUBSCRIBE_URL}}} is replaced by Resend on send.
+// Newsletter HTML for Resend broadcasts. Deliberately plain: no card, no
+// forced backgrounds, near-default colors. Mail clients restyle emails in dark
+// mode anyway (Gmail and Outlook invert even dark designs), so the mail is
+// designed light and lets every client adapt it on its own. Table layout with
+// inline styles only, link and image URLs must be absolute.
+// {{{RESEND_UNSUBSCRIBE_URL}}} is replaced by Resend on send.
 
 export interface NewsletterPost {
   title: string
@@ -12,25 +14,24 @@ export interface NewsletterPost {
 }
 
 const FOOTER_LINE = 'Knecht Works · Made in the EU 🇪🇺'
+
 // Own filename for the mail logo. /assets/** ships with an immutable one-year
 // cache and Gmail proxies images through its own cache, so bump the name
-// whenever the image changes.
-export const LOGO_URL = 'https://knecht.works/assets/logo-wordmark.png'
+// whenever the image changes. Icon only: its own colors work on light and
+// dark backgrounds, text or a chip would break in one of the two.
+export const LOGO_URL = 'https://knecht.works/assets/knecht-head-square.png'
 
 // Geist is the site font but rarely installed, the fallbacks carry the look.
 const FONT_SANS = `'Geist', Helvetica, Arial, sans-serif`
 const FONT_MONO = `'Geist Mono', 'SFMono-Regular', Consolas, 'Courier New', monospace`
 
-// Dark theme tokens, matching the site (neutral-950 background, mint primary).
 const C = {
-  page: '#0a0a0a',
-  card: '#141414',
-  border: '#2a2a2a',
-  divider: '#262626',
-  highlighted: '#f5f5f5',
-  muted: '#a3a3a3',
-  dimmed: '#737373',
-  primary: '#b7f8a2'
+  title: '#18181b',
+  text: '#3f3f46',
+  muted: '#71717a',
+  border: '#d4d4d8',
+  divider: '#e4e4e7',
+  link: '#4d7c0f'
 }
 
 const escapeHtml = (value: string): string =>
@@ -48,25 +49,23 @@ const formatDate = (iso: string): string =>
 
 function renderPost(post: NewsletterPost, isLast: boolean): string {
   const tagPill = post.tag
-    ? `<span style="display:inline-block;margin-left:10px;padding:2px 10px;border:1px solid ${C.border};border-radius:999px;font-family:${FONT_MONO};font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:${C.muted};">${escapeHtml(post.tag)}</span>`
+    ? `<span class="mono" style="display:inline-block;margin-left:10px;padding:2px 10px;border:1px solid ${C.border};border-radius:999px;font-family:${FONT_MONO};font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:${C.muted};">${escapeHtml(post.tag)}</span>`
     : ''
 
   return `
-        <tr>
-          <td style="padding:22px 24px ${isLast ? '26px' : '0'} 24px;">
-            <div class="gmail-blend-screen"><div class="gmail-blend-difference">
-            <p style="margin:0;font-family:${FONT_MONO};font-size:13px;color:${C.dimmed};">${formatDate(post.date)}${tagPill}</p>
-            <h2 style="margin:10px 0 0 0;font-family:${FONT_SANS};font-size:19px;line-height:1.35;font-weight:bold;">
-              <a href="${post.url}" style="color:${C.highlighted};text-decoration:none;">${escapeHtml(post.title)}</a>
-            </h2>
-            ${post.description ? `<p style="margin:10px 0 0 0;font-family:${FONT_SANS};font-size:15px;line-height:1.6;color:${C.muted};">${escapeHtml(post.description)}</p>` : ''}
-            <p style="margin:14px 0 0 0;font-family:${FONT_MONO};font-size:14px;">
-              <a href="${post.url}" style="color:${C.primary};text-decoration:none;">Weiterlesen &rarr;</a>
-            </p>
-            ${isLast ? '' : `<hr style="margin:22px 0 0 0;border:none;border-top:1px solid ${C.divider};">`}
-            </div></div>
-          </td>
-        </tr>`
+      <tr>
+        <td style="padding:24px 0 ${isLast ? '8px' : '0'} 0;">
+          <p class="mono" style="margin:0;font-family:${FONT_MONO};font-size:13px;color:${C.muted};">${formatDate(post.date)}${tagPill}</p>
+          <h2 style="margin:10px 0 0 0;font-family:${FONT_SANS};font-size:20px;line-height:1.35;font-weight:bold;">
+            <a href="${post.url}" style="color:${C.title};text-decoration:none;">${escapeHtml(post.title)}</a>
+          </h2>
+          ${post.description ? `<p style="margin:10px 0 0 0;font-family:${FONT_SANS};font-size:15px;line-height:1.6;color:${C.text};">${escapeHtml(post.description)}</p>` : ''}
+          <p class="mono" style="margin:14px 0 0 0;font-family:${FONT_MONO};font-size:14px;">
+            <a href="${post.url}" style="color:${C.link};text-decoration:none;">Weiterlesen &rarr;</a>
+          </p>
+          ${isLast ? '' : `<hr style="margin:24px 0 0 0;border:none;border-top:1px solid ${C.divider};">`}
+        </td>
+      </tr>`
 }
 
 export function renderNewsletter(posts: NewsletterPost[]): string {
@@ -79,8 +78,6 @@ export function renderNewsletter(posts: NewsletterPost[]): string {
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="dark">
-<meta name="supported-color-schemes" content="dark">
 <style>
   /* Picked up by clients that load web fonts (Apple Mail, iOS). Gmail and
      Outlook ignore this and use the inline fallback stacks. */
@@ -102,50 +99,46 @@ export function renderNewsletter(posts: NewsletterPost[]): string {
     font-weight: 400;
     src: url(https://knecht.works/assets/fonts/geist-mono-400.woff2) format('woff2');
   }
-  /* Gmail dark mode inverts even dark emails. "u + .body" only matches in
-     Gmail. The gradient locks pin the backgrounds (Gmail leaves
-     background-image alone), the blend modes cancel the color inversion on
-     the content. Everywhere else these rules never apply. */
-  u + .body .bg-page { background-image: linear-gradient(${C.page}, ${C.page}); }
-  u + .body .bg-card { background-image: linear-gradient(${C.card}, ${C.card}); }
-  u + .body .gmail-blend-screen { background: #000; mix-blend-mode: screen; }
-  u + .body .gmail-blend-difference { background: #000; mix-blend-mode: difference; }
 </style>
+<!--[if mso]>
+<style>
+  /* Outlook's Word engine drops the whole font stack when the first font is
+     unknown, so force the mono fallback explicitly. */
+  .mono, .mono a { font-family: Consolas, 'Courier New', monospace !important; }
+</style>
+<![endif]-->
 </head>
-<body class="body" style="margin:0;padding:0;background-color:${C.page};">
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" bgcolor="${C.page}" class="bg-page" style="background-color:${C.page};padding:16px 8px;">
+<body style="margin:0;padding:0;">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0">
   <tr>
-    <td align="center">
-      <table role="presentation" width="600" cellpadding="0" cellspacing="0" bgcolor="${C.card}" class="bg-card" style="max-width:600px;width:100%;background-color:${C.card};border:1px solid ${C.border};border-radius:16px;">
+    <td align="center" style="padding:32px 16px;">
+      <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;">
         <tr>
-          <td style="padding:24px 24px 0 24px;">
+          <td style="padding:0 0 20px 0;">
             <a href="https://knecht.works" style="text-decoration:none;">
-              <img src="${LOGO_URL}" width="82" height="32" alt="Knecht" style="border:0;">
+              <img src="${LOGO_URL}" width="48" height="48" alt="Knecht" style="border:0;">
             </a>
           </td>
         </tr>
         <tr>
-          <td style="padding:18px 24px 0 24px;">
-            <div class="gmail-blend-screen"><div class="gmail-blend-difference">
-            <p style="margin:0;font-family:${FONT_SANS};font-size:15px;line-height:1.6;color:${C.muted};">
+          <td style="padding:0 0 4px 0;">
+            <p style="margin:0;font-family:${FONT_SANS};font-size:15px;line-height:1.6;color:${C.text};">
               ${intro}
             </p>
-            </div></div>
           </td>
         </tr>
 ${posts.map((post, index) => renderPost(post, index === posts.length - 1)).join('\n')}
-      </table>
-      <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;">
         <tr>
-          <td style="padding:16px 24px;font-family:${FONT_SANS};font-size:12px;line-height:1.9;color:${C.dimmed};text-align:center;">
-            <div class="gmail-blend-screen"><div class="gmail-blend-difference">
-            Du bekommst diese Mail, weil du dich auf
-            <a href="https://knecht.works" style="color:${C.muted};">knecht.works</a> angemeldet hast.<br>
-            <a href="{{{RESEND_UNSUBSCRIBE_URL}}}" style="color:${C.muted};">Newsletter abbestellen</a> ·
-            <a href="https://knecht.works/impressum" style="color:${C.muted};">Impressum</a> ·
-            <a href="https://knecht.works/datenschutz" style="color:${C.muted};">Datenschutz</a><br>
-            ${FOOTER_LINE}
-            </div></div>
+          <td style="padding:24px 0 0 0;">
+            <hr style="margin:0 0 16px 0;border:none;border-top:1px solid ${C.divider};">
+            <p style="margin:0;font-family:${FONT_SANS};font-size:12px;line-height:1.9;color:${C.muted};text-align:center;">
+              Du bekommst diese Mail, weil du dich auf
+              <a href="https://knecht.works" style="color:${C.muted};">knecht.works</a> angemeldet hast.<br>
+              <a href="{{{RESEND_UNSUBSCRIBE_URL}}}" style="color:${C.muted};">Newsletter abbestellen</a> ·
+              <a href="https://knecht.works/impressum" style="color:${C.muted};">Impressum</a> ·
+              <a href="https://knecht.works/datenschutz" style="color:${C.muted};">Datenschutz</a><br>
+              ${FOOTER_LINE}
+            </p>
           </td>
         </tr>
       </table>

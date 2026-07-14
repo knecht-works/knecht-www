@@ -138,7 +138,7 @@ if (dryRun) {
 
   // Self-contained preview that works without a deploy, the logo is inlined
   // and the fonts are loaded from a local copy instead of knecht.works.
-  const logo = readFileSync('public/assets/logo-wordmark.png').toString('base64')
+  const logo = readFileSync(`public/assets/${LOGO_URL.split('/').pop()}`).toString('base64')
   mkdirSync('out/fonts', { recursive: true })
   for (const font of ['geist-400.woff2', 'geist-700.woff2', 'geist-mono-400.woff2']) {
     copyFileSync(`public/assets/fonts/${font}`, `out/fonts/${font}`)
