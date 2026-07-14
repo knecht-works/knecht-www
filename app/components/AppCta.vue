@@ -17,6 +17,8 @@ watch(signupParam, (value) => {
 const done = ref(false)
 const loading = ref(false)
 const error = ref('')
+// Honeypot, stays empty for real users.
+const website = ref('')
 
 const modeItems = [
   {
@@ -37,8 +39,8 @@ const submitLabel = computed(() =>
 
 const doneMessage = computed(() =>
   mode.value === 'beta'
-    ? 'Drin! Du bist Beta-Tester der ersten Stunde, wir melden uns mit mehr Informationen.'
-    : 'Drin! Du bekommst ab jetzt jedes Update.'
+    ? 'Drin! Du bist Beta-Tester der ersten Stunde. Eine Willkommens-Mail ist unterwegs zu dir.'
+    : 'Drin! Du bekommst ab jetzt jedes Update. Eine Willkommens-Mail ist unterwegs zu dir.'
 )
 
 const submit = async () => {
@@ -51,7 +53,7 @@ const submit = async () => {
   try {
     await $fetch('/api/subscribe', {
       method: 'POST',
-      body: { email: email.value, mode: mode.value }
+      body: { email: email.value, mode: mode.value, website: website.value }
     })
     done.value = true
   } catch {
@@ -128,6 +130,19 @@ const submit = async () => {
                     fieldset: 'grid w-full grid-cols-1 gap-3 sm:grid-cols-2'
                   }"
                 />
+
+                <div
+                  class="hidden"
+                  aria-hidden="true"
+                >
+                  <input
+                    v-model="website"
+                    type="text"
+                    name="website"
+                    tabindex="-1"
+                    autocomplete="off"
+                  >
+                </div>
 
                 <div class="flex w-full flex-col gap-3 sm:flex-row">
                   <UInput

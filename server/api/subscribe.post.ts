@@ -1,49 +1,41 @@
-// Adds a signup to Resend. Everyone lands in the "Updates" audience so general
-// broadcasts reach all; beta testers are additionally added to the "Beta"
-// audience for targeted access/test mails.
+// Triggers the "new-contact" automation in Resend. The automation creates the
+// contact if needed, adds it to the right segment and sends the welcome mail.
 const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/
 
 interface SubscribeBody {
   email?: string
   mode?: 'beta' | 'updates'
+  website?: string
 }
 
 export default defineEventHandler(async (event) => {
-  const { email, mode } = await readBody<SubscribeBody>(event)
+  const { email, mode, website } = await readBody<SubscribeBody>(event)
+
+  // Honeypot. The field is hidden in the form, only bots fill it.
+  if (website) {
+    return { ok: true }
+  }
 
   if (!email || !EMAIL_RE.test(email)) {
     throw createError({ statusCode: 422, statusMessage: 'Ungültige E-Mail-Adresse.' })
   }
 
-  const { resendApiKey, resendAudienceUpdates, resendAudienceBeta } = useRuntimeConfig(event)
+  const { resendApiKey } = useRuntimeConfig(event)
 
-  if (!resendApiKey || !resendAudienceUpdates) {
+  if (!resendApiKey) {
     throw createError({ statusCode: 500, statusMessage: 'Newsletter ist nicht konfiguriert.' })
   }
 
-  // Add to one audience; treat an already-existing contact as success.
-  const addToAudience = async (audienceId: string) => {
-    try {
-      await $fetch(`https://api.resend.com/audiences/${audienceId}/contacts`, {
-        method: 'POST',
-        headers: { Authorization: `Bearer ${resendApiKey}` },
-        body: { email, unsubscribed: false }
-      })
-    } catch (err: unknown) {
-      const status = (err as { statusCode?: number })?.statusCode
-      // 409 = contact already in this audience → fine.
-      if (status !== 409) throw err
+  await $fetch('https://api.resend.com/events/send', {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${resendApiKey}` },
+    body: {
+      event: 'new-contact',
+      email,
+      // Must match the payload values the automation expects.
+      payload: { segment: mode === 'beta' ? 'beta' : 'updates' }
     }
-  }
-
-  await addToAudience(resendAudienceUpdates)
-
-  if (mode === 'beta') {
-    if (!resendAudienceBeta) {
-      throw createError({ statusCode: 500, statusMessage: 'Beta-Audience ist nicht konfiguriert.' })
-    }
-    await addToAudience(resendAudienceBeta)
-  }
+  })
 
   return { ok: true }
 })

@@ -68,8 +68,6 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     resendApiKey: '',
-    resendAudienceUpdates: '',
-    resendAudienceBeta: '',
     // Optional: raises the GitHub API rate limit for /api/github.
     githubToken: ''
   },
