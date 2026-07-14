@@ -30,8 +30,7 @@ const C = {
   text: '#3f3f46',
   muted: '#71717a',
   border: '#d4d4d8',
-  divider: '#e4e4e7',
-  link: '#4d7c0f'
+  divider: '#e4e4e7'
 }
 
 const escapeHtml = (value: string): string =>
@@ -61,7 +60,7 @@ function renderPost(post: NewsletterPost, isLast: boolean): string {
           </h2>
           ${post.description ? `<p style="margin:10px 0 0 0;font-family:${FONT_SANS};font-size:15px;line-height:1.6;color:${C.text};">${escapeHtml(post.description)}</p>` : ''}
           <p class="mono" style="margin:14px 0 0 0;font-family:${FONT_MONO};font-size:14px;">
-            <a href="${post.url}" style="color:${C.link};text-decoration:none;">Weiterlesen &rarr;</a>
+            <a href="${post.url}" style="color:${C.title};text-decoration:underline;">Weiterlesen &rarr;</a>
           </p>
           ${isLast ? '' : `<hr style="margin:24px 0 0 0;border:none;border-top:1px solid ${C.divider};">`}
         </td>
@@ -70,8 +69,8 @@ function renderPost(post: NewsletterPost, isLast: boolean): string {
 
 export function renderNewsletter(posts: NewsletterPost[]): string {
   const intro = posts.length === 1
-    ? 'Hallo! Seit der letzten Mail ist bei Knecht wieder etwas weitergegangen. Ein neuer Beitrag ist online, und wie immer dokumentieren wir darin ehrlich, was funktioniert hat und was nicht. Viel Spaß beim Lesen.'
-    : `Hallo! Seit der letzten Mail ist bei Knecht einiges weitergegangen. ${posts.length} neue Beiträge sind online, und wie immer dokumentieren wir darin ehrlich, was funktioniert hat und was nicht. Viel Spaß beim Lesen.`
+    ? 'Seit der letzten Mail ist einiges weitergegangen, ein neuer Beitrag ist online. Viel Spaß beim Lesen.'
+    : `Seit der letzten Mail ist einiges weitergegangen, ${posts.length} neue Beiträge sind online. Viel Spaß beim Lesen.`
 
   return `<!DOCTYPE html>
 <html lang="de">
@@ -123,6 +122,9 @@ export function renderNewsletter(posts: NewsletterPost[]): string {
         <tr>
           <td style="padding:0 0 4px 0;">
             <p style="margin:0;font-family:${FONT_SANS};font-size:15px;line-height:1.6;color:${C.text};">
+              Hallo!
+            </p>
+            <p style="margin:12px 0 0 0;font-family:${FONT_SANS};font-size:15px;line-height:1.6;color:${C.text};">
               ${intro}
             </p>
           </td>
@@ -157,9 +159,11 @@ export function renderNewsletterText(posts: NewsletterPost[]): string {
   ].filter(Boolean).join('\n'))
 
   return [
+    'Hallo!',
+    '',
     posts.length === 1
-      ? 'Hallo! Seit der letzten Mail ist bei Knecht wieder etwas weitergegangen. Ein neuer Beitrag ist online.'
-      : `Hallo! Seit der letzten Mail ist bei Knecht einiges weitergegangen. ${posts.length} neue Beiträge sind online.`,
+      ? 'Seit der letzten Mail ist einiges weitergegangen, ein neuer Beitrag ist online.'
+      : `Seit der letzten Mail ist einiges weitergegangen, ${posts.length} neue Beiträge sind online.`,
     '',
     items.join('\n\n'),
     '',
