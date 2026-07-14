@@ -14,7 +14,7 @@
 // Requires the full git history (fetch-depth: 0), otherwise git describe fails.
 
 import { execSync } from 'node:child_process'
-import { appendFileSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs'
+import { appendFileSync, copyFileSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs'
 import { basename, join } from 'node:path'
 import matter from 'gray-matter'
 import { renderNewsletter, renderNewsletterText, type NewsletterPost } from './newsletter-template.ts'
@@ -135,7 +135,21 @@ if (dryRun) {
   mkdirSync('out', { recursive: true })
   writeFileSync('out/newsletter.html', html)
   writeFileSync('out/newsletter.txt', text)
-  console.log(`Dry-Run. Betreff wäre "${subject}", HTML liegt in out/newsletter.html.`)
+
+  // Self-contained preview that works without a deploy, the logo is inlined
+  // and the fonts are loaded from a local copy instead of knecht.works.
+  const logo = readFileSync('public/assets/logo-mail.png').toString('base64')
+  mkdirSync('out/fonts', { recursive: true })
+  for (const font of ['geist-400.woff2', 'geist-700.woff2', 'geist-mono-400.woff2']) {
+    copyFileSync(`public/assets/fonts/${font}`, `out/fonts/${font}`)
+  }
+  const preview = html
+    .replace('https://knecht.works/assets/logo-mail.png', `data:image/png;base64,${logo}`)
+    .replaceAll('https://knecht.works/assets/fonts/', 'fonts/')
+  writeFileSync('out/newsletter-preview.html', preview)
+
+  console.log(`Dry-Run. Betreff wäre "${subject}".`)
+  console.log('Original liegt in out/newsletter.html, lokale Vorschau in out/newsletter-preview.html.')
   setOutput('sent', 'false')
   process.exit(0)
 }

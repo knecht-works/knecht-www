@@ -11,7 +11,8 @@
     "lint": "eslint .",
     "lintfix": "eslint . --fix",
     "typecheck": "nuxt typecheck",
-    "ci": "npm run lint && npm run typecheck"
+    "ci": "npm run lint && npm run typecheck",
+    "newsletter:preview": "node --experimental-strip-types scripts/newsletter.ts --dry-run && open out/newsletter-preview.html"
   },
   "dependencies": {
     "@iconify-json/lucide": "^1.2.111",

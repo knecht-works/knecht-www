@@ -11,7 +11,7 @@ export interface NewsletterPost {
   url: string
 }
 
-const FOOTER_ADDRESS = 'Knecht · Leonfeldner Straße 90a · 4040 Linz · Österreich'
+const FOOTER_LINE = 'Knecht Works · Made in the EU 🇪🇺'
 const LOGO_URL = 'https://knecht.works/assets/logo-mail.png'
 
 // Geist is the site font but rarely installed, the fallbacks carry the look.
@@ -66,8 +66,8 @@ function renderPost(post: NewsletterPost, isLast: boolean): string {
 
 export function renderNewsletter(posts: NewsletterPost[]): string {
   const intro = posts.length === 1
-    ? 'Es gibt einen neuen Beitrag auf knecht.works. Hier ist er im Überblick.'
-    : `Es gibt ${posts.length} neue Beiträge auf knecht.works. Hier sind sie im Überblick.`
+    ? 'Hallo! Seit der letzten Mail ist bei Knecht wieder etwas weitergegangen. Ein neuer Beitrag ist online, und wie immer dokumentieren wir darin ehrlich, was funktioniert hat und was nicht. Viel Spaß beim Lesen.'
+    : `Hallo! Seit der letzten Mail ist bei Knecht einiges weitergegangen. ${posts.length} neue Beiträge sind online, und wie immer dokumentieren wir darin ehrlich, was funktioniert hat und was nicht. Viel Spaß beim Lesen.`
 
   return `<!DOCTYPE html>
 <html lang="de">
@@ -122,11 +122,8 @@ export function renderNewsletter(posts: NewsletterPost[]): string {
           </td>
         </tr>
         <tr>
-          <td style="padding:28px 36px 0 36px;">
-            <p style="margin:0;font-family:${FONT_MONO};font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:${C.muted};">
-              <span style="color:${C.primary};">&bull;</span>&nbsp; Building in Public
-            </p>
-            <p style="margin:14px 0 0 0;font-family:${FONT_SANS};font-size:15px;line-height:1.6;color:${C.muted};">
+          <td style="padding:24px 36px 0 36px;">
+            <p style="margin:0;font-family:${FONT_SANS};font-size:15px;line-height:1.6;color:${C.muted};">
               ${intro}
             </p>
           </td>
@@ -141,7 +138,7 @@ ${posts.map((post, index) => renderPost(post, index === posts.length - 1)).join(
             <a href="{{{RESEND_UNSUBSCRIBE_URL}}}" style="color:${C.muted};">Newsletter abbestellen</a> ·
             <a href="https://knecht.works/impressum" style="color:${C.muted};">Impressum</a> ·
             <a href="https://knecht.works/datenschutz" style="color:${C.muted};">Datenschutz</a><br>
-            ${FOOTER_ADDRESS}
+            ${FOOTER_LINE}
           </td>
         </tr>
       </table>
@@ -162,12 +159,12 @@ export function renderNewsletterText(posts: NewsletterPost[]): string {
 
   return [
     posts.length === 1
-      ? 'Es gibt einen neuen Beitrag auf knecht.works.'
-      : `Es gibt ${posts.length} neue Beiträge auf knecht.works.`,
+      ? 'Hallo! Seit der letzten Mail ist bei Knecht wieder etwas weitergegangen. Ein neuer Beitrag ist online.'
+      : `Hallo! Seit der letzten Mail ist bei Knecht einiges weitergegangen. ${posts.length} neue Beiträge sind online.`,
     '',
     items.join('\n\n'),
     '',
     'Newsletter abbestellen: {{{RESEND_UNSUBSCRIBE_URL}}}',
-    FOOTER_ADDRESS
+    FOOTER_LINE
   ].join('\n')
 }
