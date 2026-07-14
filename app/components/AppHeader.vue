@@ -40,6 +40,9 @@ const items = computed<NavigationMenuItem[]>(() =>
     :ui="{
       left: 'gap-2.5 lg:gap-3 items-center',
       right: 'gap-2.5 lg:gap-3',
+      // The menu duplicates the header row inside a fullscreen modal. Match
+      // the 1px container border below, or the logo jumps on open.
+      header: 'border-x border-t border-x-transparent border-t-transparent',
       container: [
         'h-full rounded-b-xl border transition-all duration-300',
         scrolled
