@@ -7,6 +7,8 @@ description: Knecht kann aus einem Container heraus echte DDEV-Projekte booten. 
 
 ::note
 Dieser Post ist ein Blick unter die Haube. Die Container-Architektur ist der Unterbau, damit parallele Previews mit DDEV-Projekten funktionieren, nicht das Produkt selbst. Was Knecht macht und für wen er gedacht ist, steht auf der [Startseite](/) und in [Was macht der Knecht](/updates/was-macht-knecht).
+
+Update, Juli 2026: Wir haben die Sysbox-Sandbox gebaut, und sie lief. Trotzdem haben wir sie wieder ausgebaut. Warum, steht in der Fortsetzung [Zurück zum geteilten Daemon](/updates/sandbox-rollback). Der Weg zur Entscheidung unten bleibt trotzdem lesenswert, die Fortsetzung baut darauf auf.
 ::
 
 Knecht läuft selbst als Docker Container, muss aber DDEV-Projekte hochfahren, die wieder aus Containern bestehen. Ob das überhaupt funktioniert, war die riskanteste Annahme der ganzen Architektur. Deshalb haben wir sie zuerst getestet, noch bevor der eigentliche Code entsteht.
