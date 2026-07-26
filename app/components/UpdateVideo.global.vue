@@ -16,9 +16,10 @@ let observer: IntersectionObserver | undefined
 
 onMounted(() => {
   if (!video.value) return
-  observer = new IntersectionObserver(([entry]) => {
+  observer = new IntersectionObserver((entries) => {
     const el = video.value
-    if (!el) return
+    const entry = entries[0]
+    if (!el || !entry) return
     // play() returns a promise that rejects when autoplay is blocked.
     if (entry.isIntersecting) el.play().catch(() => {})
     else el.pause()

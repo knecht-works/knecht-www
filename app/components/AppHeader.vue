@@ -52,7 +52,10 @@ const items = computed<NavigationMenuItem[]>(() =>
     }"
   >
     <template #left>
-      <NuxtLink to="/" class="flex items-center">
+      <NuxtLink
+        to="/"
+        class="flex items-center"
+      >
         <AppLogo class="w-auto shrink-0" />
       </NuxtLink>
       <AppReleasePill />
