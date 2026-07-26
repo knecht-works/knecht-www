@@ -92,6 +92,11 @@ const phases: { status: Status, title: string, text: string }[] = [
     text: 'Workflows können von Jira Tickets getriggert werden.'
   },
   {
+    status: 'done',
+    title: 'SSH & IDE',
+    text: 'In die laufenden Preview Container können per SSH und einer IDE Änderungen vorgenommen werden.'
+  },
+  {
     status: 'progress',
     title: 'Feedback loop',
     text: 'Nachdem Workflows ausgeführ wurden, braucht es diverse Feedback Möglichkeiten um Output zu verbessern.'
