@@ -37,17 +37,24 @@ description: 1-2 Sätze für die Liste auf der Startseite.
 - Dinge beim konkreten Namen nennen, keine selbst erfundenen Sammelbegriffe
   ("DDEV-Config" statt "Projekt-Config"). Was der Leser aus seinem Alltag
   kennt, muss er wiedererkennen.
+- UI-Elemente mit ihrem exakten Label in Anführungszeichen nennen
+  ('Ein Klick auf "Terminal" ...'), damit klar ist, dass ein Button oder
+  Menüpunkt gemeint ist.
 - Deutsch. "Wir" für uns, Leser sparsam und direkt ("du"/"ihr"), sonst
-  unpersönlich ("man"). Kurze, direkte Sätze. Fachbegriffe ohne gute
-  deutsche Entsprechung bleiben englisch (Daemon, Socket, Run).
+  unpersönlich ("man"). Kurze, direkte Sätze, ein Gedanke pro Satz:
+  Nutzeraktion und Technik-Detail nicht in einen Satz packen.
+  Fachbegriffe ohne gute deutsche Entsprechung bleiben englisch
+  (Daemon, Socket, Run).
 
 ## Ton
 
 - Geredet, nicht gepitcht. Keine Business-Metaphern ("Hebel",
   "Gamechanger"), keine Aufzählung per Doppelpunkt im Satz ("Das bringt
   drei Dinge: X, Y, Z"), keine Paradox-Pointen ("gilt unverändert, nur mit
-  anderem Ergebnis"). Wörtlich hinschreiben, was gemeint ist, in Sätzen,
-  die man so auch sagen würde.
+  anderem Ergebnis"), keine Werbe-Satzstellung mit Inversion ("Los geht es
+  mit ...", "öffentlich erreichbar ist da nichts") und keine inhaltsleeren
+  Zuschreibungen ("sinnvolle Defaults"). Wörtlich hinschreiben, was gemeint
+  ist, in normaler Satzstellung, in Sätzen, die man so auch sagen würde.
 - Prosa erzählt die Geschichte, Listen tragen die Fakten. Reiht ein Absatz
   mehrere Fakten oder Messwerte aneinander (auch als
   "Erstens ... Zweitens ..."-Prosa), wird daraus ein kurzer
@@ -55,12 +62,20 @@ description: 1-2 Sätze für die Liste auf der Startseite.
   fetter Vorspann ("**RAM:** ..."), keine Nummerierung ohne echte
   Reihenfolge. Ein Doppelpunkt, der eine Liste oder Tabelle einleitet,
   ist ok.
+- Aber nicht jede Sammlung wird eine Liste. Listen sind für gleichartige,
+  parallele Fakten (Messwerte, die zwei Gründe, die drei Wege). Lose
+  zusammenhängende Eigenschaften eines Features lieber thematisch zu 1-2
+  kurzen Absätzen gruppieren, sonst wirkt die Liste wie ein Feature-Zettel.
 - Ehrlich, aber unaufgeregt. Probleme, Fehlentscheidungen und Tradeoffs
   offen benennen, ohne die eigene Offenheit zu kommentieren ("und den
   machen wir bewusst") und ohne Dramatisierung: nichts als überraschend
   hinstellen, was absehbar war. Im Zweifel beim Autor nachfragen, wie es
   wirklich ablief, statt eine runde Story zu erfinden. Keine unfairen
   Seitenhiebe auf andere Tools.
+- Produktverhalten nicht als bloße Metapher beschreiben ("legt sich
+  schlafen", "wacht auf"). Den Mechanismus einmal konkret erklären (Knecht
+  stoppt unbenutzte Umgebungen automatisch); erst danach trägt eine kurze
+  Metapher.
 - Wirkungsketten ausschreiben. Wenn ein technisches Detail einen Effekt
   erklären soll (Host-Header, deshalb funktioniert Multisite), den
   Zwischenschritt nennen, der beides verbindet. Test: Würde ein Leser
@@ -102,7 +117,9 @@ description: 1-2 Sätze für die Liste auf der Startseite.
 
 ## Formatierung (Nuxt Content / MDC)
 
-- `::note` für Einordnungen am Anfang.
+- `::note` für Einordnungen am Anfang und für Info-Randnotizen im Text,
+  etwa Verhalten, das erklärenswert ist, aber nicht zum Argument des
+  Abschnitts gehört.
 - `::steps{level="3"}` ... `::` für nummerierte Abläufe, innen `###` pro
   Schritt.
 - `::field-group` mit `:::field{name="..."}` für 2-4 parallele Kategorien.
@@ -112,11 +129,18 @@ description: 1-2 Sätze für die Liste auf der Startseite.
   keine Links.
 - Bilder aus `/public/assets/` einbinden: `![Alt-Text](/assets/name.png)`,
   Alt-Text beschreibt, was zu sehen ist.
-- Kurze Demo-Videos (mp4, ebenfalls in `/public/assets/`) über die
+- Kurze Demo-Videos (mp4 oder webm, ebenfalls in `/public/assets/`) über die
   Komponente `app/components/UpdateVideo.global.vue`:
   `::update-video{src="/assets/name.mp4" caption="..."}` plus schließendes
-  `::`. Ohne `controls`-Prop läuft das Video als stummer Loop (GIF-Ersatz),
-  mit `controls` als klickbarer Clip.
+  `::`. Props nur `src`, `caption`, `poster`. Verhalten ist eingebaut:
+  stummer Loop, spielt nur solange das Video im Viewport sichtbar ist,
+  Controls erscheinen beim Hover bzw. beim ersten Tap.
+- Medien stehen früh im Abschnitt, den sie zeigen: nach dem
+  Einleitungsabsatz, der sagt, was zu sehen ist, oder direkt unter der
+  Headline, wenn es keinen gibt. Nicht ans Abschnittsende schieben.
+- Nach einem Medium den Faden wieder aufnehmen: Der Text danach braucht
+  einen kurzen Anschlusssatz, eine Liste steht nie direkt unter einem
+  Video oder Bild.
 - Fehlende Medien beim Schreiben nicht blockieren lassen: Einbindung mit
   endgültigem Dateinamen plus `<!-- TODO(samuel): ... -->` davor, und dem
   Autor eine Dreh-Liste geben (Dateiname, was zu sehen ist, Länge).
