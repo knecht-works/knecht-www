@@ -84,10 +84,37 @@ export default defineNuxtConfig({
 
   nitro: {
     preset: process.env.CF_PAGES ? 'cloudflare-pages' : undefined,
+    cloudflare: {
+      pages: {
+        routes: {
+          // Nitro auto-generates one _routes.json exclude rule per prerendered
+          // file and silently truncates the list at Cloudflare's limit of 100.
+          // Truncated paths then hit the worker, which cannot query Nuxt
+          // Content and returns 404. These wildcards keep the list small so
+          // every prerendered page and asset is served statically.
+          exclude: [
+            '/_ipx/*',
+            '/__nuxt_content/*',
+            '/assets/*',
+            '/favicon/*',
+            '/styleguide/*',
+            '/raw/*',
+            '/updates/*',
+            '/datenschutz/*',
+            '/impressum/*'
+          ]
+        }
+      }
+    },
     compressPublicAssets: { gzip: true, brotli: true },
     prerender: {
       crawlLinks: true,
       failOnError: true,
+      // Emit flat files (updates.html) instead of updates/index.html. With
+      // subfolder output Cloudflare Pages 308-redirects every canonical URL
+      // (/updates -> /updates/), which Google Search Console reports as a
+      // redirect error. Flat files serve the canonical URLs with a direct 200.
+      autoSubfolderIndex: false,
       routes: [
         '/',
         '/updates',
