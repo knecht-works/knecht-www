@@ -25,7 +25,8 @@ description: 1-2 Sätze für die Liste auf der Startseite.
 ```
 
 - Bisher verwendete Tags: Architektur, Engine, Security, Performance, Setup,
-  Beta. Vorhandene wiederverwenden, bevor ein neues erfunden wird.
+  Beta, Dashboard, Projekt. Vorhandene wiederverwenden, bevor ein neues
+  erfunden wird.
 
 ## Zielgruppe und Sprache
 
