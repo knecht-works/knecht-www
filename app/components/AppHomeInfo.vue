@@ -22,7 +22,6 @@ const steps = computed(() => stepMeta.map(step => ({
     <div class="container pt-16 sm:pt-24">
       <!-- Heading -->
       <AppReveal class="col-span-full max-w-2xl">
-
         <p class="mt-5 text-pretty text-base leading-relaxed text-muted sm:text-lg">
           {{ $t('info.intro') }}
         </p>
