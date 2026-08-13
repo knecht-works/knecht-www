@@ -7,7 +7,8 @@ export default defineNuxtConfig({
     '@nuxt/ui',
     '@nuxtjs/seo',
     'nuxt-llms',
-    'motion-v/nuxt'
+    'motion-v/nuxt',
+    '@nuxtjs/i18n'
   ],
 
   devtools: {
@@ -44,7 +45,7 @@ export default defineNuxtConfig({
   site: {
     url: process.env.NUXT_SITE_URL || 'https://knecht.works',
     name: 'Knecht',
-    defaultLocale: 'de'
+    defaultLocale: 'en'
   },
 
   content: {
@@ -69,7 +70,14 @@ export default defineNuxtConfig({
   runtimeConfig: {
     resendApiKey: '',
     // Optional: raises the GitHub API rate limit for /api/github.
-    githubToken: ''
+    githubToken: '',
+    // Admin notification on new signups. Empty disables the notification.
+    adminNotifyEmail: '',
+    // Must be a verified Resend sender domain.
+    adminNotifyFrom: 'Knecht <news@knecht.works>',
+    // Optional: ID of a published Resend template. Empty falls back to the
+    // plain inline mail built in the handler.
+    adminNotifyTemplateId: ''
   },
 
   routeRules: {
@@ -101,7 +109,9 @@ export default defineNuxtConfig({
             '/raw/*',
             '/updates/*',
             '/datenschutz/*',
-            '/impressum/*'
+            '/impressum/*',
+            '/de',
+            '/de/*'
           ]
         }
       }
@@ -115,11 +125,17 @@ export default defineNuxtConfig({
       // (/updates -> /updates/), which Google Search Console reports as a
       // redirect error. Flat files serve the canonical URLs with a direct 200.
       autoSubfolderIndex: false,
+      // Entry points per locale. The German tree is not reachable from the
+      // English pages, so crawlLinks alone would never find it.
       routes: [
         '/',
         '/updates',
         '/impressum',
-        '/datenschutz'
+        '/datenschutz',
+        '/de',
+        '/de/updates',
+        '/de/impressum',
+        '/de/datenschutz'
       ]
     }
   },
@@ -150,6 +166,21 @@ export default defineNuxtConfig({
     }
   },
 
+  i18n: {
+    // Absolute URLs in hreflang, canonical and og:url are built from this.
+    baseUrl: process.env.NUXT_SITE_URL || 'https://knecht.works',
+    locales: [
+      // `name` is the native label, it is what the switch announces.
+      { code: 'en', name: 'English', language: 'en', dir: 'ltr', file: 'en.json' },
+      { code: 'de', name: 'Deutsch', language: 'de', dir: 'ltr', file: 'de.json' }
+    ],
+    strategy: 'prefix_except_default',
+    defaultLocale: 'en',
+    // No automatic redirect. Every URL always serves the language it promises,
+    // AppLocaleNotice offers the other one when the browser prefers it.
+    detectBrowserLanguage: false
+  },
+
   image: {
     // `ipxStatic` only transforms at build/prerender time (correct for the
     // Cloudflare Pages deploy, which has no sharp runtime). In dev there is no
@@ -168,17 +199,33 @@ export default defineNuxtConfig({
     },
     sections: [
       {
-        title: 'Legal',
+        title: 'Legal (EN)',
         description: 'Legal pages',
-        contentCollection: 'pages',
+        contentCollection: 'pages_en',
         contentFilters: [
           { field: 'extension', operator: '=', value: 'md' }
         ]
       },
       {
-        title: 'Updates',
+        title: 'Updates (EN)',
         description: 'Building-in-public update articles.',
-        contentCollection: 'updates',
+        contentCollection: 'updates_en',
+        contentFilters: [
+          { field: 'extension', operator: '=', value: 'md' }
+        ]
+      },
+      {
+        title: 'Legal (DE)',
+        description: 'Legal pages, German.',
+        contentCollection: 'pages_de',
+        contentFilters: [
+          { field: 'extension', operator: '=', value: 'md' }
+        ]
+      },
+      {
+        title: 'Updates (DE)',
+        description: 'Building-in-public update articles, German.',
+        contentCollection: 'updates_de',
         contentFilters: [
           { field: 'extension', operator: '=', value: 'md' }
         ]

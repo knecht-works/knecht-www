@@ -20,32 +20,32 @@ const error = ref('')
 // Honeypot, stays empty for real users.
 const website = ref('')
 
-const modeItems = [
+const { t } = useI18n()
+
+const modeItems = computed(() => [
   {
     value: 'beta',
-    label: 'Ich will aktiv mittesten & Feedback geben',
-    description: 'Früher Zugang, du gestaltest Knecht direkt mit.'
+    label: t('cta.modeBeta.label'),
+    description: t('cta.modeBeta.description')
   },
   {
     value: 'updates',
-    label: 'Nur Updates bekommen',
-    description: 'Reine Fortschritts-Updates, kein Testen nötig.'
+    label: t('cta.modeUpdates.label'),
+    description: t('cta.modeUpdates.description')
   }
-]
+])
 
 const submitLabel = computed(() =>
-  mode.value === 'beta' ? 'Beta-Tester werden' : 'Updates abonnieren'
+  mode.value === 'beta' ? t('cta.submitBeta') : t('cta.submitUpdates')
 )
 
 const doneMessage = computed(() =>
-  mode.value === 'beta'
-    ? 'Drin! Du bist Beta-Tester der ersten Stunde. Eine Willkommens-Mail ist unterwegs zu dir.'
-    : 'Drin! Du bekommst ab jetzt jedes Update. Eine Willkommens-Mail ist unterwegs zu dir.'
+  mode.value === 'beta' ? t('cta.doneBeta') : t('cta.doneUpdates')
 )
 
 const submit = async () => {
   if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email.value)) {
-    error.value = 'Bitte eine gültige E-Mail eingeben.'
+    error.value = t('cta.errorInvalid')
     return
   }
   error.value = ''
@@ -57,7 +57,7 @@ const submit = async () => {
     })
     done.value = true
   } catch {
-    error.value = 'Hat nicht geklappt, bitte später nochmal versuchen.'
+    error.value = t('cta.errorFailed')
   } finally {
     loading.value = false
   }
@@ -92,15 +92,14 @@ const submit = async () => {
 
           <!-- Content -->
           <div class="flex-1">
-            <AppEyebrow label="Mitmachen" />
+            <AppEyebrow :label="$t('cta.eyebrow')" />
 
             <h2 class="mt-6 text-balance text-highlighted">
-              Bau Knecht mit von Anfang an.
+              {{ $t('cta.title') }}
             </h2>
 
             <p class="mx-auto mt-5 max-w-2xl text-pretty text-base leading-relaxed text-muted sm:text-lg lg:mx-0">
-              Knecht ist noch in Entwicklung. Werde Beta-Tester und gib direkt
-              Feedback, oder bleib einfach per Update auf dem Laufenden.
+              {{ $t('cta.description') }}
             </p>
 
             <div
@@ -124,7 +123,7 @@ const submit = async () => {
                   :items="modeItems"
                   variant="card"
                   color="primary"
-                  legend="Wie möchtest du dabei sein?"
+                  :legend="$t('cta.legend')"
                   :ui="{
                     legend: 'text-sm text-muted mb-2',
                     fieldset: 'grid w-full grid-cols-1 gap-3 sm:grid-cols-2'
@@ -148,12 +147,12 @@ const submit = async () => {
                   <UInput
                     v-model="email"
                     type="email"
-                    placeholder="dein@team.dev"
+                    :placeholder="$t('cta.emailPlaceholder')"
                     size="xl"
                     :color="error ? 'error' : 'neutral'"
                     :disabled="loading"
                     class="flex-1"
-                    aria-label="E-Mail-Adresse"
+                    :aria-label="$t('cta.emailAria')"
                   />
                   <UButton
                     type="submit"
@@ -174,7 +173,7 @@ const submit = async () => {
             </template>
 
             <p class="mt-4 font-mono text-xs text-dimmed">
-              nur Fortschritt · jederzeit abbestellbar
+              {{ $t('cta.note') }}
             </p>
           </div>
         </div>

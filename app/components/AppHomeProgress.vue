@@ -32,106 +32,42 @@ onMounted(() => {
 
 type Status = 'done' | 'progress' | 'rest'
 
+const { t } = useI18n()
+
 // Per-status presentation: done = green, progress = orange, rest = dark.
 // Everything else about a card is fixed; only this (color/icon) varies.
-const statusMeta: Record<Status, { label: string, dot: 'primary' | 'orange' | 'neutral', pulse: boolean, text: string, icon?: string }> = {
-  done: { label: 'Fertig', dot: 'primary', pulse: false, text: 'text-primary', icon: 'i-lucide-check' },
-  progress: { label: 'In Arbeit', dot: 'orange', pulse: true, text: 'text-[var(--accent-orange)]' },
-  rest: { label: 'Geplant', dot: 'neutral', pulse: false, text: 'text-dimmed' }
+const statusMeta: Record<Status, { dot: 'primary' | 'orange' | 'neutral', pulse: boolean, text: string, icon?: string }> = {
+  done: { dot: 'primary', pulse: false, text: 'text-primary', icon: 'i-lucide-check' },
+  progress: { dot: 'orange', pulse: true, text: 'text-[var(--accent-orange)]' },
+  rest: { dot: 'neutral', pulse: false, text: 'text-dimmed' }
 }
 
-const phases: { status: Status, title: string, text: string }[] = [
-  {
-    status: 'done',
-    title: 'Idee-Validierung',
-    text: 'Das Konzept ist in vereinfachtem Umfang getestet und funktioniert.'
-  },
-  {
-    status: 'done',
-    title: 'Branding & Organisation',
-    text: 'Name, Logo, Website und Social-Media-Auftritt stehen, inklusive allem drum herum.'
-  },
-  {
-    status: 'done',
-    title: 'Tech-Stack & Architektur',
-    text: 'Die grundlegenden Technologie-Entscheidungen sind getroffen und validiert.'
-  },
-  {
-    status: 'done',
-    title: 'Dashboard-Design',
-    text: 'Das Design für das Dashboard, in dem Projekte und Workflows entstehen, steht.'
-  },
-  {
-    status: 'done',
-    title: 'Prototyp bauen',
-    text: 'Ein Prototyp entsteht, in dem sich Projekte und Workflows inklusive AI-Agent erstellen lassen.'
-  },
-  {
-    status: 'done',
-    title: 'Installer',
-    text: 'Das Dashboard kann auf jedem Linux Server installiert werden'
-  },
-  {
-    status: 'done',
-    title: 'Update Service',
-    text: 'Es können Updates im Control panel gemacht werden.'
-  },
-  {
-    status: 'done',
-    title: 'Github Trigger',
-    text: 'Es können Github Trigger eingestellt werden für Workflows.'
-  },
-  {
-    status: 'done',
-    title: 'Der Knecht lebt',
-    text: 'Das Knecht Dashboard kann auf Linux Server einfach installiert werden und bekommt Updates.'
-  },
-  {
-    status: 'done',
-    title: 'Jira Trigger',
-    text: 'Workflows können von Jira Tickets getriggert werden.'
-  },
-  {
-    status: 'done',
-    title: 'SSH & IDE',
-    text: 'In die laufenden Preview Container können per SSH und einer IDE Änderungen vorgenommen werden.'
-  },
-  {
-    status: 'progress',
-    title: 'Feedback loop',
-    text: 'Nachdem Workflows ausgeführ wurden, braucht es diverse Feedback Möglichkeiten um Output zu verbessern.'
-  },
-  {
-    status: 'progress',
-    title: 'Beta-Tester finden',
-    text: 'Wir suchen genügend Beta-Tester, um Probleme früh zu erkennen und das finale Produkt zu bauen.'
-  },
-  {
-    status: 'progress',
-    title: 'Test-Actions',
-    text: 'Workflows können Tests für Projekte ausführen. Ein Fix gilt erst als fertig, wenn sie grün sind.'
-  },
-  {
-    status: 'rest',
-    title: 'Browser-Validierung',
-    text: 'Der Agent klickt den Bug im Preview selbst nach und liefert Screenshots als Beweis mit.'
-  },
-  {
-    status: 'rest',
-    title: 'Benachrichtigungen',
-    text: 'Slack oder E-Mail meldet sich, sobald ein Run fertig ist oder fehlschlägt.'
-  },
-  {
-    status: 'rest',
-    title: 'Doku & Onboarding',
-    text: 'Eine Dokumentation, die Setup, Workflows und Troubleshooting komplett abdeckt.'
-  },
-  {
-    status: 'rest',
-    title: 'Preismodell & Lizenzen',
-    text: 'Knecht kann offiziell gekauft werden: Preismodell, Lizenz und Bezahlung stehen.'
-  }
+const phaseMeta: { status: Status, key: string }[] = [
+  { status: 'done', key: 'ideaValidation' },
+  { status: 'done', key: 'branding' },
+  { status: 'done', key: 'techStack' },
+  { status: 'done', key: 'dashboardDesign' },
+  { status: 'done', key: 'prototype' },
+  { status: 'done', key: 'installer' },
+  { status: 'done', key: 'updateService' },
+  { status: 'done', key: 'githubTrigger' },
+  { status: 'done', key: 'knechtLives' },
+  { status: 'done', key: 'jiraTrigger' },
+  { status: 'done', key: 'sshIde' },
+  { status: 'progress', key: 'feedbackLoop' },
+  { status: 'progress', key: 'betaTesters' },
+  { status: 'progress', key: 'testActions' },
+  { status: 'rest', key: 'browserValidation' },
+  { status: 'rest', key: 'notifications' },
+  { status: 'rest', key: 'docs' },
+  { status: 'rest', key: 'pricing' }
 ]
+
+const phases = computed(() => phaseMeta.map(phase => ({
+  ...phase,
+  title: t(`progress.phases.${phase.key}.title`),
+  text: t(`progress.phases.${phase.key}.text`)
+})))
 
 const trackEl = useTemplateRef<HTMLElement>('trackEl')
 
@@ -169,7 +105,7 @@ onMounted(() => {
   })
 
   let lastDone = -1
-  phases.forEach((p, i) => {
+  phaseMeta.forEach((p, i) => {
     if (p.status === 'done') lastDone = i
   })
 
@@ -195,10 +131,10 @@ onMounted(() => {
     <div class="container pt-default ">
       <!-- Heading -->
       <AppReveal class="col-span-full max-w-2xl">
-        <AppEyebrow label="Roadmap" />
+        <AppEyebrow :label="$t('progress.eyebrow')" />
 
         <h2 class="mt-6 text-balance text-highlighted">
-          Was der Knecht gerade macht.
+          {{ $t('progress.title') }}
         </h2>
       </AppReveal>
 
@@ -209,7 +145,7 @@ onMounted(() => {
       >
         <div class="flex items-baseline justify-between gap-4">
           <span class="font-mono text-sm text-muted">
-            Fortschritt bis zur öffentlichen Beta
+            {{ $t('progress.progressLabel') }}
           </span>
           <span class="font-mono text-xl font-semibold tabular-nums text-highlighted sm:text-2xl">
             {{ Math.round(displayed) }}%
@@ -227,7 +163,7 @@ onMounted(() => {
         </div>
 
         <p class="mt-5 font-mono text-xs text-dimmed">
-          Ziel: öffentliche Beta in Q4 2026 · Early-Access in Q3
+          {{ $t('progress.goal') }}
         </p>
       </AppReveal>
 
@@ -244,7 +180,7 @@ onMounted(() => {
         >
           <AppReveal
             v-for="(phase, i) in phases"
-            :key="phase.title"
+            :key="phase.key"
             as="article"
             :y="0"
             :delay="i * 0.08"
@@ -270,7 +206,7 @@ onMounted(() => {
                 class="font-mono text-[11px] font-medium uppercase tracking-[0.1em]"
                 :class="statusMeta[phase.status].text"
               >
-                {{ statusMeta[phase.status].label }}
+                {{ $t(`progress.status.${phase.status}`) }}
               </span>
             </div>
 
@@ -293,7 +229,7 @@ onMounted(() => {
       >
         <button
           type="button"
-          aria-label="Vorherige"
+          :aria-label="$t('progress.prev')"
           :disabled="!canPrev"
           class="grid size-9 place-items-center rounded-lg border border-default text-muted transition-colors duration-200 hover:text-highlighted disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:text-muted"
           @click="scrollByCards(-1)"
@@ -305,7 +241,7 @@ onMounted(() => {
         </button>
         <button
           type="button"
-          aria-label="Nächste"
+          :aria-label="$t('progress.next')"
           :disabled="!canNext"
           class="grid size-9 place-items-center rounded-lg border border-default text-muted transition-colors duration-200 hover:text-highlighted disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:text-muted"
           @click="scrollByCards(1)"

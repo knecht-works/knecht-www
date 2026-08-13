@@ -1,27 +1,37 @@
 <script setup lang="ts">
-const tabs = [
+const { t } = useI18n()
+
+const tabMeta = [
   {
     id: 'projekte',
-    label: 'Projekte',
+    labelKey: 'demo.tabs.projects',
     image: '/assets/dashboard.png',
     url: '/projekte'
   },
   {
     id: 'detail',
-    label: 'Projekt-Detail',
-    image: '/assets/project-detail.png',
-    url: '/projekte/typo3-portal'
+    labelKey: 'demo.tabs.detail',
+    image: '/assets/project.png',
+    url: '/projekte/test-craftcms'
   },
   {
     id: 'workflow',
-    label: 'Workflow-Editor',
+    labelKey: 'demo.tabs.workflow',
     image: '/assets/workflow.png',
-    url: '/workflows/security-update-fix'
+    url: '/workflows/bug-fix'
+  },
+  {
+    id: 'running-workflow',
+    labelKey: 'demo.tabs.runningWorkflow',
+    image: '/assets/running-workflow.png',
+    url: '/workflows/bug-fix'
   }
 ]
 
-const activeId = ref(tabs[1]!.id)
-const activeTab = computed(() => tabs.find(t => t.id === activeId.value) ?? tabs[0]!)
+const tabs = computed(() => tabMeta.map(tab => ({ ...tab, label: t(tab.labelKey) })))
+
+const activeId = ref(tabMeta[0]!.id)
+const activeTab = computed(() => tabs.value.find(tab => tab.id === activeId.value) ?? tabs.value[0]!)
 </script>
 
 <template>
@@ -32,16 +42,14 @@ const activeTab = computed(() => tabs.find(t => t.id === activeId.value) ?? tabs
     <div class="container pt-default">
       <!-- Heading (left-aligned) -->
       <AppReveal class="col-span-full max-w-2xl">
-        <AppEyebrow label="So wird's aussehen" />
+        <AppEyebrow :label="$t('demo.eyebrow')" />
 
         <h2 class="mt-6 text-balance text-highlighted">
-          Viele Projekte. <span class="text-primary">Ein Knecht.</span>
+          {{ $t('demo.title') }} <span class="text-primary">{{ $t('demo.titleAccent') }}</span>
         </h2>
 
         <p class="mt-5 text-pretty text-base leading-relaxed text-muted sm:text-lg">
-          Ein erster Blick auf das Dashboard, an dem wir bauen: von der
-          Projekt-Übersicht und Projekt-Detail Seite bis zum Workflow-Editor.
-          Design und Funktionen ändern sich noch.
+          {{ $t('demo.description') }}
         </p>
       </AppReveal>
 
@@ -91,14 +99,14 @@ const activeTab = computed(() => tabs.find(t => t.id === activeId.value) ?? tabs
                each. With the previous single-image swap only the preselected tab
                was in the prerendered HTML, so the other two had no static variant
                and 404'd at runtime (Cloudflare Pages has no IPX runtime). -->
-          <div class="relative aspect-18/13">
+          <div class="relative aspect-[1915/1098]">
             <NuxtImg
               v-for="tab in tabs"
               :key="tab.id"
               :src="tab.image"
-              :alt="`Knecht ${tab.label} Vorschau`"
+              :alt="$t('demo.imageAlt', { label: tab.label })"
               :aria-hidden="tab.id === activeId ? undefined : 'true'"
-              sizes="sm:100vw lg:1520px"
+              sizes="sm:100vw lg:1920px"
               format="webp"
               quality="82"
               loading="lazy"

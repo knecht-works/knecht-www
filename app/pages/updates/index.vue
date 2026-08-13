@@ -1,7 +1,5 @@
 <script setup lang="ts">
-const { data: updates } = await useAsyncData('updates-index', () =>
-  queryCollection('updates').order('date', 'DESC').all()
-)
+const { data: updates } = await useUpdates()
 
 useSeoMeta({
   title: 'Updates',
@@ -17,7 +15,7 @@ defineOgImage('Knecht', {
 <template>
   <div class="container pt-hero">
     <div class="col-span-full">
-      <NuxtLink
+      <NuxtLinkLocale
         to="/"
         class="inline-flex items-center gap-1.5 font-mono text-sm text-muted transition-colors hover:text-primary"
       >
@@ -26,7 +24,7 @@ defineOgImage('Knecht', {
           class="size-4"
         />
         Zur Startseite
-      </NuxtLink>
+      </NuxtLinkLocale>
 
       <div class="mt-8">
         <AppEyebrow label="Updates" />

@@ -23,11 +23,9 @@ const formattedDate = computed(() =>
 
 const tocLinks = computed(() => update.value?.body?.toc?.links ?? [])
 
-// Full list (newest first) to find the current article's neighbours. Shares the
-// 'updates-index' key with the index page, so it is fetched at most once.
-const { data: updates } = await useAsyncData('updates-index', () =>
-  queryCollection('updates').order('date', 'DESC').all()
-)
+// Full list (newest first) to find the current article's neighbours. Shares its
+// key with the index page, so it is fetched at most once.
+const { data: updates } = await useUpdates()
 
 const nav = computed(() => {
   const list = updates.value ?? []
@@ -59,7 +57,7 @@ const nav = computed(() => {
       }"
     >
       <article v-if="update">
-        <NuxtLink
+        <NuxtLinkLocale
           to="/updates"
           class="inline-flex items-center gap-1.5 font-mono text-sm text-muted transition-colors hover:text-primary"
         >
@@ -68,7 +66,7 @@ const nav = computed(() => {
             class="size-4"
           />
           Alle Updates
-        </NuxtLink>
+        </NuxtLinkLocale>
 
         <div class="mt-8 flex items-center gap-3 font-mono text-sm">
           <span class="text-muted">{{ formattedDate }}</span>

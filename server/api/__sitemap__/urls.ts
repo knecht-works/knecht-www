@@ -1,17 +1,20 @@
 import { queryCollection } from '@nuxt/content/server'
 
 export default defineSitemapEventHandler(async (event) => {
-  const [pages, updates] = await Promise.all([
-    queryCollection(event, 'pages').all(),
-    queryCollection(event, 'updates').all()
+  // Content paths already carry the locale prefix, so they are the final URLs.
+  const [pagesEn, pagesDe, updatesEn, updatesDe] = await Promise.all([
+    queryCollection(event, 'pages_en').all(),
+    queryCollection(event, 'pages_de').all(),
+    queryCollection(event, 'updates_en').all(),
+    queryCollection(event, 'updates_de').all()
   ])
 
   return [
-    ...pages.map(page => asSitemapUrl({
+    ...[...pagesEn, ...pagesDe].map(page => asSitemapUrl({
       loc: page.path,
       lastmod: page.updatedAt
     })),
-    ...updates.map(update => asSitemapUrl({
+    ...[...updatesEn, ...updatesDe].map(update => asSitemapUrl({
       loc: update.path,
       lastmod: update.date
     }))

@@ -20,6 +20,8 @@ useSectionSpy()
 
     <MotionConfig :reduced-motion="'user'">
       <div class="relative z-10">
+        <AppLocaleNotice />
+
         <AppHeader />
 
         <UMain>

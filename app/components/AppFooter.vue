@@ -1,35 +1,49 @@
 <script setup lang="ts">
 const { isActive } = useNavActive()
+const localePath = useLocalePath()
 
 const year = new Date().getFullYear()
 
-const columns = [
+const { t } = useI18n()
+
+const baseColumns = [
   {
-    heading: 'Knecht',
+    headingKey: 'footer.columns.knecht',
     links: [
-      { label: 'Die Idee', to: '/#idee' },
-      { label: 'Vorschau', to: '/#dashboard' },
-      { label: 'Roadmap', to: '/#roadmap' },
-      { label: 'Updates', to: '/#updates' }
+      { labelKey: 'footer.links.idea', to: '/#idee' },
+      { labelKey: 'footer.links.preview', to: '/#dashboard' },
+      { labelKey: 'footer.links.roadmap', to: '/#roadmap' },
+      { labelKey: 'footer.links.updates', to: '/#updates' }
     ]
   },
   {
-    heading: 'Mitmachen',
+    headingKey: 'footer.columns.takePart',
     links: [
-      { label: 'Beta-Tester werden', to: '/#cta' },
-      { label: 'Updates abonnieren', to: '/#cta' },
-      { label: 'Alle Updates', to: '/updates' },
-      { label: 'Feedback geben', to: `mailto:${CONTACT_EMAIL}` }
+      { labelKey: 'footer.links.beta', to: '/#cta' },
+      { labelKey: 'footer.links.subscribe', to: '/#cta' },
+      { labelKey: 'footer.links.allUpdates', to: '/updates' },
+      { labelKey: 'footer.links.feedback', to: `mailto:${CONTACT_EMAIL}` }
     ]
   },
   {
-    heading: 'Rechtliches',
+    headingKey: 'footer.columns.legal',
     links: [
-      { label: 'Impressum', to: '/impressum' },
-      { label: 'Datenschutz', to: '/datenschutz' }
+      { labelKey: 'footer.links.imprint', to: '/impressum' },
+      { labelKey: 'footer.links.privacy', to: '/datenschutz' }
     ]
   }
 ]
+
+// Only route paths get a locale prefix, the mailto link stays untouched.
+const columns = computed(() =>
+  baseColumns.map(column => ({
+    heading: t(column.headingKey),
+    links: column.links.map(link => ({
+      label: t(link.labelKey),
+      to: link.to.startsWith('/') ? localePath(link.to) : link.to
+    }))
+  }))
+)
 </script>
 
 <template>
@@ -41,19 +55,19 @@ const columns = [
           <AppLogo />
 
           <p class="mt-5 font-mono text-sm leading-relaxed text-dimmed">
-            Boote jedes Projekt.<br>Lass den Knecht arbeiten.
+            {{ $t('footer.tagline1') }}<br>{{ $t('footer.tagline2') }}
           </p>
 
           <div class="mt-5 flex flex-wrap gap-2">
             <AppBadge
               dot-color="primary"
               :pulse="false"
-              label="In Entwicklung"
+              :label="$t('footer.badgeStatus')"
             />
             <AppBadge
               dot-color="orange"
               :pulse="false"
-              label="EU"
+              :label="$t('footer.badgeEu')"
             />
           </div>
         </div>
@@ -84,11 +98,18 @@ const columns = [
       <!-- Bottom bar -->
       <div class="col-span-full flex flex-col gap-5 py-6 sm:flex-row sm:items-center sm:justify-between">
         <div class="flex flex-col gap-1 font-mono text-xs text-dimmed">
-          <span>© {{ year }} Knecht - in Entwicklung</span>
+          <span>{{ $t('footer.copyright', { year }) }}</span>
         </div>
 
-        <!-- Socials (right) -->
+        <!-- Language switch + socials (right) -->
         <div class="flex items-center gap-4">
+          <AppLocaleSwitch />
+
+          <span
+            class="h-4 w-px bg-border"
+            aria-hidden="true"
+          />
+
           <NuxtLink
             v-for="social in SOCIAL_LINKS"
             :key="social.label"

@@ -45,7 +45,7 @@
       </p>
 
       <div class="mt-4 flex flex-wrap gap-x-8 gap-y-2">
-        <NuxtLink
+        <NuxtLinkLocale
           to="/"
           class="inline-flex items-center gap-1.5 text-primary transition-colors hover:text-highlighted"
         >
@@ -54,8 +54,8 @@
             class="size-3.5"
           />
           Startseite ansehen
-        </NuxtLink>
-        <NuxtLink
+        </NuxtLinkLocale>
+        <NuxtLinkLocale
           to="/#cta"
           class="inline-flex items-center gap-1.5 text-primary transition-colors hover:text-highlighted"
         >
@@ -64,7 +64,7 @@
             class="size-3.5"
           />
           Beta-Tester werden
-        </NuxtLink>
+        </NuxtLinkLocale>
       </div>
     </div>
   </aside>

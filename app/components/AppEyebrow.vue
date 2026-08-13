@@ -14,7 +14,7 @@ withDefaults(defineProps<{
     color="neutral"
     variant="soft"
     size="lg"
-    class="gap-2 rounded-full font-mono text-xs font-medium uppercase tracking-[0.2em] text-muted bg-transparent"
+    class="gap-2 rounded-full font-mono text-xs font-medium uppercase tracking-widest text-muted bg-transparent"
   >
     <AppPulseDot
       v-if="dot"

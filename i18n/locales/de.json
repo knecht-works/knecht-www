@@ -1,0 +1,235 @@
+{
+  "site": {
+    "title": "Booten. Fixen. Testen. Vollautomatisch.",
+    "description": "Knecht ist ein Dashboard auf deinem eigenen Server für Agenturen mit vielen DDEV-Projekten. Er bootet jedes Projekt als lauffähige Umgebung, erledigt Aufgaben in Workflows und liefert fertige Pull Requests mit Preview."
+  },
+  "header": {
+    "nav": {
+      "idea": "Die Idee",
+      "preview": "Vorschau",
+      "roadmap": "Roadmap",
+      "updates": "Updates"
+    },
+    "cta": "Beta-Tester werden"
+  },
+  "hero": {
+    "status": "In Entwicklung",
+    "roadmapLink": "Roadmap ansehen",
+    "title": "Booten. Fixen. Testen.",
+    "titleAccent": "Vollautomatisch.",
+    "description": "Knecht ist ein Dashboard auf deinem Server, gebaut für Agenturen mit vielen DDEV-Projekten. Er bootet jedes Projekt als komplett lauffähige Umgebung, erledigt Aufgaben und liefert fertige Pull Requests mit Preview.",
+    "ctaPrimary": "Beta-Tester werden",
+    "ctaSecondary": "Fortschritt verfolgen",
+    "badgeDdev": "DDEV-nativ",
+    "badgeEu": "EU · Self-hostable",
+    "badgeBeta": "Beta-Plätze offen",
+    "mascotAlt": "Knecht, der Roboter-Knecht mit Röhren-TV-Kopf"
+  },
+  "info": {
+    "eyebrow": "Die Idee",
+    "intro": "Laufende Betreuung heißt Updates einspielen, Bugs reproduzieren, alles testen. Knecht macht daraus Workflows, die immer gleich ablaufen, und holt AI nur da rein, wo sie wirklich hilft.",
+    "steps": {
+      "projects": {
+        "block": "Projekte",
+        "title": "Ein Klick, ganzes Projekt",
+        "text": "Knecht startet dein DDEV-Setup als komplette Umgebung, inklusive Web, Services und Datenbank. Jedes Projekt enthält alle Informationen, die es für einen vollständigen Boot braucht."
+      },
+      "workflows": {
+        "block": "Workflows",
+        "title": "Deterministische Workflows",
+        "text": "Abläufe aus Bausteinen, die immer gleich passieren, statt einen Agenten wild loszuschicken. Getriggert per Hand oder Webhook, etwa aus einem GitHub-Issue oder Jira-Ticket."
+      },
+      "agent": {
+        "block": "Knecht",
+        "title": "AI Agent",
+        "text": "Mit einem API-Key von Opencode kann der AI-Agent in Workflows Bugs in der laufenden Umgebung reproduzieren, fixen und direkt gegen die echte App testen, ganz ohne zu raten, ob die Änderung wirklich funktioniert."
+      }
+    }
+  },
+  "useCase": {
+    "eyebrow": "Ein konkretes Beispiel",
+    "title": "Das Security-Update, das kein Bot einspielen kann.",
+    "intro": "Bei einem CMS braucht ein Update fast immer eine laufende Datenbank. Nach dem {code} laufen Migrations, die Files schreiben, und die müssen mit in den Commit. Dependabot kann das nicht, denn er hat kein laufendes Projekt. Knecht schon.",
+    "steps": {
+      "trigger": {
+        "label": "Trigger",
+        "title": "Ein Security-Patch erscheint",
+        "text": "Ein Webhook oder Cron-Trigger startet deinen Update-Workflow, für jedes betroffene Projekt."
+      },
+      "boot": {
+        "label": "Boot",
+        "title": "Knecht bootet das Projekt",
+        "text": "Das DDEV-Setup fährt als komplette Umgebung hoch, mit Webserver, Services und Datenbank."
+      },
+      "update": {
+        "label": "Update",
+        "title": "Composer-Update mit Migrations",
+        "text": "Update läuft im echten Projekt. Migrations laufen gegen die Datenbank und schreiben ihre Files, die mit committet werden."
+      },
+      "test": {
+        "label": "Test",
+        "title": "Gegen die laufende App testen",
+        "text": "Tests können in der gebooteten Umgebung laufen und mit der Preview kann auch manuell nochmal getestet werden."
+      },
+      "result": {
+        "label": "Ergebnis",
+        "title": "Pull Request mit Preview",
+        "text": "Du bekommst einen fertigen PR plus Preview-Link. Prüfen, mergen, weiterarbeiten."
+      }
+    },
+    "outro": "Den Workflow baust du einmal. Danach läuft er für jedes deiner Projekte, bei jedem Patch."
+  },
+  "demo": {
+    "eyebrow": "So wird's aussehen",
+    "title": "Viele Projekte.",
+    "titleAccent": "Ein Knecht.",
+    "description": "Ein erster Blick auf das Dashboard, an dem wir bauen: von der Projekt-Übersicht und Projekt-Detail Seite bis zum Workflow-Editor. Design und Funktionen ändern sich noch.",
+    "tabs": {
+      "projects": "Projekte",
+      "detail": "Projekt-Detail",
+      "workflow": "Workflow-Editor",
+      "runningWorkflow": "Test Workflows"
+    },
+    "imageAlt": "Knecht {label} Vorschau"
+  },
+  "progress": {
+    "eyebrow": "Roadmap",
+    "title": "Was der Knecht gerade macht.",
+    "progressLabel": "Fortschritt bis zur öffentlichen Beta",
+    "goal": "Ziel: öffentliche Beta in Q4 2026 · Early-Access in Q3",
+    "status": {
+      "done": "Fertig",
+      "progress": "In Arbeit",
+      "rest": "Geplant"
+    },
+    "prev": "Vorherige",
+    "next": "Nächste",
+    "phases": {
+      "ideaValidation": {
+        "title": "Idee-Validierung",
+        "text": "Das Konzept ist in vereinfachtem Umfang getestet und funktioniert."
+      },
+      "branding": {
+        "title": "Branding & Organisation",
+        "text": "Name, Logo, Website und Social-Media-Auftritt stehen, inklusive allem drum herum."
+      },
+      "techStack": {
+        "title": "Tech-Stack & Architektur",
+        "text": "Die grundlegenden Technologie-Entscheidungen sind getroffen und validiert."
+      },
+      "dashboardDesign": {
+        "title": "Dashboard-Design",
+        "text": "Das Design für das Dashboard, in dem Projekte und Workflows entstehen, steht."
+      },
+      "prototype": {
+        "title": "Prototyp bauen",
+        "text": "Ein Prototyp entsteht, in dem sich Projekte und Workflows inklusive AI-Agent erstellen lassen."
+      },
+      "installer": {
+        "title": "Installer",
+        "text": "Das Dashboard kann auf jedem Linux Server installiert werden."
+      },
+      "updateService": {
+        "title": "Update Service",
+        "text": "Es können Updates im Control panel gemacht werden."
+      },
+      "githubTrigger": {
+        "title": "Github Trigger",
+        "text": "Es können Github Trigger eingestellt werden für Workflows."
+      },
+      "knechtLives": {
+        "title": "Der Knecht lebt",
+        "text": "Das Knecht Dashboard kann auf Linux Server einfach installiert werden und bekommt Updates."
+      },
+      "jiraTrigger": {
+        "title": "Jira Trigger",
+        "text": "Workflows können von Jira Tickets getriggert werden."
+      },
+      "sshIde": {
+        "title": "SSH & IDE",
+        "text": "In die laufenden Preview Container können per SSH und einer IDE Änderungen vorgenommen werden."
+      },
+      "feedbackLoop": {
+        "title": "Feedback loop",
+        "text": "Nachdem Workflows ausgeführt wurden, braucht es diverse Feedback Möglichkeiten um Output zu verbessern."
+      },
+      "betaTesters": {
+        "title": "Beta-Tester finden",
+        "text": "Wir suchen genügend Beta-Tester, um Probleme früh zu erkennen und das finale Produkt zu bauen."
+      },
+      "testActions": {
+        "title": "Test-Actions",
+        "text": "Workflows können Tests für Projekte ausführen. Ein Fix gilt erst als fertig, wenn sie grün sind."
+      },
+      "browserValidation": {
+        "title": "Browser-Validierung",
+        "text": "Der Agent klickt den Bug im Preview selbst nach und liefert Screenshots als Beweis mit."
+      },
+      "notifications": {
+        "title": "Benachrichtigungen",
+        "text": "Slack oder E-Mail meldet sich, sobald ein Run fertig ist oder fehlschlägt."
+      },
+      "docs": {
+        "title": "Doku & Onboarding",
+        "text": "Eine Dokumentation, die Setup, Workflows und Troubleshooting komplett abdeckt."
+      },
+      "pricing": {
+        "title": "Preismodell & Lizenzen",
+        "text": "Knecht kann offiziell gekauft werden: Preismodell, Lizenz und Bezahlung stehen."
+      }
+    }
+  },
+  "updates": {
+    "eyebrow": "Updates",
+    "title": "Building in Public.",
+    "description": "Wir bauen Knecht offen. Jeder Meilenstein landet hier.",
+    "all": "Alle Updates ansehen"
+  },
+  "cta": {
+    "eyebrow": "Mitmachen",
+    "title": "Bau Knecht mit von Anfang an.",
+    "description": "Knecht ist noch in Entwicklung. Werde Beta-Tester und gib direkt Feedback, oder bleib einfach per Update auf dem Laufenden.",
+    "modeBeta": {
+      "label": "Ich will aktiv mittesten & Feedback geben",
+      "description": "Früher Zugang, du gestaltest Knecht direkt mit."
+    },
+    "modeUpdates": {
+      "label": "Nur Updates bekommen",
+      "description": "Reine Fortschritts-Updates, kein Testen nötig."
+    },
+    "legend": "Wie möchtest du dabei sein?",
+    "submitBeta": "Beta-Tester werden",
+    "submitUpdates": "Updates abonnieren",
+    "doneBeta": "Drin! Du bist Beta-Tester der ersten Stunde. Eine Willkommens-Mail ist unterwegs zu dir.",
+    "doneUpdates": "Drin! Du bekommst ab jetzt jedes Update. Eine Willkommens-Mail ist unterwegs zu dir.",
+    "errorInvalid": "Bitte eine gültige E-Mail eingeben.",
+    "errorFailed": "Hat nicht geklappt, bitte später nochmal versuchen.",
+    "emailPlaceholder": "dein{'@'}team.dev",
+    "emailAria": "E-Mail-Adresse",
+    "note": "nur Fortschritt · jederzeit abbestellbar"
+  },
+  "footer": {
+    "tagline1": "Boote jedes Projekt.",
+    "tagline2": "Lass den Knecht arbeiten.",
+    "badgeStatus": "In Entwicklung",
+    "badgeEu": "EU",
+    "columns": {
+      "knecht": "Knecht",
+      "takePart": "Mitmachen",
+      "legal": "Rechtliches"
+    },
+    "links": {
+      "idea": "Die Idee",
+      "preview": "Vorschau",
+      "roadmap": "Roadmap",
+      "updates": "Updates",
+      "beta": "Beta-Tester werden",
+      "subscribe": "Updates abonnieren",
+      "allUpdates": "Alle Updates",
+      "feedback": "Feedback geben",
+      "imprint": "Impressum",
+      "privacy": "Datenschutz"
+    },
+    "copyright": "© {year} Knecht Works"
+  }
+}

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const localePath = useLocalePath()
+
 const headEl = useTemplateRef<HTMLImageElement>('headEl')
 
 const MAX_TILT = 14 // degrees
@@ -114,23 +116,23 @@ onMounted(() => {
           appear
           :delay="0.05"
         >
-          <NuxtLink
+          <NuxtLinkLocale
             to="/#roadmap"
             class="inline-flex items-center gap-3 rounded-full border border-default bg-elevated py-1.5 pl-3 pr-4 text-sm transition-colors hover:border-accented group"
           >
             <span class="flex items-center gap-2 font-medium text-muted">
               <AppPulseDot color="primary" />
-              In Entwicklung
+              {{ $t('hero.status') }}
             </span>
             <span class="h-4 w-px bg-border" />
             <span class="flex items-center gap-1.5 font-mono text-muted ">
-              Roadmap ansehen
+              {{ $t('hero.roadmapLink') }}
               <UIcon
                 name="i-lucide-arrow-right"
                 class="w-3 h-3"
               />
             </span>
-          </NuxtLink>
+          </NuxtLinkLocale>
         </AppReveal>
 
         <AppReveal
@@ -139,8 +141,8 @@ onMounted(() => {
           :delay="0.13"
           class="mt-7 text-balance text-highlighted mega"
         >
-          Booten. Fixen. Testen.
-          <span class="block text-primary">Vollautomatisch.</span>
+          {{ $t('hero.title') }}
+          <span class="block text-primary">{{ $t('hero.titleAccent') }}</span>
         </AppReveal>
 
         <AppReveal
@@ -149,7 +151,7 @@ onMounted(() => {
           :delay="0.21"
           class="mt-6 max-w-(--text-width) text-base leading-relaxed text-muted sm:text-lg"
         >
-          Knecht ist ein Dashboard auf deinem Server, gebaut für Agenturen mit vielen DDEV-Projekten. Er bootet jedes Projekt als komplett lauffähige Umgebung, erledigt Aufgaben und liefert fertige Pull Requests mit Preview.
+          {{ $t('hero.description') }}
         </AppReveal>
 
         <!-- CTAs -->
@@ -159,17 +161,17 @@ onMounted(() => {
           class="mt-8 flex flex-wrap items-center gap-3"
         >
           <UButton
-            label="Beta-Tester werden"
+            :label="$t('hero.ctaPrimary')"
             color="neutral"
             size="lg"
-            to="/#cta"
+            :to="localePath('/#cta')"
           />
           <UButton
-            label="Fortschritt verfolgen"
+            :label="$t('hero.ctaSecondary')"
             color="neutral"
             variant="outline"
             size="lg"
-            to="/#updates"
+            :to="localePath('/#updates')"
           />
         </AppReveal>
 
@@ -181,15 +183,15 @@ onMounted(() => {
         >
           <AppBadge
             dot-color="primary"
-            label="DDEV-nativ"
+            :label="$t('hero.badgeDdev')"
           />
           <AppBadge
             dot-color="orange"
-            label="EU · Self-hostable"
+            :label="$t('hero.badgeEu')"
           />
           <AppBadge
             dot-color="violet"
-            label="Beta-Plätze offen"
+            :label="$t('hero.badgeBeta')"
           />
         </AppReveal>
       </div>
@@ -208,7 +210,7 @@ onMounted(() => {
         >
           <img
             :src="'/assets/mascotLeft-body.svg'"
-            alt="Knecht – der Roboter-Knecht mit Röhren-TV-Kopf"
+            :alt="$t('hero.mascotAlt')"
             width="654"
             height="1199"
             fetchpriority="high"

@@ -2,6 +2,7 @@
 import type { NavigationMenuItem } from '@nuxt/ui'
 
 const { isActive } = useNavActive()
+const localePath = useLocalePath()
 
 const scrolled = ref(false)
 
@@ -18,19 +19,25 @@ onBeforeUnmount(() => {
   window.removeEventListener('scroll', onScroll)
 })
 
+const { t } = useI18n()
+
 const baseItems = [
-  { label: 'Die Idee', to: '/#idee' },
-  { label: 'Vorschau', to: '/#dashboard' },
-  { label: 'Roadmap', to: '/#roadmap' },
-  { label: 'Updates', to: '/#updates' }
+  { labelKey: 'header.nav.idea', to: '/#idee' },
+  { labelKey: 'header.nav.preview', to: '/#dashboard' },
+  { labelKey: 'header.nav.roadmap', to: '/#roadmap' },
+  { labelKey: 'header.nav.updates', to: '/#updates' }
 ]
 
 const items = computed<NavigationMenuItem[]>(() =>
-  baseItems.map(item => ({
-    ...item,
-    active: isActive(item.to),
-    class: isActive(item.to) ? 'text-highlighted' : undefined
-  }))
+  baseItems.map((item) => {
+    const to = localePath(item.to)
+    return {
+      label: t(item.labelKey),
+      to,
+      active: isActive(to),
+      class: isActive(to) ? 'text-highlighted' : undefined
+    }
+  })
 )
 </script>
 
@@ -52,12 +59,12 @@ const items = computed<NavigationMenuItem[]>(() =>
     }"
   >
     <template #left>
-      <NuxtLink
+      <NuxtLinkLocale
         to="/"
         class="flex items-center"
       >
         <AppLogo class="w-auto shrink-0" />
-      </NuxtLink>
+      </NuxtLinkLocale>
       <AppReleasePill />
     </template>
 
@@ -70,11 +77,11 @@ const items = computed<NavigationMenuItem[]>(() =>
     <template #right>
       <AppGithubStars />
       <UButton
-        label="Beta-Tester werden"
+        :label="$t('header.cta')"
         color="neutral"
         class="hidden lg:flex"
         size="lg"
-        to="/#cta"
+        :to="localePath('/#cta')"
       />
     </template>
 
@@ -87,12 +94,12 @@ const items = computed<NavigationMenuItem[]>(() =>
         class="-mx-2.5"
       />
       <UButton
-        label="Beta-Tester werden"
+        :label="$t('header.cta')"
         color="neutral"
         block
         size="lg"
         class="mt-4"
-        to="/#cta"
+        :to="localePath('/#cta')"
       />
     </template>
   </UHeader>

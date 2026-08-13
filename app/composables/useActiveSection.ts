@@ -11,6 +11,7 @@ export const useActiveSection = () => useState<string>('active-section', () => '
 // there is nothing to track, so the state is reset to ''.
 export const useSectionSpy = () => {
   const route = useRoute()
+  const localePath = useLocalePath()
   const active = useActiveSection()
   let observer: IntersectionObserver | null = null
 
@@ -22,7 +23,8 @@ export const useSectionSpy = () => {
   const setup = () => {
     teardown()
     active.value = ''
-    if (route.path !== '/') return
+    // The home page is `/` in the default locale and `/de` in German.
+    if (route.path !== localePath('/')) return
 
     const visible = new Set<string>()
     observer = new IntersectionObserver(
@@ -55,18 +57,23 @@ export const useSectionSpy = () => {
 // page when their section is in view; route links match the current path.
 export const useNavActive = () => {
   const route = useRoute()
+  const localePath = useLocalePath()
   const active = useActiveSection()
 
+  // Expects already localized links, the same values the nav renders.
   const isActive = (to?: string) => {
     if (!to || to.startsWith('mailto:')) return false
 
+    // `/` in the default locale, `/de` in German.
+    const home = localePath('/')
+
     const hashIndex = to.indexOf('#')
     if (hashIndex !== -1) {
-      return route.path === '/' && active.value === to.slice(hashIndex + 1)
+      return route.path === home && active.value === to.slice(hashIndex + 1)
     }
 
     const path = to.replace(/\/+$/, '') || '/'
-    if (path === '/') return route.path === '/'
+    if (path === home) return route.path === home
     return route.path === path || route.path.startsWith(`${path}/`)
   }
 
