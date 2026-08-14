@@ -53,9 +53,18 @@ description: 1-2 Sätze für die Liste auf der Startseite.
   "Gamechanger"), keine Aufzählung per Doppelpunkt im Satz ("Das bringt
   drei Dinge: X, Y, Z"), keine Paradox-Pointen ("gilt unverändert, nur mit
   anderem Ergebnis"), keine Werbe-Satzstellung mit Inversion ("Los geht es
-  mit ...", "öffentlich erreichbar ist da nichts") und keine inhaltsleeren
-  Zuschreibungen ("sinnvolle Defaults"). Wörtlich hinschreiben, was gemeint
-  ist, in normaler Satzstellung, in Sätzen, die man so auch sagen würde.
+  mit ...", "öffentlich erreichbar ist da nichts"), keine inhaltsleeren
+  Zuschreibungen ("sinnvolle Defaults") und keine Gegenüberstellungs-Frames
+  ("Für X ist das richtig, für Y hieß es ..."). Wörtlich hinschreiben, was
+  gemeint ist, in normaler Satzstellung, in Sätzen, die man so auch sagen
+  würde.
+- Erklärungen nicht als Pointe formulieren. Kurze Merksatz-Parallelen
+  ("Die Regeln steuern, das Limit garantiert"), Behauptungs-Sätze als
+  Absatzauftakt ("X ist Absicht.", "Die Limits gelten hart.") und
+  dramatisierende Wörter für normales Verhalten ("entgleister Run",
+  "heilt sich selbst") lesen sich präsentierend. Stattdessen den
+  Mechanismus in Aussagesätzen mit Begründung erklären ("Knecht verwirft
+  zu große Kopien, statt sie zu kürzen, weil ...").
 - Prosa erzählt die Geschichte, Listen tragen die Fakten. Reiht ein Absatz
   mehrere Fakten oder Messwerte aneinander (auch als
   "Erstens ... Zweitens ..."-Prosa), wird daraus ein kurzer
