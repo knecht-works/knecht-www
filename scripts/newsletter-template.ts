@@ -43,7 +43,7 @@ const escapeHtml = (value: string): string =>
   }[char] as string))
 
 const formatDate = (iso: string): string =>
-  new Intl.DateTimeFormat('de-DE', { day: 'numeric', month: 'long', year: 'numeric' })
+  new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
     .format(new Date(iso))
 
 function renderPost(post: NewsletterPost, isLast: boolean): string {
@@ -60,7 +60,7 @@ function renderPost(post: NewsletterPost, isLast: boolean): string {
           </h2>
           ${post.description ? `<p style="margin:10px 0 0 0;font-family:${FONT_SANS};font-size:15px;line-height:1.6;color:${C.text};">${escapeHtml(post.description)}</p>` : ''}
           <p class="mono" style="margin:14px 0 0 0;font-family:${FONT_MONO};font-size:14px;">
-            <a href="${post.url}" style="color:${C.title};text-decoration:underline;">Weiterlesen</a>
+            <a href="${post.url}" style="color:${C.title};text-decoration:underline;">Read more</a>
           </p>
           ${isLast ? '' : `<hr style="margin:24px 0 0 0;border:none;border-top:1px solid ${C.divider};">`}
         </td>
@@ -69,11 +69,11 @@ function renderPost(post: NewsletterPost, isLast: boolean): string {
 
 export function renderNewsletter(posts: NewsletterPost[]): string {
   const intro = posts.length === 1
-    ? 'Seit der letzten Mail ist einiges weitergegangen, ein neuer Beitrag ist online. Viel Spaß beim Lesen.'
-    : `Seit der letzten Mail ist einiges weitergegangen, ${posts.length} neue Beiträge sind online. Viel Spaß beim Lesen.`
+    ? 'A lot has happened since the last mail, and a new post is online. Enjoy reading.'
+    : `A lot has happened since the last mail, and ${posts.length} new posts are online. Enjoy reading.`
 
   return `<!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -122,7 +122,7 @@ export function renderNewsletter(posts: NewsletterPost[]): string {
         <tr>
           <td style="padding:0 0 4px 0;">
             <p style="margin:0;font-family:${FONT_SANS};font-size:15px;line-height:1.6;color:${C.text};">
-              Hallo!
+              Hi!
             </p>
             <p style="margin:12px 0 0 0;font-family:${FONT_SANS};font-size:15px;line-height:1.6;color:${C.text};">
               ${intro}
@@ -134,11 +134,11 @@ ${posts.map((post, index) => renderPost(post, index === posts.length - 1)).join(
           <td style="padding:24px 0 0 0;">
             <hr style="margin:0 0 16px 0;border:none;border-top:1px solid ${C.divider};">
             <p style="margin:0;font-family:${FONT_SANS};font-size:12px;line-height:1.9;color:${C.muted};text-align:center;">
-              Du bekommst diese Mail, weil du dich auf
-              <a href="https://knecht.works" style="color:${C.muted};">knecht.works</a> angemeldet hast.<br>
-              <a href="{{{RESEND_UNSUBSCRIBE_URL}}}" style="color:${C.muted};">Newsletter abbestellen</a> ·
-              <a href="https://knecht.works/impressum" style="color:${C.muted};">Impressum</a> ·
-              <a href="https://knecht.works/datenschutz" style="color:${C.muted};">Datenschutz</a><br>
+              You are receiving this mail because you signed up on
+              <a href="https://knecht.works" style="color:${C.muted};">knecht.works</a>.<br>
+              <a href="{{{RESEND_UNSUBSCRIBE_URL}}}" style="color:${C.muted};">Unsubscribe</a> ·
+              <a href="https://knecht.works/impressum" style="color:${C.muted};">Legal notice</a> ·
+              <a href="https://knecht.works/datenschutz" style="color:${C.muted};">Privacy policy</a><br>
               ${FOOTER_LINE}
             </p>
           </td>
@@ -159,15 +159,15 @@ export function renderNewsletterText(posts: NewsletterPost[]): string {
   ].filter(Boolean).join('\n'))
 
   return [
-    'Hallo!',
+    'Hi!',
     '',
     posts.length === 1
-      ? 'Seit der letzten Mail ist einiges weitergegangen, ein neuer Beitrag ist online.'
-      : `Seit der letzten Mail ist einiges weitergegangen, ${posts.length} neue Beiträge sind online.`,
+      ? 'A lot has happened since the last mail, and a new post is online.'
+      : `A lot has happened since the last mail, and ${posts.length} new posts are online.`,
     '',
     items.join('\n\n'),
     '',
-    'Newsletter abbestellen: {{{RESEND_UNSUBSCRIBE_URL}}}',
+    'Unsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}',
     FOOTER_LINE
   ].join('\n')
 }

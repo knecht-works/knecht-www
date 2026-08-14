@@ -20,7 +20,7 @@ import matter from 'gray-matter'
 import { LOGO_URL, renderNewsletter, renderNewsletterText, type NewsletterPost } from './newsletter-template.ts'
 
 const SITE_URL = 'https://knecht.works'
-const CONTENT_DIR = 'content/updates'
+const CONTENT_DIR = 'content/en/updates'
 // First run has no tag yet, fall back to posts from the last 16 days.
 const FALLBACK_DAYS = 16
 
@@ -86,7 +86,13 @@ function collectPosts(): NewsletterPost[] {
     .map(toPost)
     .filter((post): post is NewsletterPost => post !== null)
 
-  if (!tag) {
+  if (tag) {
+    // The git diff also reports moved or re-added files as new. Old posts
+    // carried along that way must not be announced again, so anything dated
+    // before the last send (the tag carries its date) is dropped.
+    const lastSend = tag.replace('newsletter-', '')
+    posts = posts.filter(post => post.date >= lastSend)
+  } else {
     const cutoff = Date.now() - FALLBACK_DAYS * 24 * 60 * 60 * 1000
     posts = posts.filter(post => new Date(post.date).getTime() >= cutoff)
   }
@@ -121,8 +127,8 @@ console.log(`${posts.length} neue Beiträge:`)
 for (const post of posts) console.log(`  - ${post.date} ${post.title}`)
 
 const subject = posts.length === 1
-  ? 'Ein neues Update von Knecht'
-  : `${posts.length} neue Updates von Knecht`
+  ? 'A new update from Knecht'
+  : `${posts.length} new updates from Knecht`
 const html = renderNewsletter(posts)
 const text = renderNewsletterText(posts)
 
