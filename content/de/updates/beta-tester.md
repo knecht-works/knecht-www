@@ -5,7 +5,7 @@ tag: Projekt
 description: Wir suchen eine Handvoll Agenturen und Freelancer, die Knecht auf echten Projekten einsetzen. Setup, Guthaben und das erste Jahr übernehmen wir.
 ---
 
-Knecht läuft. Was ihm jetzt fehlt, sind echte Projekte, denn lokale Tests erzeugen keine echten Bugs. Deshalb suchen wir eine Handvoll Agenturen und Freelancer, die Knecht als Erste im Alltag einsetzen.
+Knecht läuft. Was ihm jetzt fehlt, sind echte Projekte, denn lokale Tests erzeugen keine echten Bugs. Deshalb suchen wir eine Handvoll Agenturen und Freelancer, die Knecht als Erste im Alltag einsetzen. Wenn du direkt dabei sein willst, trag dich im [Formular unter diesem Post](#cta) ein.
 
 ## Was ihr bekommt
 
@@ -28,6 +28,6 @@ Am meisten bringt Knecht dort, wo viele Projekte gewartet werden. Ihr passt gut,
 
 ## Mitmachen
 
-Wenn das nach euch klingt, trag dich im Formular direkt unter diesem Post ein und wähle "Ich will aktiv mittesten & Feedback geben". Wir melden uns dann bei dir. Wenn du vorab Fragen hast, schreib uns an [hallo@knecht.works](mailto:hallo@knecht.works).
+Wenn das nach euch klingt, trag dich im [Formular direkt unter diesem Post](#cta) ein und wähle "Ich will aktiv mittesten & Feedback geben". Wir melden uns dann bei dir. Wenn du vorab Fragen hast, schreib uns an [hallo@knecht.works](mailto:hallo@knecht.works).
 
-Und wenn Testen gerade nichts für euch ist, ihr aber wissen wollt, wie es weitergeht, wählt im Formular einfach "Nur Updates bekommen".
+Und wenn Testen gerade nichts für euch ist, ihr aber wissen wollt, wie es weitergeht, wählt im [Formular](#cta) einfach "Nur Updates bekommen".

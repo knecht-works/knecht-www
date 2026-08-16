@@ -5,7 +5,7 @@ tag: Project
 description: We search for a handful of agencies and freelancers that run Knecht on real projects. We cover the setup, the credit, and the first year.
 ---
 
-Knecht runs. What it needs now are real projects, because local tests do not produce real bugs. So we search for a handful of agencies and freelancers that use Knecht first in their daily work.
+Knecht runs. What it needs now are real projects, because local tests do not produce real bugs. So we search for a handful of agencies and freelancers that use Knecht first in their daily work. If you want to join right away, sign up in the [form below this post](#cta).
 
 ## What you get
 
@@ -28,6 +28,6 @@ Knecht helps most where many projects need maintenance. You are a good fit if yo
 
 ## Take part
 
-If this sounds like you, sign up in the form below this post and select "I want to test actively and give feedback". We will then contact you. If you have questions first, send a mail to [hallo@knecht.works](mailto:hallo@knecht.works).
+If this sounds like you, sign up in the [form below this post](#cta) and select "I want to test actively and give feedback". We will then contact you. If you have questions first, send a mail to [hallo@knecht.works](mailto:hallo@knecht.works).
 
-And if testing is not your thing, but you want to follow the progress, select "Get updates only" in the form.
+And if testing is not your thing, but you want to follow the progress, select "Get updates only" in the [form](#cta).
