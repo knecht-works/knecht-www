@@ -27,7 +27,7 @@
   },
   "info": {
     "eyebrow": "The idea",
-    "intro": "Maintenance means that you install updates, reproduce bugs, and test everything. Knecht makes workflows from these tasks. Each workflow always runs the same. Knecht uses AI only where AI really helps.",
+    "intro": "Maintenance means that you install updates, reproduce bugs, and test everything. Knecht makes workflows from these tasks. Each workflow always runs the same, and AI agents do the actual work inside it.",
     "steps": {
       "projects": {
         "block": "Projects",
@@ -42,14 +42,14 @@
       "agent": {
         "block": "Knecht",
         "title": "AI agent",
-        "text": "With an Opencode API key, the AI agent can reproduce bugs in the live environment. It can fix them and test them against the real app. It does not have to guess if the change is correct."
+        "text": "With an API key from an AI provider of your choice, the AI agent can reproduce bugs in the live environment. It can fix them and test them against the real app. It does not have to guess if the change is correct."
       }
     }
   },
   "useCase": {
     "eyebrow": "A real example",
     "title": "The security update that no bot can install.",
-    "intro": "For a CMS, an update almost always needs a live database. After {code}, migrations run and write files. These files must go into the commit. Dependabot cannot do this, because it has no live project. Knecht can.",
+    "intro": "For a CMS, an update almost always needs a live database. After the update, migrations run and write files. These files must go into the commit. Dependabot cannot do this, because it has no live project. Knecht can.",
     "steps": {
       "trigger": {
         "label": "Trigger",

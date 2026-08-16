@@ -27,7 +27,7 @@
   },
   "info": {
     "eyebrow": "Die Idee",
-    "intro": "Laufende Betreuung heißt Updates einspielen, Bugs reproduzieren, alles testen. Knecht macht daraus Workflows, die immer gleich ablaufen, und holt AI nur da rein, wo sie wirklich hilft.",
+    "intro": "Laufende Betreuung heißt Updates einspielen, Bugs reproduzieren, alles testen. Knecht macht daraus Workflows, die immer gleich ablaufen, und AI Agents erledigen darin die eigentliche Arbeit.",
     "steps": {
       "projects": {
         "block": "Projekte",
@@ -42,14 +42,14 @@
       "agent": {
         "block": "Knecht",
         "title": "AI Agent",
-        "text": "Mit einem API-Key von Opencode kann der AI-Agent in Workflows Bugs in der laufenden Umgebung reproduzieren, fixen und direkt gegen die echte App testen, ganz ohne zu raten, ob die Änderung wirklich funktioniert."
+        "text": "Mit einem API-Key von einem AI Provider deiner Wahl kann der AI-Agent in Workflows Bugs in der laufenden Umgebung reproduzieren, fixen und direkt gegen die echte App testen, ganz ohne zu raten, ob die Änderung wirklich funktioniert."
       }
     }
   },
   "useCase": {
     "eyebrow": "Ein konkretes Beispiel",
     "title": "Das Security-Update, das kein Bot einspielen kann.",
-    "intro": "Bei einem CMS braucht ein Update fast immer eine laufende Datenbank. Nach dem {code} laufen Migrations, die Files schreiben, und die müssen mit in den Commit. Dependabot kann das nicht, denn er hat kein laufendes Projekt. Knecht schon.",
+    "intro": "Bei einem CMS braucht ein Update fast immer eine laufende Datenbank. Nach dem Update laufen Migrations, die Files schreiben, und die müssen mit in den Commit. Dependabot kann das nicht, denn er hat kein laufendes Projekt. Knecht schon.",
     "steps": {
       "trigger": {
         "label": "Trigger",

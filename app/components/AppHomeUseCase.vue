@@ -24,16 +24,9 @@ const steps = computed(() => stepKeys.map(key => ({
           {{ $t('useCase.title') }}
         </h2>
 
-        <i18n-t
-          keypath="useCase.intro"
-          tag="p"
-          scope="global"
-          class="mt-5 text-pretty text-base leading-relaxed text-muted sm:text-lg"
-        >
-          <template #code>
-            <code>composer update</code>
-          </template>
-        </i18n-t>
+        <p class="mt-5 text-pretty text-base leading-relaxed text-muted sm:text-lg">
+          {{ $t('useCase.intro') }}
+        </p>
       </AppReveal>
 
       <!-- Workflow run: the steps a single update actually goes through -->
