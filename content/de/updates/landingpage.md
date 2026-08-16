@@ -1,7 +1,7 @@
 ---
 title: Landingpage ist Online
 date: 2026-06-07
-tag: Setup
+tag: Projekt
 description: Warum die Landingpage noch vor dem Produkt kommt und wie es weitergeht.
 ---
 

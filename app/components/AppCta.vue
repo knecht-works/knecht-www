@@ -21,6 +21,7 @@ const error = ref('')
 const website = ref('')
 
 const { t } = useI18n()
+const localePath = useLocalePath()
 
 const modeItems = computed(() => [
   {
@@ -98,9 +99,19 @@ const submit = async () => {
               {{ $t('cta.title') }}
             </h2>
 
-            <p class="mx-auto mt-5 max-w-2xl text-pretty text-base leading-relaxed text-muted sm:text-lg lg:mx-0">
-              {{ $t('cta.description') }}
-            </p>
+            <i18n-t
+              keypath="cta.description"
+              tag="p"
+              scope="global"
+              class="mx-auto mt-5 max-w-2xl text-pretty text-base leading-relaxed text-muted sm:text-lg lg:mx-0"
+            >
+              <template #link>
+                <NuxtLink
+                  :to="localePath('/updates/beta-tester')"
+                  class="text-primary transition-opacity hover:opacity-70"
+                >{{ $t('cta.descriptionLink') }}</NuxtLink>
+              </template>
+            </i18n-t>
 
             <div
               v-if="done"
@@ -126,7 +137,10 @@ const submit = async () => {
                   :legend="$t('cta.legend')"
                   :ui="{
                     legend: 'text-sm text-muted mb-2',
-                    fieldset: 'grid w-full grid-cols-1 gap-3 sm:grid-cols-2'
+                    fieldset: 'grid w-full grid-cols-1 gap-3 sm:grid-cols-2',
+                    item: 'cursor-pointer',
+                    base: 'cursor-pointer',
+                    label: 'cursor-pointer'
                   }"
                 />
 

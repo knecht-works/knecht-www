@@ -25,7 +25,7 @@ const baseItems = [
   { labelKey: 'header.nav.idea', to: '/#idee' },
   { labelKey: 'header.nav.preview', to: '/#dashboard' },
   { labelKey: 'header.nav.roadmap', to: '/#roadmap' },
-  { labelKey: 'header.nav.updates', to: '/#updates' }
+  { labelKey: 'header.nav.updates', to: '/updates' }
 ]
 
 const items = computed<NavigationMenuItem[]>(() =>
@@ -81,7 +81,7 @@ const items = computed<NavigationMenuItem[]>(() =>
         color="neutral"
         class="hidden lg:flex"
         size="lg"
-        :to="localePath('/#cta')"
+        :to="localePath('/updates/beta-tester?signup=beta')"
       />
     </template>
 
@@ -99,7 +99,7 @@ const items = computed<NavigationMenuItem[]>(() =>
         block
         size="lg"
         class="mt-4"
-        :to="localePath('/#cta')"
+        :to="localePath('/updates/beta-tester?signup=beta')"
       />
     </template>
   </UHeader>

@@ -1,7 +1,7 @@
 ---
 title: Was macht der Knecht
 date: 2026-05-15
-tag: Setup
+tag: Projekt
 description: Über die Ideenfindung, die Motivation und wie Knecht dabei hilft.
 ---
 

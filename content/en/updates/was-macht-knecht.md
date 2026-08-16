@@ -1,7 +1,7 @@
 ---
 title: What Knecht Does
 date: 2026-05-15
-tag: Setup
+tag: Project
 description: About the idea, the motivation, and how Knecht helps.
 ---
 

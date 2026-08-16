@@ -188,7 +188,8 @@
   "cta": {
     "eyebrow": "Mitmachen",
     "title": "Bau Knecht mit von Anfang an.",
-    "description": "Knecht ist noch in Entwicklung. Werde Beta-Tester und gib direkt Feedback, oder bleib einfach per Update auf dem Laufenden.",
+    "description": "Knecht ist noch in Entwicklung. Werde {link} und gib direkt Feedback, oder bleib einfach per Update auf dem Laufenden.",
+    "descriptionLink": "Beta-Tester",
     "modeBeta": {
       "label": "Ich will aktiv mittesten & Feedback geben",
       "description": "Früher Zugang, du gestaltest Knecht direkt mit."

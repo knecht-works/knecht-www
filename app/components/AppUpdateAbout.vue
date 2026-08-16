@@ -56,7 +56,7 @@
           Startseite ansehen
         </NuxtLinkLocale>
         <NuxtLinkLocale
-          to="/#cta"
+          to="/?signup=beta#cta"
           class="inline-flex items-center gap-1.5 text-primary transition-colors hover:text-highlighted"
         >
           <UIcon

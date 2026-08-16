@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { isActive } = useNavActive()
+const { isMostSpecificActive } = useNavActive()
 const localePath = useLocalePath()
 
 const year = new Date().getFullYear()
@@ -19,8 +19,8 @@ const baseColumns = [
   {
     headingKey: 'footer.columns.takePart',
     links: [
-      { labelKey: 'footer.links.beta', to: '/#cta' },
-      { labelKey: 'footer.links.subscribe', to: '/#cta' },
+      { labelKey: 'footer.links.beta', to: '/updates/beta-tester?signup=beta' },
+      { labelKey: 'footer.links.subscribe', to: '/?signup=updates#cta' },
       { labelKey: 'footer.links.allUpdates', to: '/updates' },
       { labelKey: 'footer.links.feedback', to: `mailto:${CONTACT_EMAIL}` }
     ]
@@ -43,6 +43,12 @@ const columns = computed(() =>
       to: link.to.startsWith('/') ? localePath(link.to) : link.to
     }))
   }))
+)
+
+// All footer link targets, so active-state resolution can prefer the most
+// specific match across columns.
+const allLinkTargets = computed(() =>
+  columns.value.flatMap(column => column.links.map(link => link.to))
 )
 </script>
 
@@ -87,7 +93,7 @@ const columns = computed(() =>
               :key="link.label"
               :to="link.to"
               class="text-sm transition-colors"
-              :class="isActive(link.to) ? 'text-white' : 'text-muted hover:text-white'"
+              :class="isMostSpecificActive(link.to, allLinkTargets) ? 'text-white' : 'text-muted hover:text-white'"
             >
               {{ link.label }}
             </NuxtLink>

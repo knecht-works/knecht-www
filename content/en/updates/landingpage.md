@@ -1,7 +1,7 @@
 ---
 title: The Landing Page Is Online
 date: 2026-06-07
-tag: Setup
+tag: Project
 description: Why the landing page comes before the product, and what comes next.
 ---
 

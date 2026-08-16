@@ -53,12 +53,19 @@ export const useSectionSpy = () => {
   onBeforeUnmount(teardown)
 }
 
-// isActive(to) for nav + footer links. Hash links are active only on the home
-// page when their section is in view; route links match the current path.
+// isActive(to) for nav + footer links. Home hash links are active when their
+// section is in view, subpage hash links when their page is open, and plain
+// route links when the current path matches.
 export const useNavActive = () => {
   const route = useRoute()
   const localePath = useLocalePath()
   const active = useActiveSection()
+
+  // Path part of a link: query and hash stripped, trailing slashes removed.
+  const pathOf = (to: string) => {
+    const path = to.split(/[?#]/)[0] ?? ''
+    return path.replace(/\/+$/, '') || '/'
+  }
 
   // Expects already localized links, the same values the nav renders.
   const isActive = (to?: string) => {
@@ -66,16 +73,30 @@ export const useNavActive = () => {
 
     // `/` in the default locale, `/de` in German.
     const home = localePath('/')
-
+    const path = pathOf(to)
     const hashIndex = to.indexOf('#')
-    if (hashIndex !== -1) {
+
+    // Home section links follow the scroll spy.
+    if (hashIndex !== -1 && path === home) {
       return route.path === home && active.value === to.slice(hashIndex + 1)
     }
-
-    const path = to.replace(/\/+$/, '') || '/'
     if (path === home) return route.path === home
+    // A link to a section of a subpage counts as active on that page.
+    if (hashIndex !== -1) return route.path === path
     return route.path === path || route.path.startsWith(`${path}/`)
   }
 
-  return { isActive }
+  // isActive, but a link loses to a more specific sibling in `all`: /updates
+  // stays muted on /updates/beta-tester when a beta-tester link matches too.
+  const isMostSpecificActive = (to: string | undefined, all: (string | undefined)[]) => {
+    if (!to || !isActive(to)) return false
+    return !all.some(other =>
+      other !== undefined
+      && other !== to
+      && isActive(other)
+      && pathOf(other).startsWith(`${pathOf(to)}/`)
+    )
+  }
+
+  return { isActive, isMostSpecificActive }
 }

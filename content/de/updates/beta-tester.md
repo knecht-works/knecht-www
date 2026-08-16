@@ -1,61 +1,33 @@
 ---
 title: Beta Tester gesucht
 date: 2026-06-08
-tag: Beta
-description: Knecht ist bereit für echte Projekte. Wir suchen ein paar Agenturen, die ihn als Erste einsetzen und mitgestalten.
+tag: Projekt
+description: Wir suchen eine Handvoll Agenturen und Freelancer, die Knecht auf echten Projekten einsetzen. Setup, Guthaben und das erste Jahr übernehmen wir.
 ---
 
-Knecht läuft. Jetzt braucht er das, was kein lokaler Test ersetzen kann: echte Projekte, echte Bugs und ehrliches Feedback. Dafür suchen wir eine Handvoll Agenturen, die Knecht als Erste einsetzen wollen.
+Knecht läuft. Was ihm jetzt fehlt, sind echte Projekte, denn lokale Tests erzeugen keine echten Bugs. Deshalb suchen wir eine Handvoll Agenturen und Freelancer, die Knecht als Erste im Alltag einsetzen.
 
-::note
-**Neu hier?** Knecht ist ein Dashboard auf deinem eigenen Server: Er bootet deine DDEV-Projekte als komplett lauffähige Umgebungen, erledigt Aufgaben darin über Workflows und liefert fertige Pull Requests mit Preview. Mehr dazu auf der [Startseite](/) und in [Was macht der Knecht](/updates/was-macht-knecht).
-::
+## Was ihr bekommt
 
-## Was Knecht konkret macht
+Der Einstieg soll euch nichts kosten. Deshalb bekommt ihr von uns:
 
-Ein Beispiel aus dem Agentur-Alltag: Für ein Craft-CMS-Projekt erscheint ein Security-Patch. Um ihn einzuspielen, muss die Datenbank laufen, denn nach dem `composer update` laufen Migrations, die Files schreiben, und die müssen mit in den Commit. Dependabot kann das nicht, er hat kein laufendes Projekt. Knecht schon:
+- Wir machen das Setup gemeinsam mit euch, ihr müsst euch nicht allein durch die Einrichtung arbeiten.
+- 100 € OpenCode-Guthaben, damit die AI Agents sofort loslegen können.
+- Das erste Jahr nach dem Release ist für euch kostenlos.
+- Euer Logo mit Link auf der Startseite.
 
-1. Der Patch erscheint, ein Trigger startet deinen Update-Workflow.
-2. Knecht bootet das Projekt per DDEV, inklusive Datenbank.
-3. `composer update` läuft im echten Projekt, Migrations laufen, Tests laufen.
-4. Du bekommst einen Pull Request mit Preview-Link. Prüfen, mergen, fertig.
+Ihr geht also kein finanzielles Risiko ein und startet mit einem lauffähigen Knecht auf eurem eigenen Server, eingerichtet auf eure Projekte.
 
-Diesen Workflow baust du einmal. Danach läuft er für jedes deiner Projekte, bei jedem Patch.
+## Was wir brauchen
 
-## Wen wir suchen
+Im Gegenzug wünschen wir uns eine Person, die Knecht wirklich benutzt und uns regelmäßig sagt, wo er sie blockiert, was fehlt und was gut funktioniert. Mehr verlangen wir nicht. Dieses Feedback aus echten Projekten ist für uns mehr wert als jeder lokale Test.
 
-Knecht entfaltet seinen Nutzen dort, wo viele Projekte gewartet werden müssen. Genau dafür ist das ideale Profil:
+## Für wen das passt
 
-- **Ihr arbeitet mit DDEV.** Eure Projekte sind bereits dafür konfiguriert oder lassen sich leicht darauf umstellen.
-- **Ihr betreut mehrere Projekte.** Security-Updates und Bugfixes sind bei euch wiederkehrende Arbeit, kein Einzelfall.
-- **Ihr habt eine verantwortliche Person.** Jemand, der Knecht ausprobiert und uns regelmäßig zurückspielt, was funktioniert und was nicht.
+Am meisten bringt Knecht dort, wo viele Projekte gewartet werden. Ihr passt gut, wenn ihr mit DDEV arbeitet und genug Projekte betreut, dass Security-Updates und Bugfixes bei euch Routinearbeit sind. Wenn eure Projekte noch nicht auf DDEV laufen, sich aber leicht umstellen lassen, passt das auch.
 
-Wenn das auf euch passt, seid ihr genau richtig.
+## Mitmachen
 
-## Unser Angebot
+Wenn das nach euch klingt, trag dich im Formular direkt unter diesem Post ein und wähle "Ich will aktiv mittesten & Feedback geben". Wir melden uns dann bei dir. Wenn du vorab Fragen hast, schreib uns an [hallo@knecht.works](mailto:hallo@knecht.works).
 
-::note
-Wir setzen Knecht für euch auf und übernehmen **100 € OpenCode-Guthaben**, damit die AI Agents direkt loslegen können. Oben drauf wird das erste Jahr nach dem Release für euch kostenlos sein und euer Logo inkl. Link würden wir auf der Home platzieren, so dass es jeder sieht. 
-::
-
-Ihr müsst euch also nicht durch die Einrichtung kämpfen und geht kein finanzielles Risiko ein. Ihr bekommt einen lauffähigen Knecht auf eurem eigenen Server, eingerichtet auf eure Projekte, plus das Guthaben, um ihn wirklich zu nutzen.
-
-## Was wir uns wünschen
-
-Im Gegenzug brauchen wir ehrliches Feedback. Was hilft euch im Alltag? Wo hakt es? Was fehlt? Diese Rückmeldungen aus echten Agentur-Projekten sind für uns mehr wert als jeder Test.
-
-## Mehr als testen: mitgestalten
-
-Das ist die Chance, Knecht früh mitzuentwickeln. Euer Feedback fließt direkt in die Roadmap. Ihr seht nicht nur, wohin sich das Produkt entwickelt, ihr bestimmt die Richtung mit, bevor sich vieles verfestigt.
-
-## Interesse?
-
-Schreib uns einfach kurz an [hallo@knecht.works](mailto:hallo@knecht.works). Erzähl uns von eurer Agentur und euren Projekten, dann finden wir gemeinsam heraus, ob es passt.
-
-## Weitersagen
-
-Du kennst eine Agentur, für die das passt? Dann beschreib Knecht am besten so:
-
-> Knecht ist ein selbst gehostetes Dashboard für Agenturen mit vielen DDEV-Projekten. Er bootet jedes Projekt als lauffähige Umgebung, erledigt Aufgaben darin über Workflows und liefert fertige Pull Requests mit Preview. Beta-Tester gesucht: https://knecht.works/updates/beta-tester
-
-Das ist die ganze Idee in drei Sätzen, und mehr braucht es fürs Teilen nicht.
+Und wenn Testen gerade nichts für euch ist, ihr aber wissen wollt, wie es weitergeht, wählt im Formular einfach "Nur Updates bekommen".

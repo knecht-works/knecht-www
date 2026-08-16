@@ -188,7 +188,8 @@
   "cta": {
     "eyebrow": "Take part",
     "title": "Build Knecht with us from the start.",
-    "description": "Knecht is in development. Become a beta tester and give feedback directly, or get the updates only.",
+    "description": "Knecht is in development. Become a {link} and give feedback directly, or get the updates only.",
+    "descriptionLink": "beta tester",
     "modeBeta": {
       "label": "I want to test actively and give feedback",
       "description": "Early access. You have a direct effect on Knecht."
