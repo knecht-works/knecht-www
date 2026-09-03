@@ -25,7 +25,7 @@ defineProps<{
       :to="newer.path"
       class="group flex flex-col gap-1 rounded-xl border border-default bg-muted p-5 transition-colors hover:border-accented"
     >
-      <span class="inline-flex items-center gap-1.5 font-mono text-xs text-muted">
+      <span class="inline-flex items-center gap-1.5 font-mono text-xs text-muted mb-4">
         <UIcon
           name="i-lucide-arrow-left"
           class="size-3.5 transition-transform group-hover:-translate-x-0.5"
@@ -46,9 +46,9 @@ defineProps<{
     <NuxtLink
       v-if="older"
       :to="older.path"
-      class="group flex flex-col gap-1 rounded-xl border border-default bg-muted p-5 transition-colors hover:border-accented sm:col-start-2 sm:items-end sm:text-right"
+      class="group flex flex-col gap-1 rounded-xl border border-default bg-muted p-5 transition-colors hover:border-accented sm:col-start-2 items-end text-right"
     >
-      <span class="inline-flex items-center gap-1.5 font-mono text-xs text-muted">
+      <span class="inline-flex items-center gap-1.5 font-mono text-xs text-muted mb-4">
         Älteres Update
         <UIcon
           name="i-lucide-arrow-right"

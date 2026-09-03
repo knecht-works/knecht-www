@@ -153,6 +153,18 @@
         "title": "Feedback loop",
         "text": "Nachdem Workflows ausgeführt wurden, braucht es diverse Feedback Möglichkeiten um Output zu verbessern."
       },
+      "managedHosting": {
+        "title": "Managed Hosting",
+        "text": "Beta-Tester müssen Knecht nicht selbst installieren. Wir hosten die Instanz für sie und kümmern uns um Updates und Betrieb."
+      },
+      "langdockSupport": {
+        "title": "Langdock Support",
+        "text": "Der Agent läuft auch über Langdock. Ein API-Key deckt GPT- und Claude-Modelle ab, jede Anfrage bleibt in der EU."
+      },
+      "agentHistory": {
+        "title": "Agent-Verlauf",
+        "text": "Jedes Issue bekommt eine eigene Session. Der Agent behält Umgebung und Gespräch über mehrere Runs hinweg."
+      },
       "betaTesters": {
         "title": "Beta-Tester finden",
         "text": "Wir suchen genügend Beta-Tester, um Probleme früh zu erkennen und das finale Produkt zu bauen."

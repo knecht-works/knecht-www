@@ -2,7 +2,7 @@
 title: Beta Tester gesucht
 date: 2026-06-08
 tag: Projekt
-description: Wir suchen eine Handvoll Agenturen und Freelancer, die Knecht auf echten Projekten einsetzen. Setup, Guthaben und das erste Jahr übernehmen wir.
+description: Wir suchen eine Handvoll Agenturen und Freelancer, die Knecht auf echten Projekten einsetzen. Hosting, Guthaben und das erste Jahr übernehmen wir.
 ---
 
 Knecht läuft. Was ihm jetzt fehlt, sind echte Projekte, denn lokale Tests erzeugen keine echten Bugs. Deshalb suchen wir eine Handvoll Agenturen und Freelancer, die Knecht als Erste im Alltag einsetzen. Wenn du direkt dabei sein willst, trag dich im [Formular unter diesem Post](#cta) ein.
@@ -11,12 +11,12 @@ Knecht läuft. Was ihm jetzt fehlt, sind echte Projekte, denn lokale Tests erzeu
 
 Der Einstieg soll euch nichts kosten. Deshalb bekommt ihr von uns:
 
-- Wir machen das Setup gemeinsam mit euch, ihr müsst euch nicht allein durch die Einrichtung arbeiten.
+- Ihr müsst Knecht nicht selbst installieren. Wir hosten eure Instanz während der Beta und kümmern uns um Updates und Betrieb.
 - 100 € OpenCode-Guthaben, damit die AI Agents sofort loslegen können.
 - Das erste Jahr nach dem Release ist für euch kostenlos.
 - Euer Logo mit Link auf der Startseite.
 
-Ihr geht also kein finanzielles Risiko ein und startet mit einem lauffähigen Knecht auf eurem eigenen Server, eingerichtet auf eure Projekte.
+Ihr geht also kein finanzielles Risiko ein und startet mit einem lauffähigen Knecht, eingerichtet auf eure Projekte. Wer Knecht lieber auf dem eigenen Server betreibt, kann das weiterhin tun.
 
 ## Was wir brauchen
 

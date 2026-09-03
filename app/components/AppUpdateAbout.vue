@@ -18,11 +18,11 @@
         <span class="size-3 rounded-full bg-success/80" />
       </div>
 
-      <span class="flex min-w-0 flex-1 justify-center truncate font-mono text-xs text-dimmed">
+      <span class="min-w-0 flex-1 justify-center truncate font-mono text-xs text-dimmed hidden sm:flex">
         knecht &middot; zsh
       </span>
 
-      <span class="hidden shrink-0 items-center gap-1.5 font-mono text-xs text-dimmed sm:flex">
+      <span class="shrink-0 items-center gap-1.5 font-mono text-xs text-dimmed flex max-sm:ml-auto">
         <AppPulseDot
           color="primary"
           :pulse="false"

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { animate, inView } from 'motion-v'
 
-const progress = 80
+const progress = 85
 
 // Bar fill + percentage count up together from a single value, kicked off the
 // first time the panel scrolls into view (jumps straight to the target when the
@@ -55,11 +55,14 @@ const phaseMeta: { status: Status, key: string }[] = [
   { status: 'done', key: 'jiraTrigger' },
   { status: 'done', key: 'sshIde' },
   { status: 'done', key: 'feedbackLoop' },
+  { status: 'done', key: 'langdockSupport' },
+  { status: 'done', key: 'agentHistory' },
+  { status: 'done', key: 'managedHosting' },
+  { status: 'progress', key: 'docs' },
   { status: 'progress', key: 'betaTesters' },
-  { status: 'progress', key: 'testActions' },
+  { status: 'rest', key: 'testActions' },
   { status: 'rest', key: 'browserValidation' },
   { status: 'rest', key: 'notifications' },
-  { status: 'rest', key: 'docs' },
   { status: 'rest', key: 'pricing' }
 ]
 

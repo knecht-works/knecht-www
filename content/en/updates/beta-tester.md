@@ -2,7 +2,7 @@
 title: Beta testers wanted
 date: 2026-06-08
 tag: Project
-description: We search for a handful of agencies and freelancers that run Knecht on real projects. We cover the setup, the credit, and the first year.
+description: We search for a handful of agencies and freelancers that run Knecht on real projects. We cover the hosting, the credit, and the first year.
 ---
 
 Knecht runs. What it needs now are real projects, because local tests do not produce real bugs. So we search for a handful of agencies and freelancers that use Knecht first in their daily work. If you want to join right away, sign up in the [form below this post](#cta).
@@ -11,12 +11,12 @@ Knecht runs. What it needs now are real projects, because local tests do not pro
 
 The start should cost you nothing. So this is what you get from us:
 
-- We do the setup together with you, so you do not fight through the installation alone.
+- You do not have to install Knecht yourself. We host your instance during the beta and take care of updates and operations.
 - 100 € of OpenCode credit, so that the AI agents can start right away.
 - The first year after the release is free for you.
 - Your logo with a link on the home page.
 
-So you take no financial risk, and you start with a functional Knecht on your own server, configured for your projects.
+So you take no financial risk, and you start with a functional Knecht, configured for your projects. If you prefer to run Knecht on your own server, you can still do that.
 
 ## What we need
 
