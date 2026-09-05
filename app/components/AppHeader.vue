@@ -35,8 +35,6 @@ const items = computed<NavigationMenuItem[]>(() =>
     return {
       label: t(item.labelKey),
       to,
-      // ULink runs string links through localePath again. Unlocalized routes
-      // like /docs resolve to '' there, which degrades the link to a button.
       locale: item.localized,
       active: isActive(to),
       class: isActive(to) ? 'text-highlighted' : undefined
@@ -49,10 +47,8 @@ const items = computed<NavigationMenuItem[]>(() =>
   <UHeader
     class="lg:h-20 border-b-0 bg-transparent backdrop-blur-none"
     :ui="{
-      left: 'gap-2.5 lg:gap-3 items-center',
-      right: 'gap-2.5 lg:gap-3',
-      // The menu duplicates the header row inside a fullscreen modal. Match
-      // the 1px container border below, or the logo jumps on open.
+      left: 'gap-2.5 lg:gap-3 items-center lg:flex-none',
+      right: 'gap-2.5 lg:gap-3 lg:flex-none',
       header: 'border-x border-t border-x-transparent border-t-transparent',
       container: [
         'h-full rounded-b-xl border transition-all duration-300',
@@ -69,7 +65,7 @@ const items = computed<NavigationMenuItem[]>(() =>
       >
         <AppLogo class="w-auto shrink-0" />
       </NuxtLinkLocale>
-      <AppReleasePill />
+      <AppReleasePill class="max-sm:hidden"/>
     </template>
 
     <UNavigationMenu
@@ -79,14 +75,12 @@ const items = computed<NavigationMenuItem[]>(() =>
     />
 
     <template #right>
-      <!-- Quiet ghost controls first, the single solid CTA last. -->
       <AssistantButton />
       <UContentSearchButton
         variant="ghost"
         :aria-label="$t('header.search')"
       />
-      <!-- Phones are too narrow for the star count, it moves into the menu. -->
-      <AppGithubStars class="hidden sm:flex" />
+      <AppGithubStars class="hidden sm:flex lg:hidden xl:flex" />
       <UButton
         :label="$t('header.cta')"
         color="neutral"
