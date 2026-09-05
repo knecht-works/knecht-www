@@ -40,19 +40,19 @@ const stateOf = (index: number): StepState => {
 
 const rowClass: Record<StepState, string> = {
   done: 'border-white/6 bg-white/2',
-  active: 'border-[var(--accent-orange)]/60 bg-[var(--accent-orange)]/8',
+  active: 'border-accent-orange/60 bg-accent-orange/8',
   todo: 'border-transparent opacity-45'
 }
 
 const markClass: Record<StepState, string> = {
   done: 'border-primary/55 text-primary',
-  active: 'border-[var(--accent-orange)] bg-[var(--accent-orange)]/15 text-[var(--accent-orange)] [box-shadow:0_0_14px_color-mix(in_oklab,var(--accent-orange)_60%,transparent)]',
+  active: 'border-accent-orange bg-accent-orange/15 text-accent-orange shadow-glow',
   todo: 'border-white/14 text-dimmed'
 }
 
 const labelClass: Record<StepState, string> = {
   done: 'text-primary',
-  active: 'text-[var(--accent-orange)]',
+  active: 'text-accent-orange',
   todo: 'text-neutral-600'
 }
 </script>
@@ -63,11 +63,11 @@ const labelClass: Record<StepState, string> = {
     class="shadow-panel-lg overflow-hidden rounded-2xl border border-default bg-muted"
   >
     <!-- Title bar -->
-    <div class="flex items-center justify-between gap-3 border-b border-default bg-elevated px-4 py-3.5 sm:px-[18px]">
-      <span class="truncate font-mono text-[13px] text-highlighted">{{ workflow }}</span>
+    <div class="flex items-center justify-between gap-3 border-b border-default bg-elevated px-4 py-3.5 sm:px-4.5">
+      <span class="truncate font-mono text-sm text-highlighted">{{ workflow }}</span>
       <span
-        class="inline-flex shrink-0 items-center gap-2 font-mono text-[11px] uppercase tracking-[0.1em]"
-        :class="done ? 'text-primary' : 'text-[var(--accent-orange)]'"
+        class="inline-flex shrink-0 items-center gap-2 font-mono text-2xs uppercase tracking-widest"
+        :class="done ? 'text-primary' : 'text-accent-orange'"
       >
         <AppPulseDot
           :color="done ? 'primary' : 'orange'"
@@ -78,23 +78,23 @@ const labelClass: Record<StepState, string> = {
     </div>
 
     <!-- Progress -->
-    <div class="h-[3px] bg-white/6">
+    <div class="h-0.75 bg-white/6">
       <div
-        class="h-full bg-[linear-gradient(90deg,var(--accent-mint),color-mix(in_oklab,var(--accent-mint)_60%,var(--accent-orange)))] [box-shadow:0_0_16px_-2px_var(--accent-mint)] transition-[width] duration-600 ease-[cubic-bezier(0.22,1,0.36,1)]"
+        class="progress-fill h-full transition-all duration-600 ease-soft"
         :style="{ width: `${progress}%` }"
       />
     </div>
 
     <!-- Steps -->
-    <ol class="flex flex-col gap-2 p-3 sm:p-[18px]">
+    <ol class="flex flex-col gap-2 p-3 sm:p-4.5">
       <li
         v-for="(step, i) in steps"
         :key="step.label"
-        class="grid grid-cols-[28px_1fr] items-center gap-3 rounded-[10px] border px-3 py-3 transition-all duration-400 sm:grid-cols-[28px_1fr_auto] sm:gap-3.5 sm:px-3.5"
+        class="flex items-center gap-3 rounded-lg border px-3 py-3 transition-all duration-400 sm:gap-3.5 sm:px-3.5"
         :class="rowClass[stateOf(i)]"
       >
         <span
-          class="grid size-7 place-items-center rounded-full border font-mono text-[11px] transition-all duration-400"
+          class="grid size-7 shrink-0 place-items-center rounded-full border font-mono text-2xs transition-all duration-400"
           :class="markClass[stateOf(i)]"
         >
           <UIcon
@@ -105,7 +105,7 @@ const labelClass: Record<StepState, string> = {
           <template v-else>{{ i + 1 }}</template>
         </span>
 
-        <div class="min-w-0">
+        <div class="min-w-0 flex-1">
           <div
             class="text-sm font-semibold"
             :class="stateOf(i) === 'todo' ? 'text-muted' : 'text-highlighted'"
@@ -118,7 +118,7 @@ const labelClass: Record<StepState, string> = {
         </div>
 
         <span
-          class="hidden font-mono text-[10px] uppercase tracking-[0.1em] sm:block"
+          class="hidden shrink-0 font-mono text-2xs uppercase tracking-widest sm:block"
           :class="labelClass[stateOf(i)]"
         >
           {{ step.label }}
@@ -128,7 +128,7 @@ const labelClass: Record<StepState, string> = {
 
     <!-- Output: the comment or PR that lands back in the tool -->
     <div
-      class="mx-3 mb-3 rounded-xl border border-primary/30 bg-primary/6 px-4 py-3.5 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:mx-[18px] sm:mb-[18px]"
+      class="mx-3 mb-3 rounded-xl border border-primary/30 bg-primary/6 px-4 py-3.5 transition-all duration-500 ease-soft sm:mx-4.5 sm:mb-4.5"
       :class="done ? 'translate-y-0 opacity-100' : 'translate-y-2.5 opacity-0'"
       :aria-hidden="!done"
     >

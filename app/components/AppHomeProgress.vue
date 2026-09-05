@@ -38,7 +38,7 @@ const { t } = useI18n()
 // Everything else about a card is fixed; only this (color/icon) varies.
 const statusMeta: Record<Status, { dot: 'primary' | 'orange' | 'neutral', pulse: boolean, text: string, icon?: string }> = {
   done: { dot: 'primary', pulse: false, text: 'text-primary', icon: 'i-lucide-check' },
-  progress: { dot: 'orange', pulse: true, text: 'text-[var(--accent-orange)]' },
+  progress: { dot: 'orange', pulse: true, text: 'text-accent-orange' },
   rest: { dot: 'neutral', pulse: false, text: 'text-dimmed' }
 }
 
@@ -166,7 +166,7 @@ onMounted(() => {
           class="mt-5 h-2 overflow-hidden rounded-full bg-white/[0.07]"
         >
           <div
-            class="h-full rounded-full bg-[linear-gradient(90deg,var(--accent-mint),color-mix(in_oklab,var(--accent-mint)_60%,var(--accent-orange)))] [box-shadow:0_0_16px_-2px_var(--accent-mint)]"
+            class="progress-fill h-full rounded-full"
             :style="{ width: `${displayed}%` }"
           />
         </div>

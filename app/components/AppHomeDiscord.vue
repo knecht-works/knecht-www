@@ -4,9 +4,9 @@
 const { t } = useI18n()
 
 const messageMeta = [
-  { key: 'a', accent: 'var(--accent-mint)' },
-  { key: 'b', accent: 'var(--accent-violet)' },
-  { key: 'c', accent: 'var(--accent-orange)' }
+  { key: 'a', accent: 'text-accent-mint' },
+  { key: 'b', accent: 'text-accent-violet' },
+  { key: 'c', accent: 'text-accent-orange' }
 ]
 
 const messages = computed(() => messageMeta.map(item => ({
@@ -23,11 +23,11 @@ const messages = computed(() => messageMeta.map(item => ({
       <AppReveal
         :y="22"
         :duration="0.7"
-        class="relative col-span-full overflow-hidden rounded-2xl border border-default bg-[linear-gradient(135deg,color-mix(in_oklab,var(--accent-discord)_14%,transparent),oklch(1_0_0/0.015))]"
+        class="discord-card relative col-span-full overflow-hidden rounded-2xl border border-default"
       >
         <div
           aria-hidden="true"
-          class="pointer-events-none absolute -right-40 -top-52 size-[520px] rounded-full bg-[radial-gradient(circle,color-mix(in_oklab,var(--accent-discord)_35%,transparent),transparent_70%)]"
+          class="discord-glow"
         />
 
         <div class="relative grid gap-10 p-6 sm:p-10 lg:grid-cols-2 lg:items-center lg:gap-12 lg:px-14 lg:py-12">
@@ -36,7 +36,7 @@ const messages = computed(() => messageMeta.map(item => ({
               {{ $t('discord.title') }}
             </h2>
 
-            <p class="mt-4 max-w-xl text-pretty text-base leading-relaxed text-muted sm:text-[17px]">
+            <p class="mt-4 max-w-xl text-pretty text-base leading-relaxed text-muted sm:text-lg">
               {{ $t('discord.text') }}
             </p>
 
@@ -46,7 +46,7 @@ const messages = computed(() => messageMeta.map(item => ({
               size="lg"
               :to="DISCORD_URL"
               target="_blank"
-              class="mt-7 bg-[var(--accent-discord)] text-white hover:bg-[var(--accent-discord)]/85"
+              class="mt-7 bg-accent-discord text-white hover:bg-accent-discord/85"
             />
           </div>
 
@@ -60,16 +60,16 @@ const messages = computed(() => messageMeta.map(item => ({
             >
               <span
                 aria-hidden="true"
-                class="mt-0.5 size-[30px] shrink-0 rounded-full"
-                :style="{ background: message.accent }"
+                class="mt-0.5 size-7.5 shrink-0 rounded-full bg-current"
+                :class="message.accent"
               />
               <div class="min-w-0">
                 <div class="flex flex-wrap items-baseline gap-2">
                   <span
-                    class="text-[13px] font-semibold"
-                    :style="{ color: message.accent }"
+                    class="text-sm font-semibold"
+                    :class="message.accent"
                   >{{ message.name }}</span>
-                  <span class="font-mono text-[11px] text-dimmed">{{ message.time }}</span>
+                  <span class="font-mono text-2xs text-dimmed">{{ message.time }}</span>
                 </div>
                 <p class="mt-0.5 text-sm leading-normal text-toned">
                   {{ message.text }}

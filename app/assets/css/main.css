@@ -3,6 +3,27 @@
 
 @source "../../../content/**/*";
 
+/* Theme extensions, so components can use plain utilities instead of
+   arbitrary values. The accent colors point at the brand variables below. */
+@theme inline {
+  --color-accent-mint: var(--accent-mint);
+  --color-accent-orange: var(--accent-orange);
+  --color-accent-violet: var(--accent-violet);
+  --color-accent-discord: var(--accent-discord);
+  --color-accent-jira: var(--accent-jira);
+
+  --text-2xs: 0.6875rem;
+  --text-2xs--line-height: 1rem;
+
+  --shadow-glow: 0 0 8px currentColor;
+
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --animate-marquee: marquee 36s linear infinite;
+  --animate-flow-x: flow-x 2.4s linear infinite;
+  --animate-flow-y: flow-y 2.4s linear infinite;
+}
+
 :root {
   --font-sans: 'Geist', -apple-system, sans-serif;
   --font-mono: 'Geist Mono', monospace;
@@ -124,6 +145,33 @@
       will-change: transform, rotate;
     }
   }
+}
+
+@utility paused {
+  animation-play-state: paused;
+}
+
+/* Column layout of the integrations diagram: triggers, connector, Knecht,
+   connector, results. */
+@utility integration-grid {
+  grid-template-columns: minmax(0, 1fr) 60px minmax(0, 1.1fr) 60px minmax(0, 1fr);
+}
+
+/* Mint progress fill with a soft glow, shared by the roadmap panel and the
+   workflow run cards. */
+@utility progress-fill {
+  background: linear-gradient(90deg, var(--accent-mint), color-mix(in oklab, var(--accent-mint) 60%, var(--accent-orange)));
+  box-shadow: 0 0 16px -2px var(--accent-mint);
+}
+
+/* Highlighted Knecht node in the integrations diagram. */
+@utility knecht-node {
+  background: linear-gradient(180deg, color-mix(in oklab, var(--accent-mint) 8%, transparent), color-mix(in oklab, var(--accent-mint) 2%, transparent));
+  box-shadow: 0 0 60px -20px color-mix(in oklab, var(--accent-mint) 35%, transparent);
+}
+
+@utility discord-card {
+  background: linear-gradient(135deg, color-mix(in oklab, var(--accent-discord) 14%, transparent), oklch(1 0 0 / 0.015));
 }
 
 @utility pt-default {
@@ -265,6 +313,18 @@ picture {
     transparent 70%
   );
   opacity: 0.55;
+}
+
+/* ---------- Discord accent glow ---------- */
+.discord-glow {
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  right: -160px;
+  top: -200px;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle, color-mix(in oklab, var(--accent-discord) 35%, transparent), transparent 70%);
 }
 
 /* ---------- Markdown Styling ---------- */

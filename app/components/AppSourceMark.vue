@@ -12,7 +12,7 @@ withDefaults(defineProps<{
     class="grid shrink-0 place-items-center"
     :class="[
       SOURCE_META[source].tile,
-      size === 'sm' ? 'size-[18px] rounded-[5px]' : 'size-9 rounded-[9px]'
+      size === 'sm' ? 'size-4.5 rounded' : 'size-9 rounded-lg'
     ]"
   >
     <UIcon
