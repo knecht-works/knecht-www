@@ -327,6 +327,16 @@ picture {
   background: radial-gradient(circle, color-mix(in oklab, var(--accent-discord) 35%, transparent), transparent 70%);
 }
 
+/* Comark (assistant chat) highlights code with shiki. The site is dark-only,
+   so always render the dark variant. */
+.dark .shiki span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+  font-style: var(--shiki-dark-font-style) !important;
+  font-weight: var(--shiki-dark-font-weight) !important;
+  text-decoration: var(--shiki-dark-text-decoration) !important;
+}
+
 /* ---------- Markdown Styling ---------- */
 .richtext :deep(:is(h1, h2, h3, h4) > a) {
   display: inline-flex;
