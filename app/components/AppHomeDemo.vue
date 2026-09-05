@@ -3,28 +3,28 @@ const { t } = useI18n()
 
 const tabMeta = [
   {
-    id: 'projekte',
+    id: 'projects',
     labelKey: 'demo.tabs.projects',
     image: '/assets/dashboard.png',
-    url: '/projekte'
+    url: 'app.knecht.works/projekte'
   },
   {
     id: 'detail',
     labelKey: 'demo.tabs.detail',
-    image: '/assets/project.png',
-    url: '/projekte/test-craftcms'
+    image: '/assets/knecht-project-triggers-in-action.png',
+    url: 'app.knecht.works/projekte/test-craftcms'
   },
   {
-    id: 'workflow',
-    labelKey: 'demo.tabs.workflow',
-    image: '/assets/workflow.png',
-    url: '/workflows/bug-fix'
-  },
-  {
-    id: 'running-workflow',
-    labelKey: 'demo.tabs.runningWorkflow',
+    id: 'running',
+    labelKey: 'demo.tabs.running',
     image: '/assets/running-workflow.png',
-    url: '/workflows/bug-fix'
+    url: 'app.knecht.works/workflows/bug-fix'
+  },
+  {
+    id: 'result',
+    labelKey: 'demo.tabs.result',
+    image: '/assets/issue-enhancement-finished.png',
+    url: 'github.com/knecht-works/test-craftcms/issues/19'
   }
 ]
 
@@ -40,18 +40,12 @@ const activeTab = computed(() => tabs.value.find(tab => tab.id === activeId.valu
     class="overflow-hidden"
   >
     <div class="container pt-default">
-      <!-- Heading (left-aligned) -->
-      <AppReveal class="col-span-full max-w-2xl">
-        <AppEyebrow :label="$t('demo.eyebrow')" />
-
-        <h2 class="mt-6 text-balance text-highlighted">
-          {{ $t('demo.title') }} <span class="text-primary">{{ $t('demo.titleAccent') }}</span>
-        </h2>
-
-        <p class="mt-5 text-pretty text-base leading-relaxed text-muted sm:text-lg">
-          {{ $t('demo.description') }}
-        </p>
-      </AppReveal>
+      <AppSectionHeading
+        :eyebrow="$t('demo.eyebrow')"
+        :title="$t('demo.title')"
+        :title-accent="$t('demo.titleAccent')"
+        :text="$t('demo.description')"
+      />
 
       <!-- Tab bar: segmented control, horizontally scrollable on mobile -->
       <AppReveal
@@ -94,10 +88,10 @@ const activeTab = computed(() => tabs.value.find(tab => tab.id === activeId.valu
         class="col-span-full mt-6 w-full"
       >
         <AppBrowserFrame :url="activeTab.url">
-          <!-- Render all three screenshots (stacked, crossfaded via opacity) so
+          <!-- Render all screenshots (stacked, crossfaded via opacity) so
                the ipxStatic prerender generates an optimized /_ipx/ variant for
                each. With the previous single-image swap only the preselected tab
-               was in the prerendered HTML, so the other two had no static variant
+               was in the prerendered HTML, so the others had no static variant
                and 404'd at runtime (Cloudflare Pages has no IPX runtime). -->
           <div class="relative aspect-[1915/1098]">
             <NuxtImg

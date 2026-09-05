@@ -132,19 +132,16 @@ onMounted(() => {
     class="overflow-x-clip"
   >
     <div class="container pt-default ">
-      <!-- Heading -->
-      <AppReveal class="col-span-full max-w-2xl">
-        <AppEyebrow :label="$t('progress.eyebrow')" />
-
-        <h2 class="mt-6 text-balance text-highlighted">
-          {{ $t('progress.title') }}
-        </h2>
-      </AppReveal>
+      <AppSectionHeading
+        :eyebrow="$t('progress.eyebrow')"
+        :title="$t('progress.title')"
+        :text="$t('progress.intro')"
+      />
 
       <!-- Progress panel -->
       <AppReveal
         :delay="0.08"
-        class="shadow-panel col-span-full mt-10 rounded-xl border border-default bg-muted p-6 lg:mt-12 lg:p-8"
+        class="shadow-panel col-span-full mt-8 rounded-xl border border-default bg-muted p-6 lg:mt-10 lg:p-8"
       >
         <div class="flex items-baseline justify-between gap-4">
           <span class="font-mono text-sm text-muted">

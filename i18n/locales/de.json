@@ -5,7 +5,8 @@
   },
   "header": {
     "nav": {
-      "idea": "Die Idee",
+      "useCases": "Use Cases",
+      "integrations": "Integrationen",
       "preview": "Vorschau",
       "roadmap": "Roadmap",
       "updates": "Updates"
@@ -13,90 +14,234 @@
     "cta": "Beta-Tester werden"
   },
   "hero": {
-    "status": "In Entwicklung",
+    "status": "Beta",
     "roadmapLink": "Roadmap ansehen",
     "title": "Booten. Fixen. Testen.",
     "titleAccent": "Vollautomatisch.",
-    "description": "Knecht ist ein Dashboard auf deinem Server, gebaut für Agenturen mit vielen DDEV-Projekten. Er bootet jedes Projekt als komplett lauffähige Umgebung, erledigt Aufgaben und liefert fertige Pull Requests mit Preview.",
+    "description": "Knecht ist ein Dashboard auf deinem Server für Agenturen mit vielen DDEV-Projekten. Ein GitHub-Issue oder Jira-Ticket startet einen Workflow. Knecht bootet das Projekt als komplette Umgebung, erledigt die Aufgabe aus dem Ticket direkt darin und liefert einen fertigen Pull Request mit Preview.",
     "ctaPrimary": "Beta-Tester werden",
-    "ctaSecondary": "Fortschritt verfolgen",
+    "ctaSecondary": "Use Cases ansehen",
     "badgeDdev": "DDEV-nativ",
     "badgeEu": "EU · Self-hostable",
     "badgeBeta": "Beta-Plätze offen",
     "mascotAlt": "Knecht, der Roboter-Knecht mit Röhren-TV-Kopf"
   },
-  "info": {
-    "eyebrow": "Die Idee",
-    "intro": "Laufende Betreuung heißt Updates einspielen, Bugs reproduzieren, alles testen. Knecht macht daraus Workflows, die immer gleich ablaufen, und AI Agents erledigen darin die eigentliche Arbeit.",
-    "steps": {
-      "projects": {
-        "block": "Projekte",
-        "title": "Ein Klick, ganzes Projekt",
-        "text": "Knecht startet dein DDEV-Setup als komplette Umgebung, inklusive Web, Services und Datenbank. Jedes Projekt enthält alle Informationen, die es für einen vollständigen Boot braucht."
+  "integrations": {
+    "eyebrow": "Integrationen",
+    "title": "Knecht hängt an den Tools, die du schon benutzt.",
+    "intro": "Ein Ticket kommt rein, ein Ergebnis geht raus. Dazwischen bootet Knecht dein Projekt und arbeitet im echten System.",
+    "triggerLabel": "Trigger",
+    "resultLabel": "Ergebnis",
+    "triggers": {
+      "github": {
+        "title": "GitHub",
+        "text": "Startet Workflows aus Issues, Labels oder Mentions."
       },
-      "workflows": {
-        "block": "Workflows",
-        "title": "Deterministische Workflows",
-        "text": "Abläufe aus Bausteinen, die immer gleich passieren, statt einen Agenten wild loszuschicken. Getriggert per Hand oder Webhook, etwa aus einem GitHub-Issue oder Jira-Ticket."
+      "jira": {
+        "title": "Jira",
+        "text": "Startet Workflows aus Tickets oder Labels und kommentiert zurück."
       },
-      "agent": {
-        "block": "Knecht",
-        "title": "AI Agent",
-        "text": "Mit einem API-Key von einem AI Provider deiner Wahl kann der AI-Agent in Workflows Bugs in der laufenden Umgebung reproduzieren, fixen und direkt gegen die echte App testen, ganz ohne zu raten, ob die Änderung wirklich funktioniert."
+      "cron": {
+        "title": "Cron & Webhook",
+        "text": "Läuft nach Zeitplan oder wenn ein Security-Advisory erscheint."
+      }
+    },
+    "center": {
+      "title": "Knecht bootet dein Projekt",
+      "text": "Komplette Umgebung mit Web, Datenbank und Services.",
+      "tag": "Deterministische Workflows mit AI Agents"
+    },
+    "results": {
+      "pr": {
+        "title": "Pull Request",
+        "text": "Branch, Commits und Beschreibung, bereit zum Review."
+      },
+      "preview": {
+        "title": "Preview-Umgebung",
+        "text": "Klickbar, mit echter Datenbank dahinter."
+      },
+      "comment": {
+        "title": "Kommentar im Ticket",
+        "text": "Einschätzung mit Links zu Preview und PR."
       }
     }
   },
-  "useCase": {
-    "eyebrow": "Ein konkretes Beispiel",
-    "title": "Das Security-Update, das kein Bot einspielen kann.",
-    "intro": "Bei einem CMS braucht ein Update fast immer eine laufende Datenbank. Nach dem Update laufen Migrations, die Files schreiben, und die müssen mit in den Commit. Dependabot kann das nicht, denn er hat kein laufendes Projekt. Knecht schon.",
-    "steps": {
-      "trigger": {
-        "label": "Trigger",
-        "title": "Ein Security-Patch erscheint",
-        "text": "Ein Webhook oder Cron-Trigger startet deinen Update-Workflow, für jedes betroffene Projekt."
-      },
-      "boot": {
-        "label": "Boot",
-        "title": "Knecht bootet das Projekt",
-        "text": "Das DDEV-Setup fährt als komplette Umgebung hoch, mit Webserver, Services und Datenbank."
-      },
-      "update": {
-        "label": "Update",
-        "title": "Composer-Update mit Migrations",
-        "text": "Update läuft im echten Projekt. Migrations laufen gegen die Datenbank und schreiben ihre Files, die mit committet werden."
-      },
-      "test": {
-        "label": "Test",
-        "title": "Gegen die laufende App testen",
-        "text": "Tests können in der gebooteten Umgebung laufen und mit der Preview kann auch manuell nochmal getestet werden."
-      },
-      "result": {
-        "label": "Ergebnis",
-        "title": "Pull Request mit Preview",
-        "text": "Du bekommst einen fertigen PR plus Preview-Link. Prüfen, mergen, weiterarbeiten."
-      }
+  "useCases": {
+    "eyebrow": "Use Cases",
+    "title": "Drei Beispiele aus dem",
+    "titleAccent": "Agentur-Alltag.",
+    "intro": "Knecht erledigt jede Aufgabe, die du als Workflow beschreiben kannst. Diese drei zeigen, wie so ein Ablauf aussieht, vom Trigger bis zum Pull Request.",
+    "before": "Bisher",
+    "after": "Knecht",
+    "status": {
+      "running": "Running",
+      "succeeded": "Succeeded"
     },
-    "outro": "Den Workflow baust du einmal. Danach läuft er für jedes deiner Projekte, bei jedem Patch."
+    "items": {
+      "security": {
+        "source": "Cron Job",
+        "workflow": "Security Update Workflow",
+        "title": "Security-Update bei laufender Datenbank.",
+        "text": "Ein Patch für dein CMS erscheint. Knecht bootet jedes betroffene Projekt inklusive Datenbank, spielt das Update ein, lässt die Migrations laufen und committet alles, was dabei entsteht.",
+        "before": "Dependabot öffnet einen PR ohne Migration-Files. Jemand muss lokal booten, migrieren, nachcommitten.",
+        "after": "Update, Migrations und Preview in einem Lauf. Der PR ist vollständig, wenn er aufgeht.",
+        "steps": {
+          "trigger": {
+            "label": "Trigger",
+            "title": "Security-Advisory erkannt",
+            "detail": "Patch für craftcms/cms, 6 Projekte betroffen"
+          },
+          "boot": {
+            "label": "Boot",
+            "title": "Projekt startet mit Datenbank",
+            "detail": "Web, Datenbank und Redis laufen"
+          },
+          "update": {
+            "label": "Update",
+            "title": "composer update + Migrations",
+            "detail": "3 Migrations gelaufen, project.yaml geändert"
+          },
+          "test": {
+            "label": "Test",
+            "title": "Preview & Smoke-Test",
+            "detail": "Link-Checker grün, Preview online"
+          },
+          "result": {
+            "label": "Ergebnis",
+            "title": "Pull Request offen",
+            "detail": "PR #84 mit 4 geänderten Files und Preview-Link"
+          }
+        },
+        "out": {
+          "head": "Pull Request #84 auf knecht/84",
+          "body": "Update craftcms/cms 5.10.1 → 5.10.2. Migrations ausgeführt, project.yaml aktualisiert. Preview läuft mit echter Datenbank.",
+          "link": "84.preview.knecht.works →"
+        }
+      },
+      "estimate": {
+        "source": "Jira Ticket",
+        "workflow": "Ticket Schätzung Workflow",
+        "title": "Ein Ticket schätzen, bevor jemand Zeit reinsteckt.",
+        "text": "Ein neues Jira-Ticket bekommt das Label „knecht-estimate“. Knecht liest den Code im laufenden Projekt, findet die Ursache und schreibt Aufwand, Risiko und einen Lösungsvorschlag als Kommentar ins Ticket.",
+        "before": "Das Ticket wartet bis zum nächsten Planning. Die Schätzung ist Bauchgefühl.",
+        "after": "Einschätzung in Minuten, basierend auf dem echten Code, direkt als Kommentar im Ticket.",
+        "steps": {
+          "trigger": {
+            "label": "Trigger",
+            "title": "Neues Jira-Ticket",
+            "detail": "KAN-231, Newsletter-Formular sendet doppelt"
+          },
+          "boot": {
+            "label": "Boot",
+            "title": "Projekt startet",
+            "detail": "Umgebung läuft mit Testdaten"
+          },
+          "analyze": {
+            "label": "Analyse",
+            "title": "Knecht liest Code & reproduziert",
+            "detail": "Form-Handler, Queue und 2 Templates betroffen"
+          },
+          "assess": {
+            "label": "Bewertung",
+            "title": "Aufwand & Risiko",
+            "detail": "Etwa 3 Stunden, Risiko niedrig, ein Modul"
+          },
+          "result": {
+            "label": "Ergebnis",
+            "title": "Kommentar im Ticket",
+            "detail": "Einschätzung, Vorschlag und das Angebot, es zu fixen"
+          }
+        },
+        "out": {
+          "head": "Kommentar in KAN-231",
+          "body": "Ursache: doppelter Event-Listener in newsletter.js. Aufwand ≈ 3 h, Risiko niedrig. Vorschlag: Listener in init() zentralisieren. Soll ich den Fix als PR vorbereiten?",
+          "link": "231.preview.knecht.works →"
+        }
+      },
+      "fix": {
+        "source": "GitHub Issue",
+        "workflow": "Bug Fix Workflow",
+        "title": "Bug aus dem Issue fixen, getestet gegen die echte App.",
+        "text": "Ein Issue bekommt das Label „knecht-fix“. Knecht bootet das Projekt, reproduziert den Bug in der Preview, fixt ihn und öffnet einen Pull Request mit Preview-Link zum Nachklicken.",
+        "before": "Ein Coding-Agent rät im Blindflug, ob der Fix funktioniert. Testen musst du selbst.",
+        "after": "Der Agent sieht die laufende App, reproduziert den Bug und testet den Fix dagegen.",
+        "steps": {
+          "trigger": {
+            "label": "Trigger",
+            "title": "Issue mit Label knecht-fix",
+            "detail": "#19, Dark Mode ist auf der Seite kaputt"
+          },
+          "boot": {
+            "label": "Boot",
+            "title": "Projekt startet",
+            "detail": "Umgebung läuft, Dependencies installiert"
+          },
+          "fix": {
+            "label": "Fix",
+            "title": "Agent reproduziert & fixt",
+            "detail": "2 Commits auf knecht/19, 4 Files"
+          },
+          "test": {
+            "label": "Test",
+            "title": "Gegen laufende App getestet",
+            "detail": "Theme-Script getestet, Kontrast geprüft"
+          },
+          "result": {
+            "label": "Ergebnis",
+            "title": "PR #20 mit Preview",
+            "detail": "Kommentar im Issue mit Preview-Link"
+          }
+        },
+        "out": {
+          "head": "knecht-works-bot kommentiert #19",
+          "body": "Pushed and opened as PR #20 for review. Two commits on knecht/19, one per concern. 4 files, no dependencies, no config changes.",
+          "link": "PR #20 und 133.preview.knecht.works →"
+        }
+      }
+    }
   },
   "demo": {
-    "eyebrow": "So wird's aussehen",
+    "eyebrow": "Das Dashboard",
     "title": "Viele Projekte.",
     "titleAccent": "Ein Knecht.",
-    "description": "Ein erster Blick auf das Dashboard, an dem wir bauen: von der Projekt-Übersicht und Projekt-Detail Seite bis zum Workflow-Editor. Design und Funktionen ändern sich noch.",
+    "description": "Projekte, Workflows und Runs an einem Ort, auf deinem Server oder von uns gehostet.",
     "tabs": {
       "projects": "Projekte",
       "detail": "Projekt-Detail",
-      "workflow": "Workflow-Editor",
-      "runningWorkflow": "Test Workflows"
+      "running": "Workflow läuft",
+      "result": "Ergebnis in GitHub"
     },
     "imageAlt": "Knecht {label} Vorschau"
   },
+  "discord": {
+    "eyebrow": "Community",
+    "title": "Der Knecht hat jetzt einen Discord.",
+    "text": "Fragen zum Setup, Feedback zu Workflows, erste Runs zeigen. Wir bauen offen und antworten selbst.",
+    "cta": "Discord beitreten",
+    "messages": {
+      "a": {
+        "name": "samuel",
+        "time": "heute 09:12",
+        "text": "v0.7.0 ist raus. Jira-Trigger können jetzt Labels filtern."
+      },
+      "b": {
+        "name": "nina.dev",
+        "time": "heute 09:40",
+        "text": "Erster Security-Update-Run über 6 Craft-Projekte durch. Alle PRs grün 🎉"
+      },
+      "c": {
+        "name": "tobi",
+        "time": "heute 10:03",
+        "text": "Frage: kann der Estimate-Workflow auch auf GitHub Issues laufen?"
+      }
+    }
+  },
   "progress": {
     "eyebrow": "Roadmap",
-    "title": "Was der Knecht gerade macht.",
-    "progressLabel": "Fortschritt bis zur öffentlichen Beta",
-    "goal": "Ziel: öffentliche Beta in Q4 2026 · Early-Access in Q3",
+    "title": "Wo der Knecht gerade steht.",
+    "intro": "Was Knecht heute kann, woran wir gerade arbeiten und was als Nächstes kommt.",
+    "progressLabel": "Fortschritt bis zum öffentlichen Release",
+    "goal": "Die Beta läuft. Als Nächstes kommen Doku, Onboarding und weitere Beta-Tester.",
     "status": {
       "done": "Fertig",
       "progress": "In Arbeit",
@@ -224,7 +369,7 @@
   "footer": {
     "tagline1": "Boote jedes Projekt.",
     "tagline2": "Lass den Knecht arbeiten.",
-    "badgeStatus": "In Entwicklung",
+    "badgeStatus": "Beta-Plätze offen",
     "badgeEu": "EU",
     "columns": {
       "knecht": "Knecht",
@@ -232,12 +377,12 @@
       "legal": "Rechtliches"
     },
     "links": {
-      "idea": "Die Idee",
+      "useCases": "Use Cases",
+      "integrations": "Integrationen",
       "preview": "Vorschau",
       "roadmap": "Roadmap",
-      "updates": "Updates",
       "beta": "Beta-Tester werden",
-      "subscribe": "Updates abonnieren",
+      "discord": "Discord",
       "allUpdates": "Alle Updates",
       "feedback": "Feedback geben",
       "imprint": "Impressum",

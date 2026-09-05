@@ -1,102 +1,247 @@
 {
   "site": {
-    "title": "Boot. Fix. Test. Fully automatic.",
+    "title": "Boot. Fix. Test. Fully Automatic.",
     "description": "Knecht is a dashboard on your own server for agencies with many DDEV projects. It boots each project as an operational environment, does tasks in workflows, and supplies completed pull requests with a preview."
   },
   "header": {
     "nav": {
-      "idea": "The idea",
+      "useCases": "Use Cases",
+      "integrations": "Integrations",
       "preview": "Preview",
       "roadmap": "Roadmap",
       "updates": "Updates"
     },
-    "cta": "Become a beta tester"
+    "cta": "Become a Beta Tester"
   },
   "hero": {
-    "status": "In development",
-    "roadmapLink": "See the roadmap",
+    "status": "Beta",
+    "roadmapLink": "See the Roadmap",
     "title": "Boot. Fix. Test.",
-    "titleAccent": "Fully automatic.",
-    "description": "Knecht is a dashboard on your server, made for agencies with many DDEV projects. It boots each project as a fully operational environment, does tasks, and supplies completed pull requests with a preview.",
-    "ctaPrimary": "Become a beta tester",
-    "ctaSecondary": "Follow the progress",
-    "badgeDdev": "DDEV native",
-    "badgeEu": "EU · Self-hostable",
-    "badgeBeta": "Beta seats open",
+    "titleAccent": "Fully Automatic.",
+    "description": "Knecht is a dashboard on your server, made for agencies with many DDEV projects. A GitHub issue or Jira ticket starts a workflow. Knecht boots the project as a working environment, does the task from the ticket there, and supplies a completed pull request with a preview.",
+    "ctaPrimary": "Become a Beta Tester",
+    "ctaSecondary": "See the Use Cases",
+    "badgeDdev": "DDEV Native",
+    "badgeEu": "EU · Self-Hostable",
+    "badgeBeta": "Beta Seats Open",
     "mascotAlt": "Knecht, the robot helper with a CRT screen head"
   },
-  "info": {
-    "eyebrow": "The idea",
-    "intro": "Maintenance means that you install updates, reproduce bugs, and test everything. Knecht makes workflows from these tasks. Each workflow always runs the same, and AI agents do the actual work inside it.",
-    "steps": {
-      "projects": {
-        "block": "Projects",
-        "title": "One click, a full project",
-        "text": "Knecht starts your DDEV setup as a complete environment, with web, services, and database. Each project contains all the data that is necessary for a full boot."
+  "integrations": {
+    "eyebrow": "Integrations",
+    "title": "Knecht Connects to the Tools You Already Use.",
+    "intro": "A ticket comes in, a result goes out. In between, Knecht boots your project and works in the real system.",
+    "triggerLabel": "Trigger",
+    "resultLabel": "Result",
+    "triggers": {
+      "github": {
+        "title": "GitHub",
+        "text": "Starts a workflow from an issue, a label, or a mention."
       },
-      "workflows": {
-        "block": "Workflows",
-        "title": "Deterministic workflows",
-        "text": "Workflows are sequences of blocks. They always run the same, and no agent operates without control. You start them manually or with a webhook, for example from a GitHub issue or a Jira ticket."
+      "jira": {
+        "title": "Jira",
+        "text": "Starts a workflow from a ticket or a label and comments back."
       },
-      "agent": {
-        "block": "Knecht",
-        "title": "AI agent",
-        "text": "With an API key from an AI provider of your choice, the AI agent can reproduce bugs in the live environment. It can fix them and test them against the real app. It does not have to guess if the change is correct."
+      "cron": {
+        "title": "Cron & Webhook",
+        "text": "Runs on a schedule or when a security advisory comes in."
+      }
+    },
+    "center": {
+      "title": "Knecht Boots Your Project",
+      "text": "A complete environment with web, database, and services.",
+      "tag": "Deterministic Workflows with AI Agents"
+    },
+    "results": {
+      "pr": {
+        "title": "Pull Request",
+        "text": "Branch, commits, and description, ready for review."
+      },
+      "preview": {
+        "title": "Preview Environment",
+        "text": "Clickable, with a real database behind it."
+      },
+      "comment": {
+        "title": "Comment in the Ticket",
+        "text": "Assessment with links to the preview and the PR."
       }
     }
   },
-  "useCase": {
-    "eyebrow": "A real example",
-    "title": "The security update that no bot can install.",
-    "intro": "For a CMS, an update almost always needs a live database. After the update, migrations run and write files. These files must go into the commit. Dependabot cannot do this, because it has no live project. Knecht can.",
-    "steps": {
-      "trigger": {
-        "label": "Trigger",
-        "title": "A security patch becomes available",
-        "text": "A webhook or a cron trigger starts your update workflow, for each applicable project."
-      },
-      "boot": {
-        "label": "Boot",
-        "title": "Knecht boots the project",
-        "text": "The DDEV setup starts as a complete environment, with web server, services, and database."
-      },
-      "update": {
-        "label": "Update",
-        "title": "Composer update with migrations",
-        "text": "The update runs in the real project. Migrations run against the database and write their files. The files go into the commit."
-      },
-      "test": {
-        "label": "Test",
-        "title": "Test against the live app",
-        "text": "Tests can run in the booted environment. With the preview, you can also do a manual test."
-      },
-      "result": {
-        "label": "Result",
-        "title": "Pull request with preview",
-        "text": "You get a completed PR and a preview link. Examine it, merge it, continue your work."
-      }
+  "useCases": {
+    "eyebrow": "Use cases",
+    "title": "Three Examples from",
+    "titleAccent": "Agency Life.",
+    "intro": "Knecht does every task that you can describe as a workflow. These three show what such a run looks like, from the trigger to the pull request.",
+    "before": "Before",
+    "after": "Knecht",
+    "status": {
+      "running": "Running",
+      "succeeded": "Succeeded"
     },
-    "outro": "You build the workflow one time. Then it runs for each of your projects, for each patch."
+    "items": {
+      "security": {
+        "source": "Cron Job",
+        "workflow": "Security Update Workflow",
+        "title": "A Security Update with the Database Running.",
+        "text": "A patch for your CMS comes out. Knecht boots each affected project with its database, installs the update, runs the migrations, and commits everything that comes out of it.",
+        "before": "Dependabot opens a PR without the migration files. Someone has to boot locally, migrate, and commit again.",
+        "after": "Update, migrations, and preview in one run. The PR is complete when it opens.",
+        "steps": {
+          "trigger": {
+            "label": "Trigger",
+            "title": "Security advisory detected",
+            "detail": "Patch for craftcms/cms, 6 projects affected"
+          },
+          "boot": {
+            "label": "Boot",
+            "title": "Project starts with database",
+            "detail": "Web, database, and Redis are up"
+          },
+          "update": {
+            "label": "Update",
+            "title": "composer update + migrations",
+            "detail": "3 migrations applied, project.yaml changed"
+          },
+          "test": {
+            "label": "Test",
+            "title": "Preview & smoke test",
+            "detail": "Link checker green, preview online"
+          },
+          "result": {
+            "label": "Result",
+            "title": "Pull request open",
+            "detail": "PR #84 with 4 changed files and a preview link"
+          }
+        },
+        "out": {
+          "head": "Pull request #84 on knecht/84",
+          "body": "Update craftcms/cms 5.10.1 → 5.10.2. Migrations applied, project.yaml updated. Preview runs with a real database.",
+          "link": "84.preview.knecht.works →"
+        }
+      },
+      "estimate": {
+        "source": "Jira Ticket",
+        "workflow": "Ticket Estimate Workflow",
+        "title": "Estimate a Ticket Before Anyone Spends Time on It.",
+        "text": "A new Jira ticket gets the label \"knecht-estimate\". Knecht reads the code in the live project, finds the cause, and writes effort, risk, and a suggested fix as a comment in the ticket.",
+        "before": "The ticket waits for the next planning. The estimate is a gut feeling.",
+        "after": "An assessment in minutes, based on the real code, directly as a comment in the ticket.",
+        "steps": {
+          "trigger": {
+            "label": "Trigger",
+            "title": "New Jira ticket",
+            "detail": "KAN-231, newsletter form sends twice"
+          },
+          "boot": {
+            "label": "Boot",
+            "title": "Project starts",
+            "detail": "Environment up with test data"
+          },
+          "analyze": {
+            "label": "Analysis",
+            "title": "Knecht reads code & reproduces",
+            "detail": "Form handler, queue, and 2 templates affected"
+          },
+          "assess": {
+            "label": "Assessment",
+            "title": "Effort & risk",
+            "detail": "About 3 hours, low risk, one module"
+          },
+          "result": {
+            "label": "Result",
+            "title": "Comment in the ticket",
+            "detail": "Assessment, suggestion, and the offer to fix it"
+          }
+        },
+        "out": {
+          "head": "Comment in KAN-231",
+          "body": "Cause: duplicate event listener in newsletter.js. Effort ≈ 3 h, low risk. Suggestion: centralize the listener in init(). Should I prepare the fix as a PR?",
+          "link": "231.preview.knecht.works →"
+        }
+      },
+      "fix": {
+        "source": "GitHub Issue",
+        "workflow": "Bug Fix Workflow",
+        "title": "Fix the Bug from the Issue, Tested Against the Real App.",
+        "text": "An issue gets the label \"knecht-fix\". Knecht boots the project, reproduces the bug in the preview, fixes it, and opens a pull request with a preview link you can click through.",
+        "before": "A coding agent guesses blindly whether the fix works. You have to test it yourself.",
+        "after": "The agent sees the live app, reproduces the bug, and tests the fix against it.",
+        "steps": {
+          "trigger": {
+            "label": "Trigger",
+            "title": "Issue with label knecht-fix",
+            "detail": "#19, dark mode is broken on this site"
+          },
+          "boot": {
+            "label": "Boot",
+            "title": "Project starts",
+            "detail": "Environment up, dependencies installed"
+          },
+          "fix": {
+            "label": "Fix",
+            "title": "Agent reproduces & fixes",
+            "detail": "2 commits on knecht/19, 4 files"
+          },
+          "test": {
+            "label": "Test",
+            "title": "Tested against the live app",
+            "detail": "Theme script tested, contrast checked"
+          },
+          "result": {
+            "label": "Result",
+            "title": "PR #20 with preview",
+            "detail": "Comment in the issue with a preview link"
+          }
+        },
+        "out": {
+          "head": "knecht-works-bot commented on #19",
+          "body": "Pushed and opened as PR #20 for review. Two commits on knecht/19, one per concern. 4 files, no dependencies, no config changes.",
+          "link": "PR #20 and 133.preview.knecht.works →"
+        }
+      }
+    }
   },
   "demo": {
-    "eyebrow": "How it will look",
-    "title": "Many projects.",
+    "eyebrow": "The dashboard",
+    "title": "Many Projects.",
     "titleAccent": "One Knecht.",
-    "description": "A first look at the dashboard that we build now, from the project list and the project detail page to the workflow editor. The design and the functions can change.",
+    "description": "Projects, workflows, and runs in one place, on your server or hosted by us.",
     "tabs": {
       "projects": "Projects",
       "detail": "Project Detail",
-      "workflow": "Workflow Editor",
-      "runningWorkflow": "Test Workflows"
+      "running": "Workflow Running",
+      "result": "Result in GitHub"
     },
     "imageAlt": "Knecht {label} preview"
   },
+  "discord": {
+    "eyebrow": "Community",
+    "title": "Knecht Now Has a Discord.",
+    "text": "Questions about the setup, feedback on workflows, show your first runs. We build in the open and answer ourselves.",
+    "cta": "Join the Discord",
+    "messages": {
+      "a": {
+        "name": "samuel",
+        "time": "today 09:12",
+        "text": "v0.7.0 is out. Jira triggers can now filter by label."
+      },
+      "b": {
+        "name": "nina.dev",
+        "time": "today 09:40",
+        "text": "First security update run across 6 Craft projects is done. All PRs green 🎉"
+      },
+      "c": {
+        "name": "tobi",
+        "time": "today 10:03",
+        "text": "Question: can the estimate workflow also run on GitHub issues?"
+      }
+    }
+  },
   "progress": {
     "eyebrow": "Roadmap",
-    "title": "What Knecht does now.",
-    "progressLabel": "Progress to the public beta",
-    "goal": "Goal: public beta in Q4 2026 · early access in Q3",
+    "title": "Where Knecht Stands.",
+    "intro": "What Knecht can do today, what we are working on, and what comes next.",
+    "progressLabel": "Progress to the public release",
+    "goal": "The beta is running. Next up are documentation, onboarding, and more beta testers.",
     "status": {
       "done": "Done",
       "progress": "In progress",
@@ -106,23 +251,23 @@
     "next": "Next",
     "phases": {
       "ideaValidation": {
-        "title": "Idea validation",
+        "title": "Idea Validation",
         "text": "We tested the concept in a reduced scope. It works."
       },
       "branding": {
-        "title": "Branding and organization",
+        "title": "Branding and Organization",
         "text": "The name, the logo, the website, and the social media presence are complete."
       },
       "techStack": {
-        "title": "Tech stack and architecture",
+        "title": "Tech Stack and Architecture",
         "text": "We made the basic technology decisions and validated them."
       },
       "dashboardDesign": {
-        "title": "Dashboard design",
+        "title": "Dashboard Design",
         "text": "The design for the dashboard is complete. In the dashboard, you make projects and workflows."
       },
       "prototype": {
-        "title": "Build the prototype",
+        "title": "Build the Prototype",
         "text": "A prototype exists. In it, you can make projects and workflows with an AI agent."
       },
       "installer": {
@@ -130,19 +275,19 @@
         "text": "You can install the dashboard on each Linux server."
       },
       "updateService": {
-        "title": "Update service",
+        "title": "Update Service",
         "text": "You can install updates from the control panel."
       },
       "githubTrigger": {
-        "title": "GitHub trigger",
+        "title": "GitHub Trigger",
         "text": "You can set GitHub triggers that start workflows."
       },
       "knechtLives": {
-        "title": "Knecht is alive",
+        "title": "Knecht Is Alive",
         "text": "You can install the Knecht dashboard on a Linux server with low effort, and it gets updates."
       },
       "jiraTrigger": {
-        "title": "Jira trigger",
+        "title": "Jira Trigger",
         "text": "Jira tickets can start workflows."
       },
       "sshIde": {
@@ -150,31 +295,31 @@
         "text": "You can make changes in the live preview containers through SSH and an IDE."
       },
       "feedbackLoop": {
-        "title": "Feedback loop",
+        "title": "Feedback Loop",
         "text": "After a workflow run, different feedback functions are necessary to make the output better."
       },
       "managedHosting": {
-        "title": "Managed hosting",
+        "title": "Managed Hosting",
         "text": "Beta testers do not have to install Knecht themselves. We host the instance for them and take care of updates and operations."
       },
       "langdockSupport": {
-        "title": "Langdock support",
+        "title": "Langdock Support",
         "text": "The agent also runs through Langdock. One API key covers GPT and Claude models, and every request stays in the EU."
       },
       "agentHistory": {
-        "title": "Agent history",
+        "title": "Agent History",
         "text": "Every issue gets its own session. The agent keeps its environment and conversation across multiple runs."
       },
       "betaTesters": {
-        "title": "Find beta testers",
+        "title": "Find Beta Testers",
         "text": "We look for a sufficient number of beta testers to find problems early and build the final product."
       },
       "testActions": {
-        "title": "Test actions",
+        "title": "Test Actions",
         "text": "Workflows can run tests for projects. A fix is complete only when the tests are green."
       },
       "browserValidation": {
-        "title": "Browser validation",
+        "title": "Browser Validation",
         "text": "The agent examines the bug in the preview and supplies screenshots as proof."
       },
       "notifications": {
@@ -182,11 +327,11 @@
         "text": "Slack or email sends a message when a run is complete or when it fails."
       },
       "docs": {
-        "title": "Documentation and onboarding",
+        "title": "Documentation and Onboarding",
         "text": "Documentation that covers the setup, workflows, and troubleshooting fully."
       },
       "pricing": {
-        "title": "Price model and licenses",
+        "title": "Price Model and Licenses",
         "text": "You can officially buy Knecht. The price model, the license, and the payment are complete."
       }
     }
@@ -195,11 +340,11 @@
     "eyebrow": "Updates",
     "title": "Building in Public.",
     "description": "We build Knecht in the open. Each milestone is published here.",
-    "all": "See all updates"
+    "all": "See All Updates"
   },
   "cta": {
     "eyebrow": "Take part",
-    "title": "Build Knecht with us from the start.",
+    "title": "Build Knecht with Us from the Start.",
     "description": "Knecht is in development. Become a {link} and give feedback directly, or get the updates only.",
     "descriptionLink": "beta tester",
     "modeBeta": {
@@ -211,8 +356,8 @@
       "description": "Progress updates only. Tests are not necessary."
     },
     "legend": "How do you want to take part?",
-    "submitBeta": "Become a beta tester",
-    "submitUpdates": "Subscribe to updates",
+    "submitBeta": "Become a Beta Tester",
+    "submitUpdates": "Subscribe to Updates",
     "doneBeta": "Done! You are one of the first beta testers. A welcome email is on the way to you.",
     "doneUpdates": "Done! From now on, you get each update. A welcome email is on the way to you.",
     "errorInvalid": "Please enter a valid email address.",
@@ -224,25 +369,25 @@
   "footer": {
     "tagline1": "Boot each project.",
     "tagline2": "Let Knecht do the work.",
-    "badgeStatus": "In development",
+    "badgeStatus": "Beta Seats Open",
     "badgeEu": "EU",
     "columns": {
       "knecht": "Knecht",
-      "takePart": "Take part",
+      "takePart": "Take Part",
       "legal": "Legal"
     },
     "links": {
-      "idea": "The idea",
+      "useCases": "Use Cases",
+      "integrations": "Integrations",
       "preview": "Preview",
       "roadmap": "Roadmap",
-      "updates": "Updates",
-      "beta": "Become a beta tester",
-      "subscribe": "Subscribe to updates",
-      "allUpdates": "All updates",
-      "feedback": "Give feedback",
-      "imprint": "Legal notice",
-      "privacy": "Privacy policy"
+      "beta": "Become a Beta Tester",
+      "discord": "Discord",
+      "allUpdates": "All Updates",
+      "feedback": "Give Feedback",
+      "imprint": "Legal Notice",
+      "privacy": "Privacy Policy"
     },
-    "copyright": "© {year} Knecht - in development"
+    "copyright": "© {year} Knecht Works"
   }
 }

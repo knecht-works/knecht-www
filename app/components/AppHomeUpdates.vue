@@ -13,18 +13,11 @@ const { data: updates } = await useAsyncData(`home-updates-${locale.value}`, () 
     id="updates"
   >
     <div class="container pt-default ">
-      <!-- Heading -->
-      <AppReveal class="col-span-full max-w-2xl">
-        <AppEyebrow :label="$t('updates.eyebrow')" />
-
-        <h2 class="mt-6 text-balance text-highlighted">
-          {{ $t('updates.title') }}
-        </h2>
-
-        <p class="mt-5 text-pretty text-base leading-relaxed text-muted sm:text-lg">
-          {{ $t('updates.description') }}
-        </p>
-      </AppReveal>
+      <AppSectionHeading
+        :eyebrow="$t('updates.eyebrow')"
+        :title="$t('updates.title')"
+        :text="$t('updates.description')"
+      />
 
       <!-- Timeline -->
       <ol class="col-span-full border-t border-default mt-8 lg:mt-10">
