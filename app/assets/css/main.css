@@ -25,6 +25,8 @@
   --accent-orange: #fa7a2c;
   --accent-violet: #fcc46e;
   --accent-ink: #16220f;
+  --accent-discord: #5865f2;
+  --accent-jira: #2684ff;
 
 
   --container-margin-x: 1rem;
@@ -212,6 +214,41 @@ picture {
   opacity: 0.28;
 }
 
+/* ---------- motion for the home scenes ---------- */
+
+
+/* Integration flow: a dot travels along a connector line. `flow-x` for the
+   horizontal desktop layout, `flow-y` when the diagram stacks on mobile. */
+@keyframes flow-x {
+  0% {
+    left: 0;
+    opacity: 0;
+  }
+  10%,
+  90% {
+    opacity: 1;
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+
+@keyframes flow-y {
+  0% {
+    top: 0;
+    opacity: 0;
+  }
+  10%,
+  90% {
+    opacity: 1;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
 /* ---------- CTA accent glow ---------- */
 .cta-glow {
   position: absolute;
@@ -312,5 +349,15 @@ html.reveal-on .app-reveal-section {
 
   .slider-scrollbar::-webkit-scrollbar-thumb:hover {
     background: oklch(1 0 0 / 0.28);
+  }
+}
+
+/* Logo marquee: the track holds the list twice, so -50% loops seamlessly. */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
   }
 }
