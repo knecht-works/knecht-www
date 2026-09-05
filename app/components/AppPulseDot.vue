@@ -1,5 +1,5 @@
 <script setup lang="ts">
-type DotColor = 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'error' | 'neutral' | 'orange' | 'violet'
+type DotColor = 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'error' | 'neutral' | 'orange' | 'violet' | 'discord'
 
 const props = withDefaults(defineProps<{
   color?: DotColor
@@ -22,7 +22,8 @@ const colorClass = computed(() => ({
   neutral: 'text-muted',
   // Mascot accents (match the reference dot palette).
   orange: 'text-[var(--accent-orange)]',
-  violet: 'text-[var(--accent-violet)]'
+  violet: 'text-[var(--accent-violet)]',
+  discord: 'text-[var(--accent-discord)]'
 }[props.color]))
 </script>
 

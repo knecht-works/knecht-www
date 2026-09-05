@@ -4,8 +4,10 @@ withDefaults(defineProps<{
   label?: string
   /** Show the leading status dot. */
   dot?: boolean
+  dotColor?: 'primary' | 'discord'
 }>(), {
-  dot: true
+  dot: true,
+  dotColor: 'primary'
 })
 </script>
 
@@ -18,7 +20,7 @@ withDefaults(defineProps<{
   >
     <AppPulseDot
       v-if="dot"
-      color="primary"
+      :color="dotColor"
       :pulse="false"
     />
     <slot>{{ label }}</slot>

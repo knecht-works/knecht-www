@@ -17,7 +17,7 @@ export interface SocialLink {
 // Shown as icon links in the footer.
 export const SOCIAL_LINKS: SocialLink[] = [
   { label: 'GitHub', to: GITHUB_URL, icon: 'i-simple-icons-github' },
-  { label: 'Discord', to: 'https://discord.gg/WuxjmtgUyX', icon: 'i-simple-icons-discord' },
+  { label: 'Discord', to: DISCORD_URL, icon: 'i-simple-icons-discord' },
   { label: 'LinkedIn', to: 'https://www.linkedin.com/company/knecht-works/', icon: 'i-simple-icons-linkedin' },
   { label: 'E-Mail', to: `mailto:${CONTACT_EMAIL}`, icon: 'i-lucide-mail' }
 ]
