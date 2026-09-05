@@ -4,13 +4,9 @@
 defineProps<{
   title: string
   text: string
-  /** Renders the 36px source tile on the left. */
   source?: SourceKey
-  /** Inline icon before the title, used for results. */
   icon?: string
-  /** Color of the inline icon, as a CSS color value. */
   accent?: string
-  /** Dashed outline for triggers that are not tool integrations. */
   dashed?: boolean
 }>()
 </script>

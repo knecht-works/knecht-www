@@ -3,7 +3,6 @@
 // means spacing and type scale change in one place.
 defineProps<{
   title: string
-  /** Trailing part of the title, rendered in the primary color. */
   titleAccent?: string
   text?: string
 }>()

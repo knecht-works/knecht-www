@@ -3,9 +3,7 @@
 // large screens, vertical when the diagram stacks. The dot is hidden entirely
 // for reduced motion instead of sitting frozen at the start.
 withDefaults(defineProps<{
-  /** CSS color for the dot and its glow. */
   accent?: string
-  /** Animation offset in seconds, so two connectors do not pulse in sync. */
   delay?: number
 }>(), {
   accent: 'var(--accent-mint)',

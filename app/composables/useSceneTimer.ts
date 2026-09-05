@@ -1,19 +1,10 @@
 import type { MaybeRefOrGetter } from 'vue'
 
 interface SceneTimerOptions {
-  /** Milliseconds per tick. */
   stepMs?: number
-  /** Share of the target that has to be visible before the clock runs. */
   threshold?: number
 }
 
-/**
- * Clock for an animated scene on the home page. `tick` starts at 0 and increases
- * every `stepMs` while `target` is in the viewport and the tab is visible, so a
- * scene begins when the visitor reaches it and costs nothing while hidden. With
- * reduced motion the clock never starts and `frozen` tells the scene to render
- * its finished state instead.
- */
 export function useSceneTimer(target: MaybeRefOrGetter<HTMLElement | null | undefined>, { stepMs = 1500, threshold = 0.1 }: SceneTimerOptions = {}) {
   const tick = ref(0)
   const frozen = ref(false)
