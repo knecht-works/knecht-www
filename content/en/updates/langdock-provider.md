@@ -1,5 +1,5 @@
 ---
-title: Langdock as an AI provider
+title: Langdock as an AI Provider
 date: 2026-08-18
 tag: Engine
 description: The agent now also runs through Langdock. One API key covers GPT and Claude models, and every request stays in the EU or in the US.

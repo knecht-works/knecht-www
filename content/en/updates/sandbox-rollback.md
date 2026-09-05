@@ -1,5 +1,5 @@
 ---
-title: Back to the shared daemon, one preview for 180 MB
+title: Back to the Shared Daemon, One Preview for 180 MB
 date: 2026-07-26
 tag: Architecture
 description: The sandbox per run worked, and it used 3 GB of RAM per preview. This post explains why we removed it again and how we solve the old problems today.

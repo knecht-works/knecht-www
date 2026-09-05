@@ -1,5 +1,5 @@
 ---
-title: Why Knecht is not open source
+title: Why Knecht Is Not Open Source
 date: 2026-08-09
 tag: Project
 description: Knecht now has a license, the Functional Source License. This post explains what you can do with the code, why we did not select MIT, and how each version becomes open source after two years.

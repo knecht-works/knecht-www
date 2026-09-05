@@ -1,5 +1,5 @@
 ---
-title: Knecht now replies on GitHub
+title: Knecht Now Replies on GitHub
 date: 2026-08-17
 tag: Engine
 description: Every issue gets its own session with an environment and a conversation, the agent replies and labels directly in the thread, and a mention sends it back to work.

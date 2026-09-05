@@ -1,5 +1,5 @@
 ---
-title: From 5 seconds to under 0.5
+title: From 5 Seconds to Under 0.5
 date: 2026-06-12
 tag: Performance
 description: A deep dive into why CSS blur is one of the most expensive effects in the browser, and how a single filter made the landing page slow on mobile.

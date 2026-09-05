@@ -1,5 +1,5 @@
 ---
-title: The agent gets a memory per project
+title: The Agent Gets a Memory per Project
 date: 2026-08-14
 tag: Engine
 description: Until now the agent explored the project again in every run. Now Knecht remembers per project what the agent has learned.
