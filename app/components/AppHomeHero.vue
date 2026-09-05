@@ -10,6 +10,41 @@ const SCROLL_RANGE = 600 // px of scroll that maps to the full downward tilt
 const SHAKE_AMP = 13 // peak shake angle in degrees
 const SHAKE_FREQ = 32 // shake speed (rad/s) → ~3 head turns
 const SHAKE_DUR = 0.6 // seconds
+const GLANCE_DOWN = 15 // degrees the head lowers to look at the content below
+const GLANCE_OVERSHOOT = 3 // degrees it swings past neutral on the way back up
+const GLANCE_DELAY = 1200 // ms after mount, once the hero intro has settled
+
+// One-shot motions layered on top of the tracked tilt. Each returns the extra
+// angle at time t (seconds) and ends after `dur`.
+type Overlay = { dur: number, at: (t: number) => number }
+const shakeMotion: Overlay = {
+  dur: SHAKE_DUR,
+  at: t => SHAKE_AMP * Math.sin(t * SHAKE_FREQ) * (1 - t / SHAKE_DUR)
+}
+// Cubic ease-in-out for the glance segments.
+const ease = (x: number) => (x < 0.5 ? 4 * x * x * x : 1 - (-2 * x + 2) ** 3 / 2)
+// Interpolates between keyframes [time, angle] with eased segments.
+const keyframed = (frames: [number, number][]) => (t: number) => {
+  for (let i = 1; i < frames.length; i++) {
+    const [t0, a0] = frames[i - 1]!
+    const [t1, a1] = frames[i]!
+    if (t <= t1) return a0 + (a1 - a0) * ease((t - t0) / (t1 - t0))
+  }
+  return frames[frames.length - 1]![1]
+}
+// A deliberate glance down at the page, a short hold, then back up with a
+// small overshoot before settling.
+const glanceMotion: Overlay = {
+  dur: 2.0,
+  at: keyframed([
+    [0, 0],
+    [0.55, -GLANCE_DOWN],
+    [1.0, -GLANCE_DOWN],
+    [1.6, GLANCE_OVERSHOOT],
+    [2.0, 0]
+  ])
+}
+
 let triggerShake = () => {}
 const onMascotClick = () => triggerShake()
 
@@ -29,25 +64,24 @@ onMounted(() => {
   let curRot = 0
   let raf = 0
   let running = false
-  let shakeT0 = 0
-  let shaking = false
+  let overlay: Overlay | null = null
+  let overlayT0 = 0
 
   const tick = () => {
     curRot += (targetRot - curRot) * 0.12
 
-    // Damped "no" shake layered on top of the tracked tilt.
-    let shake = 0
-    if (shaking) {
-      const t = (performance.now() - shakeT0) / 1000
-      if (t >= SHAKE_DUR) {
-        shaking = false
+    let extra = 0
+    if (overlay) {
+      const t = (performance.now() - overlayT0) / 1000
+      if (t >= overlay.dur) {
+        overlay = null
       } else {
-        shake = SHAKE_AMP * Math.sin(t * SHAKE_FREQ) * (1 - t / SHAKE_DUR)
+        extra = overlay.at(t)
       }
     }
 
-    el.style.transform = `rotate(${(curRot + shake).toFixed(2)}deg)`
-    if (Math.abs(targetRot - curRot) > 0.01 || shaking) {
+    el.style.transform = `rotate(${(curRot + extra).toFixed(2)}deg)`
+    if (Math.abs(targetRot - curRot) > 0.01 || overlay) {
       raf = requestAnimationFrame(tick)
     } else {
       running = false
@@ -60,11 +94,16 @@ onMounted(() => {
     }
   }
 
-  triggerShake = () => {
-    shakeT0 = performance.now()
-    shaking = true
+  const play = (motion: Overlay) => {
+    overlay = motion
+    overlayT0 = performance.now()
     kick()
   }
+
+  triggerShake = () => play(shakeMotion)
+
+  // Greet the visitor once the hero has faded in.
+  const glanceTimer = window.setTimeout(() => play(glanceMotion), GLANCE_DELAY)
 
   let cleanup: () => void
 
@@ -101,6 +140,7 @@ onMounted(() => {
   onBeforeUnmount(() => {
     triggerShake = () => {}
     cleanup()
+    window.clearTimeout(glanceTimer)
     cancelAnimationFrame(raf)
   })
 })
