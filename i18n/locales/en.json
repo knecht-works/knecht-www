@@ -76,124 +76,124 @@
       "succeeded": "Succeeded"
     },
     "items": {
-      "security": {
+      "update": {
         "source": "Cron Job",
-        "workflow": "Security Update Workflow",
-        "title": "A Security Update with the Database Running.",
-        "text": "A patch for your CMS comes out. Knecht boots each affected project with its database, installs the update, runs the migrations, and commits everything that comes out of it.",
+        "workflow": "Craft Update & Link Check",
+        "title": "The CMS Update with the Database Running.",
+        "text": "Every Monday, Knecht boots the project with its database, installs Craft and plugin updates, runs the migrations, and checks every link on the preview. If there is nothing to update, the run ends without a PR.",
         "before": "Dependabot opens a PR without the migration files. Someone has to boot locally, migrate, and commit again.",
-        "after": "Update, migrations, and preview in one run. The PR is complete when it opens.",
+        "after": "Update, migrations, and link check in one run. The PR is complete when it opens.",
         "steps": {
           "trigger": {
             "label": "Trigger",
-            "title": "Security advisory detected",
-            "detail": "Patch for craftcms/cms, 6 projects affected"
+            "title": "Schedule fires",
+            "detail": "Monday 06:00, project craft-shop"
           },
           "boot": {
             "label": "Boot",
-            "title": "Project starts with database",
-            "detail": "Web, database, and Redis are up"
+            "title": "Project boots with database",
+            "detail": "ddev composer install, DB dump imported"
           },
           "update": {
-            "label": "Update",
-            "title": "composer update + migrations",
-            "detail": "3 migrations applied, project.yaml changed"
+            "label": "Shell",
+            "title": "ddev craft update all",
+            "detail": "craftcms/cms 5.10.1 → 5.10.2, 3 migrations applied"
           },
-          "test": {
-            "label": "Test",
-            "title": "Preview & smoke test",
-            "detail": "Link checker green, preview online"
+          "links": {
+            "label": "Links",
+            "title": "Link check on the preview",
+            "detail": "142 pages checked, 0 broken"
           },
           "result": {
-            "label": "Result",
-            "title": "Pull request open",
-            "detail": "PR #84 with 4 changed files and a preview link"
+            "label": "PR",
+            "title": "Branch, commit, pull request",
+            "detail": "knecht/craft-update-1042, PR #84"
           }
         },
         "out": {
-          "head": "Pull request #84 on knecht/84",
-          "body": "Update craftcms/cms 5.10.1 → 5.10.2. Migrations applied, project.yaml updated. Preview runs with a real database.",
-          "link": "84.preview.knecht.works →"
+          "head": "Pull request #84 on knecht/craft-update-1042",
+          "body": "Update Craft CMS and plugins (run 1042). Link check after the update, 0 of 142 pages broken. Preview runs with a real database.",
+          "link": "Preview: 84.preview.knecht.works"
         }
       },
       "estimate": {
         "source": "Jira Ticket",
-        "workflow": "Ticket Estimate Workflow",
+        "workflow": "Ticket Estimate",
         "title": "Estimate a Ticket Before Anyone Spends Time on It.",
-        "text": "A new Jira ticket gets the label \"knecht-estimate\". Knecht reads the code in the live project, finds the cause, and writes effort, risk, and a suggested fix as a comment in the ticket.",
+        "text": "A Jira ticket gets the label \"knecht-estimate\". Knecht boots the project, reproduces the problem in the preview, reads the code, and writes effort, risk, and a suggested fix as a comment in the ticket.",
         "before": "The ticket waits for the next planning. The estimate is a gut feeling.",
         "after": "An assessment in minutes, based on the real code, directly as a comment in the ticket.",
         "steps": {
           "trigger": {
             "label": "Trigger",
-            "title": "New Jira ticket",
+            "title": "Ticket gets label knecht-estimate",
             "detail": "KAN-231, newsletter form sends twice"
           },
           "boot": {
             "label": "Boot",
-            "title": "Project starts",
-            "detail": "Environment up with test data"
+            "title": "Project boots",
+            "detail": "Environment up with DB dump"
           },
           "analyze": {
-            "label": "Analysis",
-            "title": "Knecht reads code & reproduces",
-            "detail": "Form handler, queue, and 2 templates affected"
+            "label": "AI",
+            "title": "Agent reproduces in the preview",
+            "detail": "Form submitted, duplicate listener in newsletter.js"
           },
           "assess": {
-            "label": "Assessment",
-            "title": "Effort & risk",
-            "detail": "About 3 hours, low risk, one module"
+            "label": "AI",
+            "title": "Effort & risk as output",
+            "detail": "effort: 3 h, risk: low, summary with suggestion"
           },
           "result": {
-            "label": "Result",
-            "title": "Comment in the ticket",
-            "detail": "Assessment, suggestion, and the offer to fix it"
+            "label": "HTTP",
+            "title": "Comment via Jira API",
+            "detail": "POST issue/KAN-231/comment"
           }
         },
         "out": {
           "head": "Comment in KAN-231",
-          "body": "Cause: duplicate event listener in newsletter.js. Effort ≈ 3 h, low risk. Suggestion: centralize the listener in init(). Should I prepare the fix as a PR?",
-          "link": "231.preview.knecht.works →"
+          "body": "The cause is a duplicate event listener in newsletter.js. Effort about 3 hours, low risk, one module affected. Suggestion is to centralize the listener in init().",
+          "link": "Preview: 231.preview.knecht.works"
         }
       },
       "fix": {
         "source": "GitHub Issue",
-        "workflow": "Bug Fix Workflow",
+        "workflow": "Bug Fix",
         "title": "Fix the Bug from the Issue, Tested Against the Real App.",
-        "text": "An issue gets the label \"knecht-fix\". Knecht boots the project, reproduces the bug in the preview, fixes it, and opens a pull request with a preview link you can click through.",
+        "text": "An issue gets the label \"knecht-fix\". Knecht boots the project, the agent reproduces the bug in the preview and fixes it, the tests run, and a pull request with a preview link opens at the end.",
         "before": "A coding agent guesses blindly whether the fix works. You have to test it yourself.",
         "after": "The agent sees the live app, reproduces the bug, and tests the fix against it.",
         "steps": {
           "trigger": {
             "label": "Trigger",
-            "title": "Issue with label knecht-fix",
+            "title": "Issue gets label knecht-fix",
             "detail": "#19, dark mode is broken on this site"
           },
           "boot": {
             "label": "Boot",
-            "title": "Project starts",
+            "title": "Project boots",
             "detail": "Environment up, dependencies installed"
           },
           "fix": {
-            "label": "Fix",
+            "label": "AI",
             "title": "Agent reproduces & fixes",
-            "detail": "2 commits on knecht/19, 4 files"
+            "detail": "Bug replayed in the preview, 4 files changed"
           },
           "test": {
-            "label": "Test",
-            "title": "Tested against the live app",
-            "detail": "Theme script tested, contrast checked"
+            "label": "Shell",
+            "title": "ddev npm test",
+            "detail": "12 tests green"
           },
           "result": {
-            "label": "Result",
-            "title": "PR #20 with preview",
-            "detail": "Comment in the issue with a preview link"
+            "label": "PR",
+            "title": "Commit & pull request",
+            "detail": "PR #20 with preview link, reply in the issue"
           }
         },
         "out": {
           "head": "knecht-works-bot commented on #19",
-          "body": "Pushed and opened as PR #20 for review. Two commits on knecht/19, one per concern. 4 files, no dependencies, no config changes.",
-          "link": "PR #20 and 133.preview.knecht.works →"
+          "body": "The fix is open as PR #20. The data-theme attribute was missing on reload, 4 files changed, tests green. You can click through it in the preview.",
+          "link": "PR #20 and 133.preview.knecht.works"
         }
       }
     }
