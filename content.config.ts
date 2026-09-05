@@ -13,6 +13,11 @@ const updateSchema = z.object({
   description: z.string().optional()
 })
 
+const docsSchema = z.object({
+  title: z.string(),
+  description: z.string().optional()
+})
+
 // One collection per locale, suffixed with the locale code. `prefix` mirrors
 // the i18n route prefix (`prefix_except_default`, default `en`), so a content
 // item's path is identical to the route that renders it and queries can pass
@@ -38,5 +43,13 @@ export const collections = {
     type: 'page',
     source: { include: 'de/updates/**', prefix: '/de/updates' },
     schema: updateSchema
+  }),
+  // Docs exist in English only and are served unprefixed under /docs. Folder
+  // numbering (1.getting-started) and .navigation.yml files drive the sidebar
+  // order, following the Docus content schema.
+  docs_en: defineCollection({
+    type: 'page',
+    source: { include: 'en/docs/**', prefix: '/docs' },
+    schema: docsSchema
   })
 }
