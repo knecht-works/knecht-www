@@ -89,7 +89,7 @@ const labelClass: Record<StepState, string> = {
     <ol class="flex flex-col gap-2 p-3 sm:p-4.5">
       <li
         v-for="(step, i) in steps"
-        :key="step.label"
+        :key="i"
         class="flex items-center gap-3 rounded-lg border px-3 py-3 transition-all duration-400 sm:gap-3.5 sm:px-3.5"
         :class="rowClass[stateOf(i)]"
       >
@@ -132,7 +132,7 @@ const labelClass: Record<StepState, string> = {
       :class="done ? 'translate-y-0 opacity-100' : 'translate-y-2.5 opacity-0'"
       :aria-hidden="!done"
     >
-      <div class="flex items-center gap-2.5 text-xs font-medium text-primary">
+      <div class="flex items-center gap-2.5 text-sm font-semibold text-primary">
         <AppSourceMark :source="source" />
         <span class="truncate">{{ out.head }}</span>
       </div>

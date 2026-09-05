@@ -4,7 +4,7 @@
 const { t } = useI18n()
 
 const caseMeta: { key: string, source: SourceKey, steps: string[], flip?: boolean }[] = [
-  { key: 'security', source: 'cron', steps: ['trigger', 'boot', 'update', 'test', 'result'] },
+  { key: 'update', source: 'cron', steps: ['trigger', 'boot', 'update', 'links', 'result'] },
   { key: 'estimate', source: 'jira', steps: ['trigger', 'boot', 'analyze', 'assess', 'result'], flip: true },
   { key: 'fix', source: 'github', steps: ['trigger', 'boot', 'fix', 'test', 'result'] }
 ]
