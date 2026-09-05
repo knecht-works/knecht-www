@@ -112,17 +112,27 @@ onMounted(() => {
     if (p.status === 'done') lastDone = i
   })
 
-  const card = lastDone > 0 ? (track.children[lastDone] as HTMLElement | undefined) : undefined
+  // Layout is final once the component is mounted, so no rAF is needed. It would
+  // also never fire while the page loads in a background tab.
+  const styles = getComputedStyle(track)
+  const padLeft = parseFloat(styles.paddingInlineStart) || 0
+  const padRight = parseFloat(styles.paddingInlineEnd) || 0
+  const first = track.children[0] as HTMLElement | undefined
+  const gap = 16 // gap-4
+  const perView = first ? Math.floor((track.clientWidth - padLeft - padRight + gap) / (first.offsetWidth + gap)) : 1
 
-  requestAnimationFrame(() => {
-    if (card) {
-      // Align the card to the content edge (track's inner padding), not the bled-out
-      // border edge.
-      const padLeft = parseFloat(getComputedStyle(track).paddingInlineStart) || 0
-      track.scrollLeft += card.getBoundingClientRect().left - track.getBoundingClientRect().left - padLeft
-    }
-    updateArrows()
-  })
+  // Start at the last finished phase. With room for three or more cards, start
+  // one card earlier so two finished phases stay visible next to the work in
+  // progress.
+  const startIndex = Math.max(0, perView >= 3 ? lastDone - 1 : lastDone)
+  const card = startIndex > 0 ? (track.children[startIndex] as HTMLElement | undefined) : undefined
+
+  if (card) {
+    // Align the card to the content edge (track's inner padding), not the bled-out
+    // border edge.
+    track.scrollLeft += card.getBoundingClientRect().left - track.getBoundingClientRect().left - padLeft
+  }
+  updateArrows()
 })
 </script>
 
