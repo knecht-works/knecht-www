@@ -7,6 +7,7 @@ export default defineNuxtConfig({
     '@nuxt/ui',
     '@nuxtjs/seo',
     'nuxt-llms',
+    '@comark/nuxt',
     'motion-v/nuxt',
     '@nuxtjs/i18n'
   ],
@@ -69,6 +70,8 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     resendApiKey: '',
+    anthropicApiKey: '',
+    assistantModel: 'claude-sonnet-5',
     // Optional: raises the GitHub API rate limit for /api/github.
     githubToken: '',
     // Admin notification on new signups. Empty disables the notification.
@@ -81,6 +84,9 @@ export default defineNuxtConfig({
   },
 
   routeRules: {
+    // The docs root has no page of its own. Not prerendered, so the redirect
+    // lands in Cloudflare's _redirects instead of an empty static file.
+    '/docs': { redirect: { to: '/docs/getting-started/introduction', statusCode: 301 }, prerender: false },
     '/_ipx/**': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
     // Long-lived cache for static assets. Filenames are stable, so bump the name
     // (or add ?v=) when you replace an asset, otherwise returning visitors keep
@@ -108,6 +114,7 @@ export default defineNuxtConfig({
             '/styleguide/*',
             '/raw/*',
             '/updates/*',
+            '/docs/*',
             '/datenschutz/*',
             '/impressum/*',
             '/de',
@@ -129,6 +136,8 @@ export default defineNuxtConfig({
       // English pages, so crawlLinks alone would never find it.
       routes: [
         '/',
+        // Entry point for the docs crawl, /docs itself only redirects here.
+        '/docs/getting-started/introduction',
         '/updates',
         '/impressum',
         '/datenschutz',
@@ -143,9 +152,12 @@ export default defineNuxtConfig({
   vite: {
     optimizeDeps: {
       include: [
+        '@ai-sdk/vue',
+        '@comark/vue',
         '@unhead/schema-org/vue',
         '@vue/devtools-core',
-        '@vue/devtools-kit'
+        '@vue/devtools-kit',
+        'ai'
       ]
     }
   },
@@ -199,6 +211,14 @@ export default defineNuxtConfig({
     },
     sections: [
       {
+        title: 'Docs',
+        description: 'Product documentation.',
+        contentCollection: 'docs_en',
+        contentFilters: [
+          { field: 'extension', operator: '=', value: 'md' }
+        ]
+      },
+      {
         title: 'Legal (EN)',
         description: 'Legal pages',
         contentCollection: 'pages_en',
@@ -233,7 +253,13 @@ export default defineNuxtConfig({
     ]
   },
 
-  ogImage: { zeroRuntime: true },
+  ogImage: {
+    zeroRuntime: true,
+    // The prerenderer requests every OG image at once and the renderer works
+    // through them one by one. Queue time counts against this timeout, so the
+    // 15 s default fails the build once the site has a few dozen pages.
+    security: { renderTimeout: 120_000 }
+  },
 
   sitemap: {
     sources: ['/api/__sitemap__/urls']
