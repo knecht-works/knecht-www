@@ -6,7 +6,7 @@ defineProps<{
   text: string
   source?: SourceKey
   icon?: string
-  accent?: string
+  iconClass?: string
   dashed?: boolean
 }>()
 </script>
@@ -23,12 +23,12 @@ defineProps<{
     />
 
     <div class="min-w-0">
-      <div class="flex items-center gap-2 text-[15px] font-semibold text-highlighted">
+      <div class="flex items-center gap-2 font-semibold text-highlighted">
         <UIcon
           v-if="icon"
           :name="icon"
           class="size-4 shrink-0"
-          :style="accent ? { color: accent } : undefined"
+          :class="iconClass"
         />
         {{ title }}
       </div>

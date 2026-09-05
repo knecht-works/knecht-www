@@ -10,9 +10,9 @@ const triggerMeta: { key: string, source: SourceKey, dashed?: boolean }[] = [
 ]
 
 const resultMeta = [
-  { key: 'pr', icon: 'i-lucide-git-pull-request', accent: 'var(--accent-mint)' },
-  { key: 'preview', icon: 'i-lucide-globe', accent: 'var(--accent-orange)' },
-  { key: 'comment', icon: 'i-lucide-message-square-text', accent: 'var(--accent-violet)' }
+  { key: 'pr', icon: 'i-lucide-git-pull-request', iconClass: 'text-accent-mint' },
+  { key: 'preview', icon: 'i-lucide-globe', iconClass: 'text-accent-orange' },
+  { key: 'comment', icon: 'i-lucide-message-square-text', iconClass: 'text-accent-violet' }
 ]
 
 const triggers = computed(() => triggerMeta.map(item => ({
@@ -39,11 +39,11 @@ const results = computed(() => resultMeta.map(item => ({
       <AppReveal
         :delay="0.08"
         :y="22"
-        class="shadow-panel col-span-full mt-10 flex flex-col rounded-2xl border border-default bg-muted p-5 sm:p-8 lg:mt-12 lg:grid lg:grid-cols-[minmax(0,1fr)_60px_minmax(0,1.1fr)_60px_minmax(0,1fr)] lg:items-center lg:p-10"
+        class="shadow-panel col-span-full mt-10 flex flex-col rounded-2xl border border-default bg-muted p-5 sm:p-8 lg:mt-12 lg:grid lg:integration-grid lg:items-center lg:p-10"
       >
         <!-- Triggers -->
         <div class="flex flex-col gap-3">
-          <span class="font-mono text-[11px] uppercase tracking-[0.12em] text-dimmed">
+          <span class="font-mono text-2xs uppercase tracking-widest text-dimmed">
             {{ $t('integrations.triggerLabel') }}
           </span>
           <AppFlowCard
@@ -56,10 +56,10 @@ const results = computed(() => resultMeta.map(item => ({
           />
         </div>
 
-        <AppFlowConnector accent="var(--accent-mint)" />
+        <AppFlowConnector />
 
         <!-- Knecht -->
-        <div class="relative rounded-2xl border border-primary/35 bg-[linear-gradient(180deg,color-mix(in_oklab,var(--accent-mint)_8%,transparent),color-mix(in_oklab,var(--accent-mint)_2%,transparent))] px-5 py-7 text-center [box-shadow:0_0_60px_-20px_color-mix(in_oklab,var(--accent-mint)_35%,transparent)] sm:px-6">
+        <div class="knecht-node relative rounded-2xl border border-primary/35 px-5 py-7 text-center sm:px-6">
           <NuxtImg
             :src="'/assets/mascotMain.png'"
             alt=""
@@ -67,7 +67,7 @@ const results = computed(() => resultMeta.map(item => ({
             height="240"
             format="webp"
             loading="lazy"
-            class="mx-auto h-[120px] w-auto select-none [filter:drop-shadow(0_16px_24px_oklch(0_0_0/0.6))]"
+            class="drop-shadow-mascot mx-auto h-30 w-auto select-none"
           />
           <div class="mt-3.5 text-lg font-semibold text-highlighted">
             {{ $t('integrations.center.title') }}
@@ -81,20 +81,20 @@ const results = computed(() => resultMeta.map(item => ({
         </div>
 
         <AppFlowConnector
-          accent="var(--accent-orange)"
+          accent="orange"
           :delay="1.2"
         />
 
         <!-- Results -->
         <div class="flex flex-col gap-3">
-          <span class="font-mono text-[11px] uppercase tracking-[0.12em] text-dimmed">
+          <span class="font-mono text-2xs uppercase tracking-widest text-dimmed">
             {{ $t('integrations.resultLabel') }}
           </span>
           <AppFlowCard
             v-for="item in results"
             :key="item.key"
             :icon="item.icon"
-            :accent="item.accent"
+            :icon-class="item.iconClass"
             :title="item.title"
             :text="item.text"
           />

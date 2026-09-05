@@ -21,9 +21,9 @@ const colorClass = computed(() => ({
   error: 'text-error',
   neutral: 'text-muted',
   // Mascot accents (match the reference dot palette).
-  orange: 'text-[var(--accent-orange)]',
-  violet: 'text-[var(--accent-violet)]',
-  discord: 'text-[var(--accent-discord)]'
+  orange: 'text-accent-orange',
+  violet: 'text-accent-violet',
+  discord: 'text-accent-discord'
 }[props.color]))
 </script>
 
@@ -35,7 +35,7 @@ const colorClass = computed(() => ({
     />
     <span
       class="relative inline-flex size-1.5 rounded-full bg-current"
-      :class="glow && '[box-shadow:0_0_8px_currentColor]'"
+      :class="glow && 'shadow-glow'"
     />
   </span>
 </template>

@@ -28,11 +28,11 @@ defineProps<{
         {{ sourceLabel }}
       </AppBadge>
 
-      <h3 class="mt-5 text-balance text-[clamp(1.5rem,2vw,1.875rem)] leading-[1.2] tracking-[-0.02em] text-highlighted">
+      <h3 class="mt-5 text-balance text-2xl leading-tight tracking-tight text-highlighted sm:text-3xl">
         {{ title }}
       </h3>
 
-      <p class="mt-4 max-w-xl text-pretty text-base leading-relaxed text-muted sm:text-[17px]">
+      <p class="mt-4 max-w-xl text-pretty text-base leading-relaxed text-muted sm:text-lg">
         {{ text }}
       </p>
 
