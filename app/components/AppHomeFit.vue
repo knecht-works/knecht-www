@@ -42,9 +42,7 @@ const noFits = [
     <div class="container pt-default">
       <!-- Heading -->
       <AppReveal class="col-span-full max-w-2xl">
-        <AppEyebrow label="Für wen" />
-
-        <h2 class="mt-6 text-balance text-highlighted">
+        <h2 class="text-balance text-highlighted">
           Gebaut für den Agentur-Alltag.
         </h2>
 

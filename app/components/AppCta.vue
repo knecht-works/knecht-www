@@ -93,9 +93,7 @@ const submit = async () => {
 
           <!-- Content -->
           <div class="flex-1">
-            <AppEyebrow :label="$t('cta.eyebrow')" />
-
-            <h2 class="mt-6 text-balance text-highlighted">
+            <h2 class="text-balance text-highlighted">
               {{ $t('cta.title') }}
             </h2>
 

@@ -54,11 +54,7 @@ defineOgImage('Knecht', {
         Zur Startseite
       </NuxtLinkLocale>
 
-      <div class="mt-8">
-        <AppEyebrow label="Updates" />
-      </div>
-
-      <h1 class="mt-6 text-balance text-highlighted">
+      <h1 class="mt-8 text-balance text-highlighted">
         Building in Public.
       </h1>
 

@@ -32,7 +32,6 @@ const results = computed(() => resultMeta.map(item => ({
   <section id="integrations">
     <div class="container pt-default">
       <AppSectionHeading
-        :eyebrow="$t('integrations.eyebrow')"
         :title="$t('integrations.title')"
         :text="$t('integrations.intro')"
       />
