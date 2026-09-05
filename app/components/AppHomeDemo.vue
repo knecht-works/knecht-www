@@ -3,28 +3,28 @@ const { t } = useI18n()
 
 const tabMeta = [
   {
-    id: 'projects',
+    id: 'projekte',
     labelKey: 'demo.tabs.projects',
     image: '/assets/dashboard.png',
-    url: 'app.knecht.works/projekte'
+    url: '/projekte'
   },
   {
     id: 'detail',
     labelKey: 'demo.tabs.detail',
-    image: '/assets/knecht-project-triggers-in-action.png',
-    url: 'app.knecht.works/projekte/test-craftcms'
+    image: '/assets/project.png',
+    url: '/projekte/test-craftcms'
   },
   {
-    id: 'running',
-    labelKey: 'demo.tabs.running',
+    id: 'workflow',
+    labelKey: 'demo.tabs.workflow',
+    image: '/assets/workflow.png',
+    url: '/workflows/bug-fix'
+  },
+  {
+    id: 'running-workflow',
+    labelKey: 'demo.tabs.runningWorkflow',
     image: '/assets/running-workflow.png',
-    url: 'app.knecht.works/workflows/bug-fix'
-  },
-  {
-    id: 'result',
-    labelKey: 'demo.tabs.result',
-    image: '/assets/issue-enhancement-finished.png',
-    url: 'github.com/knecht-works/test-craftcms/issues/19'
+    url: '/workflows/bug-fix'
   }
 ]
 

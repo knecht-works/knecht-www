@@ -205,8 +205,8 @@
     "tabs": {
       "projects": "Projekte",
       "detail": "Projekt-Detail",
-      "running": "Workflow läuft",
-      "result": "Ergebnis in GitHub"
+      "workflow": "Workflow-Editor",
+      "runningWorkflow": "Test Workflows"
     },
     "imageAlt": "Knecht {label} Vorschau"
   },
