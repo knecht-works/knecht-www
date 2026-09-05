@@ -21,20 +21,23 @@ onBeforeUnmount(() => {
 
 const { t } = useI18n()
 
-const baseItems = [
+// Docs exist in English only, so their link stays unlocalized.
+const baseItems: { labelKey: string, to: string, localized?: boolean }[] = [
   { labelKey: 'header.nav.integrations', to: '/#integrations' },
   { labelKey: 'header.nav.useCases', to: '/#use-cases' },
-  { labelKey: 'header.nav.preview', to: '/#dashboard' },
-  { labelKey: 'header.nav.roadmap', to: '/#roadmap' },
-  { labelKey: 'header.nav.updates', to: '/updates' }
+  { labelKey: 'header.nav.updates', to: '/updates' },
+  { labelKey: 'header.nav.docs', to: '/docs', localized: false }
 ]
 
 const items = computed<NavigationMenuItem[]>(() =>
   baseItems.map((item) => {
-    const to = localePath(item.to)
+    const to = item.localized === false ? item.to : localePath(item.to)
     return {
       label: t(item.labelKey),
       to,
+      // ULink runs string links through localePath again. Unlocalized routes
+      // like /docs resolve to '' there, which degrades the link to a button.
+      locale: item.localized,
       active: isActive(to),
       class: isActive(to) ? 'text-highlighted' : undefined
     }
@@ -76,7 +79,14 @@ const items = computed<NavigationMenuItem[]>(() =>
     />
 
     <template #right>
-      <AppGithubStars />
+      <!-- Quiet ghost controls first, the single solid CTA last. -->
+      <AssistantButton />
+      <UContentSearchButton
+        variant="ghost"
+        :aria-label="$t('header.search')"
+      />
+      <!-- Phones are too narrow for the star count, it moves into the menu. -->
+      <AppGithubStars class="hidden sm:flex" />
       <UButton
         :label="$t('header.cta')"
         color="neutral"
@@ -102,6 +112,7 @@ const items = computed<NavigationMenuItem[]>(() =>
         class="mt-4"
         :to="localePath('/updates/beta-tester?signup=beta')"
       />
+      <AppGithubStars class="sm:hidden mt-4 justify-center" />
     </template>
   </UHeader>
 </template>

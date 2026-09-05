@@ -9,9 +9,11 @@
       "integrations": "Integrations",
       "preview": "Preview",
       "roadmap": "Roadmap",
-      "updates": "Updates"
+      "updates": "Updates",
+      "docs": "Docs"
     },
-    "cta": "Become a Beta Tester"
+    "cta": "Become a Beta Tester",
+    "search": "Search"
   },
   "hero": {
     "status": "Beta",
@@ -382,5 +384,51 @@
       "privacy": "Privacy Policy"
     },
     "copyright": "© {year} Knecht Works"
+  },
+  "assistant": {
+    "name": "Knecht",
+    "ask": "Ask Knecht",
+    "beta": "Beta",
+    "placeholder": "Ask anything…",
+    "newChat": "New chat",
+    "close": "Close",
+    "usingPage": "Agent is using",
+    "stopContext": "Stop using this page as context",
+    "useContext": "Use page as context",
+    "copy": "Copy",
+    "copied": "Copied",
+    "copyResponse": "Copy response",
+    "regenerate": "Regenerate",
+    "status": [
+      "Thinking...",
+      "Reading docs...",
+      "Writing..."
+    ],
+    "faq": [
+      {
+        "category": "Getting started",
+        "items": [
+          "What is Knecht and who is it for?",
+          "How do I install Knecht on my server?",
+          "How do I connect my first repository?"
+        ]
+      },
+      {
+        "category": "Concepts",
+        "items": [
+          "What is a workflow made of?",
+          "What do agents do inside a workflow?",
+          "What is a preview?"
+        ]
+      },
+      {
+        "category": "Project",
+        "items": [
+          "What is the current state of Knecht?",
+          "How can I join the beta?",
+          "Which integrations does Knecht support?"
+        ]
+      }
+    ]
   }
 }

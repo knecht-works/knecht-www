@@ -9,9 +9,11 @@
       "integrations": "Integrationen",
       "preview": "Vorschau",
       "roadmap": "Roadmap",
-      "updates": "Updates"
+      "updates": "Updates",
+      "docs": "Docs"
     },
-    "cta": "Beta-Tester werden"
+    "cta": "Beta-Tester werden",
+    "search": "Suche"
   },
   "hero": {
     "status": "Beta",
@@ -221,7 +223,7 @@
         "text": "v0.7.0 ist raus. Jira-Trigger können jetzt Labels filtern."
       },
       "b": {
-       "name": "Matthias",
+        "name": "Matthias",
         "time": "heute 09:40",
         "text": "Erster Security-Update-Run über 6 Craft-Projekte durch. Alle PRs grün 🎉"
       },
@@ -382,5 +384,51 @@
       "privacy": "Datenschutz"
     },
     "copyright": "© {year} Knecht Works"
+  },
+  "assistant": {
+    "name": "Knecht",
+    "ask": "Frag Knecht",
+    "beta": "Beta",
+    "placeholder": "Frag etwas…",
+    "newChat": "Neuer Chat",
+    "close": "Schließen",
+    "usingPage": "Agent nutzt",
+    "stopContext": "Diese Seite nicht mehr als Kontext nutzen",
+    "useContext": "Seite als Kontext nutzen",
+    "copy": "Kopieren",
+    "copied": "Kopiert",
+    "copyResponse": "Antwort kopieren",
+    "regenerate": "Neu generieren",
+    "status": [
+      "Denkt nach...",
+      "Liest die Docs...",
+      "Schreibt..."
+    ],
+    "faq": [
+      {
+        "category": "Erste Schritte",
+        "items": [
+          "Was ist Knecht und für wen ist es?",
+          "Wie installiere ich Knecht auf meinem Server?",
+          "Wie verbinde ich mein erstes Repository?"
+        ]
+      },
+      {
+        "category": "Konzepte",
+        "items": [
+          "Woraus besteht ein Workflow?",
+          "Was machen Agents in einem Workflow?",
+          "Was ist eine Preview?"
+        ]
+      },
+      {
+        "category": "Projekt",
+        "items": [
+          "Wie ist der aktuelle Stand von Knecht?",
+          "Wie kann ich Beta-Tester werden?",
+          "Welche Integrationen unterstützt Knecht?"
+        ]
+      }
+    ]
   }
 }

@@ -2,6 +2,9 @@
 // Shared page chrome: background field, header and footer. Used by every layout
 // so the visual frame stays identical no matter the content arrangement.
 
+// Docs pages hide the marketing CTA between content and footer.
+withDefaults(defineProps<{ cta?: boolean }>(), { cta: true })
+
 // Scroll-spy for the home sections, mounted once here so the nav + footer can
 // reflect the active section.
 useSectionSpy()
@@ -19,20 +22,32 @@ useSectionSpy()
     </div>
 
     <MotionConfig :reduced-motion="'user'">
-      <div class="relative z-10">
-        <AppLocaleNotice />
+      <!-- The docked assistant panel sits next to the page column and pushes
+           it aside, so the page keeps its own scroll and the header stays
+           within its column. -->
+      <div class="relative z-10 flex">
+        <div class="min-w-0 flex-1">
+          <AppLocaleNotice />
 
-        <AppHeader />
+          <AppHeader />
 
-        <UMain>
-          <slot />
-        </UMain>
+          <UMain>
+            <slot />
+          </UMain>
 
-        <!-- Site-wide CTA, shown at the bottom of every page above the footer. -->
-        <AppCta />
+          <!-- Site-wide CTA, shown at the bottom of every page above the footer. -->
+          <AppCta v-if="cta" />
 
-        <AppFooter />
+          <AppFooter />
+        </div>
+
+        <ClientOnly>
+          <LazyAssistantFloatingInput />
+          <LazyAssistantPanel />
+        </ClientOnly>
       </div>
     </MotionConfig>
+
+    <AppSearch />
   </div>
 </template>
