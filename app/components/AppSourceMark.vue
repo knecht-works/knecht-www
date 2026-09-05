@@ -1,7 +1,6 @@
 <script setup lang="ts">
 withDefaults(defineProps<{
   source: SourceKey
-  /** sm = inline 18px mark in pills, md = 36px tile in cards. */
   size?: 'sm' | 'md'
 }>(), {
   size: 'sm'
