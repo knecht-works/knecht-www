@@ -216,17 +216,17 @@
     "cta": "Discord beitreten",
     "messages": {
       "a": {
-        "name": "samuel",
+        "name": "Samuel",
         "time": "heute 09:12",
         "text": "v0.7.0 ist raus. Jira-Trigger können jetzt Labels filtern."
       },
       "b": {
-        "name": "nina.dev",
+       "name": "Matthias",
         "time": "heute 09:40",
         "text": "Erster Security-Update-Run über 6 Craft-Projekte durch. Alle PRs grün 🎉"
       },
       "c": {
-        "name": "tobi",
+        "name": "Bruno",
         "time": "heute 10:03",
         "text": "Frage: kann der Estimate-Workflow auch auf GitHub Issues laufen?"
       }
