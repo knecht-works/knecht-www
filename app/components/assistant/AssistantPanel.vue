@@ -6,8 +6,7 @@ const {
   isDockedBreakpoint,
   currentPage,
   pageContextDismissed,
-  pendingPrompt,
-  mood
+  pendingPrompt
 } = useAssistant()
 const route = useRoute()
 
@@ -65,22 +64,7 @@ defineShortcuts({
     :docked="isDockedBreakpoint"
   >
     <template #title>
-      <span class="inline-flex items-center gap-2 min-w-0">
-        <span class="assistant-pop-in inline-flex">
-          <AssistantIcon
-            class="size-5 shrink-0"
-            :mood="mood"
-          />
-        </span>
-        <span class="truncate">{{ $t('assistant.name') }}</span>
-        <UBadge
-          variant="subtle"
-          size="sm"
-          class="shrink-0"
-        >
-          {{ $t('assistant.beta') }}
-        </UBadge>
-      </span>
+      <AppLogo />
     </template>
 
     <template #actions>
@@ -116,18 +100,3 @@ defineShortcuts({
     <AssistantPanelChat :key="chatKey" />
   </AssistantPanelShell>
 </template>
-
-<style scoped>
-.assistant-pop-in {
-  animation: assistant-pop-in 0.3s ease-out 0.1s both;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .assistant-pop-in { animation: none; }
-}
-
-@keyframes assistant-pop-in {
-  from { opacity: 0; transform: scale(0.5); filter: blur(4px); }
-  to { opacity: 1; transform: scale(1); filter: blur(0); }
-}
-</style>

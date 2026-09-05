@@ -26,7 +26,7 @@ export function useAssistant() {
     FLOATING_INPUT_SECTIONS.some(section => route.path === section || route.path.startsWith(`${section}/`))
   )
 
-  const isDockedBreakpoint = useMediaQuery('(min-width: 1280px)')
+  const isDockedBreakpoint = useMediaQuery('(min-width: 1340px)')
 
   const faqQuestions = computed<FaqCategory[]>(() => {
     const categories = tm('assistant.faq') as { category: string, items: string[] }[]

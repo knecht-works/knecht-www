@@ -9,6 +9,8 @@ defineProps<{
 const sidebarUi = {
   container: 'bg-default',
   header: 'min-h-16 lg:min-h-20',
+  // The logo is inline-flex, as a flex item it drops the baseline gap below.
+  title: 'flex',
   body: 'p-0 gap-0 overflow-hidden',
   actions: 'gap-0.5'
 } as const
@@ -18,7 +20,7 @@ const slideoverUi = {
   body: 'p-0 sm:p-0 gap-0 overflow-hidden',
   header: 'min-h-16 lg:min-h-20 flex items-center gap-1.5 overflow-hidden border-b border-default px-4 sm:px-4',
   wrapper: 'min-w-0 flex-1',
-  title: 'text-highlighted font-semibold truncate',
+  title: 'flex text-highlighted font-semibold truncate',
   actions: 'flex items-center gap-1.5 shrink-0 gap-0.5',
   close: ''
 } as const
