@@ -1,7 +1,7 @@
 {
   "site": {
-    "title": "Booten. Fixen. Testen. Vollautomatisch.",
-    "description": "Knecht ist ein Dashboard auf deinem eigenen Server für Agenturen mit vielen DDEV-Projekten. Er bootet jedes Projekt als lauffähige Umgebung, erledigt Aufgaben in Workflows und liefert fertige Pull Requests mit Preview."
+    "title": "KI-Workflows für DDEV-Projekte",
+    "description": "Knecht bootet deine DDEV-Projekte auf deinem Server, erledigt das Ticket im laufenden Projekt und öffnet einen Pull Request mit Preview."
   },
   "header": {
     "nav": {

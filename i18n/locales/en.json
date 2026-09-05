@@ -1,7 +1,7 @@
 {
   "site": {
-    "title": "Boot. Fix. Test. Fully Automatic.",
-    "description": "Knecht is a dashboard on your own server for agencies with many DDEV projects. It boots each project as an operational environment, does tasks in workflows, and supplies completed pull requests with a preview."
+    "title": "AI Workflows for DDEV Projects",
+    "description": "Knecht boots your DDEV projects on your own server, works the ticket in the running project, and opens a pull request with a preview."
   },
   "header": {
     "nav": {
