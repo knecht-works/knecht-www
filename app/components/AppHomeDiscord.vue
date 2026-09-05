@@ -32,12 +32,7 @@ const messages = computed(() => messageMeta.map(item => ({
 
         <div class="relative grid gap-10 p-6 sm:p-10 lg:grid-cols-2 lg:items-center lg:gap-12 lg:px-14 lg:py-12">
           <div>
-            <AppEyebrow
-              :label="$t('discord.eyebrow')"
-              dot-color="discord"
-            />
-
-            <h2 class="mt-5 text-balance text-highlighted">
+            <h2 class="text-balance text-highlighted">
               {{ $t('discord.title') }}
             </h2>
 

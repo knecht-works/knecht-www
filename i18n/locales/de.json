@@ -27,7 +27,6 @@
     "mascotAlt": "Knecht, der Roboter-Knecht mit Röhren-TV-Kopf"
   },
   "integrations": {
-    "eyebrow": "Integrationen",
     "title": "Knecht hängt an den Tools, die du schon benutzt.",
     "intro": "Ein Ticket kommt rein, ein Ergebnis geht raus. Dazwischen bootet Knecht dein Projekt und arbeitet im echten System.",
     "triggerLabel": "Trigger",
@@ -67,7 +66,6 @@
     }
   },
   "useCases": {
-    "eyebrow": "Use Cases",
     "title": "Drei Beispiele aus dem",
     "titleAccent": "Agentur-Alltag.",
     "intro": "Knecht erledigt jede Aufgabe, die du als Workflow beschreiben kannst. Diese drei zeigen, wie so ein Ablauf aussieht, vom Trigger bis zum Pull Request.",
@@ -201,7 +199,6 @@
     }
   },
   "demo": {
-    "eyebrow": "Das Dashboard",
     "title": "Viele Projekte.",
     "titleAccent": "Ein Knecht.",
     "description": "Projekte, Workflows und Runs an einem Ort, auf deinem Server oder von uns gehostet.",
@@ -214,7 +211,6 @@
     "imageAlt": "Knecht {label} Vorschau"
   },
   "discord": {
-    "eyebrow": "Community",
     "title": "Der Knecht hat jetzt einen Discord.",
     "text": "Fragen zum Setup, Feedback zu Workflows, erste Runs zeigen. Wir bauen offen und antworten selbst.",
     "cta": "Discord beitreten",
@@ -237,7 +233,6 @@
     }
   },
   "progress": {
-    "eyebrow": "Roadmap",
     "title": "Wo der Knecht gerade steht.",
     "intro": "Was Knecht heute kann, woran wir gerade arbeiten und was als Nächstes kommt.",
     "progressLabel": "Fortschritt bis zum öffentlichen Release",
@@ -337,13 +332,11 @@
     }
   },
   "updates": {
-    "eyebrow": "Updates",
     "title": "Building in Public.",
     "description": "Wir bauen Knecht offen. Jeder Meilenstein landet hier.",
     "all": "Alle Updates ansehen"
   },
   "cta": {
-    "eyebrow": "Mitmachen",
     "title": "Bau Knecht mit von Anfang an.",
     "description": "Knecht ist noch in Entwicklung. Werde {link} und gib direkt Feedback, oder bleib einfach per Update auf dem Laufenden.",
     "descriptionLink": "Beta-Tester",

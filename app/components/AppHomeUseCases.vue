@@ -37,7 +37,6 @@ const cases = computed(() => caseMeta.map((item) => {
   <section id="use-cases">
     <div class="container pt-default">
       <AppSectionHeading
-        :eyebrow="$t('useCases.eyebrow')"
         :title="$t('useCases.title')"
         :title-accent="$t('useCases.titleAccent')"
         :text="$t('useCases.intro')"

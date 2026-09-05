@@ -27,7 +27,6 @@
     "mascotAlt": "Knecht, the robot helper with a CRT screen head"
   },
   "integrations": {
-    "eyebrow": "Integrations",
     "title": "Knecht Connects to the Tools You Already Use.",
     "intro": "A ticket comes in, a result goes out. In between, Knecht boots your project and works in the real system.",
     "triggerLabel": "Trigger",
@@ -67,7 +66,6 @@
     }
   },
   "useCases": {
-    "eyebrow": "Use cases",
     "title": "Three Examples from",
     "titleAccent": "Agency Life.",
     "intro": "Knecht does every task that you can describe as a workflow. These three show what such a run looks like, from the trigger to the pull request.",
@@ -201,7 +199,6 @@
     }
   },
   "demo": {
-    "eyebrow": "The dashboard",
     "title": "Many Projects.",
     "titleAccent": "One Knecht.",
     "description": "Projects, workflows, and runs in one place, on your server or hosted by us.",
@@ -214,7 +211,6 @@
     "imageAlt": "Knecht {label} preview"
   },
   "discord": {
-    "eyebrow": "Community",
     "title": "Knecht Now Has a Discord.",
     "text": "Questions about the setup, feedback on workflows, show your first runs. We build in the open and answer ourselves.",
     "cta": "Join the Discord",
@@ -237,7 +233,6 @@
     }
   },
   "progress": {
-    "eyebrow": "Roadmap",
     "title": "Where Knecht Stands.",
     "intro": "What Knecht can do today, what we are working on, and what comes next.",
     "progressLabel": "Progress to the public release",
@@ -337,13 +332,11 @@
     }
   },
   "updates": {
-    "eyebrow": "Updates",
     "title": "Building in Public.",
     "description": "We build Knecht in the open. Each milestone is published here.",
     "all": "See All Updates"
   },
   "cta": {
-    "eyebrow": "Take part",
     "title": "Build Knecht with Us from the Start.",
     "description": "Knecht is in development. Become a {link} and give feedback directly, or get the updates only.",
     "descriptionLink": "beta tester",

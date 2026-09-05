@@ -41,7 +41,6 @@ const activeTab = computed(() => tabs.value.find(tab => tab.id === activeId.valu
   >
     <div class="container pt-default">
       <AppSectionHeading
-        :eyebrow="$t('demo.eyebrow')"
         :title="$t('demo.title')"
         :title-accent="$t('demo.titleAccent')"
         :text="$t('demo.description')"

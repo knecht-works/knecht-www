@@ -14,7 +14,6 @@ const { data: updates } = await useAsyncData(`home-updates-${locale.value}`, () 
   >
     <div class="container pt-default ">
       <AppSectionHeading
-        :eyebrow="$t('updates.eyebrow')"
         :title="$t('updates.title')"
         :text="$t('updates.description')"
       />

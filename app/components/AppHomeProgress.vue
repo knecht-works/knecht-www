@@ -143,7 +143,6 @@ onMounted(() => {
   >
     <div class="container pt-default ">
       <AppSectionHeading
-        :eyebrow="$t('progress.eyebrow')"
         :title="$t('progress.title')"
         :text="$t('progress.intro')"
       />
