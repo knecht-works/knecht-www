@@ -1,5 +1,5 @@
 ---
-title: Automate DDEV projects with workflows
+title: Automate DDEV Projects with Workflows
 date: 2026-07-13
 tag: Engine
 description: Automation for DDEV projects. Knecht runs Composer updates and tests in a sandbox and opens pull requests. With an AI agent that fixes bugs in the project.

@@ -1,5 +1,5 @@
 ---
-title: Beta testers wanted
+title: Beta Testers Wanted
 date: 2026-06-08
 tag: Project
 description: We search for a handful of agencies and freelancers that run Knecht on real projects. We cover the hosting, the credit, and the first year.

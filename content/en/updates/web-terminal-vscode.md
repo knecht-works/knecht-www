@@ -1,5 +1,5 @@
 ---
-title: A terminal and VS Code for each run
+title: A Terminal and VS Code for Each Run
 date: 2026-07-27
 tag: Dashboard
 description: A terminal in the browser, a ready SSH command, and VS Code without a local setup. You can now open each run directly and continue the work.
