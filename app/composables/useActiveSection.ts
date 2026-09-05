@@ -1,7 +1,7 @@
 // Home page section ids, in document order. The header/footer nav links point at
-// these via hash (e.g. /#idee). `cta` is included so the spy clears the previous
+// these via hash (e.g. /#roadmap). `cta` is included so the spy clears the previous
 // section when the CTA is reached, even though no nav item targets it.
-const SECTION_IDS = ['idee', 'dashboard', 'roadmap', 'updates', 'cta']
+const SECTION_IDS = ['integrations', 'use-cases', 'dashboard', 'discord', 'roadmap', 'updates', 'cta']
 
 // Current in-view home section. Populated by useSectionSpy (called once in
 // AppShell) and read by the nav + footer via useNavActive.

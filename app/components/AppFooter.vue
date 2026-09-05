@@ -10,17 +10,17 @@ const baseColumns = [
   {
     headingKey: 'footer.columns.knecht',
     links: [
-      { labelKey: 'footer.links.idea', to: '/#idee' },
+      { labelKey: 'footer.links.integrations', to: '/#integrations' },
+      { labelKey: 'footer.links.useCases', to: '/#use-cases' },
       { labelKey: 'footer.links.preview', to: '/#dashboard' },
-      { labelKey: 'footer.links.roadmap', to: '/#roadmap' },
-      { labelKey: 'footer.links.updates', to: '/#updates' }
+      { labelKey: 'footer.links.roadmap', to: '/#roadmap' }
     ]
   },
   {
     headingKey: 'footer.columns.takePart',
     links: [
       { labelKey: 'footer.links.beta', to: '/updates/beta-tester?signup=beta' },
-      { labelKey: 'footer.links.subscribe', to: '/?signup=updates#cta' },
+      { labelKey: 'footer.links.discord', to: DISCORD_URL },
       { labelKey: 'footer.links.allUpdates', to: '/updates' },
       { labelKey: 'footer.links.feedback', to: `mailto:${CONTACT_EMAIL}` }
     ]
@@ -34,7 +34,7 @@ const baseColumns = [
   }
 ]
 
-// Only route paths get a locale prefix, the mailto link stays untouched.
+// Only route paths get a locale prefix, mailto and external links stay untouched.
 const columns = computed(() =>
   baseColumns.map(column => ({
     heading: t(column.headingKey),
@@ -92,6 +92,7 @@ const allLinkTargets = computed(() =>
               v-for="link in column.links"
               :key="link.label"
               :to="link.to"
+              :target="link.to.startsWith('http') ? '_blank' : undefined"
               class="text-sm transition-colors"
               :class="isMostSpecificActive(link.to, allLinkTargets) ? 'text-white' : 'text-muted hover:text-white'"
             >
@@ -101,35 +102,32 @@ const allLinkTargets = computed(() =>
         </div>
       </div>
 
-      <!-- Bottom bar -->
+      <!-- Bottom bar. On mobile the copyright takes its own line, below it the
+           language switch sits left and the socials right. -->
       <div class="col-span-full flex flex-col gap-5 py-6 sm:flex-row sm:items-center sm:justify-between">
-        <div class="flex flex-col gap-1 font-mono text-xs text-dimmed">
-          <span>{{ $t('footer.copyright', { year }) }}</span>
-        </div>
+        <span class="font-mono text-xs text-dimmed">
+          {{ $t('footer.copyright', { year }) }}
+        </span>
 
-        <!-- Language switch + socials (right) -->
-        <div class="flex items-center gap-4">
+        <div class="flex items-center justify-between gap-6 sm:justify-end sm:gap-8">
           <AppLocaleSwitch />
 
-          <span
-            class="h-4 w-px bg-border"
-            aria-hidden="true"
-          />
-
-          <NuxtLink
-            v-for="social in SOCIAL_LINKS"
-            :key="social.label"
-            :to="social.to"
-            :aria-label="social.label"
-            :target="social.to.startsWith('http') ? '_blank' : undefined"
-            rel="noopener noreferrer"
-            class="text-dimmed transition-colors hover:text-white"
-          >
-            <UIcon
-              :name="social.icon"
-              class="size-5"
-            />
-          </NuxtLink>
+          <div class="flex items-center gap-4">
+            <NuxtLink
+              v-for="social in SOCIAL_LINKS"
+              :key="social.label"
+              :to="social.to"
+              :aria-label="social.label"
+              :target="social.to.startsWith('http') ? '_blank' : undefined"
+              rel="noopener noreferrer"
+              class="text-dimmed transition-colors hover:text-white"
+            >
+              <UIcon
+                :name="social.icon"
+                class="size-5"
+              />
+            </NuxtLink>
+          </div>
         </div>
       </div>
     </div>

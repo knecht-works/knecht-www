@@ -171,7 +171,7 @@ onMounted(() => {
             color="neutral"
             variant="outline"
             size="lg"
-            :to="localePath('/#updates')"
+            :to="localePath('/#use-cases')"
           />
         </AppReveal>
 

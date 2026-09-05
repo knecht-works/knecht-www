@@ -22,7 +22,8 @@ onBeforeUnmount(() => {
 const { t } = useI18n()
 
 const baseItems = [
-  { labelKey: 'header.nav.idea', to: '/#idee' },
+  { labelKey: 'header.nav.integrations', to: '/#integrations' },
+  { labelKey: 'header.nav.useCases', to: '/#use-cases' },
   { labelKey: 'header.nav.preview', to: '/#dashboard' },
   { labelKey: 'header.nav.roadmap', to: '/#roadmap' },
   { labelKey: 'header.nav.updates', to: '/updates' }
