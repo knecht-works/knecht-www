@@ -1,3 +1,27 @@
+import { readdirSync } from 'node:fs'
+
+// Docs group folders (2.setup) have no page of their own. /docs and every
+// group URL redirect to the first page inside, derived from the content tree
+// so new groups are covered without touching this file.
+const docsRedirects = (() => {
+  const root = 'content/en/docs'
+  const byOrder = (a: string, b: string) => a.localeCompare(b, undefined, { numeric: true })
+  const slug = (name: string) => name.replace(/^\d+\./, '').replace(/\.md$/, '')
+  const groups = readdirSync(root, { withFileTypes: true })
+    .filter(entry => entry.isDirectory())
+    .map(entry => entry.name)
+    .sort(byOrder)
+  const redirects: Record<string, string> = {}
+  for (const group of groups) {
+    const first = readdirSync(`${root}/${group}`).filter(name => name.endsWith('.md')).sort(byOrder)[0]
+    if (first) {
+      redirects[`/docs/${slug(group)}`] = `/docs/${slug(group)}/${slug(first)}`
+    }
+  }
+  redirects['/docs'] = Object.values(redirects)[0]!
+  return redirects
+})()
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   modules: [
@@ -84,9 +108,12 @@ export default defineNuxtConfig({
   },
 
   routeRules: {
-    // The docs root has no page of its own. Not prerendered, so the redirect
-    // lands in Cloudflare's _redirects instead of an empty static file.
-    '/docs': { redirect: { to: '/docs/getting-started/introduction', statusCode: 301 }, prerender: false },
+    // Not prerendered, so the redirects land in Cloudflare's _redirects
+    // instead of empty static files.
+    ...Object.fromEntries(Object.entries(docsRedirects).map(([from, to]) => [
+      from,
+      { redirect: { to, statusCode: 301 }, prerender: false }
+    ])),
     '/_ipx/**': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
     // Long-lived cache for static assets. Filenames are stable, so bump the name
     // (or add ?v=) when you replace an asset, otherwise returning visitors keep
@@ -137,7 +164,7 @@ export default defineNuxtConfig({
       routes: [
         '/',
         // Entry point for the docs crawl, /docs itself only redirects here.
-        '/docs/getting-started/introduction',
+        docsRedirects['/docs']!,
         '/updates',
         '/impressum',
         '/datenschutz',

@@ -6,28 +6,16 @@ defineProps<{
 }>()
 
 // Mobile: the collapsible bar only gets a background while it actually sticks
-// below the header (same pattern as AppHeader's scrolled state). Threshold is
-// --ui-header-height (4rem) plus 1px tolerance. Desktop is unaffected: the bar
-// is forced transparent via lg:bg-transparent.
-const STICKY_TOP = 65
-
+// below the header (same pattern as AppHeader's scrolled state). Desktop is
+// unaffected: the bar is forced transparent via lg:bg-transparent.
 const toc = useTemplateRef('toc')
-const pinned = ref(false)
 
-function onScroll() {
-  // ContentToc renders a fragment, so $el is a comment anchor, not the bar
-  // itself - the actual element is the next element sibling.
+// ContentToc renders a fragment, so $el is a comment anchor, not the bar
+// itself - the actual element is the next element sibling.
+const pinned = usePinned(computed(() => {
   const node = (toc.value as { $el?: Element | CharacterData } | null)?.$el
-  const el = node instanceof Element ? node : node?.nextElementSibling
-  pinned.value = !!el && el.getBoundingClientRect().top <= STICKY_TOP
-}
-
-onMounted(() => {
-  onScroll()
-  window.addEventListener('scroll', onScroll, { passive: true })
-})
-
-onBeforeUnmount(() => window.removeEventListener('scroll', onScroll))
+  return node instanceof Element ? node : node?.nextElementSibling
+}))
 </script>
 
 <template>

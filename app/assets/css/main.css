@@ -69,6 +69,10 @@
   --ui-border-accented: oklch(1 0 0 / 0.16);
 }
 
+html {
+  scrollbar-gutter: stable;
+}
+
 @utility outside-container {
   padding-inline: var(--container-margin-x);
 }
@@ -179,7 +183,7 @@
 }
 
 @utility pt-hero {
-  @apply pt-8 sm:pt-12 lg:pt-18;
+  @apply pt-8 sm:pt-10;
 }
 
 h1.mega {
