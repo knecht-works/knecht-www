@@ -53,7 +53,7 @@ watch(isOpen, (value) => {
       >
         <div
           v-if="pageContextEnabled"
-          class="flex items-center gap-2 border-b border-default px-4 py-2.5"
+          class="flex items-center gap-2 border-b border-default px-4 py-2"
         >
           <div class="min-w-0 flex-1 flex items-center gap-1.5 text-xs">
             <span class="shrink-0 text-dimmed">{{ $t('assistant.usingPage') }}</span>
@@ -91,7 +91,7 @@ watch(isOpen, (value) => {
         :maxrows="5"
         autofocus
         :ui="{
-          root: 'px-4 pb-2',
+          root: 'px-4 pb-4',
           body: 'px-0',
           base: 'px-0 rounded-none',
           footer: 'px-0 items-baseline'

@@ -25,7 +25,11 @@ defineOgImage('Knecht')
 </script>
 
 <template>
-  <UApp :toaster="{ expand: false }">
+  <!-- No scrollbar padding on body lock: html reserves the gutter in main.css. -->
+  <UApp
+    :toaster="{ expand: false }"
+    :scroll-body="false"
+  >
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>

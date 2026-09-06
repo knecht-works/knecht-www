@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { ContentSurroundLink } from '@nuxt/ui'
+
 const route = useRoute()
 
 const { data: update } = await useUpdate(route.path)
@@ -27,18 +29,16 @@ const tocLinks = computed(() => update.value?.body?.toc?.links ?? [])
 // key with the index page, so it is fetched at most once.
 const { data: updates } = await useUpdates()
 
-const nav = computed(() => {
+// Newer on the left, older on the right, like the docs. A missing neighbour
+// stays in the array as a placeholder so the other card keeps its side.
+// UContentSurround skips it at runtime, its prop type just does not say so.
+const surround = computed(() => {
   const list = updates.value ?? []
   const i = list.findIndex(u => u.path === route.path)
-  if (i === -1) return { newer: null, older: null }
-  // Map to AppUpdateNav's slim link shape (drops the rest of the collection
-  // item and the undefined from out-of-range index access).
-  const toLink = (item: (typeof list)[number] | undefined) =>
+  if (i === -1) return []
+  const toLink = (item?: (typeof list)[number]) =>
     item ? { path: item.path, title: item.title, description: item.description } : null
-  return {
-    newer: toLink(list[i - 1]), // next more recent
-    older: toLink(list[i + 1]) // next older
-  }
+  return [toLink(list[i - 1]), toLink(list[i + 1])] as ContentSurroundLink[]
 })
 </script>
 
@@ -103,10 +103,13 @@ const nav = computed(() => {
         <AppUpdateAbout class="max-w-(--text-width)" />
       </article>
 
-      <AppUpdateNav
-        :newer="nav.newer"
-        :older="nav.older"
-      />
+      <template v-if="surround.some(Boolean)">
+        <USeparator class="mt-12" />
+        <UContentSurround
+          :surround="surround"
+          class="mt-12"
+        />
+      </template>
 
       <template #right>
         <AppToc
