@@ -1,7 +1,8 @@
 <script setup lang="ts">
 // A workflow run as the dashboard shows it, replayed step by step. The replay
-// starts when the card scrolls into view, pauses while it is out of view, and
-// rests a few ticks on the finished state before it loops.
+// starts when the card scrolls into view, plays once and rests on the finished
+// state. Only one card on the page plays at a time. A button in the title bar
+// pauses, resumes or replays the run.
 export interface RunStep {
   label: string
   title: string
@@ -17,21 +18,22 @@ const props = defineProps<{
 
 type StepState = 'done' | 'active' | 'todo'
 
-// Ticks the finished state stays visible before the run restarts.
-const REST_TICKS = 3
+const { t } = useI18n()
 
 const rootEl = useTemplateRef<HTMLElement>('rootEl')
-const { tick, frozen } = useSceneTimer(rootEl, { threshold: 0.4 })
-
 // Index of the active step. At the step count the run is done and the output
 // card slides in.
-const pos = computed(() => frozen.value
-  ? props.steps.length
-  : tick.value % (props.steps.length + REST_TICKS)
-)
+const { pos, playing, toggle } = useRunPlayer(rootEl, props.steps.length)
 
 const done = computed(() => pos.value >= props.steps.length)
-const progress = computed(() => Math.round((Math.min(pos.value, props.steps.length) / props.steps.length) * 100))
+const progress = computed(() => Math.round((pos.value / props.steps.length) * 100))
+
+// Play / pause / replay button in the title bar.
+const control = computed(() => {
+  if (playing.value) return { icon: 'i-lucide-pause', label: t('useCases.player.pause') }
+  if (done.value) return { icon: 'i-lucide-rotate-ccw', label: t('useCases.player.replay') }
+  return { icon: 'i-lucide-play', label: t('useCases.player.play') }
+})
 
 const stateOf = (index: number): StepState => {
   if (done.value || pos.value > index) return 'done'
@@ -63,26 +65,20 @@ const labelClass: Record<StepState, string> = {
     class="shadow-panel-lg overflow-hidden rounded-2xl border border-default bg-muted"
   >
     <!-- Title bar -->
-    <div class="flex items-center justify-between gap-3 border-b border-default bg-elevated px-4 py-3.5 sm:px-4.5">
+    <div class="flex items-center justify-between gap-3 border-default bg-elevated px-4 py-3.5 sm:px-4.5">
       <span class="truncate font-mono text-sm text-highlighted">{{ workflow }}</span>
-      <span
-        class="inline-flex shrink-0 items-center gap-2 font-mono text-2xs uppercase tracking-widest"
-        :class="done ? 'text-primary' : 'text-accent-orange'"
+      <button
+        type="button"
+        class="grid size-7 shrink-0 place-items-center rounded-full border border-default text-muted transition-colors hover:border-accented hover:text-highlighted"
+        :aria-label="control.label"
+        :title="control.label"
+        @click="toggle"
       >
-        <AppPulseDot
-          :color="done ? 'primary' : 'orange'"
-          :pulse="!done"
+        <UIcon
+          :name="control.icon"
+          class="size-3.5"
         />
-        {{ done ? $t('useCases.status.succeeded') : $t('useCases.status.running') }}
-      </span>
-    </div>
-
-    <!-- Progress -->
-    <div class="h-0.75 bg-white/6">
-      <div
-        class="progress-fill h-full transition-all duration-600 ease-soft"
-        :style="{ width: `${progress}%` }"
-      />
+      </button>
     </div>
 
     <!-- Steps -->

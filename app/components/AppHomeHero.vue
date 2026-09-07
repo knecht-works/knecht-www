@@ -150,7 +150,7 @@ onMounted(() => {
   <section class="relative overflow-hidden">
     <div class="container pt-8 sm:pt-12 lg:pt-18">
       <!-- Content (≈70%) -->
-      <div class="col-span-full md:col-span-7">
+      <div class="col-span-full md:col-span-7 sm:py-10 2xl:py-16">
         <!-- Announcement badge -->
         <AppReveal
           appear
@@ -242,7 +242,7 @@ onMounted(() => {
         :delay="0.2"
         :y="24"
         :duration="0.8"
-        class="col-span-full max-md:mt-16 md:col-span-4 md:relative md:ml-10"
+        class="col-span-full max-md:mt-16 md:col-span-5 md:relative md:ml-10"
       >
         <div
           class="relative max-md:mx-auto aspect-[654/1199] w-1/2 cursor-pointer select-none md:absolute md:left-1/2 md:top-1/2 md:h-full md:w-auto md:-translate-x-1/2 md:-translate-y-1/2"
