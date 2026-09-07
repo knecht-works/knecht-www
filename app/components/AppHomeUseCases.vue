@@ -1,12 +1,12 @@
 <script setup lang="ts">
-// Three stories from agency life. Each run card drives its own replay, starting
-// when it scrolls into view.
+// Three stories from agency life. Each run card plays once when it scrolls into
+// view, one card at a time (see useRunPlayer).
 const { t } = useI18n()
 
 const caseMeta: { key: string, source: SourceKey, steps: string[], flip?: boolean }[] = [
-  { key: 'update', source: 'cron', steps: ['trigger', 'boot', 'update', 'links', 'result'] },
-  { key: 'estimate', source: 'jira', steps: ['trigger', 'boot', 'analyze', 'assess', 'result'], flip: true },
-  { key: 'fix', source: 'github', steps: ['trigger', 'boot', 'fix', 'test', 'result'] }
+  { key: 'update', source: 'cron', steps: ['trigger', 'boot', 'update', 'links'] },
+  { key: 'estimate', source: 'jira', steps: ['trigger', 'boot', 'analyze'], flip: true },
+  { key: 'fix', source: 'github', steps: ['trigger', 'boot', 'fix', 'build'] }
 ]
 
 const cases = computed(() => caseMeta.map((item) => {
@@ -42,7 +42,7 @@ const cases = computed(() => caseMeta.map((item) => {
         :text="$t('useCases.intro')"
       />
 
-      <div class="col-span-full mt-12 flex flex-col gap-16 lg:mt-14 lg:gap-24">
+      <div class="col-span-full mt-12 flex flex-col gap-16 lg:mt-20 lg:gap-24">
         <AppReveal
           v-for="item in cases"
           :key="item.key"

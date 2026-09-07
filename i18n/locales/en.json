@@ -73,14 +73,15 @@
     "intro": "Knecht does every task that you can describe as a workflow. These three show what such a run looks like, from the trigger to the pull request.",
     "before": "Before",
     "after": "Knecht",
-    "status": {
-      "running": "Running",
-      "succeeded": "Succeeded"
+    "player": {
+      "play": "Play",
+      "pause": "Pause",
+      "replay": "Replay"
     },
     "items": {
       "update": {
         "source": "Cron Job",
-        "workflow": "Craft Update & Link Check",
+        "workflow": "Craft Update Workflow",
         "title": "The CMS Update with the Database Running.",
         "text": "Every Monday, Knecht boots the project with its database, installs Craft and plugin updates, runs the migrations, and checks every link on the preview. If there is nothing to update, the run ends without a PR.",
         "before": "Dependabot opens a PR without the migration files. Someone has to boot locally, migrate, and commit again.",
@@ -88,12 +89,12 @@
         "steps": {
           "trigger": {
             "label": "Trigger",
-            "title": "Schedule fires",
+            "title": "Schedule Fires",
             "detail": "Monday 06:00, project craft-shop"
           },
           "boot": {
             "label": "Boot",
-            "title": "Project boots with database",
+            "title": "Project Boots with Database",
             "detail": "ddev composer install, DB dump imported"
           },
           "update": {
@@ -103,13 +104,8 @@
           },
           "links": {
             "label": "Links",
-            "title": "Link check on the preview",
+            "title": "Link Check on the Preview",
             "detail": "142 pages checked, 0 broken"
-          },
-          "result": {
-            "label": "PR",
-            "title": "Branch, commit, pull request",
-            "detail": "knecht/craft-update-1042, PR #84"
           }
         },
         "out": {
@@ -120,7 +116,7 @@
       },
       "estimate": {
         "source": "Jira Ticket",
-        "workflow": "Ticket Estimate",
+        "workflow": "Ticket Estimate Workflow",
         "title": "Estimate a Ticket Before Anyone Spends Time on It.",
         "text": "A Jira ticket gets the label \"knecht-estimate\". Knecht boots the project, reproduces the problem in the preview, reads the code, and writes effort, risk, and a suggested fix as a comment in the ticket.",
         "before": "The ticket waits for the next planning. The estimate is a gut feeling.",
@@ -128,28 +124,18 @@
         "steps": {
           "trigger": {
             "label": "Trigger",
-            "title": "Ticket gets label knecht-estimate",
+            "title": "Ticket Gets Label knecht-estimate",
             "detail": "KAN-231, newsletter form sends twice"
           },
           "boot": {
             "label": "Boot",
-            "title": "Project boots",
+            "title": "Project Boots",
             "detail": "Environment up with DB dump"
           },
           "analyze": {
             "label": "AI",
-            "title": "Agent reproduces in the preview",
-            "detail": "Form submitted, duplicate listener in newsletter.js"
-          },
-          "assess": {
-            "label": "AI",
-            "title": "Effort & risk as output",
-            "detail": "effort: 3 h, risk: low, summary with suggestion"
-          },
-          "result": {
-            "label": "HTTP",
-            "title": "Comment via Jira API",
-            "detail": "POST issue/KAN-231/comment"
+            "title": "Agent Reproduces & Estimates",
+            "detail": "Duplicate listener in newsletter.js, effort 3 h, risk low"
           }
         },
         "out": {
@@ -160,7 +146,7 @@
       },
       "fix": {
         "source": "GitHub Issue",
-        "workflow": "Bug Fix",
+        "workflow": "Bug Fix Workflow",
         "title": "Fix the Bug from the Issue, Tested Against the Real App.",
         "text": "An issue gets the label \"knecht-fix\". Knecht boots the project, the agent reproduces the bug in the preview and fixes it, the tests run, and a pull request with a preview link opens at the end.",
         "before": "A coding agent guesses blindly whether the fix works. You have to test it yourself.",
@@ -168,28 +154,23 @@
         "steps": {
           "trigger": {
             "label": "Trigger",
-            "title": "Issue gets label knecht-fix",
+            "title": "Issue Gets Label knecht-fix",
             "detail": "#19, dark mode is broken on this site"
           },
           "boot": {
             "label": "Boot",
-            "title": "Project boots",
+            "title": "Project Boots",
             "detail": "Environment up, dependencies installed"
           },
           "fix": {
             "label": "AI",
-            "title": "Agent reproduces & fixes",
+            "title": "Agent Reproduces & Fixes",
             "detail": "Bug replayed in the preview, 4 files changed"
           },
-          "test": {
+          "build": {
             "label": "Shell",
-            "title": "ddev npm test",
-            "detail": "12 tests green"
-          },
-          "result": {
-            "label": "PR",
-            "title": "Commit & pull request",
-            "detail": "PR #20 with preview link, reply in the issue"
+            "title": "Build and Preview",
+            "detail": "ddev npm run build, preview updated"
           }
         },
         "out": {

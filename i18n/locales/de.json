@@ -73,14 +73,15 @@
     "intro": "Knecht erledigt jede Aufgabe, die du als Workflow beschreiben kannst. Diese drei zeigen, wie so ein Ablauf aussieht, vom Trigger bis zum Pull Request.",
     "before": "Bisher",
     "after": "Knecht",
-    "status": {
-      "running": "Running",
-      "succeeded": "Succeeded"
+    "player": {
+      "play": "Abspielen",
+      "pause": "Pause",
+      "replay": "Nochmal abspielen"
     },
     "items": {
       "update": {
         "source": "Cron Job",
-        "workflow": "Craft Update & Link Check",
+        "workflow": "Craft Update Workflow",
         "title": "Das CMS-Update mit laufender Datenbank.",
         "text": "Jeden Montag bootet Knecht das Projekt inklusive Datenbank, spielt Craft- und Plugin-Updates ein, lässt die Migrations laufen und prüft alle Links auf der Preview. Gibt es nichts zu updaten, endet der Lauf ohne PR.",
         "before": "Dependabot öffnet einen PR ohne Migration-Files. Jemand muss lokal booten, migrieren, nachcommitten.",
@@ -88,12 +89,12 @@
         "steps": {
           "trigger": {
             "label": "Trigger",
-            "title": "Zeitplan löst aus",
+            "title": "Zeitplan Löst Aus",
             "detail": "Montag 06:00, Projekt craft-shop"
           },
           "boot": {
             "label": "Boot",
-            "title": "Projekt bootet mit Datenbank",
+            "title": "Projekt Bootet mit Datenbank",
             "detail": "ddev composer install, DB-Dump importiert"
           },
           "update": {
@@ -105,11 +106,6 @@
             "label": "Links",
             "title": "Link-Check auf der Preview",
             "detail": "142 Seiten geprüft, 0 kaputt"
-          },
-          "result": {
-            "label": "PR",
-            "title": "Branch, Commit, Pull Request",
-            "detail": "knecht/craft-update-1042, PR #84"
           }
         },
         "out": {
@@ -120,7 +116,7 @@
       },
       "estimate": {
         "source": "Jira Ticket",
-        "workflow": "Ticket Estimate",
+        "workflow": "Ticket Estimate Workflow",
         "title": "Ein Ticket schätzen, bevor jemand Zeit reinsteckt.",
         "text": "Ein Jira-Ticket bekommt das Label „knecht-estimate“. Knecht bootet das Projekt, reproduziert das Problem in der Preview, liest den Code und schreibt Aufwand, Risiko und einen Lösungsvorschlag als Kommentar ins Ticket.",
         "before": "Das Ticket wartet bis zum nächsten Planning. Die Schätzung ist Bauchgefühl.",
@@ -128,28 +124,18 @@
         "steps": {
           "trigger": {
             "label": "Trigger",
-            "title": "Ticket bekommt Label knecht-estimate",
+            "title": "Ticket Bekommt Label knecht-estimate",
             "detail": "KAN-231, Newsletter-Formular sendet doppelt"
           },
           "boot": {
             "label": "Boot",
-            "title": "Projekt bootet",
+            "title": "Projekt Bootet",
             "detail": "Umgebung läuft mit DB-Dump"
           },
           "analyze": {
             "label": "AI",
-            "title": "Agent reproduziert in der Preview",
-            "detail": "Formular abgeschickt, doppelter Listener in newsletter.js"
-          },
-          "assess": {
-            "label": "AI",
-            "title": "Aufwand & Risiko als Output",
-            "detail": "effort: 3 h, risk: low, summary mit Vorschlag"
-          },
-          "result": {
-            "label": "HTTP",
-            "title": "Kommentar per Jira-API",
-            "detail": "POST issue/KAN-231/comment"
+            "title": "Agent Reproduziert & Schätzt",
+            "detail": "Doppelter Listener in newsletter.js, Aufwand 3 h, Risiko niedrig"
           }
         },
         "out": {
@@ -160,7 +146,7 @@
       },
       "fix": {
         "source": "GitHub Issue",
-        "workflow": "Bug Fix",
+        "workflow": "Bug Fix Workflow",
         "title": "Bug aus dem Issue fixen, getestet gegen die echte App.",
         "text": "Ein Issue bekommt das Label „knecht-fix“. Knecht bootet das Projekt, der Agent reproduziert den Bug in der Preview und fixt ihn, die Tests laufen, und am Ende geht ein Pull Request mit Preview-Link auf.",
         "before": "Ein Coding-Agent rät im Blindflug, ob der Fix funktioniert. Testen musst du selbst.",
@@ -168,28 +154,23 @@
         "steps": {
           "trigger": {
             "label": "Trigger",
-            "title": "Issue bekommt Label knecht-fix",
+            "title": "Issue Bekommt Label knecht-fix",
             "detail": "#19, Dark Mode ist auf der Seite kaputt"
           },
           "boot": {
             "label": "Boot",
-            "title": "Projekt bootet",
+            "title": "Projekt Bootet",
             "detail": "Umgebung läuft, Dependencies installiert"
           },
           "fix": {
             "label": "AI",
-            "title": "Agent reproduziert & fixt",
+            "title": "Agent Reproduziert & Fixt",
             "detail": "Bug in der Preview nachgestellt, 4 Files geändert"
           },
-          "test": {
+          "build": {
             "label": "Shell",
-            "title": "ddev npm test",
-            "detail": "12 Tests grün"
-          },
-          "result": {
-            "label": "PR",
-            "title": "Commit & Pull Request",
-            "detail": "PR #20 mit Preview-Link, Antwort im Issue"
+            "title": "Build und Preview",
+            "detail": "ddev npm run build, Preview aktualisiert"
           }
         },
         "out": {
