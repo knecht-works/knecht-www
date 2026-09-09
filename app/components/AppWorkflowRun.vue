@@ -26,7 +26,6 @@ const rootEl = useTemplateRef<HTMLElement>('rootEl')
 const { pos, playing, toggle } = useRunPlayer(rootEl, props.steps.length)
 
 const done = computed(() => pos.value >= props.steps.length)
-const progress = computed(() => Math.round((pos.value / props.steps.length) * 100))
 
 // Play / pause / replay button in the title bar.
 const control = computed(() => {

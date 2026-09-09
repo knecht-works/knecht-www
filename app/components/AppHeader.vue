@@ -66,7 +66,7 @@ const items = computed<NavigationMenuItem[]>(() =>
       >
         <AppLogo class="w-auto shrink-0" />
       </NuxtLinkLocale>
-      <AppReleasePill class="max-sm:hidden"/>
+      <AppReleasePill class="max-sm:hidden" />
     </template>
 
     <UNavigationMenu
@@ -97,7 +97,7 @@ const items = computed<NavigationMenuItem[]>(() =>
         <nav>
           <NuxtLink
             v-for="(item, i) in items"
-            :key="item.to"
+            :key="item.label"
             :to="item.to"
             class="group flex items-center gap-4 border-b border-default py-4 text-2xl font-semibold tracking-tight transition-colors"
             :class="item.active ? 'text-primary' : 'text-highlighted'"
