@@ -21,6 +21,12 @@ const triggers = computed(() => triggerMeta.map(item => ({
   text: t(`integrations.triggers.${item.key}.text`)
 })))
 
+const centerSteps = computed(() => ['boot', 'run', 'ai'].map(key => ({
+  key,
+  title: t(`integrations.center.steps.${key}.title`),
+  detail: t(`integrations.center.steps.${key}.detail`)
+})))
+
 const results = computed(() => resultMeta.map(item => ({
   ...item,
   title: t(`integrations.results.${item.key}.title`),
@@ -72,12 +78,27 @@ const results = computed(() => resultMeta.map(item => ({
           <div class="mt-3.5 text-lg font-semibold text-highlighted">
             {{ $t('integrations.center.title') }}
           </div>
-          <p class="mx-auto mt-2 max-w-xs text-sm leading-relaxed text-muted">
-            {{ $t('integrations.center.text') }}
-          </p>
-          <div class="mt-4 flex justify-center">
-            <AppTag :label="$t('integrations.center.tag')" />
-          </div>
+
+          <!-- What happens inside a run, as a rough three step outline -->
+          <ol class="mx-auto mt-5 flex max-w-xs flex-col gap-2 text-left">
+            <li
+              v-for="(step, i) in centerSteps"
+              :key="step.key"
+              class="flex items-start gap-3 rounded-lg border border-default bg-elevated px-3 py-2.5"
+            >
+              <span class="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full border border-primary/55 font-mono text-2xs text-primary">
+                {{ i + 1 }}
+              </span>
+              <div class="min-w-0">
+                <div class="text-sm font-semibold text-highlighted">
+                  {{ step.title }}
+                </div>
+                <div class="mt-0.5 text-xs leading-snug text-dimmed">
+                  {{ step.detail }}
+                </div>
+              </div>
+            </li>
+          </ol>
         </div>
 
         <AppFlowConnector

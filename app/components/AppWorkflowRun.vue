@@ -68,7 +68,7 @@ const labelClass: Record<StepState, string> = {
       <span class="truncate font-mono text-sm text-highlighted">{{ workflow }}</span>
       <button
         type="button"
-        class="grid size-7 shrink-0 place-items-center rounded-full border border-default text-muted transition-colors hover:border-accented hover:text-highlighted"
+        class="grid size-7 shrink-0 cursor-pointer place-items-center rounded-full border border-default text-muted transition-colors hover:border-accented hover:text-highlighted"
         :aria-label="control.label"
         :title="control.label"
         @click="toggle"

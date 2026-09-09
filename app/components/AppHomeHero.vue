@@ -150,7 +150,7 @@ onMounted(() => {
   <section class="relative overflow-hidden">
     <div class="container pt-8 sm:pt-12 lg:pt-18">
       <!-- Content (≈70%) -->
-      <div class="col-span-full md:col-span-7 sm:py-10 2xl:py-16">
+      <div class="col-span-full md:col-span-7 sm:pb-6 2xl:py-16">
         <!-- Announcement badge -->
         <AppReveal
           appear

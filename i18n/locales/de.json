@@ -48,9 +48,21 @@
       }
     },
     "center": {
-      "title": "Knecht bootet dein Projekt",
-      "text": "Komplette Umgebung mit Web, Datenbank und Services.",
-      "tag": "Deterministische Workflows mit AI Agents"
+      "title": "Knecht führt Workflows aus",
+      "steps": {
+        "boot": {
+          "title": "Projekt bootet",
+          "detail": "Web, Datenbank und Services, wie lokal"
+        },
+        "run": {
+          "title": "Schritte laufen der Reihe nach",
+          "detail": "Shell-Befehle, Tests, Link-Checks"
+        },
+        "ai": {
+          "title": "AI Agent, wo nötig",
+          "detail": "Liest Code, reproduziert, fixt"
+        }
+      }
     },
     "results": {
       "pr": {
@@ -71,8 +83,6 @@
     "title": "Drei Beispiele aus dem",
     "titleAccent": "Agentur-Alltag.",
     "intro": "Knecht erledigt jede Aufgabe, die du als Workflow beschreiben kannst. Diese drei zeigen, wie so ein Ablauf aussieht, vom Trigger bis zum Pull Request.",
-    "before": "Bisher",
-    "after": "Knecht",
     "player": {
       "play": "Abspielen",
       "pause": "Pause",
@@ -83,9 +93,7 @@
         "source": "Cron Job",
         "workflow": "Craft Update Workflow",
         "title": "Das CMS-Update mit laufender Datenbank.",
-        "text": "Jeden Montag bootet Knecht das Projekt inklusive Datenbank, spielt Craft- und Plugin-Updates ein, lässt die Migrations laufen und prüft alle Links auf der Preview. Gibt es nichts zu updaten, endet der Lauf ohne PR.",
-        "before": "Dependabot öffnet einen PR ohne Migration-Files. Jemand muss lokal booten, migrieren, nachcommitten.",
-        "after": "Update, Migrations und Link-Check in einem Lauf. Der PR ist vollständig, wenn er aufgeht.",
+        "text": "Jeden Montag bootet Knecht das Projekt mit Datenbank, führt craft update all aus und prüft alle Links auf der Preview. Der PR enthält composer.lock und die aktualisierte Project Config, niemand muss lokal updaten und nachcommitten.",
         "steps": {
           "trigger": {
             "label": "Trigger",
@@ -118,9 +126,7 @@
         "source": "Jira Ticket",
         "workflow": "Ticket Estimate Workflow",
         "title": "Ein Ticket schätzen, bevor jemand Zeit reinsteckt.",
-        "text": "Ein Jira-Ticket bekommt das Label „knecht-estimate“. Knecht bootet das Projekt, reproduziert das Problem in der Preview, liest den Code und schreibt Aufwand, Risiko und einen Lösungsvorschlag als Kommentar ins Ticket.",
-        "before": "Das Ticket wartet bis zum nächsten Planning. Die Schätzung ist Bauchgefühl.",
-        "after": "Einschätzung in Minuten, basierend auf dem echten Code, direkt als Kommentar im Ticket.",
+        "text": "Ein Jira-Ticket bekommt das Label „knecht-estimate“. Knecht bootet das Projekt, reproduziert das Problem und schreibt Aufwand, Risiko und Lösungsvorschlag als Kommentar ins Ticket, in Minuten statt beim nächsten Planning.",
         "steps": {
           "trigger": {
             "label": "Trigger",
@@ -148,9 +154,7 @@
         "source": "GitHub Issue",
         "workflow": "Bug Fix Workflow",
         "title": "Bug aus dem Issue fixen, getestet gegen die echte App.",
-        "text": "Ein Issue bekommt das Label „knecht-fix“. Knecht bootet das Projekt, der Agent reproduziert den Bug in der Preview und fixt ihn, die Tests laufen, und am Ende geht ein Pull Request mit Preview-Link auf.",
-        "before": "Ein Coding-Agent rät im Blindflug, ob der Fix funktioniert. Testen musst du selbst.",
-        "after": "Der Agent sieht die laufende App, reproduziert den Bug und testet den Fix dagegen.",
+        "text": "Ein Issue bekommt das Label „knecht-fix“. Der Agent reproduziert den Bug in der laufenden App, fixt ihn, testet den Fix dagegen und öffnet einen Pull Request mit Preview-Link.",
         "steps": {
           "trigger": {
             "label": "Trigger",
