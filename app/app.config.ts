@@ -31,6 +31,25 @@ export default defineAppConfig({
       },
       td: {
         base: 'border-default first:border-e px-5 py-3.5 text-sm leading-relaxed text-muted first:font-medium first:text-highlighted'
+      },
+      pre: {
+        slots: {
+          header: 'border-default',
+          base: 'border-default bg-elevated shadow-panel'
+        }
+      },
+      code: {
+        variants: {
+          color: {
+            neutral: 'border-default bg-elevated'
+          }
+        }
+      }
+    },
+    contentNavigation: {
+      slots: {
+        link: 'py-1',
+        itemWithChildren: 'data-[state=open]:mb-1'
       }
     },
     button: {

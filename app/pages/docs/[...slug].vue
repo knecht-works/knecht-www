@@ -10,7 +10,7 @@ definePageMeta({
     if (to.path === '/docs') {
       // The link checker cannot match catch-all route patterns.
       // eslint-disable-next-line link-checker/valid-route, link-checker/valid-sitemap-link
-      return navigateTo('/docs/introduction/introduction', { redirectCode: 301, replace: true })
+      return navigateTo('/docs/get-started/introduction', { redirectCode: 301, replace: true })
     }
   }
 })
