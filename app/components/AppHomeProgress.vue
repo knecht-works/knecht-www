@@ -191,7 +191,7 @@ onMounted(() => {
             v-for="phase in phases"
             :key="phase.key"
             as="article"
-            :y="0"
+            :y="0.1"
             class="shadow-panel flex w-70 shrink-0 snap-start flex-col rounded-xl border border-default bg-muted p-6 transition duration-200 hover:-translate-y-1 hover:border-accented z-10 relative hover:shadow-panel-lg sm:w-[320px]"
           >
             <!-- Status -->

@@ -48,9 +48,21 @@
       }
     },
     "center": {
-      "title": "Knecht Boots Your Project",
-      "text": "A complete environment with web, database, and services.",
-      "tag": "Deterministic Workflows with AI Agents"
+      "title": "Knecht Runs Workflows",
+      "steps": {
+        "boot": {
+          "title": "Project Boots",
+          "detail": "Web, database, and services, like locally"
+        },
+        "run": {
+          "title": "Steps Run in Order",
+          "detail": "Shell commands, tests, link checks"
+        },
+        "ai": {
+          "title": "AI Agent Where Needed",
+          "detail": "Reads code, reproduces, fixes"
+        }
+      }
     },
     "results": {
       "pr": {
@@ -71,8 +83,6 @@
     "title": "Three Examples from",
     "titleAccent": "Agency Life.",
     "intro": "Knecht does every task that you can describe as a workflow. These three show what such a run looks like, from the trigger to the pull request.",
-    "before": "Before",
-    "after": "Knecht",
     "player": {
       "play": "Play",
       "pause": "Pause",
@@ -83,9 +93,7 @@
         "source": "Cron Job",
         "workflow": "Craft Update Workflow",
         "title": "The CMS Update with the Database Running.",
-        "text": "Every Monday, Knecht boots the project with its database, installs Craft and plugin updates, runs the migrations, and checks every link on the preview. If there is nothing to update, the run ends without a PR.",
-        "before": "Dependabot opens a PR without the migration files. Someone has to boot locally, migrate, and commit again.",
-        "after": "Update, migrations, and link check in one run. The PR is complete when it opens.",
+        "text": "Every Monday, Knecht boots the project with its database, runs craft update all, and checks every link on the preview. The PR contains composer.lock and the updated project config, nobody has to update locally and commit again.",
         "steps": {
           "trigger": {
             "label": "Trigger",
@@ -118,9 +126,7 @@
         "source": "Jira Ticket",
         "workflow": "Ticket Estimate Workflow",
         "title": "Estimate a Ticket Before Anyone Spends Time on It.",
-        "text": "A Jira ticket gets the label \"knecht-estimate\". Knecht boots the project, reproduces the problem in the preview, reads the code, and writes effort, risk, and a suggested fix as a comment in the ticket.",
-        "before": "The ticket waits for the next planning. The estimate is a gut feeling.",
-        "after": "An assessment in minutes, based on the real code, directly as a comment in the ticket.",
+        "text": "A Jira ticket gets the label \"knecht-estimate\". Knecht boots the project, reproduces the problem, and writes effort, risk, and a suggested fix as a comment in the ticket, in minutes instead of at the next planning.",
         "steps": {
           "trigger": {
             "label": "Trigger",
@@ -148,9 +154,7 @@
         "source": "GitHub Issue",
         "workflow": "Bug Fix Workflow",
         "title": "Fix the Bug from the Issue, Tested Against the Real App.",
-        "text": "An issue gets the label \"knecht-fix\". Knecht boots the project, the agent reproduces the bug in the preview and fixes it, the tests run, and a pull request with a preview link opens at the end.",
-        "before": "A coding agent guesses blindly whether the fix works. You have to test it yourself.",
-        "after": "The agent sees the live app, reproduces the bug, and tests the fix against it.",
+        "text": "An issue gets the label \"knecht-fix\". The agent reproduces the bug in the live app, fixes it, tests the fix against it, and opens a pull request with a preview link.",
         "steps": {
           "trigger": {
             "label": "Trigger",

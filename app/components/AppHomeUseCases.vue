@@ -17,8 +17,6 @@ const cases = computed(() => caseMeta.map((item) => {
     workflow: t(`${base}.workflow`),
     title: t(`${base}.title`),
     text: t(`${base}.text`),
-    before: t(`${base}.before`),
-    after: t(`${base}.after`),
     steps: item.steps.map(step => ({
       label: t(`${base}.steps.${step}.label`),
       title: t(`${base}.steps.${step}.title`),
@@ -53,8 +51,6 @@ const cases = computed(() => caseMeta.map((item) => {
             :source-label="item.sourceLabel"
             :title="item.title"
             :text="item.text"
-            :before="item.before"
-            :after="item.after"
             :workflow="item.workflow"
             :steps="item.steps"
             :out="item.out"
