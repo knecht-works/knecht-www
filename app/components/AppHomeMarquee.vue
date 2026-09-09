@@ -21,9 +21,10 @@ const track = Array.from({ length: 3 }, () => logos).flat()
 
 <template>
   <section>
-    <AppReveal 
+    <AppReveal
       class="container pt-20 sm:pt-24 2xl:pt-28"
-      :delay="0.08">
+      :delay="0.08"
+    >
       <div class="col-span-full overflow-hidden mask-x-from-88% mask-x-to-100%">
         <!-- The track is rendered twice so the -50% loop is seamless. -->
         <div class="flex w-max items-center gap-12 py-2 animate-marquee hover:paused motion-reduce:animate-none sm:gap-16">
