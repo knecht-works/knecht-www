@@ -69,6 +69,11 @@ const { data: surround } = await useAsyncData('docs-surround-' + route.path, () 
   queryCollectionItemSurroundings('docs_en', route.path, { fields: ['description'] })
 )
 
+// Opens a prefilled issue in the website repo for feedback on this page.
+const issueUrl = computed(() =>
+  `${GITHUB_URL}/knecht-www/issues/new?title=${encodeURIComponent(`Docs: ${page.value?.title} Feedback`)}`
+)
+
 useSeoMeta({
   title: page.value.title,
   description: page.value.description
@@ -149,6 +154,29 @@ defineOgImage('Knecht', {
     </div>
 
     <UPage :ui="{ right: 'hidden lg:block' }">
+      <UAlert
+        icon="i-lucide-construction"
+        color="neutral"
+        variant="subtle"
+        title="These docs are new."
+        class="mt-8"
+        :ui="{ description: 'text-muted' }"
+      >
+        <template #description>
+          Expect rough edges. If something is missing or hard to follow, tell us on
+          <NuxtLink
+            :to="DISCORD_URL"
+            target="_blank"
+            class="text-primary transition-opacity hover:opacity-70"
+          >Discord</NuxtLink>
+          or by mail at
+          <NuxtLink
+            to="mailto:hallo@knecht.works"
+            class="text-primary transition-opacity hover:opacity-70"
+          >hallo@knecht.works</NuxtLink>.
+        </template>
+      </UAlert>
+
       <UPageHeader
         :title="page.title"
         :description="page.description"
@@ -166,9 +194,12 @@ defineOgImage('Knecht', {
           class="richtext"
         />
 
-        <USeparator v-if="surround?.filter(Boolean).length" />
+        <DocsFeedback :issue-url="issueUrl" />
 
-        <UContentSurround :surround="surround" />
+        <UContentSurround
+          v-if="surround?.filter(Boolean).length"
+          :surround="surround"
+        />
       </UPageBody>
 
       <template
@@ -179,7 +210,19 @@ defineOgImage('Knecht', {
           :links="page.body.toc.links"
           highlight
           highlight-variant="circuit"
-        />
+        >
+          <template #bottom>
+            <UButton
+              label="Provide Feedback"
+              icon="i-lucide-message-square-plus"
+              color="neutral"
+              variant="subtle"
+              size="sm"
+              :to="issueUrl"
+              target="_blank"
+            />
+          </template>
+        </UContentToc>
       </template>
     </UPage>
   </div>
