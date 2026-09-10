@@ -141,6 +141,14 @@ html {
   }
 }
 
+/* The head hangs before JS runs, so the wake-up in AppHomeHero.vue starts from
+   the right pose without a jump. Mirrors WAKE_DOWN. */
+@media (prefers-reduced-motion: no-preference) {
+  .mascot-head-asleep {
+    transform: rotate(-16deg);
+  }
+}
+
 @media (pointer: coarse) and (prefers-reduced-motion: no-preference) {
   @supports ((animation-timeline: scroll()) and (animation-range: 0% 100%)) {
     .mascot-head-scroll {
