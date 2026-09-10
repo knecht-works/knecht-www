@@ -5,7 +5,6 @@ interface Logo {
   src: string
   width: number
   height: number
-  /** Raster logos are forced to white, the SVGs are already styled. */
   recolor?: boolean
 }
 
@@ -28,7 +27,7 @@ const track = Array.from({ length: 3 }, () => logos).flat()
     >
       <div class="col-span-full overflow-hidden mask-x-from-88% mask-x-to-100%">
         <!-- The track is rendered twice so the -50% loop is seamless. -->
-        <div class="flex w-max items-center gap-12 py-2 animate-marquee hover:paused motion-reduce:animate-none sm:gap-16">
+        <div class="flex w-max items-center gap-14 py-2 animate-marquee hover:paused motion-reduce:animate-none sm:gap-20">
           <template
             v-for="pass in 2"
             :key="pass"
@@ -49,7 +48,7 @@ const track = Array.from({ length: 3 }, () => logos).flat()
                 :width="logo.width"
                 :height="logo.height"
                 loading="lazy"
-                class="h-7 w-auto sm:h-8"
+                class="aspect-[3/1] h-10 w-auto object-contain sm:h-11"
                 :class="{ 'brightness-0 invert': logo.recolor }"
               >
             </a>
