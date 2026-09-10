@@ -90,6 +90,14 @@ html {
   scroll-padding-inline: var(--slider-edge);
 }
 
+/* Fades the bleed zones of a slider-bleed track, so cards dissolve towards the
+   viewport edges instead of running into them. Cards at rest sit inside the
+   content edge and stay fully visible. */
+@utility slider-fade {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 var(--slider-edge), #000 calc(100% - var(--slider-edge)), transparent);
+  mask-image: linear-gradient(to right, transparent, #000 var(--slider-edge), #000 calc(100% - var(--slider-edge)), transparent);
+}
+
 @utility container-grid {
   @apply grid grid-cols-12 mx-auto;
 }
