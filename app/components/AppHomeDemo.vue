@@ -47,8 +47,7 @@ const activeTab = computed(() => tabs.value.find(tab => tab.id === activeId.valu
       />
 
       <!-- Tab bar: segmented control, horizontally scrollable on mobile -->
-      <AppReveal
-        :delay="0.05"
+      <div
         class="col-span-full mt-8 -mx-(--container-margin-x) overflow-x-auto outside-container scrollbar-none"
       >
         <div
@@ -78,12 +77,10 @@ const activeTab = computed(() => tabs.value.find(tab => tab.id === activeId.valu
             {{ tab.label }}
           </button>
         </div>
-      </AppReveal>
+      </div>
 
       <!-- Browser mockup -->
-      <AppReveal
-        :delay="0.1"
-        :y="22"
+      <div
         class="col-span-full mt-6 w-full"
       >
         <AppBrowserFrame :url="activeTab.url">
@@ -108,7 +105,7 @@ const activeTab = computed(() => tabs.value.find(tab => tab.id === activeId.valu
             />
           </div>
         </AppBrowserFrame>
-      </AppReveal>
+      </div>
     </div>
   </section>
 </template>

@@ -20,9 +20,7 @@ const messages = computed(() => messageMeta.map(item => ({
 <template>
   <section id="discord">
     <div class="container pt-default">
-      <AppReveal
-        :y="22"
-        :duration="0.7"
+      <div
         class="discord-card relative col-span-full overflow-hidden rounded-2xl border border-default"
       >
         <div
@@ -51,11 +49,9 @@ const messages = computed(() => messageMeta.map(item => ({
           </div>
 
           <ol class="flex flex-col gap-2.5">
-            <AppReveal
-              v-for="(message, i) in messages"
+            <li
+              v-for="message in messages"
               :key="message.key"
-              as="li"
-              :delay="0.1 + i * 0.1"
               class="flex items-start gap-3 rounded-xl border border-default bg-default/70 px-3.5 py-3"
             >
               <span
@@ -75,10 +71,10 @@ const messages = computed(() => messageMeta.map(item => ({
                   {{ message.text }}
                 </p>
               </div>
-            </AppReveal>
+            </li>
           </ol>
         </div>
-      </AppReveal>
+      </div>
     </div>
   </section>
 </template>

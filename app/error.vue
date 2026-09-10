@@ -31,8 +31,7 @@ const retry = () => clearError({ redirect: useRoute().fullPath })
   <NuxtLayout>
     <section class="relative overflow-hidden">
       <div class="container">
-        <AppReveal
-          appear
+        <div
           class="col-span-full flex min-h-[60vh] flex-col items-center justify-center py-16 text-center sm:py-24"
         >
           <!-- Status code -->
@@ -64,7 +63,7 @@ const retry = () => clearError({ redirect: useRoute().fullPath })
               @click="retry"
             />
           </div>
-        </AppReveal>
+        </div>
       </div>
     </section>
   </NuxtLayout>
