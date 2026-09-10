@@ -61,6 +61,7 @@ defineShortcuts({
       :status="chat.status"
       compact
       class="gap-2 px-0"
+      :ui="{ viewport: 'top-auto bottom-4' }"
       :user="userMessage"
       :assistant="assistantMessage"
     >

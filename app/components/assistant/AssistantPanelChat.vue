@@ -33,13 +33,18 @@ watch(isOpen, (value) => {
 
 <template>
   <div class="flex h-full min-h-0 flex-1 flex-col">
-    <div class="flex-1 min-h-0 overflow-y-auto p-4">
-      <AssistantMessages
-        :chat="chat"
-        :faq-questions="faqQuestions"
-        class="flex flex-col gap-4"
-        @ask-question="send"
-      />
+    <!-- The scroll-to-bottom button of UChatMessages is absolute and needs a
+         positioned ancestor that does not scroll, otherwise it lands relative
+         to the whole panel and can end up under the prompt. -->
+    <div class="relative flex min-h-0 flex-1 flex-col">
+      <div class="flex-1 min-h-0 overflow-y-auto p-4">
+        <AssistantMessages
+          :chat="chat"
+          :faq-questions="faqQuestions"
+          class="flex flex-col gap-4"
+          @ask-question="send"
+        />
+      </div>
     </div>
 
     <div class="flex w-full shrink-0 flex-col border-y border-default">
