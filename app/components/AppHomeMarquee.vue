@@ -12,7 +12,8 @@ interface Logo {
 const logos: Logo[] = [
   { name: 'Anwesoft', url: 'https://www.anwesoft.com', src: '/assets/logos/anwesoft-logo.webp', width: 384, height: 100, recolor: true },
   { name: 'Justin Holt', url: 'https://justinholt.com', src: '/assets/logos/justinholt-logo.svg', width: 100, height: 100 },
-  { name: 'Samuel Reichör', url: 'https://samuelreichor.at', src: '/assets/logos/sr-logo.svg', width: 544, height: 544 }
+  { name: 'Samuel Reichör', url: 'https://samuelreichor.at', src: '/assets/logos/sr-logo.svg', width: 544, height: 544 },
+  { name: 'More Things Digial', url: 'https://www.morethings.digital/de', src: '/assets/logos/morethingsdigital-logo.svg', width: 100, height: 100 },
 ]
 
 // Repeat the short list so one half of the track is wider than the viewport.
