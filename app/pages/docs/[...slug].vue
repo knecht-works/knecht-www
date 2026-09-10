@@ -159,7 +159,7 @@ defineOgImage('Knecht', {
         color="neutral"
         variant="subtle"
         title="These docs are new."
-        class="mt-8"
+        class="lg:mt-8"
         :ui="{ description: 'text-muted' }"
       >
         <template #description>
