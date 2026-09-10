@@ -211,7 +211,7 @@ onMounted(() => {
             color="neutral"
             variant="outline"
             size="lg"
-            :to="localePath('/#use-cases')"
+            to="/docs"
           />
         </AppReveal>
 
