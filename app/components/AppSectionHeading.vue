@@ -4,18 +4,23 @@
 defineProps<{
   title: string
   titleAccent?: string
+  /** Text that follows the accent when the accent sits mid-sentence. */
+  titleAfter?: string
   text?: string
 }>()
 </script>
 
 <template>
-  <AppReveal class="col-span-full max-w-2xl">
+  <div class="col-span-full max-w-2xl">
     <h2 class="text-balance text-highlighted">
       {{ title }}
       <span
         v-if="titleAccent"
         class="text-primary"
       >{{ titleAccent }}</span>
+      <template v-if="titleAfter">
+        {{ ' ' + titleAfter }}
+      </template>
     </h2>
 
     <p
@@ -26,5 +31,5 @@ defineProps<{
     </p>
 
     <slot />
-  </AppReveal>
+  </div>
 </template>

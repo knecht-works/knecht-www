@@ -1,12 +1,12 @@
 <script setup lang="ts">
 // One node in the integrations diagram: a trigger (with a source tile) or a
-// result (with a small colored icon in front of the title).
+// result (with an icon tile in an accent color).
 defineProps<{
   title: string
   text: string
   source?: SourceKey
   icon?: string
-  iconClass?: string
+  tileClass?: string
   dashed?: boolean
 }>()
 </script>
@@ -14,22 +14,26 @@ defineProps<{
 <template>
   <div
     class="flex items-center gap-3.5 rounded-xl border px-4 py-3.5"
-    :class="dashed ? 'border-dashed border-accented' : 'border-default bg-elevated'"
+    :class="dashed ? 'border-dashed border-accented' : 'border-white/6 bg-card'"
   >
     <AppSourceMark
       v-if="source"
       :source="source"
       size="md"
     />
+    <span
+      v-else-if="icon"
+      class="grid size-9 shrink-0 place-items-center rounded-lg"
+      :class="tileClass"
+    >
+      <UIcon
+        :name="icon"
+        class="size-5"
+      />
+    </span>
 
     <div class="min-w-0">
-      <div class="flex items-center gap-2 font-semibold text-highlighted">
-        <UIcon
-          v-if="icon"
-          :name="icon"
-          class="size-4 shrink-0"
-          :class="iconClass"
-        />
+      <div class="font-semibold text-highlighted">
         {{ title }}
       </div>
       <div class="mt-1 text-sm leading-snug text-muted">

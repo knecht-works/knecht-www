@@ -10,9 +10,9 @@ const triggerMeta: { key: string, source: SourceKey, dashed?: boolean }[] = [
 ]
 
 const resultMeta = [
-  { key: 'pr', icon: 'i-lucide-git-pull-request', iconClass: 'text-accent-mint' },
-  { key: 'preview', icon: 'i-lucide-globe', iconClass: 'text-accent-orange' },
-  { key: 'comment', icon: 'i-lucide-message-square-text', iconClass: 'text-accent-violet' }
+  { key: 'pr', icon: 'i-lucide-git-pull-request', tileClass: 'bg-accent-mint text-neutral-950' },
+  { key: 'preview', icon: 'i-lucide-globe', tileClass: 'bg-accent-orange text-white' },
+  { key: 'comment', icon: 'i-lucide-message-square-text', tileClass: 'bg-accent-violet text-neutral-950' }
 ]
 
 const triggers = computed(() => triggerMeta.map(item => ({
@@ -21,10 +21,16 @@ const triggers = computed(() => triggerMeta.map(item => ({
   text: t(`integrations.triggers.${item.key}.text`)
 })))
 
-const centerSteps = computed(() => ['boot', 'run', 'ai'].map(key => ({
-  key,
-  title: t(`integrations.center.steps.${key}.title`),
-  detail: t(`integrations.center.steps.${key}.detail`)
+// What happens inside a run, as three one-line steps.
+const stepMeta = [
+  { key: 'boot', icon: 'i-lucide-box' },
+  { key: 'run', icon: 'i-lucide-list-checks' },
+  { key: 'ai', icon: 'i-lucide-sparkles' }
+]
+
+const centerSteps = computed(() => stepMeta.map(item => ({
+  ...item,
+  title: t(`integrations.center.steps.${item.key}`)
 })))
 
 const results = computed(() => resultMeta.map(item => ({
@@ -36,22 +42,25 @@ const results = computed(() => resultMeta.map(item => ({
 
 <template>
   <section id="integrations">
-    <div class="container pt-default">
+    <div
+      class="container pt-default"
+    >
       <AppSectionHeading
         :title="$t('integrations.title')"
+        :title-accent="$t('integrations.titleAccent')"
+        :title-after="$t('integrations.titleAfter')"
         :text="$t('integrations.intro')"
       />
 
-      <AppReveal
-        :delay="0.08"
-        :y="22"
-        class="shadow-panel col-span-full mt-10 flex flex-col rounded-2xl border border-default bg-muted p-5 sm:p-8 lg:mt-12 lg:grid lg:integration-grid lg:items-center lg:p-10"
+      <div
+        class="shadow-panel col-span-full mt-10 flex flex-col rounded-2xl border border-default bg-white/2 p-5 sm:p-8 lg:grid lg:integration-grid lg:items-center lg:gap-y-3 lg:p-10 xl:integration-grid-xl"
       >
+        <!-- Labels get their own grid row from lg, so the columns below stay centered on the Knecht card. -->
+        <span class="mb-3 font-mono text-2xs uppercase tracking-widest text-dimmed lg:col-start-1 lg:row-start-1 lg:mb-0">
+          {{ $t('integrations.triggerLabel') }}
+        </span>
         <!-- Triggers -->
-        <div class="flex flex-col gap-3">
-          <span class="font-mono text-2xs uppercase tracking-widest text-dimmed">
-            {{ $t('integrations.triggerLabel') }}
-          </span>
+        <div class="flex flex-col gap-3 lg:row-start-2">
           <AppFlowCard
             v-for="item in triggers"
             :key="item.key"
@@ -62,65 +71,65 @@ const results = computed(() => resultMeta.map(item => ({
           />
         </div>
 
-        <AppFlowConnector />
+        <AppFlowConnector class="lg:row-start-2" />
 
         <!-- Knecht -->
-        <div class="knecht-node relative rounded-2xl border border-primary/35 px-5 py-7 text-center sm:px-6">
-          <NuxtImg
-            :src="'/assets/mascotMain.png'"
-            alt=""
-            aria-hidden="true"
-            height="240"
-            format="webp"
-            loading="lazy"
-            class="drop-shadow-mascot mx-auto h-30 w-auto select-none"
-          />
-          <div class="mt-3.5 text-lg font-semibold text-highlighted">
-            {{ $t('integrations.center.title') }}
+        <div class="relative rounded-2xl lg:row-start-2 border border-white/6 bg-card px-5 py-7 sm:flex sm:items-center sm:gap-5 sm:px-6 lg:block xl:flex xl:px-7">
+          <div class="min-w-0 flex-1">
+            <div class="font-semibold text-highlighted">
+              {{ $t('integrations.center.label') }}
+            </div>
+            <p class="mt-1 max-w-xs text-sm leading-snug text-muted">
+              {{ $t('integrations.center.text') }}
+            </p>
+
+            <ol class="mt-5 flex flex-col gap-2">
+              <li
+                v-for="step in centerSteps"
+                :key="step.key"
+                class="flex items-center gap-2.5 rounded-lg border border-white/6 bg-card px-3 py-2 text-sm font-medium text-highlighted"
+              >
+                <UIcon
+                  :name="step.icon"
+                  class="size-4 shrink-0 text-primary"
+                />
+                {{ step.title }}
+              </li>
+            </ol>
           </div>
 
-          <!-- What happens inside a run, as a rough three step outline -->
-          <ol class="mx-auto mt-5 flex max-w-xs flex-col gap-2 text-left">
-            <li
-              v-for="(step, i) in centerSteps"
-              :key="step.key"
-              class="flex items-start gap-3 rounded-lg border border-default bg-elevated px-3 py-2.5"
-            >
-              <span class="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full border border-primary/55 font-mono text-2xs text-primary">
-                {{ i + 1 }}
-              </span>
-              <div class="min-w-0">
-                <div class="text-sm font-semibold text-highlighted">
-                  {{ step.title }}
-                </div>
-                <div class="mt-0.5 text-xs leading-snug text-dimmed">
-                  {{ step.detail }}
-                </div>
-              </div>
-            </li>
-          </ol>
+          <img
+            :src="'/assets/mascotLeft.svg'"
+            alt=""
+            aria-hidden="true"
+            width="654"
+            height="1199"
+            loading="lazy"
+            class="drop-shadow-mascot hidden h-52 w-auto shrink-0 select-none sm:block lg:hidden xl:block"
+          >
         </div>
 
         <AppFlowConnector
           accent="orange"
           :delay="1.2"
+          class="lg:row-start-2"
         />
 
         <!-- Results -->
-        <div class="flex flex-col gap-3">
-          <span class="font-mono text-2xs uppercase tracking-widest text-dimmed">
-            {{ $t('integrations.resultLabel') }}
-          </span>
+        <span class="mb-3 font-mono text-2xs uppercase tracking-widest text-dimmed lg:col-start-5 lg:row-start-1 lg:mb-0">
+          {{ $t('integrations.resultLabel') }}
+        </span>
+        <div class="flex flex-col gap-3 lg:row-start-2">
           <AppFlowCard
             v-for="item in results"
             :key="item.key"
             :icon="item.icon"
-            :icon-class="item.iconClass"
+            :tile-class="item.tileClass"
             :title="item.title"
             :text="item.text"
           />
         </div>
-      </AppReveal>
+      </div>
     </div>
   </section>
 </template>

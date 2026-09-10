@@ -11,6 +11,7 @@
   --color-accent-violet: var(--accent-violet);
   --color-accent-discord: var(--accent-discord);
   --color-accent-jira: var(--accent-jira);
+  --color-card: oklch(0.17 0 0);
 
   --text-2xs: 0.6875rem;
   --text-2xs--line-height: 1rem;
@@ -161,17 +162,16 @@ html {
   grid-template-columns: minmax(0, 1fr) 60px minmax(0, 1.1fr) 60px minmax(0, 1fr);
 }
 
+/* From xl the Knecht card also holds the mascot, so it gets more room. */
+@utility integration-grid-xl {
+  grid-template-columns: minmax(0, 1fr) 60px minmax(0, 1.6fr) 60px minmax(0, 1fr);
+}
+
 /* Mint progress fill with a soft glow, shared by the roadmap panel and the
    workflow run cards. */
 @utility progress-fill {
   background: linear-gradient(90deg, var(--accent-mint), color-mix(in oklab, var(--accent-mint) 60%, var(--accent-orange)));
   box-shadow: 0 0 16px -2px var(--accent-mint);
-}
-
-/* Highlighted Knecht node in the integrations diagram. */
-@utility knecht-node {
-  background: linear-gradient(180deg, color-mix(in oklab, var(--accent-mint) 8%, transparent), color-mix(in oklab, var(--accent-mint) 2%, transparent));
-  box-shadow: 0 0 60px -20px color-mix(in oklab, var(--accent-mint) 35%, transparent);
 }
 
 @utility discord-card {
