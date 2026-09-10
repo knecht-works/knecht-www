@@ -41,7 +41,7 @@ const noFits = [
   <section id="zielgruppe">
     <div class="container pt-default">
       <!-- Heading -->
-      <AppReveal class="col-span-full max-w-2xl">
+      <div class="col-span-full max-w-2xl">
         <h2 class="text-balance text-highlighted">
           Gebaut für den Agentur-Alltag.
         </h2>
@@ -51,16 +51,13 @@ const noFits = [
           ab, die viele Projekte mit sich bringen: Updates, Bugfixes,
           Previews. Ohne eigenes Platform-Team und ohne neue Infrastruktur.
         </p>
-      </AppReveal>
+      </div>
 
       <!-- Fit criteria -->
       <div class="col-span-full mt-8 grid gap-4 sm:grid-cols-2 lg:mt-10 xl:grid-cols-4">
-        <AppReveal
-          v-for="(fit, i) in fits"
+        <article
+          v-for="fit in fits"
           :key="fit.title"
-          as="article"
-          :y="0"
-          :delay="i * 0.08"
           class="shadow-panel group relative flex flex-col rounded-xl border border-default bg-muted p-6 transition duration-200 hover:-translate-y-1 hover:border-accented hover:shadow-panel-lg lg:p-7"
           :style="{ '--a': fit.accent }"
         >
@@ -84,12 +81,11 @@ const noFits = [
           <p class="mt-3 text-sm leading-relaxed text-muted">
             {{ fit.text }}
           </p>
-        </AppReveal>
+        </article>
       </div>
 
       <!-- Who it is not for: a quiet footnote, not a competing card -->
-      <AppReveal
-        :delay="0.1"
+      <div
         class="col-span-full mt-4"
       >
         <div class="flex flex-col gap-4 rounded-xl border border-dashed border-default px-6 py-5 lg:flex-row lg:items-center lg:justify-between lg:px-7">
@@ -114,7 +110,7 @@ const noFits = [
             Dann braucht ihr Knecht vermutlich nicht. Er ist für alle, die genau das nicht aufbauen wollen.
           </p>
         </div>
-      </AppReveal>
+      </div>
     </div>
   </section>
 </template>

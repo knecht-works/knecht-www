@@ -70,9 +70,7 @@ const submit = async () => {
     id="cta"
   >
     <div class="container pt-default ">
-      <AppReveal
-        :y="22"
-        :duration="0.7"
+      <div
         class="shadow-panel-lg relative col-span-full overflow-hidden rounded-2xl border border-default bg-gradient-to-br from-white/[0.05] to-white/[0.015]"
       >
         <div class="cta-glow" />
@@ -189,7 +187,7 @@ const submit = async () => {
             </p>
           </div>
         </div>
-      </AppReveal>
+      </div>
     </div>
   </section>
 </template>
