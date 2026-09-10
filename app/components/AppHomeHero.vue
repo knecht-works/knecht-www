@@ -9,19 +9,23 @@ const MOBILE_TILT_DOWN = 16 // degrees the head tilts down after scrolling SCROL
 const SCROLL_RANGE = 600 // px of scroll that maps to the full downward tilt
 const SHAKE_AMP = 13 // peak shake angle in degrees
 const SHAKE_FREQ = 32 // shake speed (rad/s) → ~3 head turns
-const SHAKE_DUR = 0.6 // seconds
-const GLANCE_DOWN = 15 // degrees the head lowers to look at the content below
-const GLANCE_OVERSHOOT = 3 // degrees it swings past neutral on the way back up
-const GLANCE_DELAY = 1200 // ms after mount, once the hero intro has settled
+const SHAKE_DUR = 0.6 // seconds, click shake
+const WAKE_DOWN = 16 // degrees the head hangs while asleep, mirrored by .mascot-head-asleep
+const WAKE_HOLD = 1.2 // seconds the head keeps hanging while the hero fades in
+const WAKE_UP = 1.9 // seconds at which the head is upright and the shake starts
+const WAKE_SHAKE_DUR = 1.3 // seconds, longer than the click shake
 
 // One-shot motions layered on top of the tracked tilt. Each returns the extra
 // angle at time t (seconds) and ends after `dur`.
 type Overlay = { dur: number, at: (t: number) => number }
-const shakeMotion: Overlay = {
-  dur: SHAKE_DUR,
-  at: t => SHAKE_AMP * Math.sin(t * SHAKE_FREQ) * (1 - t / SHAKE_DUR)
+// A shake that ramps in briefly and fades out smoothly over `dur` seconds.
+const shake = (dur: number) => (t: number) => {
+  const rampIn = Math.min(1, t / 0.15)
+  const envelope = rampIn * rampIn * (1 - t / dur) ** 2
+  return SHAKE_AMP * Math.sin(t * SHAKE_FREQ) * envelope
 }
-// Cubic ease-in-out for the glance segments.
+const shakeMotion: Overlay = { dur: SHAKE_DUR, at: shake(SHAKE_DUR) }
+// Cubic ease-in-out for the keyframe segments.
 const ease = (x: number) => (x < 0.5 ? 4 * x * x * x : 1 - (-2 * x + 2) ** 3 / 2)
 // Interpolates between keyframes [time, angle] with eased segments.
 const keyframed = (frames: [number, number][]) => (t: number) => {
@@ -32,17 +36,17 @@ const keyframed = (frames: [number, number][]) => (t: number) => {
   }
   return frames[frames.length - 1]![1]
 }
-// A deliberate glance down at the page, a short hold, then back up with a
-// small overshoot before settling.
-const glanceMotion: Overlay = {
-  dur: 2.0,
-  at: keyframed([
-    [0, 0],
-    [0.55, -GLANCE_DOWN],
-    [1.0, -GLANCE_DOWN],
-    [1.6, GLANCE_OVERSHOOT],
-    [2.0, 0]
-  ])
+// Wake-up: the head hangs while the hero fades in, lifts to neutral, then
+// shakes itself awake.
+const wake = keyframed([
+  [0, -WAKE_DOWN],
+  [WAKE_HOLD, -WAKE_DOWN],
+  [WAKE_UP, 0]
+])
+const wakeShake = shake(WAKE_SHAKE_DUR)
+const wakeMotion: Overlay = {
+  dur: WAKE_UP + WAKE_SHAKE_DUR,
+  at: t => (t < WAKE_UP ? wake(t) : wakeShake(t - WAKE_UP))
 }
 
 let triggerShake = () => {}
@@ -102,8 +106,8 @@ onMounted(() => {
 
   triggerShake = () => play(shakeMotion)
 
-  // Greet the visitor once the hero has faded in.
-  const glanceTimer = window.setTimeout(() => play(glanceMotion), GLANCE_DELAY)
+  // CSS already renders the head hanging; from here JS owns the pose.
+  play(wakeMotion)
 
   let cleanup: () => void
 
@@ -113,6 +117,8 @@ onMounted(() => {
     cleanup = () => {}
   } else if (fine) {
     const onMove = (e: MouseEvent) => {
+      // Let the wake-up finish before the head starts following the cursor.
+      if (overlay === wakeMotion) return
       const r = el.getBoundingClientRect()
       const dy = e.clientY - (r.top + r.height * 0.322) // cursor offset from the neck pivot
       targetRot = clamp(-dy / 28, -MAX_TILT, MAX_TILT) // mouse lower → head tilts further down
@@ -130,9 +136,9 @@ onMounted(() => {
       targetRot = rotForScroll()
       kick()
     }
-    // Snap to the current scroll position on load without animating in.
+    // Snap to the current scroll position on load without animating in. The
+    // wake-up tick is already running and writes the pose on the next frame.
     curRot = targetRot = rotForScroll()
-    el.style.transform = `rotate(${curRot.toFixed(2)}deg)`
     window.addEventListener('scroll', onScroll, { passive: true })
     cleanup = () => window.removeEventListener('scroll', onScroll)
   }
@@ -140,7 +146,6 @@ onMounted(() => {
   onBeforeUnmount(() => {
     triggerShake = () => {}
     cleanup()
-    window.clearTimeout(glanceTimer)
     cancelAnimationFrame(raf)
   })
 })
@@ -148,14 +153,11 @@ onMounted(() => {
 
 <template>
   <section class="relative overflow-hidden">
-    <div class="container pt-8 sm:pt-12 lg:pt-18">
+    <div class="container pt-8 sm:pt-12 lg:pt-18 md:pb-16">
       <!-- Content (≈70%) -->
-      <div class="col-span-full md:col-span-7 sm:pb-6 2xl:py-16">
+      <div class="col-span-full md:col-span-7">
         <!-- Announcement badge -->
-        <AppReveal
-          appear
-          :delay="0.05"
-        >
+        <div>
           <NuxtLinkLocale
             to="/#roadmap"
             class="inline-flex items-center gap-3 rounded-full border border-default bg-elevated py-1.5 pl-3 pr-4 text-sm transition-colors hover:border-accented group"
@@ -173,31 +175,23 @@ onMounted(() => {
               />
             </span>
           </NuxtLinkLocale>
-        </AppReveal>
+        </div>
 
-        <AppReveal
-          as="h1"
-          appear
-          :delay="0.13"
+        <h1
           class="mt-7 text-balance text-highlighted mega"
         >
           {{ $t('hero.title') }}
           <span class="block text-primary">{{ $t('hero.titleAccent') }}</span>
-        </AppReveal>
+        </h1>
 
-        <AppReveal
-          as="p"
-          appear
-          :delay="0.21"
-          class="mt-6 max-w-(--text-width) text-base leading-relaxed text-muted sm:text-lg"
+        <p
+          class="mt-6 max-w-xl text-base leading-relaxed text-muted sm:text-lg"
         >
           {{ $t('hero.description') }}
-        </AppReveal>
+        </p>
 
         <!-- CTAs -->
-        <AppReveal
-          appear
-          :delay="0.29"
+        <div
           class="mt-8 flex flex-wrap items-center gap-3"
         >
           <UButton
@@ -213,39 +207,15 @@ onMounted(() => {
             size="lg"
             to="/docs"
           />
-        </AppReveal>
-
-        <!-- Status pills -->
-        <AppReveal
-          appear
-          :delay="0.37"
-          class="mt-9 flex flex-wrap items-center gap-2.5"
-        >
-          <AppBadge
-            dot-color="primary"
-            :label="$t('hero.badgeDdev')"
-          />
-          <AppBadge
-            dot-color="orange"
-            :label="$t('hero.badgeEu')"
-          />
-          <AppBadge
-            dot-color="violet"
-            :label="$t('hero.badgeBeta')"
-          />
-        </AppReveal>
+        </div>
       </div>
 
       <!-- Mascot (≈30%) -->
-      <AppReveal
-        appear
-        :delay="0.2"
-        :y="24"
-        :duration="0.8"
-        class="col-span-full max-md:mt-16 md:col-span-5 md:relative md:ml-10"
+      <div
+        class="max-md:hidden md:col-span-5 md:relative md:ml-10"
       >
         <div
-          class="relative max-md:mx-auto aspect-[654/1199] w-1/2 cursor-pointer select-none md:absolute md:left-1/2 md:top-1/2 md:h-full md:w-auto md:-translate-x-1/2 md:-translate-y-1/2"
+          class="absolute left-1/2 top-0 aspect-[654/1199] h-[calc(100%+4rem)] w-auto -translate-x-1/2 cursor-pointer select-none"
           @click="onMascotClick"
         >
           <img
@@ -264,11 +234,11 @@ onMounted(() => {
             width="654"
             height="1199"
             fetchpriority="high"
-            class="mascot-head-scroll absolute inset-0 h-full w-full object-contain will-change-transform"
+            class="mascot-head-asleep mascot-head-scroll absolute inset-0 h-full w-full object-contain will-change-transform"
             style="transform-origin: 49.4% 32.2%"
           >
         </div>
-      </AppReveal>
+      </div>
     </div>
   </section>
 </template>
