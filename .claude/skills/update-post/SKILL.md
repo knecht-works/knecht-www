@@ -132,7 +132,9 @@ description: 1-2 Sätze für die Liste auf der Startseite.
   Abschnitts gehört.
 - `::steps{level="3"}` ... `::` für nummerierte Abläufe, innen `###` pro
   Schritt.
-- `::field-group` mit `:::field{name="..."}` für 2-4 parallele Kategorien.
+- `::field-group` nie verwenden (Samuel, 2026-09-10). Für 2-4 parallele
+  Kategorien mit Ziel-Link `::card-group` mit `:::card{title="..." icon="..." to="..."}`,
+  sonst eine schlichte Liste.
 - Vorher/Nachher-Vergleiche als Markdown-Tabelle: erste Spalte die
   Dimension (RAM, Disk, Bootzeit), eine Spalte pro Variante. Nur Zeilen
   aufnehmen, für die es belegte Werte oder klare Fakten gibt. In Tabellen
