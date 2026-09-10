@@ -34,15 +34,22 @@ const control = computed(() => {
   return { icon: 'i-lucide-play', label: t('useCases.player.play') }
 })
 
+// Status dot before the workflow name: running, finished or idle.
+const dotClass = computed(() => {
+  if (playing.value) return 'bg-accent-orange text-accent-orange shadow-glow animate-pulse'
+  if (done.value) return 'bg-primary text-primary shadow-glow'
+  return 'bg-accented'
+})
+
 const stateOf = (index: number): StepState => {
   if (done.value || pos.value > index) return 'done'
   return pos.value === index ? 'active' : 'todo'
 }
 
 const rowClass: Record<StepState, string> = {
-  done: 'border-white/6 bg-white/2',
+  done: 'border-white/6 bg-card',
   active: 'border-accent-orange/60 bg-accent-orange/8',
-  todo: 'border-transparent opacity-45'
+  todo: 'border-transparent bg-card opacity-45'
 }
 
 const markClass: Record<StepState, string> = {
@@ -65,7 +72,13 @@ const labelClass: Record<StepState, string> = {
   >
     <!-- Title bar -->
     <div class="flex items-center justify-between gap-3 border-default bg-elevated px-4 py-3.5 sm:px-4.5">
-      <span class="truncate font-mono text-sm text-highlighted">{{ workflow }}</span>
+      <span class="flex min-w-0 items-center gap-2.5">
+        <span
+          class="size-2 shrink-0 rounded-full transition-colors duration-400"
+          :class="dotClass"
+        />
+        <span class="truncate font-mono text-sm text-highlighted">{{ workflow }}</span>
+      </span>
       <button
         type="button"
         class="grid size-7 shrink-0 cursor-pointer place-items-center rounded-full border border-default text-muted transition-colors hover:border-accented hover:text-highlighted"
@@ -131,7 +144,8 @@ const labelClass: Record<StepState, string> = {
         <AppSourceMark :source="source" />
         <span class="truncate">{{ out.head }}</span>
       </div>
-      <p class="mt-2 text-sm leading-normal text-toned">
+      <!-- Fixed to three lines so cards with different copy keep one height. -->
+      <p class="mt-2 line-clamp-3 min-h-[3lh] text-sm leading-normal text-toned">
         {{ out.body }}
       </p>
       <div class="mt-2 truncate font-mono text-xs text-primary">
