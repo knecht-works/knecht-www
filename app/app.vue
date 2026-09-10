@@ -3,13 +3,17 @@
 // canonical and the og:locale tags. Its canonical overrides the one from
 // nuxt-seo-utils, which is registered with a low tag priority.
 const localeHead = useLocaleHead()
+const localePath = useLocalePath()
 
 useHead(() => ({
   htmlAttrs: {
     ...localeHead.value.htmlAttrs,
     class: 'dark'
   },
-  link: [...localeHead.value.link ?? []],
+  link: [
+    ...localeHead.value.link ?? [],
+    { rel: 'alternate', type: 'application/rss+xml', title: 'Knecht Updates', href: localePath('/updates/rss.xml') }
+  ],
   meta: [
     ...localeHead.value.meta ?? [],
     { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -25,7 +29,6 @@ defineOgImage('Knecht')
 </script>
 
 <template>
-  <!-- No scrollbar padding on body lock: html reserves the gutter in main.css. -->
   <UApp
     :toaster="{ expand: false }"
     :scroll-body="false"
