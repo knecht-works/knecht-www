@@ -325,7 +325,10 @@
   "updates": {
     "title": "Building in Public.",
     "description": "Wir bauen Knecht offen. Jeder Meilenstein landet hier.",
-    "all": "Alle Updates ansehen"
+    "all": "Alle Updates ansehen",
+    "readMore": "Weiterlesen",
+    "back": "Alle Updates",
+    "seoDescription": "Building in Public, jeder Meilenstein von Knecht wird ehrlich dokumentiert."
   },
   "cta": {
     "title": "Bau Knecht mit von Anfang an.",
@@ -419,5 +422,11 @@
         ]
       }
     ]
+  },
+  "common": {
+    "home": "Zur Startseite"
+  },
+  "pages": {
+    "updatedAt": "Zuletzt aktualisiert"
   }
 }

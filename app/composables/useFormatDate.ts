@@ -1,0 +1,8 @@
+// Long date in the active locale, e.g. "10. September 2026" or "September 10, 2026".
+export const useFormatDate = () => {
+  const { locale } = useI18n()
+  const tag = computed(() => locale.value === 'de' ? 'de-DE' : 'en-US')
+
+  return (date: string) =>
+    new Intl.DateTimeFormat(tag.value, { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(date))
+}

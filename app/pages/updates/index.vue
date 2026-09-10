@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const { t } = useI18n()
 const { data: updates } = await useUpdates()
 
 const selectedTags = ref<string[]>([])
@@ -31,12 +32,12 @@ function toggleTag(tag: string) {
 
 useSeoMeta({
   title: 'Updates',
-  description: 'Building in Public, jeder Meilenstein von Knecht wird ehrlich dokumentiert.'
+  description: t('updates.seoDescription')
 })
 
 defineOgImage('Knecht', {
   title: 'Updates',
-  description: 'Building in Public, jeder Meilenstein von Knecht wird ehrlich dokumentiert.'
+  description: t('updates.seoDescription')
 })
 </script>
 
@@ -51,15 +52,15 @@ defineOgImage('Knecht', {
           name="i-lucide-arrow-left"
           class="size-4"
         />
-        Zur Startseite
+        {{ $t('common.home') }}
       </NuxtLinkLocale>
 
       <h1 class="mt-8 text-balance text-highlighted">
-        Building in Public.
+        {{ $t('updates.title') }}
       </h1>
 
       <p class="mt-5 text-pretty text-base leading-relaxed text-muted sm:text-lg">
-        Wir bauen Knecht offen für alle. Jeder Meilenstein landet hier.
+        {{ $t('updates.description') }}
       </p>
     </div>
 

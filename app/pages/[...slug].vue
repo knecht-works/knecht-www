@@ -34,11 +34,8 @@ defineOgImage('Knecht', {
   description: page.value.description
 })
 
-const updatedAt = computed(() =>
-  page.value?.updatedAt
-    ? new Intl.DateTimeFormat('de-DE', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(page.value.updatedAt))
-    : null
-)
+const formatDate = useFormatDate()
+const updatedAt = computed(() => page.value?.updatedAt ? formatDate(page.value.updatedAt) : null)
 </script>
 
 <template>
@@ -55,7 +52,7 @@ const updatedAt = computed(() =>
           name="i-lucide-arrow-left"
           class="size-4"
         />
-        Zur Startseite
+        {{ $t('common.home') }}
       </NuxtLinkLocale>
 
       <h1 class="mt-8 text-balance text-highlighted">
@@ -66,7 +63,7 @@ const updatedAt = computed(() =>
         v-if="updatedAt"
         class="mt-3 font-mono text-xs text-dimmed"
       >
-        Zuletzt aktualisiert: {{ updatedAt }}
+        {{ $t('pages.updatedAt') }}: {{ updatedAt }}
       </p>
 
       <div class="mt-6 max-w-(--text-width) richtext">

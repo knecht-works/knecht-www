@@ -179,7 +179,8 @@ export default defineNuxtConfig({
         '@unhead/schema-org/vue',
         '@vue/devtools-core',
         '@vue/devtools-kit',
-        'ai'
+        '@vueuse/core',
+        'ai',
       ]
     }
   },

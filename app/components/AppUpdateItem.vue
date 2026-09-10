@@ -9,9 +9,8 @@ const props = defineProps<{
   }
 }>()
 
-const formattedDate = computed(() =>
-  new Intl.DateTimeFormat('de-DE', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(props.update.date))
-)
+const formatDate = useFormatDate()
+const formattedDate = computed(() => formatDate(props.update.date))
 </script>
 
 <template>
@@ -38,7 +37,7 @@ const formattedDate = computed(() =>
         {{ update.description }}
       </p>
       <span class="mt-3 inline-flex items-center gap-1.5 font-mono text-sm text-primary">
-        Weiterlesen
+        {{ $t('updates.readMore') }}
         <UIcon
           name="i-lucide-arrow-right"
           class="size-3.5 transition-transform group-hover:translate-x-0.5"

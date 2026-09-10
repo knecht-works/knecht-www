@@ -19,9 +19,8 @@ defineOgImage('Knecht', {
   description: update.value.description
 })
 
-const formattedDate = computed(() =>
-  new Intl.DateTimeFormat('de-DE', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(update.value!.date))
-)
+const formatDate = useFormatDate()
+const formattedDate = computed(() => formatDate(update.value!.date))
 
 const tocLinks = computed(() => update.value?.body?.toc?.links ?? [])
 
@@ -65,7 +64,7 @@ const surround = computed(() => {
             name="i-lucide-arrow-left"
             class="size-4"
           />
-          Alle Updates
+          {{ $t('updates.back') }}
         </NuxtLinkLocale>
 
         <div class="mt-8 flex items-center gap-3 font-mono text-sm">
