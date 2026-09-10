@@ -18,69 +18,63 @@
   "hero": {
     "status": "Beta",
     "roadmapLink": "See the Roadmap",
-    "title": "Boot. Fix. Test.",
-    "titleAccent": "Fully Automatic.",
-    "description": "Knecht is a dashboard on your server, made for agencies with many DDEV projects. A GitHub issue or Jira ticket starts a workflow. Knecht boots the project as a working environment, does the task from the ticket there, and supplies a completed pull request with a preview.",
+    "title": "Your Agency's",
+    "titleAccent": "Maintenance Robot.",
+    "description": "A ticket starts a workflow. Knecht boots the project, does the task inside it, and opens a pull request with a preview. Self-hosted, for agencies that maintain many projects.",
     "ctaPrimary": "Become a Beta Tester",
     "ctaSecondary": "Explore the Docs",
-    "badgeDdev": "DDEV Native",
-    "badgeEu": "EU · Self-Hostable",
-    "badgeBeta": "Beta Seats Open",
     "mascotAlt": "Knecht, the robot helper with a CRT screen head"
   },
+  "testers": {
+    "label": "These teams are testing Knecht in the beta right now."
+  },
   "integrations": {
-    "title": "Knecht Connects to the Tools You Already Use.",
-    "intro": "A ticket comes in, a result goes out. In between, Knecht boots your project and works in the real system.",
+    "title": "Knecht Connects to the Tools You",
+    "titleAccent": "Already",
+    "titleAfter": "Use.",
+    "intro": "A ticket comes in, a result goes out. Knecht boots your project and does the work in a real dev environment.",
     "triggerLabel": "Trigger",
     "resultLabel": "Result",
     "triggers": {
       "github": {
         "title": "GitHub",
-        "text": "Starts a workflow from an issue, a label, or a mention."
+        "text": "From an issue, a label, or a mention."
       },
       "jira": {
         "title": "Jira",
-        "text": "Starts a workflow from a ticket or a label and comments back."
+        "text": "From a ticket or a label."
       },
       "cron": {
         "title": "Cron & Webhook",
-        "text": "Runs on a schedule or when a security advisory comes in."
+        "text": "On a schedule or a security advisory."
       }
     },
     "center": {
-      "title": "Knecht Runs Workflows",
+      "label": "Let the Knecht Work",
+      "text": "For every ticket, Knecht boots the project and runs the workflow inside it.",
       "steps": {
-        "boot": {
-          "title": "Project Boots",
-          "detail": "Web, database, and services, like locally"
-        },
-        "run": {
-          "title": "Steps Run in Order",
-          "detail": "Shell commands, tests, link checks"
-        },
-        "ai": {
-          "title": "AI Agent Where Needed",
-          "detail": "Reads code, reproduces, fixes"
-        }
+        "boot": "Project Boots with Database",
+        "run": "Workflow Steps Run in Order",
+        "ai": "AI Agent Where Needed"
       }
     },
     "results": {
       "pr": {
         "title": "Pull Request",
-        "text": "Branch, commits, and description, ready for review."
+        "text": "Branch, commits, and description."
       },
       "preview": {
         "title": "Preview Environment",
-        "text": "Clickable, with a real database behind it."
+        "text": "Clickable, with a real database."
       },
       "comment": {
         "title": "Comment in the Ticket",
-        "text": "Assessment with links to the preview and the PR."
+        "text": "Links to the preview and the PR."
       }
     }
   },
   "useCases": {
-    "title": "Three Examples from",
+    "title": "Use Cases for",
     "titleAccent": "Agency Life.",
     "intro": "Knecht does every task that you can describe as a workflow. These three show what such a run looks like, from the trigger to the pull request.",
     "player": {
@@ -90,10 +84,9 @@
     },
     "items": {
       "update": {
-        "source": "Cron Job",
         "workflow": "Craft Update Workflow",
-        "title": "The CMS Update with the Database Running.",
-        "text": "Every Monday, Knecht boots the project with its database, runs craft update all, and checks every link on the preview. The PR contains composer.lock and the updated project config, nobody has to update locally and commit again.",
+        "title": "CMS Update with Database.",
+        "text": "Every Monday Knecht boots the project with its database, updates Craft, and checks every link. The PR comes back ready.",
         "steps": {
           "trigger": {
             "label": "Trigger",
@@ -123,10 +116,9 @@
         }
       },
       "estimate": {
-        "source": "Jira Ticket",
         "workflow": "Ticket Estimate Workflow",
-        "title": "Estimate a Ticket Before Anyone Spends Time on It.",
-        "text": "A Jira ticket gets the label \"knecht-estimate\". Knecht boots the project, reproduces the problem, and writes effort, risk, and a suggested fix as a comment in the ticket, in minutes instead of at the next planning.",
+        "title": "Estimate Tickets Up Front.",
+        "text": "One label on the Jira ticket is enough. Knecht reproduces the problem and writes effort, risk, and a fix back to the ticket.",
         "steps": {
           "trigger": {
             "label": "Trigger",
@@ -138,10 +130,15 @@
             "title": "Project Boots",
             "detail": "Environment up with DB dump"
           },
-          "analyze": {
+          "reproduce": {
             "label": "AI",
-            "title": "Agent Reproduces & Estimates",
-            "detail": "Duplicate listener in newsletter.js, effort 3 h, risk low"
+            "title": "Agent Reproduces the Problem",
+            "detail": "Duplicate listener in newsletter.js"
+          },
+          "estimate": {
+            "label": "AI",
+            "title": "Effort and Risk Estimated",
+            "detail": "Effort 3 h, risk low, one module affected"
           }
         },
         "out": {
@@ -151,10 +148,9 @@
         }
       },
       "fix": {
-        "source": "GitHub Issue",
         "workflow": "Bug Fix Workflow",
-        "title": "Fix the Bug from the Issue, Tested Against the Real App.",
-        "text": "An issue gets the label \"knecht-fix\". The agent reproduces the bug in the live app, fixes it, tests the fix against it, and opens a pull request with a preview link.",
+        "title": "Fix Bugs from the Issue.",
+        "text": "The issue gets a label. The agent reproduces the bug in the running app, fixes it there, and opens a PR with a preview.",
         "steps": {
           "trigger": {
             "label": "Trigger",
@@ -188,7 +184,7 @@
   "demo": {
     "title": "Many Projects.",
     "titleAccent": "One Knecht.",
-    "description": "Projects, workflows, and runs in one place, on your server or hosted by us.",
+    "description": "Projects, workflows, and runs in one place on your server. A workflow is written once and runs on as many projects as you connect, and every run keeps its log, preview, and result.",
     "tabs": {
       "projects": "Projects",
       "detail": "Project Detail",
@@ -198,7 +194,7 @@
     "imageAlt": "Knecht {label} preview"
   },
   "discord": {
-    "title": "Knecht Now Has a Discord.",
+    "title": "Knecht Now Has a Discord Server.",
     "text": "Questions about the setup, feedback on workflows, show your first runs. We build in the open and answer ourselves.",
     "cta": "Join the Discord",
     "messages": {
@@ -223,7 +219,7 @@
     "title": "Where Knecht Stands.",
     "intro": "What Knecht can do today, what we are working on, and what comes next.",
     "progressLabel": "Progress to the public release",
-    "goal": "The beta is running. Next up are documentation, onboarding, and more beta testers.",
+    "goal": "The beta is running. Next up are the Jira integration and more beta testers.",
     "status": {
       "done": "Done",
       "progress": "In progress",
@@ -310,7 +306,15 @@
       },
       "docs": {
         "title": "Documentation and Onboarding",
-        "text": "Documentation that covers the setup, workflows, and troubleshooting fully."
+        "text": "The docs cover the setup, workflows, and troubleshooting."
+      },
+      "noDdev": {
+        "title": "Projects Without DDEV",
+        "text": "Knecht boots projects that do not use DDEV as well."
+      },
+      "jiraImprove": {
+        "title": "Improve Jira Integration",
+        "text": "The Jira trigger gets more options and better comments back in the ticket."
       },
       "pricing": {
         "title": "Price Model and Licenses",
