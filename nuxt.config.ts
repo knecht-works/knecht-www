@@ -159,10 +159,12 @@ export default defineNuxtConfig({
         // Entry point for the docs crawl, /docs itself only redirects here.
         docsRedirects['/docs']!,
         '/updates',
+        '/updates/rss.xml',
         '/impressum',
         '/datenschutz',
         '/de',
         '/de/updates',
+        '/de/updates/rss.xml',
         '/de/impressum',
         '/de/datenschutz'
       ]
