@@ -22,7 +22,7 @@
     "titleAccent": "Fully Automatic.",
     "description": "Knecht is a dashboard on your server, made for agencies with many DDEV projects. A GitHub issue or Jira ticket starts a workflow. Knecht boots the project as a working environment, does the task from the ticket there, and supplies a completed pull request with a preview.",
     "ctaPrimary": "Become a Beta Tester",
-    "ctaSecondary": "See the Use Cases",
+    "ctaSecondary": "Explore the Docs",
     "badgeDdev": "DDEV Native",
     "badgeEu": "EU · Self-Hostable",
     "badgeBeta": "Beta Seats Open",
