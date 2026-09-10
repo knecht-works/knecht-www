@@ -19,12 +19,36 @@ onMounted(() => {
   preferred.value = langs.some(lang => lang.toLowerCase().startsWith('de')) ? 'de' : 'en'
 })
 
-const target = computed(() => {
-  if (dismissed.value || !preferred.value || preferred.value === locale.value) return null
+const route = useRoute()
 
-  const path = switchLocalePath(preferred.value)
-  return path ? { locale: preferred.value, path } : null
-})
+// Content routes only count as translated when the other locale's collection
+// holds the counterpart. Static routes (home, updates index) always exist.
+const counterpartCollection = (to: 'de' | 'en') => {
+  const name = String(route.name ?? '').replace(/___\w+$/, '')
+  if (name === 'slug') return `pages_${to}` as const
+  if (name === 'updates-slug') return `updates_${to}` as const
+  return null
+}
+
+const counterpart = ref<{ locale: 'de' | 'en', path: string } | null>(null)
+
+watch([preferred, () => route.path], async ([to, current]) => {
+  counterpart.value = null
+  // Docs exist in English only, the German site links straight to them.
+  if (!to || to === locale.value || current.startsWith('/docs')) return
+
+  const path = switchLocalePath(to)
+  if (!path) return
+
+  const collection = counterpartCollection(to)
+  if (collection && !(await queryCollection(collection).path(path).first())) return
+  // Ignore a result that arrives after navigating on.
+  if (route.path !== current) return
+
+  counterpart.value = { locale: to, path }
+}, { immediate: true })
+
+const target = computed(() => dismissed.value ? null : counterpart.value)
 
 // Written in the language being offered, not in the one currently shown.
 const COPY = {
