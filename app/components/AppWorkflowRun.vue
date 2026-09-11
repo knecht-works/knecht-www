@@ -1,8 +1,4 @@
 <script setup lang="ts">
-// A workflow run as the dashboard shows it, replayed step by step. The replay
-// starts when the card scrolls into view, plays once and rests on the finished
-// state. Only one card on the page plays at a time. A button in the title bar
-// pauses, resumes or replays the run.
 export interface RunStep {
   label: string
   title: string
@@ -21,20 +17,16 @@ type StepState = 'done' | 'active' | 'todo'
 const { t } = useI18n()
 
 const rootEl = useTemplateRef<HTMLElement>('rootEl')
-// Index of the active step. At the step count the run is done and the output
-// card slides in.
 const { pos, playing, toggle } = useRunPlayer(rootEl, props.steps.length)
 
 const done = computed(() => pos.value >= props.steps.length)
 
-// Play / pause / replay button in the title bar.
 const control = computed(() => {
   if (playing.value) return { icon: 'i-lucide-pause', label: t('useCases.player.pause') }
   if (done.value) return { icon: 'i-lucide-rotate-ccw', label: t('useCases.player.replay') }
   return { icon: 'i-lucide-play', label: t('useCases.player.play') }
 })
 
-// Status dot before the workflow name: running, finished or idle.
 const dotClass = computed(() => {
   if (playing.value) return 'bg-accent-orange text-accent-orange shadow-glow animate-pulse'
   if (done.value) return 'bg-primary text-primary shadow-glow'
@@ -70,7 +62,6 @@ const labelClass: Record<StepState, string> = {
     ref="rootEl"
     class="shadow-panel-lg overflow-hidden rounded-2xl border border-default bg-muted"
   >
-    <!-- Title bar -->
     <div class="flex items-center justify-between gap-3 border-default bg-elevated px-4 py-3.5 sm:px-4.5">
       <span class="flex min-w-0 items-center gap-2.5">
         <span
@@ -93,7 +84,6 @@ const labelClass: Record<StepState, string> = {
       </button>
     </div>
 
-    <!-- Steps -->
     <ol class="flex flex-col gap-2 p-3 sm:p-4.5">
       <li
         v-for="(step, i) in steps"
@@ -134,7 +124,6 @@ const labelClass: Record<StepState, string> = {
       </li>
     </ol>
 
-    <!-- Output: the comment or PR that lands back in the tool -->
     <div
       class="mx-3 mb-3 rounded-xl border border-primary/30 bg-primary/6 px-4 py-3.5 transition-all duration-500 ease-soft sm:mx-4.5 sm:mb-4.5"
       :class="done ? 'translate-y-0 opacity-100' : 'translate-y-2.5 opacity-0'"

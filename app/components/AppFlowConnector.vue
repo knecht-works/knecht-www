@@ -1,7 +1,6 @@
 <script setup lang="ts">
-// Line between two diagram nodes with a dot travelling along it. Horizontal on
-// large screens, vertical when the diagram stacks. The dot is hidden entirely
-// for reduced motion instead of sitting frozen at the start.
+// The dot is hidden entirely for reduced motion instead of sitting frozen at
+// the start.
 withDefaults(defineProps<{
   accent?: 'mint' | 'orange'
   delay?: number

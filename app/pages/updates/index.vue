@@ -4,7 +4,6 @@ const { data: updates } = await useUpdates()
 
 const selectedTags = ref<string[]>([])
 
-// Most used tags first, ties sorted alphabetically.
 const tags = computed(() => {
   const counts = new Map<string, number>()
   for (const update of updates.value ?? []) {
@@ -16,7 +15,6 @@ const tags = computed(() => {
     (counts.get(b)! - counts.get(a)!) || a.localeCompare(b))
 })
 
-// Tags are OR-combined. An empty selection shows everything.
 const filteredUpdates = computed(() => {
   if (selectedTags.value.length === 0) {
     return updates.value ?? []

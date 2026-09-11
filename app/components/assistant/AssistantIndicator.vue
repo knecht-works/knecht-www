@@ -6,7 +6,6 @@ const dotSize = 2
 const gap = 2
 const totalDots = size * size
 
-// Each pattern lights the 4x4 grid step by step, then hands over to the next.
 const patterns = [
   [[0], [1], [2], [3], [7], [11], [15], [14], [13], [12], [8], [4], [5], [6], [10], [9]],
   [[0, 4, 8, 12], [1, 5, 9, 13], [2, 6, 10, 14], [3, 7, 11, 15]],
@@ -40,7 +39,6 @@ const currentIndex = ref(0)
 const displayedText = ref(statusMessages.value[0]!)
 const chars = 'abcdefghijklmnopqrstuvwxyz'
 
-// Scrambles from one status word to the next, left to right.
 function scramble(from: string, to: string) {
   const maxLength = Math.max(from.length, to.length)
   let frame = 0

@@ -1,7 +1,6 @@
 import { Chat } from '@ai-sdk/vue'
 import { DefaultChatTransport } from 'ai'
 
-// One chat session against /api/assistant. A new instance means a new chat.
 export function useAssistantChat(options: { consumePendingPrompt: () => string | null }) {
   const { pageContextEnabled, currentPage } = useAssistant()
 

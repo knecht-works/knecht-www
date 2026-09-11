@@ -1,7 +1,6 @@
-// True while a sticky element actually sticks below the mobile header. The
-// threshold is --ui-header-height (4rem) plus 1px tolerance. An element that
-// already starts right below the header only counts once the page has
-// scrolled as far as the header needs for its own scrolled state (20px).
+// 65 is --ui-header-height (4rem) plus 1px tolerance. The 20px scroll gate
+// matches the header's own scrolled state, so an element that already starts
+// right below the header does not count on load.
 export function usePinned(el: Ref<Element | null | undefined>) {
   const pinned = ref(false)
 

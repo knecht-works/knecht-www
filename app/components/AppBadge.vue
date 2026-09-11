@@ -2,19 +2,12 @@
 type DotColor = 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'error' | 'neutral' | 'orange' | 'violet'
 
 withDefaults(defineProps<{
-  /** Text shown in the badge (alternatively use the default slot). */
   label?: string
-  /** Color of the leading status dot. */
   dotColor?: DotColor
-  /** Show the leading status dot. */
   dot?: boolean
-  /** Animate (pulse) the dot's color. */
   pulse?: boolean
-  /** Optional leading icon, replaces the dot when set. */
   icon?: string
-  /** Optional trailing icon. */
   trailingIcon?: string
-  /** Render the badge as a link. */
   to?: string
   target?: string
 }>(), {

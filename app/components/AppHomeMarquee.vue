@@ -30,7 +30,6 @@ const track = Array.from({ length: 3 }, () => logos).flat()
           {{ $t('testers.label') }}
         </p>
         <div class="min-w-0 flex-1 overflow-hidden mask-x-from-88% mask-x-to-100%">
-          <!-- The track is rendered twice so the -50% loop is seamless. -->
           <div class="flex w-max items-center gap-14 py-2 animate-marquee hover:paused motion-reduce:animate-none sm:gap-20">
             <template
               v-for="pass in 2"

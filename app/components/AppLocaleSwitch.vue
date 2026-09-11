@@ -18,7 +18,6 @@ const items = computed<DropdownMenuItem[]>(() => locales.value.map(item => ({
   class: item.code === locale.value ? 'text-highlighted' : undefined
 })))
 
-// The trigger label speaks the language the visitor is currently reading.
 const TRIGGER_LABEL: Record<string, string> = {
   en: 'Change language',
   de: 'Sprache wechseln'

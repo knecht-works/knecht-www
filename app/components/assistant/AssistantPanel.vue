@@ -25,7 +25,6 @@ watch(() => route.path, () => {
   pageContextDismissed.value = false
 })
 
-// The open state survives reloads and navigation.
 const storedOpen = useLocalStorage('assistant-open', false)
 onMounted(() => {
   isOpen.value = storedOpen.value

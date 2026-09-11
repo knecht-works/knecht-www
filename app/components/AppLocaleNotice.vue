@@ -5,8 +5,7 @@
 const { locale } = useI18n()
 const switchLocalePath = useSwitchLocalePath()
 
-// Set on dismiss and on following the offer, so the notice stays away for a
-// month either way instead of coming back on every visit.
+// Set on dismiss and on following the offer, so the notice stays away either way.
 const dismissed = useCookie<boolean>('locale-notice-dismissed', {
   maxAge: 60 * 60 * 24 * 30,
   sameSite: 'lax'

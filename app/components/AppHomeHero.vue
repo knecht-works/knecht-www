@@ -8,26 +8,21 @@ const MOBILE_TILT_UP = 16 // degrees the head looks up at the top of the page (m
 const MOBILE_TILT_DOWN = 16 // degrees the head tilts down after scrolling SCROLL_RANGE
 const SCROLL_RANGE = 600 // px of scroll that maps to the full downward tilt
 const SHAKE_AMP = 13 // peak shake angle in degrees
-const SHAKE_FREQ = 32 // shake speed (rad/s) → ~3 head turns
+const SHAKE_FREQ = 32 // rad/s, about three head turns
 const SHAKE_DUR = 0.6 // seconds, click shake
 const WAKE_DOWN = 16 // degrees the head hangs while asleep, mirrored by .mascot-head-asleep
 const WAKE_HOLD = 1.2 // seconds the head keeps hanging while the hero fades in
 const WAKE_UP = 1.9 // seconds at which the head is upright and the shake starts
 const WAKE_SHAKE_DUR = 1.3 // seconds, longer than the click shake
 
-// One-shot motions layered on top of the tracked tilt. Each returns the extra
-// angle at time t (seconds) and ends after `dur`.
 type Overlay = { dur: number, at: (t: number) => number }
-// A shake that ramps in briefly and fades out smoothly over `dur` seconds.
 const shake = (dur: number) => (t: number) => {
   const rampIn = Math.min(1, t / 0.15)
   const envelope = rampIn * rampIn * (1 - t / dur) ** 2
   return SHAKE_AMP * Math.sin(t * SHAKE_FREQ) * envelope
 }
 const shakeMotion: Overlay = { dur: SHAKE_DUR, at: shake(SHAKE_DUR) }
-// Cubic ease-in-out for the keyframe segments.
 const ease = (x: number) => (x < 0.5 ? 4 * x * x * x : 1 - (-2 * x + 2) ** 3 / 2)
-// Interpolates between keyframes [time, angle] with eased segments.
 const keyframed = (frames: [number, number][]) => (t: number) => {
   for (let i = 1; i < frames.length; i++) {
     const [t0, a0] = frames[i - 1]!
@@ -36,8 +31,6 @@ const keyframed = (frames: [number, number][]) => (t: number) => {
   }
   return frames[frames.length - 1]![1]
 }
-// Wake-up: the head hangs while the hero fades in, lifts to neutral, then
-// shakes itself awake.
 const wake = keyframed([
   [0, -WAKE_DOWN],
   [WAKE_HOLD, -WAKE_DOWN],
@@ -121,13 +114,12 @@ onMounted(() => {
       if (overlay === wakeMotion) return
       const r = el.getBoundingClientRect()
       const dy = e.clientY - (r.top + r.height * 0.322) // cursor offset from the neck pivot
-      targetRot = clamp(-dy / 28, -MAX_TILT, MAX_TILT) // mouse lower → head tilts further down
+      targetRot = clamp(-dy / 28, -MAX_TILT, MAX_TILT)
       kick()
     }
     window.addEventListener('mousemove', onMove, { passive: true })
     cleanup = () => window.removeEventListener('mousemove', onMove)
   } else {
-    // Look up at the top of the page, then tilt down as the user scrolls.
     const rotForScroll = () => {
       const p = clamp(window.scrollY / SCROLL_RANGE, 0, 1)
       return MOBILE_TILT_UP - p * (MOBILE_TILT_UP + MOBILE_TILT_DOWN)
@@ -154,9 +146,7 @@ onMounted(() => {
 <template>
   <section class="relative overflow-hidden">
     <div class="container pt-8 sm:pt-12 lg:pt-18 md:pb-16">
-      <!-- Content (≈70%) -->
       <div class="col-span-full md:col-span-7">
-        <!-- Announcement badge -->
         <div>
           <NuxtLinkLocale
             to="/#roadmap"
@@ -190,7 +180,6 @@ onMounted(() => {
           {{ $t('hero.description') }}
         </p>
 
-        <!-- CTAs -->
         <div
           class="mt-8 flex flex-wrap items-center gap-3"
         >
@@ -210,7 +199,6 @@ onMounted(() => {
         </div>
       </div>
 
-      <!-- Mascot (≈30%) -->
       <div
         class="max-md:hidden md:col-span-5 md:relative md:ml-10"
       >

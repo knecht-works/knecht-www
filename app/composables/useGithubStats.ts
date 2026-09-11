@@ -3,9 +3,8 @@ interface GithubStats {
   version: string | null
 }
 
-// Shared client-side fetch of /api/github: no matter how many components use
-// it, the endpoint is called once. localStorage bridges the gap until the
-// response arrives, so revisits render instantly.
+// Called once no matter how many components use it. localStorage bridges the
+// gap until the response arrives, so revisits render instantly.
 export function useGithubStats() {
   const stats = useState<GithubStats>('github-stats', () => ({ stars: null, version: null }))
   const started = useState('github-stats-started', () => false)

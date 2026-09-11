@@ -24,8 +24,6 @@ const formattedDate = computed(() => formatDate(update.value!.date))
 
 const tocLinks = computed(() => update.value?.body?.toc?.links ?? [])
 
-// Full list (newest first) to find the current article's neighbours. Shares its
-// key with the index page, so it is fetched at most once.
 const { data: updates } = await useUpdates()
 
 // Newer on the left, older on the right, like the docs. A missing neighbour
@@ -43,8 +41,6 @@ const surround = computed(() => {
 
 <template>
   <div class="container pt-hero">
-    <!-- UPage owns the two-column reading layout; the tracks are remapped to
-         the site's content width and a fixed 15rem TOC column. -->
     <UPage
       class="col-span-full"
       :ui="{
@@ -86,15 +82,12 @@ const surround = computed(() => {
           {{ update.description }}
         </p>
 
-        <!-- Mobile TOC between hero and body; sticks below the header while
-             scrolling the article. Desktop renders it in the right column. -->
         <AppToc
           v-if="tocLinks.length"
           :links="tocLinks"
           class="mt-8 lg:hidden"
         />
 
-        <!-- Full blog body - styled by Nuxt UI's built-in Prose components. -->
         <div class="richtext lg:border-t lg:border-default pt-4 lg:mt-8">
           <ContentRenderer :value="update" />
         </div>

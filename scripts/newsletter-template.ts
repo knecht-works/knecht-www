@@ -1,9 +1,6 @@
-// Newsletter HTML for Resend broadcasts. Deliberately plain: no card, no
-// forced backgrounds, near-default colors. Mail clients restyle emails in dark
-// mode anyway (Gmail and Outlook invert even dark designs), so the mail is
-// designed light and lets every client adapt it on its own. Table layout with
-// inline styles only, link and image URLs must be absolute.
-// {{{RESEND_UNSUBSCRIBE_URL}}} is replaced by Resend on send.
+// Designed light and deliberately plain: mail clients restyle emails in dark
+// mode anyway (Gmail and Outlook invert even dark designs). Link and image
+// URLs must be absolute. {{{RESEND_UNSUBSCRIBE_URL}}} is replaced by Resend.
 
 export interface NewsletterPost {
   title: string

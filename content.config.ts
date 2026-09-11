@@ -44,9 +44,7 @@ export const collections = {
     source: { include: 'de/updates/**', prefix: '/de/updates' },
     schema: updateSchema
   }),
-  // Docs exist in English only and are served unprefixed under /docs. Folder
-  // numbering (1.getting-started) and .navigation.yml files drive the sidebar
-  // order, following the Docus content schema.
+  // Docs exist in English only and are served unprefixed under /docs.
   docs_en: defineCollection({
     type: 'page',
     source: { include: 'en/docs/**', prefix: '/docs' },

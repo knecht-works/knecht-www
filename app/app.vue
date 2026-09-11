@@ -1,7 +1,6 @@
 <script setup lang="ts">
-// Emits html lang/dir, hreflang alternates incl. x-default, the locale-aware
-// canonical and the og:locale tags. Its canonical overrides the one from
-// nuxt-seo-utils, which is registered with a low tag priority.
+// Its canonical overrides the one from nuxt-seo-utils, which is registered
+// with a low tag priority.
 const localeHead = useLocaleHead()
 const localePath = useLocalePath()
 

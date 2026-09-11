@@ -46,7 +46,6 @@ const activeTab = computed(() => tabs.value.find(tab => tab.id === activeId.valu
         :text="$t('demo.description')"
       />
 
-      <!-- Tab bar: segmented control, horizontally scrollable on mobile -->
       <div
         class="col-span-full mt-8 -mx-(--container-margin-x) overflow-x-auto outside-container scrollbar-none"
       >
@@ -79,7 +78,6 @@ const activeTab = computed(() => tabs.value.find(tab => tab.id === activeId.valu
         </div>
       </div>
 
-      <!-- Browser mockup -->
       <div
         class="col-span-full mt-6 w-full"
       >

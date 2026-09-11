@@ -16,7 +16,6 @@ async function getDocsContext(origin: string): Promise<string> {
   return text
 }
 
-// Abuse guards for the public endpoint.
 const MAX_MESSAGES = 30
 const MAX_MESSAGE_CHARS = 4000
 

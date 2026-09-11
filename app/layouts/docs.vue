@@ -6,7 +6,6 @@ const { data: navigation } = await useAsyncData('docs-navigation', () => queryCo
 // Strip the synthetic /docs root node so the sections render as top-level groups.
 const docsNav = computed<ContentNavigationItem[]>(() => navigation.value?.[0]?.children ?? navigation.value ?? [])
 
-// The docs page renders the same tree in its mobile menu drawer.
 provide('docsNavigation', docsNav)
 </script>
 

@@ -8,7 +8,6 @@ export interface FaqCategory {
   items: string[]
 }
 
-// Prose overrides for the compact chat column.
 export const ASSISTANT_CHAT_THEME = {
   prose: {
     p: { base: 'my-2 text-sm/6' },
@@ -30,7 +29,6 @@ export const ASSISTANT_STREAMING_CARET = {
   class: 'inline-block w-2 h-[1em] bg-current align-middle ml-px opacity-80 animate-pulse'
 }
 
-// Consecutive text chunks render as one markdown block.
 export function getMergedParts(parts: UIMessage['parts']): UIMessage['parts'] {
   const result: UIMessage['parts'] = []
   for (const part of parts) {

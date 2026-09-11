@@ -1,12 +1,6 @@
 <script setup lang="ts">
-// Shared page chrome: background field, header and footer. Used by every layout
-// so the visual frame stays identical no matter the content arrangement.
-
-// Docs pages hide the marketing CTA between content and footer.
 withDefaults(defineProps<{ cta?: boolean }>(), { cta: true })
 
-// Scroll-spy for the home sections, mounted once here so the nav + footer can
-// reflect the active section.
 useSectionSpy()
 </script>
 
@@ -35,7 +29,6 @@ useSectionSpy()
             <slot />
           </UMain>
 
-          <!-- Site-wide CTA, shown at the bottom of every page above the footer. -->
           <AppCta v-if="cta" />
 
           <AppFooter />

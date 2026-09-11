@@ -1,6 +1,5 @@
 <script setup lang="ts">
 defineProps<{
-  /** Tag text (alternatively use the default slot). */
   label?: string
 }>()
 </script>

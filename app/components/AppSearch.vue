@@ -1,6 +1,4 @@
 <script setup lang="ts">
-// Cmd+K search over the docs. UContentSearchButton (in the header) and this
-// component share their open state through Nuxt UI's useContentSearch.
 const { data: files } = useLazyAsyncData(
   'docs-search-sections',
   () => queryCollectionSearchSections('docs_en'),

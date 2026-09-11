@@ -1,8 +1,4 @@
 <script setup lang="ts">
-// Update posts get shared as deep links, so each one doubles as a landing
-// page. This box answers "what is this product?" for readers who arrive cold.
-// Styled as a small terminal window: on-brand, and visually distinct from the
-// big CTA panel that follows further down the page.
 </script>
 
 <template>
@@ -10,7 +6,6 @@
     aria-label="Was ist Knecht?"
     class="shadow-panel mt-12 overflow-hidden rounded-xl border border-default bg-muted"
   >
-    <!-- Title bar -->
     <div class="flex items-center gap-4 border-b border-default bg-elevated px-4 py-3">
       <div class="flex shrink-0 items-center gap-2">
         <span class="size-3 rounded-full bg-error/80" />
@@ -31,7 +26,6 @@
       </span>
     </div>
 
-    <!-- Transcript -->
     <div class="bg-default p-5 font-mono text-sm leading-relaxed lg:p-6">
       <p class="text-highlighted">
         <span class="select-none text-primary">$&nbsp;</span>knecht --help

@@ -1,16 +1,3 @@
-// Builds and schedules the newsletter broadcast. Runs in GitHub Actions on the
-// 1st and 15th, or manually via workflow_dispatch. Finds every update post
-// added since the last "newsletter-*" git tag, renders the teaser mail and
-// creates a Resend broadcast scheduled 24 hours out, so it can still be
-// cancelled in the Resend dashboard.
-//
-// Flags:
-//   --dry-run  writes the HTML to ./out/newsletter.html, sends nothing
-//   --test     sends to the test segment (RESEND_TEST_SEGMENT_ID)
-//
-// Env: RESEND_API_KEY, RESEND_SEGMENT_ID, RESEND_TEST_SEGMENT_ID (only for
-// --test), NEWSLETTER_FROM (optional, has a default).
-//
 // Requires the full git history (fetch-depth: 0), otherwise git describe fails.
 
 import { execSync } from 'node:child_process'

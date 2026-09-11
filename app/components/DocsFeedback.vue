@@ -6,7 +6,6 @@ defineProps<{
 const route = useRoute()
 const vote = ref<'up' | 'down' | null>(null)
 
-// The UI acknowledges right away, the vote is sent in the background.
 // Nothing is stored on the device, so a reload allows voting again.
 function submit(value: 'up' | 'down') {
   vote.value = value

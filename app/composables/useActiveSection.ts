@@ -1,14 +1,10 @@
-// Home page section ids, in document order. The header/footer nav links point at
-// these via hash (e.g. /#roadmap). `cta` is included so the spy clears the previous
-// section when the CTA is reached, even though no nav item targets it.
+// In document order. No nav item targets `cta`, it is listed so the spy clears
+// the previous section once the CTA is reached.
 const SECTION_IDS = ['integrations', 'use-cases', 'dashboard', 'discord', 'roadmap', 'updates', 'cta']
 
-// Current in-view home section. Populated by useSectionSpy (called once in
-// AppShell) and read by the nav + footer via useNavActive.
 export const useActiveSection = () => useState<string>('active-section', () => '')
 
-// Scroll-spy over the home sections. Call ONCE, in AppShell. Off the home page
-// there is nothing to track, so the state is reset to ''.
+// Call once, in AppShell.
 export const useSectionSpy = () => {
   const route = useRoute()
   const localePath = useLocalePath()
@@ -23,7 +19,6 @@ export const useSectionSpy = () => {
   const setup = () => {
     teardown()
     active.value = ''
-    // The home page is `/` in the default locale and `/de` in German.
     if (route.path !== localePath('/')) return
 
     const visible = new Set<string>()
@@ -33,7 +28,6 @@ export const useSectionSpy = () => {
           if (entry.isIntersecting) visible.add(entry.target.id)
           else visible.delete(entry.target.id)
         }
-        // First section (in document order) currently crossing the band.
         const current = SECTION_IDS.find(id => visible.has(id))
         if (current) active.value = current
       },
@@ -53,15 +47,11 @@ export const useSectionSpy = () => {
   onBeforeUnmount(teardown)
 }
 
-// isActive(to) for nav + footer links. Home hash links are active when their
-// section is in view, subpage hash links when their page is open, and plain
-// route links when the current path matches.
 export const useNavActive = () => {
   const route = useRoute()
   const localePath = useLocalePath()
   const active = useActiveSection()
 
-  // Path part of a link: query and hash stripped, trailing slashes removed.
   const pathOf = (to: string) => {
     const path = to.split(/[?#]/)[0] ?? ''
     return path.replace(/\/+$/, '') || '/'
@@ -71,17 +61,14 @@ export const useNavActive = () => {
   const isActive = (to?: string) => {
     if (!to || to.startsWith('mailto:')) return false
 
-    // `/` in the default locale, `/de` in German.
     const home = localePath('/')
     const path = pathOf(to)
     const hashIndex = to.indexOf('#')
 
-    // Home section links follow the scroll spy.
     if (hashIndex !== -1 && path === home) {
       return route.path === home && active.value === to.slice(hashIndex + 1)
     }
     if (path === home) return route.path === home
-    // A link to a section of a subpage counts as active on that page.
     if (hashIndex !== -1) return route.path === path
     return route.path === path || route.path.startsWith(`${path}/`)
   }

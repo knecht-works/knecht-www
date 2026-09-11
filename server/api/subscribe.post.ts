@@ -22,8 +22,7 @@ interface AdminNotice {
   country: string
 }
 
-// Sends the admin a heads-up about the new signup. Runs detached, so a failure
-// here never breaks the signup itself.
+// Runs detached, so a failure here never breaks the signup itself.
 async function notifyAdmin({ apiKey, from, to, templateId, email, segment, country }: AdminNotice) {
   const time = new Date().toLocaleString('de-AT', { timeZone: 'Europe/Vienna' })
 

@@ -1,6 +1,5 @@
-// Proxies the GitHub repo stats so browsers never hit GitHub's anonymous
-// rate limit (60 req/h per IP). Cached server-side; failed lookups return
-// null so the UI can simply hide the affected element.
+// Browsers never hit GitHub's anonymous rate limit (60 req/h per IP). Failed
+// lookups return null so the UI can hide the affected element.
 // Keep in sync with GITHUB_REPO in app/utils/constants.ts.
 const GITHUB_REPO = 'knecht-works/knecht-cloud'
 

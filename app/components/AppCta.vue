@@ -2,8 +2,7 @@
 type Mode = 'beta' | 'updates'
 
 const email = ref('')
-// Beta is the default - active testers + feedback are the primary goal.
-// ?signup=updates|beta preselects the mode, e.g. from newsletter teasers.
+// Beta is the default: active testers and feedback are the primary goal.
 const route = useRoute()
 const signupParam = computed<Mode | null>(() =>
   route.query.signup === 'updates' || route.query.signup === 'beta'
@@ -76,7 +75,6 @@ const submit = async () => {
         <div class="cta-glow" />
 
         <div class="relative flex flex-col items-center gap-8 px-4 py-6 lg:flex-row lg:gap-24 lg:p-14">
-          <!-- Mascot -->
           <div class="shrink-0">
             <img
               :src="'/assets/mascotRight.svg'"
@@ -89,7 +87,6 @@ const submit = async () => {
             >
           </div>
 
-          <!-- Content -->
           <div class="flex-1">
             <h2 class="text-balance text-highlighted">
               {{ $t('cta.title') }}

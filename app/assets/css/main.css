@@ -3,8 +3,6 @@
 
 @source "../../../content/**/*";
 
-/* Theme extensions, so components can use plain utilities instead of
-   arbitrary values. The accent colors point at the brand variables below. */
 @theme inline {
   --color-accent-mint: var(--accent-mint);
   --color-accent-orange: var(--accent-orange);
@@ -78,11 +76,8 @@ html {
   padding-inline: var(--container-margin-x);
 }
 
-/* Full-bleed horizontal slider: the track spans the whole viewport, while its
-   content and scroll-snap stops stay aligned to the container's content edge. On
-   screens wider than the container this lets cards scroll into the side gutters
-   instead of being clipped at the max-width box. Needs an ancestor with
-   overflow-x: clip so the 100vw width can't trigger page-level horizontal scroll. */
+/* Needs an ancestor with overflow-x: clip, otherwise the 100vw width triggers
+   page-level horizontal scroll. */
 @utility slider-bleed {
   --slider-edge: calc((100vw - min(100vw, var(--ui-container))) / 2 + var(--container-margin-x));
   margin-inline: calc(50% - 50vw);
@@ -90,9 +85,6 @@ html {
   scroll-padding-inline: var(--slider-edge);
 }
 
-/* Fades the bleed zones of a slider-bleed track, so cards dissolve towards the
-   viewport edges instead of running into them. Cards at rest sit inside the
-   content edge and stay fully visible. */
 @utility slider-fade {
   -webkit-mask-image: linear-gradient(to right, transparent, #000 var(--slider-edge), #000 calc(100% - var(--slider-edge)), transparent);
   mask-image: linear-gradient(to right, transparent, #000 var(--slider-edge), #000 calc(100% - var(--slider-edge)), transparent);
@@ -109,7 +101,6 @@ html {
   @apply grid grid-cols-12 mx-auto;
 }
 
-/* Depth - neutral (non-colored) shadows tuned for the near-black surfaces. */
 @utility shadow-panel {
   box-shadow:
     0 1px 2px -1px oklch(0 0 0 / 0.5),
@@ -134,12 +125,8 @@ html {
   filter: drop-shadow(0 26px 42px oklch(0 0 0 / 0.6));
 }
 
-/* Mobile: tilt the mascot head from looking up to looking down, driven by the
-   scroll progress on the compositor thread. This stays smooth even while the
-   mobile URL bar shows/hides and resizes the viewport. Values mirror the JS
-   constants in AppHomeHero.vue (MOBILE_TILT_UP, MOBILE_TILT_DOWN, SCROLL_RANGE).
-   Uses the `rotate` property so the JS click shake (written to `transform`)
-   composes on top of it. */
+/* Mirrors MOBILE_TILT_UP, MOBILE_TILT_DOWN and SCROLL_RANGE in AppHomeHero.vue.
+   Uses `rotate` so the JS click shake (written to `transform`) composes on top. */
 @keyframes mascot-tilt {
   from {
     rotate: 16deg;
@@ -172,8 +159,6 @@ html {
   animation-play-state: paused;
 }
 
-/* Column layout of the integrations diagram: triggers, connector, Knecht,
-   connector, results. */
 @utility integration-grid {
   grid-template-columns: minmax(0, 1fr) 60px minmax(0, 1.1fr) 60px minmax(0, 1fr);
 }
@@ -183,8 +168,6 @@ html {
   grid-template-columns: minmax(0, 1fr) 60px minmax(0, 1.6fr) 60px minmax(0, 1fr);
 }
 
-/* Mint progress fill with a soft glow, shared by the roadmap panel and the
-   workflow run cards. */
 @utility progress-fill {
   background: linear-gradient(90deg, var(--accent-mint), color-mix(in oklab, var(--accent-mint) 60%, var(--accent-orange)));
   box-shadow: 0 0 16px -2px var(--accent-mint);
@@ -239,7 +222,6 @@ picture {
   display: contents;
 }
 
-/* ---------- background field: grid + accent glows ---------- */
 .bg-field {
   position: fixed;
   inset: 0;
@@ -282,11 +264,6 @@ picture {
   opacity: 0.28;
 }
 
-/* ---------- motion for the home scenes ---------- */
-
-
-/* Integration flow: a dot travels along a connector line. `flow-x` for the
-   horizontal desktop layout, `flow-y` when the diagram stacks on mobile. */
 @keyframes flow-x {
   0% {
     left: 0;
@@ -317,7 +294,6 @@ picture {
   }
 }
 
-/* ---------- CTA accent glow ---------- */
 .cta-glow {
   position: absolute;
   width: 640px;
@@ -335,7 +311,6 @@ picture {
   opacity: 0.55;
 }
 
-/* ---------- Discord accent glow ---------- */
 .discord-glow {
   position: absolute;
   width: 520px;
@@ -357,7 +332,6 @@ picture {
   text-decoration: var(--shiki-dark-text-decoration) !important;
 }
 
-/* ---------- Markdown Styling ---------- */
 .richtext :deep(:is(h1, h2, h3, h4) > a) {
   display: inline-flex;
   align-items: center;
@@ -371,7 +345,6 @@ picture {
   order: 1; /* DOM-order is span-then-text; push it after the text */
 }
 
-/* ---------- thin branded scrollbar for horizontal sliders ---------- */
 .slider-scrollbar {
   --scrollbar-thumb: oklch(1 0 0 / 0.16);
   --scrollbar-track: transparent;
@@ -388,8 +361,6 @@ picture {
   }
 }
 
-/* WebKit/Blink without scrollbar-color (incl. Safari < 26.2): use the legacy
-   pseudo-elements only. */
 @supports not (scrollbar-color: auto) {
   .slider-scrollbar::-webkit-scrollbar {
     height: 8px;

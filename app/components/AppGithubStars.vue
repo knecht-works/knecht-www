@@ -1,5 +1,4 @@
 <script setup lang="ts">
-// Star count comes from the cached /api/github proxy via useGithubStats.
 // The count area below reserves its space, so the link never changes width.
 const stats = useGithubStats()
 

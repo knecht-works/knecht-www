@@ -4,7 +4,6 @@ type DotColor = 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'erro
 const props = withDefaults(defineProps<{
   color?: DotColor
   pulse?: boolean
-  /** Soft colored glow around the dot (matches the reference look). */
   glow?: boolean
 }>(), {
   color: 'primary',
@@ -20,7 +19,6 @@ const colorClass = computed(() => ({
   warning: 'text-warning',
   error: 'text-error',
   neutral: 'text-muted',
-  // Mascot accents (match the reference dot palette).
   orange: 'text-accent-orange',
   violet: 'text-accent-violet',
   discord: 'text-accent-discord'

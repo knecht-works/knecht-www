@@ -1,12 +1,9 @@
 import { useMediaQuery } from '@vueuse/core'
 
-// Pages the assistant can use as context. Index pages carry no useful context.
+// Index pages carry no useful context.
 const CONTEXT_PAGE_PREFIXES = ['/docs/', '/updates/', '/de/updates/']
-// Sections that show the floating "ask anything" input.
 const FLOATING_INPUT_SECTIONS = ['/docs', '/updates', '/de/updates']
 
-// Shared assistant state. Components in the header, the floating input and
-// the panel all read from and write to the same refs.
 export function useAssistant() {
   const route = useRoute()
   const { tm, rt } = useI18n()

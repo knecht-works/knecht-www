@@ -1,6 +1,4 @@
 <script setup lang="ts">
-// One node in the integrations diagram: a trigger (with a source tile) or a
-// result (with an icon tile in an accent color).
 defineProps<{
   title: string
   text: string

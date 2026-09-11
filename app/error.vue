@@ -22,7 +22,6 @@ useHead(() => ({
 }))
 useSeoMeta({ title: () => `${code.value} – ${heading.value}` })
 
-// clearError tears down the error state before navigating away.
 const goHome = () => clearError({ redirect: localePath('/') })
 const retry = () => clearError({ redirect: useRoute().fullPath })
 </script>
@@ -34,7 +33,6 @@ const retry = () => clearError({ redirect: useRoute().fullPath })
         <div
           class="col-span-full flex min-h-[60vh] flex-col items-center justify-center py-16 text-center sm:py-24"
         >
-          <!-- Status code -->
           <p class="text-primary font-mono text-7xl font-bold tracking-tight tabular-nums sm:text-8xl">
             {{ code }}
           </p>

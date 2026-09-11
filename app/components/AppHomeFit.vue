@@ -1,8 +1,4 @@
 <script setup lang="ts">
-// Honest positioning: the target group gets the stage as four criteria cards,
-// while "who this is NOT for" stays a quiet dashed footnote instead of an
-// equally weighted comparison card. Saying it at all defuses the loudest
-// criticism (mature platform teams judging Knecht against their own stack).
 const fits = [
   {
     icon: 'i-lucide-layers',
@@ -40,7 +36,6 @@ const noFits = [
 <template>
   <section id="zielgruppe">
     <div class="container pt-default">
-      <!-- Heading -->
       <div class="col-span-full max-w-2xl">
         <h2 class="text-balance text-highlighted">
           Gebaut für den Agentur-Alltag.
@@ -53,7 +48,6 @@ const noFits = [
         </p>
       </div>
 
-      <!-- Fit criteria -->
       <div class="col-span-full mt-8 grid gap-4 sm:grid-cols-2 lg:mt-10 xl:grid-cols-4">
         <article
           v-for="fit in fits"
@@ -84,7 +78,6 @@ const noFits = [
         </article>
       </div>
 
-      <!-- Who it is not for: a quiet footnote, not a competing card -->
       <div
         class="col-span-full mt-4"
       >

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-// The home page is a pure Vue composition - no markdown collection backing it.
 const { t } = useI18n()
 const title = t('site.title')
 const description = t('site.description')

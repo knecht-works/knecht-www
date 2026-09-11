@@ -3,9 +3,6 @@ import { animate, inView } from 'motion-v'
 
 const progress = 85
 
-// Bar fill + percentage count up together from a single value, kicked off the
-// first time the panel scrolls into view (jumps straight to the target when the
-// visitor prefers reduced motion).
 const displayed = ref(0)
 const barEl = useTemplateRef<HTMLElement>('barEl')
 
@@ -24,7 +21,7 @@ onMounted(() => {
       ease: [0.16, 1, 0.3, 1], // fast start, long slow ease-out (easeOutExpo)
       onUpdate: v => (displayed.value = v)
     })
-    stop?.() // fill once, then stop observing
+    stop?.()
   }, { amount: 0.6 })
 
   onBeforeUnmount(() => stop?.())
@@ -34,8 +31,6 @@ type Status = 'done' | 'progress' | 'rest'
 
 const { t } = useI18n()
 
-// Per-status presentation: done = green, progress = orange, rest = dark.
-// Everything else about a card is fixed; only this (color/icon) varies.
 const statusMeta: Record<Status, { dot: 'primary' | 'orange' | 'neutral', pulse: boolean, text: string, icon?: string }> = {
   done: { dot: 'primary', pulse: false, text: 'text-primary', icon: 'i-lucide-check' },
   progress: { dot: 'orange', pulse: true, text: 'text-accent-orange' },
@@ -149,7 +144,6 @@ onMounted(() => {
         :text="$t('progress.intro')"
       />
 
-      <!-- Progress panel -->
       <div
         class="shadow-panel col-span-full mt-8 rounded-xl border border-default bg-muted p-6 lg:mt-10 lg:p-8"
       >
@@ -177,12 +171,8 @@ onMounted(() => {
         </p>
       </div>
 
-      <!-- Slider on every breakpoint. The track breaks out of the container's
-           inline padding via -mx, then re-insets its content with matching px (and
-           scroll-px so snap stops align to the content edge) - so cards bleed to the
-           viewport edge while scrolling but rest flush with the content at the ends.
-           Vertically, py + negative my give the hover lift/shadow room without being
-           clipped by the overflow-y:auto that overflow-x-auto forces. -->
+      <!-- py + negative my give the hover lift/shadow room without being clipped
+           by the overflow-y:auto that overflow-x-auto forces. -->
       <div class="col-span-full mt-4">
         <div
           ref="trackEl"
@@ -193,7 +183,6 @@ onMounted(() => {
             :key="phase.key"
             class="shadow-panel flex w-70 shrink-0 snap-start flex-col rounded-xl border border-default bg-muted p-6 transition duration-200 hover:-translate-y-1 hover:border-accented z-10 relative hover:shadow-panel-lg sm:w-[320px]"
           >
-            <!-- Status -->
             <div class="flex h-[22px] items-center gap-2.5">
               <span
                 v-if="statusMeta[phase.status].icon"
@@ -228,8 +217,6 @@ onMounted(() => {
         </div>
       </div>
 
-      <!-- Minimal arrow nav below the slider (the scrollbar is hidden). Shown
-           only while the track actually overflows. -->
       <div
         v-show="canPrev || canNext"
         class="col-span-full mt-5 flex gap-2"

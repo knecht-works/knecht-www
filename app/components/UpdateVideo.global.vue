@@ -1,8 +1,6 @@
 <script setup lang="ts">
-// Demo video for update posts, used from markdown as ::update-video{src="..."}.
-// The .global suffix registers it for MDC. Plays as a muted loop, but only
-// while visible in the viewport; native controls appear on hover (or first
-// tap on touch devices).
+// Used from markdown as ::update-video{src="..."}. The .global suffix
+// registers it for MDC.
 defineProps<{
   src: string
   caption?: string

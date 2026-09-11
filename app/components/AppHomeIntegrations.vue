@@ -1,6 +1,4 @@
 <script setup lang="ts">
-// Trigger -> Knecht -> result, as one diagram. Stacks vertically on mobile,
-// reads left to right from lg upwards.
 const { t } = useI18n()
 
 const triggerMeta: { key: string, source: SourceKey, dashed?: boolean }[] = [
@@ -21,7 +19,6 @@ const triggers = computed(() => triggerMeta.map(item => ({
   text: t(`integrations.triggers.${item.key}.text`)
 })))
 
-// What happens inside a run, as three one-line steps.
 const stepMeta = [
   { key: 'boot', icon: 'i-lucide-box' },
   { key: 'run', icon: 'i-lucide-list-checks' },
@@ -59,7 +56,6 @@ const results = computed(() => resultMeta.map(item => ({
         <span class="mb-3 font-mono text-2xs uppercase tracking-widest text-dimmed lg:col-start-1 lg:row-start-1 lg:mb-0">
           {{ $t('integrations.triggerLabel') }}
         </span>
-        <!-- Triggers -->
         <div class="flex flex-col gap-3 lg:row-start-2">
           <AppFlowCard
             v-for="item in triggers"
@@ -73,7 +69,6 @@ const results = computed(() => resultMeta.map(item => ({
 
         <AppFlowConnector class="lg:row-start-2" />
 
-        <!-- Knecht -->
         <div class="relative rounded-2xl lg:row-start-2 border border-white/6 bg-card px-5 py-7 sm:flex sm:items-center sm:gap-5 sm:px-6 lg:block xl:flex xl:px-7">
           <div class="min-w-0 flex-1">
             <div class="font-semibold text-highlighted">
@@ -115,7 +110,6 @@ const results = computed(() => resultMeta.map(item => ({
           class="lg:row-start-2"
         />
 
-        <!-- Results -->
         <span class="mb-3 font-mono text-2xs uppercase tracking-widest text-dimmed lg:col-start-5 lg:row-start-1 lg:mb-0">
           {{ $t('integrations.resultLabel') }}
         </span>

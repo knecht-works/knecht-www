@@ -1,6 +1,4 @@
 <script setup lang="ts">
-// Latest update articles for the active locale (newest first).
-// The full archive lives on /updates.
 const { updates: collection, locale } = useContentCollections()
 
 const { data: updates } = await useAsyncData(`home-updates-${locale.value}`, () =>
@@ -18,7 +16,6 @@ const { data: updates } = await useAsyncData(`home-updates-${locale.value}`, () 
         :text="$t('updates.description')"
       />
 
-      <!-- Timeline -->
       <ol class="col-span-full border-t border-default mt-8 lg:mt-10">
         <li
           v-for="update in updates"

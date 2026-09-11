@@ -6,7 +6,6 @@ interface FeedbackBody {
   vote?: string
 }
 
-// Minimal shape of the D1 binding, enough for one insert.
 interface D1Binding {
   prepare(query: string): {
     bind(...values: unknown[]): { run(): Promise<unknown> }

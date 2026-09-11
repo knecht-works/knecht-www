@@ -34,7 +34,6 @@ const baseColumns = [
   }
 ]
 
-// Only route paths get a locale prefix, mailto and external links stay untouched.
 const columns = computed(() =>
   baseColumns.map(column => ({
     heading: t(column.headingKey),
@@ -56,7 +55,6 @@ const allLinkTargets = computed(() =>
   <footer class="border-t border-default mt-20 lg:mt-24">
     <div class="container pt-10 lg:pt-16">
       <div class="col-span-full flex flex-col justify-between gap-12 border-b border-default pb-12 lg:flex-row lg:gap-16">
-        <!-- Brand -->
         <div class="max-w-xs">
           <AppLogo />
 
@@ -78,7 +76,6 @@ const allLinkTargets = computed(() =>
           </div>
         </div>
 
-        <!-- Link columns -->
         <div class="grid grid-cols-2 gap-8 sm:grid-cols-3 sm:gap-16">
           <div
             v-for="column in columns"
@@ -102,8 +99,6 @@ const allLinkTargets = computed(() =>
         </div>
       </div>
 
-      <!-- Bottom bar. On mobile the copyright takes its own line, below it the
-           language switch sits left and the socials right. -->
       <div class="col-span-full flex flex-col gap-5 py-6 sm:flex-row sm:items-center sm:justify-between">
         <span class="font-mono text-xs text-dimmed">
           {{ $t('footer.copyright', { year }) }}

@@ -180,7 +180,7 @@ export default defineNuxtConfig({
         '@vue/devtools-core',
         '@vue/devtools-kit',
         '@vueuse/core',
-        'ai',
+        'ai'
       ]
     }
   },
@@ -202,10 +202,8 @@ export default defineNuxtConfig({
   },
 
   i18n: {
-    // Absolute URLs in hreflang, canonical and og:url are built from this.
     baseUrl: process.env.NUXT_SITE_URL || 'https://knecht.works',
     locales: [
-      // `name` is the native label, it is what the switch announces.
       { code: 'en', name: 'English', language: 'en', dir: 'ltr', file: 'en.json' },
       { code: 'de', name: 'Deutsch', language: 'de', dir: 'ltr', file: 'de.json' }
     ],

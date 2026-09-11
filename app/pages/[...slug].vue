@@ -3,7 +3,6 @@ import { withLeadingSlash } from 'ufo'
 
 const route = useRoute()
 const { pages, locale } = useContentCollections()
-// Route params exclude the locale prefix, so this is the path inside a locale.
 const slug = computed(() => Array.isArray(route.params.slug) ? withLeadingSlash(String(route.params.slug.join('/'))) : withLeadingSlash(String(route.params.slug)))
 
 const { data: page } = await useAsyncData('pages-' + route.path, async () => {
@@ -17,7 +16,7 @@ const { data: page } = await useAsyncData('pages-' + route.path, async () => {
 
   return content
 }, {
-  watch: [locale] // Refetch when locale changes
+  watch: [locale]
 })
 
 if (!page.value) {

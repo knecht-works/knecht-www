@@ -28,7 +28,6 @@ const headline = computed(() => findPageHeadline(docsNav.value, route.path))
 const menuOpen = ref(false)
 const tocOpen = ref(false)
 
-// The mobile bar only gets a background while it sticks below the header.
 const bar = useTemplateRef('bar')
 const pinned = usePinned(bar)
 
@@ -69,7 +68,6 @@ const { data: surround } = await useAsyncData('docs-surround-' + route.path, () 
   queryCollectionItemSurroundings('docs_en', route.path, { fields: ['description'] })
 )
 
-// Opens a prefilled issue in the website repo for feedback on this page.
 const issueUrl = computed(() =>
   `${GITHUB_URL}/knecht-www/issues/new?title=${encodeURIComponent(`Docs: ${page.value?.title} Feedback`)}`
 )
@@ -87,8 +85,6 @@ defineOgImage('Knecht', {
 
 <template>
   <div v-if="page">
-    <!-- Mobile: sticky bar below the header that opens the docs navigation
-         and the TOC as drawers, like nuxt.com. Desktop uses the page columns. -->
     <div
       ref="bar"
       class="lg:hidden sticky top-(--ui-header-height) z-10 -mx-(--container-margin-x) outside-container flex items-center justify-between py-3 rounded-b-xl border-b transition-colors"

@@ -5,9 +5,6 @@ defineProps<{
   links: TocLink[]
 }>()
 
-// Mobile: the collapsible bar only gets a background while it actually sticks
-// below the header (same pattern as AppHeader's scrolled state). Desktop is
-// unaffected: the bar is forced transparent via lg:bg-transparent.
 const toc = useTemplateRef('toc')
 
 // ContentToc renders a fragment, so $el is a comment anchor, not the bar
@@ -19,9 +16,8 @@ const pinned = usePinned(computed(() => {
 </script>
 
 <template>
-  <!-- On mobile ContentToc is a sticky collapsible bar (its own default styles).
-       On lg it sits in the page's right column and sticks below the taller
-       desktop header (h-20), hence the larger top offset. -->
+  <!-- On lg the bar sticks below the taller desktop header (h-20), hence the
+       larger top offset. -->
   <UContentToc
     ref="toc"
     :links="links"

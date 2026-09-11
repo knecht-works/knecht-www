@@ -1,6 +1,4 @@
 <script setup lang="ts">
-// Release tag comes from the cached /api/github proxy via useGithubStats.
-// Without data the pill simply stays hidden.
 const stats = useGithubStats()
 const version = computed(() => stats.value.version)
 </script>

@@ -1,6 +1,4 @@
 <script setup lang="ts">
-// Community card. The messages are illustrative examples from the design, not a
-// live feed. Names and colors stay here, the texts live in the locale files.
 const { t } = useI18n()
 
 const messageMeta = [

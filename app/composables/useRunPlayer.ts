@@ -1,12 +1,7 @@
 import type { MaybeRefOrGetter } from 'vue'
 
-// Plays a stepped run exactly once, advancing `pos` every `stepMs` until it
-// reaches `total`. The first advance comes after the shorter `firstMs`. Only
-// one player on the page runs at a time: a card that
-// scrolls into view waits until the running one has finished or left the
-// viewport. A card that leaves the viewport mid-run pauses and hands over.
-// `toggle` pauses or resumes the run by hand and restarts it once finished.
-// A run paused by hand stays paused until it is resumed by hand.
+// Only one player on the page runs at a time; a card scrolling into view waits
+// for the running one. A run paused by hand stays paused until resumed by hand.
 
 interface Player {
   inView: boolean
@@ -122,7 +117,6 @@ export function useRunPlayer(target: MaybeRefOrGetter<HTMLElement | null | undef
     }
     if (player.done()) pos.value = 0
     player.paused = false
-    // A manual start takes over from whichever card is running.
     if (current) release(current)
     current = player
     player.start()
