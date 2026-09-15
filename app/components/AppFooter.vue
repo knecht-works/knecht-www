@@ -74,6 +74,21 @@ const allLinkTargets = computed(() =>
               :label="$t('footer.badgeEu')"
             />
           </div>
+
+          <a
+            href="https://launchnest.io/p/knecht-works"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="mt-6 inline-block"
+          >
+            <img
+              src="https://launchnest.io/badge/knecht-works.svg?variant=featured&theme=dark"
+              alt="Knecht Works on LaunchNest"
+              width="220"
+              height="56"
+              loading="lazy"
+            >
+          </a>
         </div>
 
         <div class="grid grid-cols-2 gap-8 sm:grid-cols-3 sm:gap-16">
