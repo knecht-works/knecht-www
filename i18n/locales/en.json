@@ -373,7 +373,8 @@
       "allUpdates": "All Updates",
       "feedback": "Give Feedback",
       "imprint": "Legal Notice",
-      "privacy": "Privacy Policy"
+      "privacy": "Privacy Policy",
+      "brand": "Brand Assets"
     },
     "copyright": "© {year} Knecht Works"
   },
@@ -428,5 +429,19 @@
   },
   "pages": {
     "updatedAt": "Last updated"
+  },
+  "brand": {
+    "title": "Brand Assets",
+    "description": "Logos, the wordmark and the mascot for articles, talks and integrations. Use them as they are, without changing colors or proportions.",
+    "seoDescription": "Download the Knecht logo, wordmark and mascot as SVG and PNG.",
+    "downloadAll": "Download All Assets",
+    "items": {
+      "icon": "Icon",
+      "iconLight": "Icon on Light",
+      "logoDark": "Logo on Dark",
+      "logoLight": "Logo on Light",
+      "mascotRight": "Mascot Looking Right",
+      "mascotLeft": "Mascot Looking Left"
+    }
   }
 }

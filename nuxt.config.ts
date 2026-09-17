@@ -130,6 +130,7 @@ export default defineNuxtConfig({
             '/_ipx/*',
             '/__nuxt_content/*',
             '/assets/*',
+            '/brand',
             '/favicon/*',
             '/styleguide/*',
             '/raw/*',

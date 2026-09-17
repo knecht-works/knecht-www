@@ -373,7 +373,8 @@
       "allUpdates": "Alle Updates",
       "feedback": "Feedback geben",
       "imprint": "Impressum",
-      "privacy": "Datenschutz"
+      "privacy": "Datenschutz",
+      "brand": "Logos & Assets"
     },
     "copyright": "© {year} Knecht Works"
   },
@@ -428,5 +429,19 @@
   },
   "pages": {
     "updatedAt": "Zuletzt aktualisiert"
+  },
+  "brand": {
+    "title": "Logos & Assets",
+    "description": "Logos, Wortmarke und Maskottchen für Artikel, Talks und Integrationen. Bitte so verwenden wie sie sind, ohne Farben oder Proportionen zu verändern.",
+    "seoDescription": "Knecht-Logo, Wortmarke und Maskottchen als SVG und PNG herunterladen.",
+    "downloadAll": "Alle Assets herunterladen",
+    "items": {
+      "icon": "Icon",
+      "iconLight": "Icon auf Hell",
+      "logoDark": "Logo auf Dunkel",
+      "logoLight": "Logo auf Hell",
+      "mascotRight": "Maskottchen nach rechts",
+      "mascotLeft": "Maskottchen nach links"
+    }
   }
 }

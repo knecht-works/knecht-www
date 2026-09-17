@@ -13,7 +13,8 @@ const baseColumns = [
       { labelKey: 'footer.links.integrations', to: '/#integrations' },
       { labelKey: 'footer.links.useCases', to: '/#use-cases' },
       { labelKey: 'footer.links.preview', to: '/#dashboard' },
-      { labelKey: 'footer.links.roadmap', to: '/#roadmap' }
+      { labelKey: 'footer.links.roadmap', to: '/#roadmap' },
+      { labelKey: 'footer.links.brand', to: '/brand' }
     ]
   },
   {
