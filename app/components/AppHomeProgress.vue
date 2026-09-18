@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { animate, inView } from 'motion-v'
 
-const progress = 85
+const progress = 90
 
 const displayed = ref(0)
 const barEl = useTemplateRef<HTMLElement>('barEl')
@@ -55,7 +55,7 @@ const phaseMeta: { status: Status, key: string }[] = [
   { status: 'done', key: 'managedHosting' },
   { status: 'done', key: 'docs' },
   { status: 'done', key: 'noDdev' },
-  { status: 'progress', key: 'jiraImprove' },
+  { status: 'done', key: 'jiraImprove' },
   { status: 'progress', key: 'betaTesters' },
   { status: 'rest', key: 'testActions' },
   { status: 'rest', key: 'browserValidation' },
