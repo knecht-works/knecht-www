@@ -56,6 +56,8 @@ const phaseMeta: { status: Status, key: string }[] = [
   { status: 'done', key: 'docs' },
   { status: 'done', key: 'noDdev' },
   { status: 'done', key: 'jiraImprove' },
+  { status: 'done', key: 'planeTrigger' },
+  { status: 'done', key: 'linearTrigger' },
   { status: 'progress', key: 'betaTesters' },
   { status: 'rest', key: 'testActions' },
   { status: 'rest', key: 'browserValidation' },

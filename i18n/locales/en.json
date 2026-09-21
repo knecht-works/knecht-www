@@ -311,6 +311,14 @@
       "pricing": {
         "title": "Price Model and Licenses",
         "text": "You can officially buy Knecht. The price model, the license, and the payment are complete."
+      },
+      "planeTrigger": {
+        "title": "Plane Integration",
+        "text": "Plane work items can start workflows."
+      },
+      "linearTrigger": {
+        "title": "Linear Integration",
+        "text": "Linear issues can start workflows."
       }
     }
   },
