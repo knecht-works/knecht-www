@@ -5,14 +5,12 @@ defineProps<{
   source?: SourceKey
   icon?: string
   tileClass?: string
-  dashed?: boolean
 }>()
 </script>
 
 <template>
   <div
-    class="flex items-center gap-3.5 rounded-xl border px-4 py-3.5"
-    :class="dashed ? 'border-dashed border-accented' : 'border-white/6 bg-card'"
+    class="flex items-center gap-3.5 rounded-xl border border-white/6 bg-card px-4 py-3.5"
   >
     <AppSourceMark
       v-if="source"

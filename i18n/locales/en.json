@@ -36,18 +36,10 @@
     "triggerLabel": "Trigger",
     "resultLabel": "Result",
     "triggers": {
-      "github": {
-        "title": "GitHub",
-        "text": "From an issue, a label, or a mention."
-      },
-      "jira": {
-        "title": "Jira",
-        "text": "From a ticket or a label."
-      },
-      "cron": {
-        "title": "Cron & Webhook",
-        "text": "On a schedule or a security advisory."
-      }
+      "github": "GitHub",
+      "jira": "Jira",
+      "plane": "Plane",
+      "linear": "Linear"
     },
     "center": {
       "label": "Let the Knecht Work",

@@ -9,6 +9,8 @@
   --color-accent-violet: var(--accent-violet);
   --color-accent-discord: var(--accent-discord);
   --color-accent-jira: var(--accent-jira);
+  --color-accent-plane: var(--accent-plane);
+  --color-accent-linear: var(--accent-linear);
   --color-card: oklch(0.17 0 0);
 
   --text-2xs: 0.6875rem;
@@ -47,6 +49,8 @@
   --accent-ink: #16220f;
   --accent-discord: #5865f2;
   --accent-jira: #2684ff;
+  --accent-plane: #3f76ff;
+  --accent-linear: #5e6ad2;
 
 
   --container-margin-x: 1rem;
