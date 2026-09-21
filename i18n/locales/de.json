@@ -311,6 +311,14 @@
       "pricing": {
         "title": "Preismodell & Lizenzen",
         "text": "Knecht kann offiziell gekauft werden: Preismodell, Lizenz und Bezahlung stehen."
+      },
+      "planeTrigger": {
+        "title": "Plane Integration",
+        "text": "Es können Plane Trigger eingestellt werden für Workflows."
+      },
+      "linearTrigger": {
+        "title": "Linear Integration",
+        "text": "Es können Linear Trigger eingestellt werden für Workflows."
       }
     }
   },
