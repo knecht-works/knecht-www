@@ -36,18 +36,10 @@
     "triggerLabel": "Trigger",
     "resultLabel": "Ergebnis",
     "triggers": {
-      "github": {
-        "title": "GitHub",
-        "text": "Aus Issues, Labels oder Mentions."
-      },
-      "jira": {
-        "title": "Jira",
-        "text": "Aus Tickets oder Labels."
-      },
-      "cron": {
-        "title": "Cron & Webhook",
-        "text": "Nach Zeitplan oder bei Security-Advisories."
-      }
+      "github": "GitHub",
+      "jira": "Jira",
+      "plane": "Plane",
+      "linear": "Linear"
     },
     "center": {
       "label": "Lass den Knecht arbeiten",

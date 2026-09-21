@@ -1,10 +1,11 @@
 <script setup lang="ts">
 const { t } = useI18n()
 
-const triggerMeta: { key: string, source: SourceKey, dashed?: boolean }[] = [
+const triggerMeta: { key: string, source: SourceKey }[] = [
   { key: 'github', source: 'github' },
   { key: 'jira', source: 'jira' },
-  { key: 'cron', source: 'cron', dashed: true }
+  { key: 'plane', source: 'plane' },
+  { key: 'linear', source: 'linear' }
 ]
 
 const resultMeta = [
@@ -15,8 +16,7 @@ const resultMeta = [
 
 const triggers = computed(() => triggerMeta.map(item => ({
   ...item,
-  title: t(`integrations.triggers.${item.key}.title`),
-  text: t(`integrations.triggers.${item.key}.text`)
+  title: t(`integrations.triggers.${item.key}`)
 })))
 
 const stepMeta = [
@@ -56,15 +56,18 @@ const results = computed(() => resultMeta.map(item => ({
         <span class="mb-3 font-mono text-2xs uppercase tracking-widest text-dimmed lg:col-start-1 lg:row-start-1 lg:mb-0">
           {{ $t('integrations.triggerLabel') }}
         </span>
-        <div class="flex flex-col gap-3 lg:row-start-2">
-          <AppFlowCard
+        <div class="grid grid-cols-2 gap-3 lg:row-start-2">
+          <div
             v-for="item in triggers"
             :key="item.key"
-            :source="item.source"
-            :dashed="item.dashed"
-            :title="item.title"
-            :text="item.text"
-          />
+            class="flex flex-col items-center gap-2.5 rounded-xl border border-white/6 bg-card px-4 py-5 font-semibold text-highlighted"
+          >
+            <AppSourceMark
+              :source="item.source"
+              size="md"
+            />
+            {{ item.title }}
+          </div>
         </div>
 
         <AppFlowConnector class="lg:row-start-2" />
