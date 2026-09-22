@@ -219,7 +219,10 @@ export default defineNuxtConfig({
     // Cloudflare Pages deploy, which has no sharp runtime). In dev there is no
     // `/_ipx/` handler, so use on-demand `ipx` there to preview optimized images.
     provider: process.env.NODE_ENV === 'development' ? 'ipx' : 'ipxStatic',
-    quality: 78
+    quality: 78,
+    // With a quality, sharp saves PNG as a 256 color palette, which breaks the colors of screenshots.
+    ipx: { modifiers: { format: 'webp' } },
+    ipxStatic: { modifiers: { format: 'webp' } }
   },
 
   llms: {
