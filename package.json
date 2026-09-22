@@ -36,6 +36,7 @@
   "devDependencies": {
     "@iconify-json/circle-flags": "^1.2.10",
     "@iconify-json/simple-icons": "^1.2.85",
+    "@iconify-json/vscode-icons": "^1.2.80",
     "@nuxt/eslint": "^1.15.2",
     "eslint": "^10.4.1",
     "gray-matter": "^4.0.3",
