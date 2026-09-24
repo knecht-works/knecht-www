@@ -3,7 +3,7 @@
 
 <template>
   <aside
-    aria-label="Was ist Knecht?"
+    :aria-label="$t('updates.about.label')"
     class="shadow-panel mt-12 overflow-hidden rounded-xl border border-default bg-muted"
   >
     <div class="flex items-center gap-4 border-b border-default bg-elevated px-4 py-3">
@@ -22,7 +22,7 @@
           color="primary"
           :pulse="false"
         />
-        Neu hier?
+        {{ $t('updates.about.newHere') }}
       </span>
     </div>
 
@@ -32,10 +32,7 @@
       </p>
 
       <p class="mt-3 text-muted">
-        Ein Dashboard auf deinem eigenen Server, gebaut für Agenturen mit
-        vielen DDEV-Projekten. Bootet jedes Projekt als komplett lauffähige
-        Umgebung, erledigt Aufgaben in Workflows und liefert
-        fertige Pull Requests mit Preview.
+        {{ $t('updates.about.help') }}
       </p>
 
       <div class="mt-4 flex flex-wrap gap-x-8 gap-y-2">
@@ -47,7 +44,7 @@
             name="i-lucide-arrow-right"
             class="size-3.5"
           />
-          Startseite ansehen
+          {{ $t('updates.about.home') }}
         </NuxtLinkLocale>
         <NuxtLinkLocale
           to="/?signup=beta#cta"
@@ -57,7 +54,7 @@
             name="i-lucide-arrow-right"
             class="size-3.5"
           />
-          Beta-Tester werden
+          {{ $t('updates.about.beta') }}
         </NuxtLinkLocale>
       </div>
     </div>

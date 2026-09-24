@@ -328,7 +328,14 @@
     "all": "Alle Updates ansehen",
     "readMore": "Weiterlesen",
     "back": "Alle Updates",
-    "seoDescription": "Building in Public, jeder Meilenstein von Knecht wird ehrlich dokumentiert."
+    "seoDescription": "Building in Public, jeder Meilenstein von Knecht wird ehrlich dokumentiert.",
+    "about": {
+      "label": "Was ist Knecht?",
+      "newHere": "Neu hier?",
+      "help": "Ein Dashboard auf deinem eigenen Server, gebaut für Agenturen mit vielen DDEV-Projekten. Bootet jedes Projekt als komplett lauffähige Umgebung, erledigt Aufgaben in Workflows und liefert fertige Pull Requests mit Preview.",
+      "home": "Startseite ansehen",
+      "beta": "Beta-Tester werden"
+    }
   },
   "cta": {
     "title": "Bau Knecht mit von Anfang an.",

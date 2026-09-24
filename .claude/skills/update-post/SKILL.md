@@ -147,6 +147,10 @@ description: 1-2 Sätze für die Liste auf der Startseite.
   `::`. Props nur `src`, `caption`, `poster`. Verhalten ist eingebaut:
   stummer Loop, spielt nur solange das Video im Viewport sichtbar ist,
   Controls erscheinen beim Hover bzw. beim ersten Tap.
+- YouTube-Videos über `app/components/UpdateYoutube.global.vue`:
+  `::update-youtube{id="<video-id>" title="..." caption="..."}` plus
+  schließendes `::`. `title` ist Pflicht (Titel des Videos, für den
+  iframe), `caption` optional. Lädt über youtube-nocookie.com.
 - Medien stehen früh im Abschnitt, den sie zeigen: nach dem
   Einleitungsabsatz, der sagt, was zu sehen ist, oder direkt unter der
   Headline, wenn es keinen gibt. Nicht ans Abschnittsende schieben.

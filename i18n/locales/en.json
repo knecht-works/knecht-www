@@ -328,7 +328,14 @@
     "all": "See All Updates",
     "readMore": "Read More",
     "back": "All Updates",
-    "seoDescription": "Building in Public, every milestone of Knecht is documented honestly."
+    "seoDescription": "Building in Public, every milestone of Knecht is documented honestly.",
+    "about": {
+      "label": "What is Knecht?",
+      "newHere": "New here?",
+      "help": "A dashboard on your own server, built for agencies with many DDEV projects. Boots every project as a fully running environment, handles tasks in workflows and delivers finished pull requests with a preview.",
+      "home": "See the Home Page",
+      "beta": "Become a Beta Tester"
+    }
   },
   "cta": {
     "title": "Build Knecht with Us from the Start.",
