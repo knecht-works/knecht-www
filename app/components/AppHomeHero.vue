@@ -194,7 +194,7 @@ onMounted(() => {
             color="neutral"
             variant="outline"
             size="lg"
-            to="/docs"
+            to="/docs/get-started/introduction"
           />
         </div>
       </div>

@@ -155,6 +155,9 @@ export default defineNuxtConfig({
       // Entry points per locale. The German tree is not reachable from the
       // English pages, so crawlLinks alone would never find it.
       routes: [
+        // Without a top-level 404.html Cloudflare Pages treats the site as an
+        // SPA and answers unknown static paths with the homepage and a 200.
+        '/404.html',
         '/',
         // Entry point for the docs crawl, /docs itself only redirects here.
         docsRedirects['/docs']!,
