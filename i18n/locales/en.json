@@ -183,7 +183,8 @@
       "workflow": "Workflow Editor",
       "runningWorkflow": "Test Workflows"
     },
-    "imageAlt": "Knecht {label} preview"
+    "imageAlt": "Knecht {label} preview",
+    "browserAction": "Preview"
   },
   "discord": {
     "title": "Knecht Now Has a Discord Server.",

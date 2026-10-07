@@ -81,7 +81,10 @@ const activeTab = computed(() => tabs.value.find(tab => tab.id === activeId.valu
       <div
         class="col-span-full mt-6 w-full"
       >
-        <AppBrowserFrame :url="activeTab.url">
+        <AppBrowserFrame
+          :url="activeTab.url"
+          :action="$t('demo.browserAction')"
+        >
           <!-- Render all screenshots (stacked, crossfaded via opacity) so
                the ipxStatic prerender generates an optimized /_ipx/ variant for
                each. With the previous single-image swap only the preselected tab

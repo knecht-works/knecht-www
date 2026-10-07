@@ -3,8 +3,7 @@ withDefaults(defineProps<{
   url?: string
   action?: string
 }>(), {
-  url: 'app.knecht.dev/projects',
-  action: 'Vorschau'
+  url: 'app.knecht.dev/projects'
 })
 </script>
 
