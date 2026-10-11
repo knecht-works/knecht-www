@@ -47,7 +47,7 @@ function onEscape() {
 
 <template>
   <div
-    class="assistant-floating pointer-events-none fixed inset-x-0 z-10 bottom-[max(1.5rem,env(safe-area-inset-bottom))] px-4"
+    class="assistant-floating pointer-events-none fixed max-sm:hidden inset-x-0 z-10 bottom-[max(1.5rem,env(safe-area-inset-bottom))] px-4"
     :class="hidden ? 'assistant-floating--hidden' : 'assistant-floating--visible'"
     :inert="hidden"
   >
