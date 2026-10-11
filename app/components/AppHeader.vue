@@ -5,6 +5,7 @@ const { isActive } = useNavActive()
 const localePath = useLocalePath()
 
 const scrolled = ref(false)
+const subnavPinned = useSubnavPinned()
 
 function onScroll() {
   scrolled.value = window.scrollY > 20
@@ -52,7 +53,8 @@ const items = computed<NavigationMenuItem[]>(() =>
       header: 'border-x border-t border-x-transparent border-t-transparent',
       body: 'flex flex-1 flex-col',
       container: [
-        'h-full rounded-b-xl border transition-all duration-300',
+        'h-full border transition-all duration-300',
+        subnavPinned ? '' : 'rounded-b-xl',
         scrolled
           ? 'border-default bg-default/95 shadow-panel'
           : 'border-transparent'
