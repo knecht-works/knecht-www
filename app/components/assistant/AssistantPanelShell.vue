@@ -16,7 +16,7 @@ const sidebarUi = {
 } as const
 
 const slideoverUi = {
-  content: 'w-full max-w-none sm:max-w-96 max-h-svh p-0 flex flex-col',
+  content: 'w-full max-w-none sm:max-w-96 p-0 flex flex-col',
   body: 'p-0 sm:p-0 gap-0 overflow-hidden',
   header: 'min-h-16 lg:min-h-20 flex items-center gap-1.5 overflow-hidden border-b border-default px-4 sm:px-4',
   wrapper: 'min-w-0 flex-1',
