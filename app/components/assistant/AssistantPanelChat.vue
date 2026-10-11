@@ -98,7 +98,7 @@ watch(isOpen, (value) => {
         :ui="{
           root: 'px-4 pb-4',
           body: 'px-0',
-          base: 'px-0 rounded-none',
+          base: 'px-0 rounded-none text-base sm:text-sm',
           footer: 'px-0 items-baseline'
         }"
         @submit="onSubmit"
