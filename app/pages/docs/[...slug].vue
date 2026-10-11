@@ -88,7 +88,7 @@ defineOgImage('Knecht', {
     <div
       ref="bar"
       class="lg:hidden sticky top-(--ui-header-height) z-10 -mx-(--container-margin-x) outside-container flex items-center justify-between py-3 rounded-b-xl border-b transition-colors"
-      :class="pinned ? 'bg-default/95 border-default' : 'border-transparent'"
+      :class="pinned ? 'bg-default/95 backdrop-blur border-default' : 'border-transparent'"
     >
       <UDrawer
         v-model:open="menuOpen"

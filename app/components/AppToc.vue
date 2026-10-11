@@ -24,9 +24,9 @@ const pinned = usePinned(computed(() => {
     title="Auf dieser Seite"
     highlight
     highlight-variant="circuit"
-    :class="pinned ? 'max-lg:rounded-b-xl! -mx-(--container-margin-x)! outside-container!' : 'bg-transparent!'"
+    :class="pinned ? 'max-lg:rounded-b-xl! max-lg:backdrop-blur! -mx-(--container-margin-x)! outside-container!' : 'bg-transparent!'"
     :ui="{
-      root: 'max-lg:bg-default/95 max-lg:border-b max-lg:border-default/95 backdrop-blur-none transition-colors lg:top-24 lg:bg-transparent lg:overflow-visible lg:max-h-none max-lg:mt-4! !mx-0 !px-0',
+      root: 'max-lg:bg-default/95 max-lg:border-b max-lg:border-default backdrop-blur-none transition-colors lg:top-24 lg:bg-transparent lg:overflow-visible lg:max-h-none max-lg:mt-4! !mx-0 !px-0',
       container: 'lg:p-0 border-0!',
       trigger: 'font-mono text-xs font-normal uppercase tracking-widest text-dimmed',
       content: 'lg:mt-3'
