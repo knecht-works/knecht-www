@@ -5,7 +5,7 @@ tag: Projekt
 description: Knecht hat jetzt eine Dokumentation mit Suche, einem Chat-Assistenten und Feedback auf jeder Seite. Und einen Discord-Server, auf dem wir eure Rückmeldungen sammeln.
 ---
 
-Bisher gab es zu Knecht nur diese Updates. Sie erzählen, warum etwas so gebaut ist, aber nicht, wie man es einrichtet. Wer eine Instanz aufsetzen oder einen Workflow bauen wollte, musste sich die Schritte aus mehreren Posts zusammensuchen. Seit dieser Woche gibt es unter [knecht.works/docs](/docs) eine Dokumentation. Dieser Post zeigt, was drinsteht und was die Seiten außer Text noch können.
+Bisher gab es zu Knecht nur diese Updates. Sie erzählen, warum etwas so gebaut ist, aber nicht, wie man es einrichtet. Wer eine Instanz aufsetzen oder einen Workflow bauen wollte, musste sich die Schritte aus mehreren Posts zusammensuchen. Seit dieser Woche gibt es unter [knecht.works/docs](/docs/get-started/introduction) eine Dokumentation. Dieser Post zeigt, was drinsteht und was die Seiten außer Text noch können.
 
 ## Was drinsteht
 
