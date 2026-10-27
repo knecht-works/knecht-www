@@ -14,7 +14,8 @@ const logos: Logo[] = [
   { name: 'Justin Holt', url: 'https://justinholt.com', src: '/assets/logos/justinholt-logo.svg', width: 100, height: 100 },
   { name: 'Samuel Reichör', url: 'https://samuelreichor.at', src: '/assets/logos/sr-logo.svg', width: 544, height: 544 },
   { name: 'More Things Digial', url: 'https://www.morethings.digital/de', src: '/assets/logos/morethingsdigital-logo.svg', width: 100, height: 100 },
-  { name: 'Angelo Keirsebilck', url: 'https://www.angelokeirsebilck.be/', src: '/assets/logos/angelokeirsebilck-logo.svg', width: 544, height: 544 }
+  { name: 'Angelo Keirsebilck', url: 'https://www.angelokeirsebilck.be/', src: '/assets/logos/angelokeirsebilck-logo.svg', width: 544, height: 544 },
+  { name: 'Fredmansky', url: 'https://fredmansky.at', src: '/assets/logos/fredmansky-logo.svg', width: 100, height: 100 }
 ]
 
 // Repeat the short list so one half of the track is wider than the viewport.
