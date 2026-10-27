@@ -62,28 +62,15 @@ const allLinkTargets = computed(() =>
             {{ $t('footer.tagline1') }}<br>{{ $t('footer.tagline2') }}
           </p>
 
-          <div class="mt-5 flex flex-wrap gap-2">
-            <AppBadge
-              dot-color="primary"
-              :pulse="false"
-              :label="$t('footer.badgeStatus')"
-            />
-            <AppBadge
-              dot-color="orange"
-              :pulse="false"
-              :label="$t('footer.badgeEu')"
-            />
-          </div>
-
           <a
-            href="https://launchnest.io/p/knecht-works"
+            href="https://devhunt.org/tool/knecht-works"
             target="_blank"
             rel="noopener noreferrer"
             class="mt-6 inline-block"
           >
             <img
-              src="https://launchnest.io/badge/knecht-works.svg?variant=featured&theme=dark"
-              alt="Knecht Works on LaunchNest"
+              src="/assets/devhunt-2nd-product-of-the-week.svg"
+              alt="Knecht Works: Product of the Week on DevHunt"
               width="220"
               height="56"
               loading="lazy"
@@ -115,12 +102,20 @@ const allLinkTargets = computed(() =>
       </div>
 
       <div class="col-span-full flex flex-col gap-5 py-6 sm:flex-row sm:items-center sm:justify-between">
-        <span class="font-mono text-xs text-dimmed">
+        <span class="order-last inline-flex items-center gap-2 border-t border-default pt-5 font-mono text-xs text-dimmed sm:order-none sm:border-0 sm:pt-0">
           {{ $t('footer.copyright', { year }) }}
+          <img
+            src="/assets/eu-flag.svg"
+            alt="EU"
+            width="18"
+            height="12"
+          >
         </span>
 
-        <div class="flex items-center justify-between gap-6 sm:justify-end sm:gap-8">
+        <div class="flex items-center justify-between gap-6 sm:justify-end sm:gap-4">
           <AppLocaleSwitch />
+
+          <span class="-mt-1.5 hidden h-4 border-l border-default sm:-ml-1.5 sm:block" />
 
           <div class="flex items-center gap-4">
             <NuxtLink
