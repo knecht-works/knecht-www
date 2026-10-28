@@ -76,7 +76,6 @@ Europa, für viele ist Englisch Zweitsprache. Klar vor elegant.
 
 - Kurze Sätze, ein Gedanke pro Satz. Ein deutscher Satz wird im Zweifel zu
   zwei englischen. Deutsche Schachtelsätze nie 1:1 nachbauen.
-- Keine Kontraktionen. "does not", nicht "doesn't". "it is", nicht "it's".
 - Keine Em-Dashes, nirgends. Komma, Doppelpunkt oder zwei Sätze.
 - Deutsche Doppelpunkt-Konstruktionen im Satz auflösen. "Das haben wir
   geändert: Knecht steht unter der FSL" wird zu zwei Sätzen. Ein
@@ -140,7 +139,7 @@ done
 Die Zahlen müssen übereinstimmen. Dazu per Auge:
 
 - Frontmatter hat dieselben Keys, `date` und `updatedAt` identisch.
-- Keine Em-Dashes, keine Kontraktionen im englischen Text.
+- Keine Em-Dashes im englischen Text.
 - Kein deutsches Wort übrig geblieben, besonders in Alt-Texten, Captions
   und Tabellenzellen.
 
