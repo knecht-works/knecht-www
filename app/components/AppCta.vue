@@ -1,18 +1,11 @@
 <script setup lang="ts">
-type Mode = 'beta' | 'updates'
-
 const email = ref('')
-// Beta is the default: active testers and feedback are the primary goal.
-const route = useRoute()
-const signupParam = computed<Mode | null>(() =>
-  route.query.signup === 'updates' || route.query.signup === 'beta'
-    ? route.query.signup
-    : null
-)
-const mode = ref<Mode>(signupParam.value ?? 'beta')
-watch(signupParam, (value) => {
-  if (value) mode.value = value
-})
+const type = ref<'agency' | 'freelancer'>('agency')
+const name = ref('')
+const url = ref('')
+const hosting = ref<string>()
+const stack = ref<string[]>([])
+const projects = ref<string>()
 const done = ref(false)
 const loading = ref(false)
 const error = ref('')
@@ -22,26 +15,23 @@ const website = ref('')
 const { t } = useI18n()
 const localePath = useLocalePath()
 
-const modeItems = computed(() => [
-  {
-    value: 'beta',
-    label: t('cta.modeBeta.label'),
-    description: t('cta.modeBeta.description')
-  },
-  {
-    value: 'updates',
-    label: t('cta.modeUpdates.label'),
-    description: t('cta.modeUpdates.description')
-  }
+const option = (group: string, value: string, key = value) => ({ value, label: t(`cta.details.${group}.${key}`) })
+const hostingItems = computed(() => [
+  option('hosting', 'managed'),
+  option('hosting', 'self-hosted', 'selfHosted'),
+  option('hosting', 'unsure')
 ])
-
-const submitLabel = computed(() =>
-  mode.value === 'beta' ? t('cta.submitBeta') : t('cta.submitUpdates')
+const stackItems = computed(() =>
+  ['craft', 'drupal', 'kirby', 'laravel', 'typo3', 'php', 'wordpress', 'shopware', 'node', 'other'].map(value => option('stack', value))
 )
-
-const doneMessage = computed(() =>
-  mode.value === 'beta' ? t('cta.doneBeta') : t('cta.doneUpdates')
-)
+const projectItems = computed(() => [
+  { value: 'none', label: t('cta.details.projects.none') },
+  ...['1-5', '6-20', '21-50', '50+'].map(value => ({ value, label: value }))
+])
+const typeItems = computed(() => [
+  { value: 'agency', label: t('cta.details.type.agency') },
+  { value: 'freelancer', label: t('cta.details.type.freelancer') }
+])
 
 const submit = async () => {
   if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email.value)) {
@@ -53,7 +43,17 @@ const submit = async () => {
   try {
     await $fetch('/api/subscribe', {
       method: 'POST',
-      body: { email: email.value, mode: mode.value, website: website.value }
+      body: {
+        email: email.value,
+        mode: 'beta',
+        website: website.value,
+        type: type.value,
+        name: name.value,
+        url: url.value,
+        hosting: hosting.value,
+        stack: stack.value,
+        projects: projects.value
+      }
     })
     done.value = true
   } catch {
@@ -108,34 +108,81 @@ const submit = async () => {
 
             <div
               v-if="done"
-              class="mx-auto mt-7 inline-flex items-center gap-2.5 rounded-xl border border-primary/30 bg-primary/10 px-4 py-3 font-mono text-sm text-primary lg:mx-0"
+              class="mx-auto mt-7 inline-flex items-center gap-2.5 rounded-xl border border-primary/30 bg-primary/10 px-4 py-3 text-sm text-primary lg:mx-0"
             >
               <AppPulseDot
                 color="primary"
                 :pulse="false"
               />
-              {{ doneMessage }}
+              {{ $t('cta.done') }}
             </div>
 
             <template v-else>
               <form
-                class="mx-auto mt-7 flex w-full max-w-3xl flex-col gap-4 lg:mx-0"
+                class="mx-auto mt-7 flex w-full max-w-3xl flex-col gap-3 lg:mx-0"
                 @submit.prevent="submit"
               >
-                <URadioGroup
-                  v-model="mode"
-                  :items="modeItems"
-                  variant="card"
-                  color="primary"
-                  :legend="$t('cta.legend')"
-                  :ui="{
-                    legend: 'text-sm text-muted mb-2',
-                    fieldset: 'grid w-full grid-cols-1 gap-3 sm:grid-cols-2',
-                    item: 'cursor-pointer',
-                    base: 'cursor-pointer',
-                    label: 'cursor-pointer'
-                  }"
-                />
+                <div class="grid w-full grid-cols-1 gap-3 sm:grid-cols-2">
+                  <UFormField :label="type === 'agency' ? $t('cta.details.name.agencyLabel') : $t('cta.details.name.freelancerLabel')">
+                    <UFieldGroup
+                      size="xl"
+                      class="w-full"
+                    >
+                      <USelect
+                        v-model="type"
+                        :items="typeItems"
+                        :aria-label="$t('cta.details.type.label')"
+                        class="w-32 shrink-0"
+                      />
+                      <UInput
+                        v-model="name"
+                        :placeholder="type === 'agency' ? $t('cta.details.name.agencyPlaceholder') : $t('cta.details.name.freelancerPlaceholder')"
+                        class="flex-1"
+                        :autocomplete="type === 'agency' ? 'organization' : 'name'"
+                      />
+                    </UFieldGroup>
+                  </UFormField>
+                  <UFormField :label="$t('cta.details.url.label')">
+                    <UInput
+                      v-model="url"
+                      type="url"
+                      :placeholder="$t('cta.details.url.placeholder')"
+                      size="xl"
+                      class="w-full"
+                      autocomplete="url"
+                    />
+                  </UFormField>
+                  <UFormField :label="$t('cta.details.hosting.label')">
+                    <USelect
+                      v-model="hosting"
+                      :items="hostingItems"
+                      :placeholder="$t('cta.details.hosting.placeholder')"
+                      size="xl"
+                      class="w-full"
+                    />
+                  </UFormField>
+                  <UFormField :label="$t('cta.details.projects.label')">
+                    <UFieldGroup
+                      size="xl"
+                      class="w-full"
+                    >
+                      <USelect
+                        v-model="projects"
+                        :items="projectItems"
+                        :placeholder="$t('cta.details.projects.placeholder')"
+                        class="w-32 shrink-0"
+                      />
+                      <USelect
+                        v-model="stack"
+                        :items="stackItems"
+                        :placeholder="$t('cta.details.stack.placeholder')"
+                        multiple
+                        class="min-w-0 flex-1"
+                        :ui="{ value: 'truncate' }"
+                      />
+                    </UFieldGroup>
+                  </UFormField>
+                </div>
 
                 <div
                   class="hidden"
@@ -150,22 +197,28 @@ const submit = async () => {
                   >
                 </div>
 
-                <div class="flex w-full flex-col gap-3 sm:flex-row">
-                  <UInput
-                    v-model="email"
-                    type="email"
-                    :placeholder="$t('cta.emailPlaceholder')"
-                    size="xl"
-                    :color="error ? 'error' : 'neutral'"
-                    :disabled="loading"
+                <div class="flex w-full flex-col gap-3 sm:flex-row sm:items-end">
+                  <UFormField
+                    :label="$t('cta.emailLabel')"
                     class="flex-1"
-                    :aria-label="$t('cta.emailAria')"
-                  />
+                  >
+                    <UInput
+                      v-model="email"
+                      type="email"
+                      :placeholder="$t('cta.emailPlaceholder')"
+                      size="xl"
+                      :color="error ? 'error' : 'primary'"
+                      :disabled="loading"
+                      class="w-full"
+                      autocomplete="email"
+                    />
+                  </UFormField>
                   <UButton
                     type="submit"
-                    :label="submitLabel"
+                    :label="$t('cta.submit')"
                     color="neutral"
                     size="xl"
+                    class="h-10 text-sm"
                     :loading="loading"
                   />
                 </div>
@@ -178,10 +231,6 @@ const submit = async () => {
                 {{ error }}
               </p>
             </template>
-
-            <p class="mt-4 font-mono text-xs text-dimmed">
-              {{ $t('cta.note') }}
-            </p>
           </div>
         </div>
       </div>

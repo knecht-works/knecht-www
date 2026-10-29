@@ -340,28 +340,65 @@
   },
   "cta": {
     "title": "Bau Knecht mit von Anfang an.",
-    "description": "Knecht ist noch in Entwicklung. Werde {link} und gib direkt Feedback, oder bleib einfach per Update auf dem Laufenden.",
+    "description": "Knecht ist in der Beta. Werde {link} und gestalte es mit deinem Feedback mit.",
     "descriptionLink": "Beta-Tester",
-    "modeBeta": {
-      "label": "Ich will aktiv mittesten & Feedback geben",
-      "description": "Früher Zugang, du gestaltest Knecht direkt mit."
-    },
-    "modeUpdates": {
-      "label": "Nur Updates bekommen",
-      "description": "Reine Fortschritts-Updates, kein Testen nötig."
-    },
-    "legend": "Wie möchtest du dabei sein?",
-    "submitBeta": "Beta-Tester werden",
-    "submitUpdates": "Updates abonnieren",
-    "doneBeta": "Drin! Du bist Beta-Tester der ersten Stunde. Eine Willkommens-Mail ist unterwegs zu dir.",
-    "doneUpdates": "Drin! Du bekommst ab jetzt jedes Update. Eine Willkommens-Mail ist unterwegs zu dir.",
+    "submit": "Beta-Tester werden",
+    "done": "Drin! Du bist Beta-Tester der ersten Stunde. Eine Willkommens-Mail ist unterwegs zu dir.",
     "errorInvalid": "Bitte eine gültige E-Mail eingeben.",
     "errorFailed": "Hat nicht geklappt, bitte später nochmal versuchen.",
     "emailPlaceholder": "dein{'@'}team.dev",
-    "emailAria": "E-Mail-Adresse",
-    "note": "nur Fortschritt · jederzeit abbestellbar"
+    "emailLabel": "E-Mail",
+    "details": {
+      "type": {
+        "label": "Du meldest dich an als",
+        "agency": "Agentur",
+        "freelancer": "Freelancer"
+      },
+      "name": {
+        "agencyLabel": "Name der Agentur",
+        "agencyPlaceholder": "Deine Agentur",
+        "freelancerLabel": "Dein Name",
+        "freelancerPlaceholder": "Vor- und Nachname"
+      },
+      "url": {
+        "label": "Website",
+        "placeholder": "https://"
+      },
+      "hosting": {
+        "label": "Hosting",
+        "placeholder": "Auswählen",
+        "managed": "Von Knecht gehostet",
+        "selfHosted": "Selbst gehostet",
+        "unsure": "Noch unsicher"
+      },
+      "stack": {
+        "placeholder": "Stack",
+        "craft": "Craft CMS",
+        "drupal": "Drupal",
+        "kirby": "Kirby",
+        "laravel": "Laravel",
+        "typo3": "TYPO3",
+        "php": "Plain PHP",
+        "wordpress": "WordPress",
+        "shopware": "Shopware",
+        "node": "Node / Nuxt",
+        "other": "Anderes"
+      },
+      "projects": {
+        "label": "DDEV-Projekte",
+        "placeholder": "Anzahl",
+        "none": "Noch keine"
+      }
+    }
   },
   "footer": {
+    "subscribe": {
+      "description": "Newsletter abonnieren und sehen, was neu ist.",
+      "placeholder": "dein{'@'}team.dev",
+      "emailLabel": "E-Mail",
+      "submit": "Abonnieren",
+      "done": "Drin! Eine Willkommens-Mail ist unterwegs zu dir."
+    },
     "tagline1": "Boote jedes Projekt.",
     "tagline2": "Lass den Knecht arbeiten.",
     "columns": {

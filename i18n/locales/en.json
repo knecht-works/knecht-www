@@ -340,28 +340,65 @@
   },
   "cta": {
     "title": "Build Knecht with Us from the Start.",
-    "description": "Knecht is in development. Become a {link} and give feedback directly, or get the updates only.",
+    "description": "Knecht is in beta. Become a {link} and shape it with your feedback.",
     "descriptionLink": "beta tester",
-    "modeBeta": {
-      "label": "I want to test actively and give feedback",
-      "description": "Early access. You have a direct effect on Knecht."
-    },
-    "modeUpdates": {
-      "label": "Get updates only",
-      "description": "Progress updates only. Tests are not necessary."
-    },
-    "legend": "How do you want to take part?",
-    "submitBeta": "Become a Beta Tester",
-    "submitUpdates": "Subscribe to Updates",
-    "doneBeta": "Done! You are one of the first beta testers. A welcome email is on the way to you.",
-    "doneUpdates": "Done! From now on, you get each update. A welcome email is on the way to you.",
+    "submit": "Become a Beta Tester",
+    "done": "Done! You are one of the first beta testers. A welcome email is on the way to you.",
     "errorInvalid": "Please enter a valid email address.",
     "errorFailed": "That did not work. Please try again later.",
     "emailPlaceholder": "you{'@'}team.dev",
-    "emailAria": "Email address",
-    "note": "progress only · unsubscribe at any time"
+    "emailLabel": "Email",
+    "details": {
+      "type": {
+        "label": "You sign up as",
+        "agency": "Agency",
+        "freelancer": "Freelancer"
+      },
+      "name": {
+        "agencyLabel": "Agency name",
+        "agencyPlaceholder": "Your agency",
+        "freelancerLabel": "Your name",
+        "freelancerPlaceholder": "First and last name"
+      },
+      "url": {
+        "label": "Website",
+        "placeholder": "https://"
+      },
+      "hosting": {
+        "label": "Hosting",
+        "placeholder": "Choose",
+        "managed": "Managed by Knecht",
+        "selfHosted": "Self-hosted",
+        "unsure": "Not sure yet"
+      },
+      "stack": {
+        "placeholder": "Stack",
+        "craft": "Craft CMS",
+        "drupal": "Drupal",
+        "kirby": "Kirby",
+        "laravel": "Laravel",
+        "typo3": "TYPO3",
+        "php": "Plain PHP",
+        "wordpress": "WordPress",
+        "shopware": "Shopware",
+        "node": "Node / Nuxt",
+        "other": "Other"
+      },
+      "projects": {
+        "label": "DDEV projects",
+        "placeholder": "Amount",
+        "none": "None yet"
+      }
+    }
   },
   "footer": {
+    "subscribe": {
+      "description": "Join our newsletter to see what we shipped.",
+      "placeholder": "you{'@'}team.dev",
+      "emailLabel": "Email",
+      "submit": "Subscribe",
+      "done": "Done! A welcome email is on the way to you."
+    },
     "tagline1": "Boot each project.",
     "tagline2": "Let Knecht do the work.",
     "columns": {
