@@ -47,7 +47,7 @@
           {{ $t('updates.about.home') }}
         </NuxtLinkLocale>
         <NuxtLinkLocale
-          to="/?signup=beta#cta"
+          to="/#cta"
           class="inline-flex items-center gap-1.5 text-primary transition-colors hover:text-highlighted"
         >
           <UIcon

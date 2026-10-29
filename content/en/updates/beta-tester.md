@@ -28,6 +28,6 @@ Knecht helps most where many projects need maintenance. You are a good fit if yo
 
 ## Take part
 
-If this sounds like you, sign up in the [form below this post](#cta) and select "I want to test actively and give feedback". We will then contact you. If you have questions first, send a mail to [hallo@knecht.works](mailto:hallo@knecht.works).
+If this sounds like you, sign up in the [form below this post](#cta). We will then contact you. If you have questions first, send a mail to [hallo@knecht.works](mailto:hallo@knecht.works).
 
-And if testing is not your thing, but you want to follow the progress, select "Get updates only" in the [form](#cta).
+And if testing is not your thing, but you want to follow the progress, subscribe to the updates in the footer.

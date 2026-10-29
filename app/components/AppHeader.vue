@@ -90,7 +90,7 @@ const items = computed<NavigationMenuItem[]>(() =>
         color="neutral"
         class="hidden lg:flex"
         size="lg"
-        :to="localePath('/updates/beta-tester?signup=beta')"
+        :to="localePath('/updates/beta-tester')"
       />
     </template>
 
@@ -119,7 +119,7 @@ const items = computed<NavigationMenuItem[]>(() =>
             color="neutral"
             block
             size="xl"
-            :to="localePath('/updates/beta-tester?signup=beta')"
+            :to="localePath('/updates/beta-tester')"
           />
         </div>
       </div>

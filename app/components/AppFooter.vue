@@ -19,7 +19,7 @@ const baseColumns = [
   {
     headingKey: 'footer.columns.takePart',
     links: [
-      { labelKey: 'footer.links.beta', to: '/updates/beta-tester?signup=beta' },
+      { labelKey: 'footer.links.beta', to: '/updates/beta-tester' },
       { labelKey: 'footer.links.discord', to: DISCORD_URL },
       { labelKey: 'footer.links.allUpdates', to: '/updates' },
       { labelKey: 'footer.links.feedback', to: `mailto:${CONTACT_EMAIL}` }
@@ -62,20 +62,7 @@ const allLinkTargets = computed(() =>
             {{ $t('footer.tagline1') }}<br>{{ $t('footer.tagline2') }}
           </p>
 
-          <a
-            href="https://devhunt.org/tool/knecht-works"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="mt-6 inline-block"
-          >
-            <img
-              src="/assets/devhunt-2nd-product-of-the-week.svg"
-              alt="Knecht Works: Product of the Week on DevHunt"
-              width="220"
-              height="56"
-              loading="lazy"
-            >
-          </a>
+          <AppFooterSubscribe class="mt-8" />
         </div>
 
         <div class="grid grid-cols-2 gap-8 sm:grid-cols-3 sm:gap-16">

@@ -28,6 +28,6 @@ Am meisten bringt Knecht dort, wo viele Projekte gewartet werden. Ihr passt gut,
 
 ## Mitmachen
 
-Wenn das nach euch klingt, trag dich im [Formular direkt unter diesem Post](#cta) ein und wähle "Ich will aktiv mittesten & Feedback geben". Wir melden uns dann bei dir. Wenn du vorab Fragen hast, schreib uns an [hallo@knecht.works](mailto:hallo@knecht.works).
+Wenn das nach euch klingt, trag dich im [Formular direkt unter diesem Post](#cta) ein. Wir melden uns dann bei dir. Wenn du vorab Fragen hast, schreib uns an [hallo@knecht.works](mailto:hallo@knecht.works).
 
-Und wenn Testen gerade nichts für euch ist, ihr aber wissen wollt, wie es weitergeht, wählt im [Formular](#cta) einfach "Nur Updates bekommen".
+Und wenn Testen gerade nichts für euch ist, ihr aber wissen wollt, wie es weitergeht, abonniert die Updates im Footer.

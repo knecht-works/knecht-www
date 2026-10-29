@@ -187,7 +187,7 @@ onMounted(() => {
             :label="$t('hero.ctaPrimary')"
             color="neutral"
             size="lg"
-            :to="localePath('/?signup=beta#cta')"
+            :to="localePath('/#cta')"
           />
           <UButton
             :label="$t('hero.ctaSecondary')"
