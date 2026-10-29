@@ -394,3 +394,17 @@ picture {
     transform: translateX(-50%);
   }
 }
+
+/* Keyboard focus is one 2px ring in the primary color, same as in the
+   dashboard. The theme's per-component outlines are switched off and the ring
+   is forced through Tailwind's ring variables, so an inset ring stays inset.
+   An element that declares `outline-none` opts out. */
+*:focus-visible,
+*:has(> a:focus-visible) {
+  --tw-ring-shadow: var(--tw-ring-inset,) 0 0 0 calc(2px + var(--tw-ring-offset-width, 0px)) var(--ui-primary);
+  outline-width: 0;
+}
+
+*:focus-visible:not([tabindex="-1"], .outline-none, .focus\:outline-none) {
+  box-shadow: var(--tw-inset-shadow, 0 0 #0000), var(--tw-inset-ring-shadow, 0 0 #0000), var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}

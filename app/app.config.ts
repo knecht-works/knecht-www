@@ -46,6 +46,11 @@ export default defineAppConfig({
         }
       }
     },
+    select: {
+      slots: {
+        base: 'cursor-pointer'
+      }
+    },
     contentNavigation: {
       slots: {
         link: 'py-1',
@@ -54,7 +59,7 @@ export default defineAppConfig({
     },
     button: {
       slots: {
-        base: 'rounded-lg'
+        base: 'rounded-lg cursor-pointer'
       },
       variants: {
         size: {
