@@ -33,7 +33,9 @@ watch(isOpen, (value) => {
   storedOpen.value = value
 })
 
-defineShortcuts({
+// Registering "tab" always would swallow Tab on every page, because the
+// shortcut calls preventDefault before the handler runs.
+defineShortcuts(computed(() => ({
   meta_i: {
     handler: () => {
       isOpen.value = !isOpen.value
@@ -47,14 +49,15 @@ defineShortcuts({
     },
     usingInput: true
   },
-  tab: {
-    handler: () => {
-      if (!isOpen.value || !currentPage.value) return
-      pageContextDismissed.value = !pageContextDismissed.value
-    },
-    usingInput: true
-  }
-})
+  ...(isOpen.value && currentPage.value && {
+    tab: {
+      handler: () => {
+        pageContextDismissed.value = !pageContextDismissed.value
+      },
+      usingInput: true
+    }
+  })
+})))
 </script>
 
 <template>
