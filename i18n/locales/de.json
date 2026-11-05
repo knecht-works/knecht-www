@@ -10,7 +10,8 @@
       "preview": "Vorschau",
       "roadmap": "Roadmap",
       "updates": "Updates",
-      "docs": "Docs"
+      "docs": "Docs",
+      "playground": "Demo"
     },
     "cta": "Beta-Tester werden",
     "search": "Suche"
@@ -23,7 +24,8 @@
     "description": "Ein Ticket startet einen Workflow. Knecht bootet das Projekt, erledigt die Aufgabe direkt darin und öffnet einen Pull Request mit Preview. Self-hosted, für Agenturen mit vielen Projekten.",
     "ctaPrimary": "Beta-Tester werden",
     "ctaSecondary": "Docs ansehen",
-    "mascotAlt": "Knecht, der Roboter-Knecht mit Röhren-TV-Kopf"
+    "mascotAlt": "Knecht, der Roboter-Knecht mit Röhren-TV-Kopf",
+    "ctaTry": "Demo ausprobieren"
   },
   "testers": {
     "label": "Diese Teams testen Knecht gerade in der Beta."
@@ -184,7 +186,69 @@
       "runningWorkflow": "Test Workflows"
     },
     "imageAlt": "Knecht {label} Vorschau",
-    "browserAction": "Vorschau"
+    "browserAction": "Punkte Antippen",
+    "hotspots": {
+      "projects": {
+        "filter": {
+          "title": "Nach Stack Filtern",
+          "text": "Craft, Drupal, Laravel oder TYPO3: Projekte lassen sich nach Framework filtern."
+        },
+        "status": {
+          "title": "Live-Status",
+          "text": "Ein laufender Run erscheint sofort auf der Karte, ohne Neuladen."
+        },
+        "live": {
+          "title": "Preview Läuft",
+          "text": "Live heißt: Die Preview dieses Projekts ist gerade erreichbar."
+        }
+      },
+      "detail": {
+        "preview": {
+          "title": "Preview im Dashboard",
+          "text": "Die Preview des Runs öffnet sich direkt im Dashboard."
+        },
+        "tools": {
+          "title": "Tools im Run",
+          "text": "Mailpit, Adminer und Terminal öffnen sich direkt aus dem Run."
+        },
+        "sessions": {
+          "title": "Jeder Run Bleibt",
+          "text": "Log, Preview und Ergebnis bleiben pro Session erhalten."
+        },
+        "followUp": {
+          "title": "Follow-Up",
+          "text": "Gib dem Agent Feedback und lass ihn das Ergebnis nachbessern."
+        }
+      },
+      "workflow": {
+        "triggers": {
+          "title": "Mehrere Trigger",
+          "text": "Jira, GitHub und ein Zeitplan können denselben Workflow starten."
+        },
+        "library": {
+          "title": "Step-Library",
+          "text": "Feste Schritte, AI, Tests und Kontrollfluss per Klick hinzufügen."
+        },
+        "ai": {
+          "title": "AI-Schritt",
+          "text": "Ein Prompt, den der Agent im laufenden Projekt ausführt."
+        }
+      },
+      "runningWorkflow": {
+        "banner": {
+          "title": "Test-Run im Echten Projekt",
+          "text": "Probier einen Workflow aus, bevor ein Trigger ihn startet."
+        },
+        "log": {
+          "title": "Live-Log",
+          "text": "Jeder Schritt streamt seine Ausgabe live ins Dashboard."
+        },
+        "background": {
+          "title": "Im Hintergrund",
+          "text": "Der Run läuft weiter, auch wenn du die Seite verlässt."
+        }
+      }
+    }
   },
   "discord": {
     "title": "Der Knecht hat jetzt einen Discord-Server.",
@@ -471,5 +535,86 @@
   },
   "pages": {
     "updatedAt": "Zuletzt aktualisiert"
+  },
+  "playground": {
+    "title": "Bau Deinen Ersten",
+    "titleAccent": "Workflow.",
+    "intro": "Wähl einen Trigger, steck Bausteine zusammen und starte einen Test-Run. So fühlt sich ein Workflow im Knecht-Dashboard an.",
+    "libraryLabel": "Bausteine",
+    "triggerLabel": "Trigger",
+    "workflowLabel": "Workflow",
+    "logLabel": "Live-Log",
+    "idle": "Bereit",
+    "add": "{step} hinzufügen",
+    "remove": "{step} entfernen",
+    "empty": "Klick links auf einen Baustein, um ihn hinzuzufügen.",
+    "run": "Test-Run Starten",
+    "running": "Läuft",
+    "rerun": "Nochmal Starten",
+    "logEmpty": "Starte einen Test-Run, um das Log zu sehen.",
+    "triggers": {
+      "github": {
+        "label": "GitHub Issue",
+        "event": "Label knecht gesetzt",
+        "log": "Issue #128 bekommt das Label knecht",
+        "where": "im Issue"
+      },
+      "jira": {
+        "label": "Jira Ticket",
+        "event": "Status In Progress",
+        "log": "SHOP-412 wechselt auf In Progress",
+        "where": "im Jira-Ticket"
+      },
+      "linear": {
+        "label": "Linear Issue",
+        "event": "An Knecht zugewiesen",
+        "log": "ENG-87 wird Knecht zugewiesen",
+        "where": "im Linear-Issue"
+      },
+      "cron": {
+        "label": "Zeitplan",
+        "event": "Montag 06:00",
+        "log": "Zeitplan löst aus, Montag 06:00",
+        "where": "im Run"
+      }
+    },
+    "steps": {
+      "boot": {
+        "title": "Projekt Booten",
+        "text": "Startet die Umgebung und importiert die Datenbank.",
+        "logA": "ddev start, composer install",
+        "logB": "DB-Dump importiert, Projekt läuft"
+      },
+      "shell": {
+        "title": "Shell-Befehl",
+        "text": "Führt einen Befehl in der Sandbox aus.",
+        "logA": "$ ddev craft update all",
+        "logB": "3 Pakete aktualisiert, Migrations gelaufen"
+      },
+      "ai": {
+        "title": "AI Agent",
+        "text": "Erledigt die Aufgabe im laufenden Projekt.",
+        "logA": "Agent liest das Ticket und reproduziert das Problem",
+        "logB": "2 Dateien geändert, Fix im Browser geprüft"
+      },
+      "http": {
+        "title": "HTTP-Request",
+        "text": "Ruft eine externe API oder einen Webhook auf.",
+        "logA": "POST hooks.slack.com, Run gestartet",
+        "logB": "200 OK in 184 ms"
+      },
+      "links": {
+        "title": "Link-Check",
+        "text": "Prüft alle Seiten der Preview auf kaputte Links.",
+        "logA": "Sitemap gelesen, 142 Seiten gefunden",
+        "logB": "142 Seiten geprüft, 0 kaputt"
+      }
+    },
+    "result": {
+      "title": "Run Erfolgreich",
+      "pr": "Pull Request #86 geöffnet",
+      "preview": "86.preview.knecht.works",
+      "comment": "Kommentar mit Links {where}"
+    }
   }
 }

@@ -196,6 +196,16 @@ onMounted(() => {
             size="lg"
             to="/docs/get-started/introduction"
           />
+          <NuxtLinkLocale
+            to="/#playground"
+            class="inline-flex items-center gap-1.5 px-2 font-mono text-sm text-primary transition-opacity hover:opacity-70"
+          >
+            {{ $t('hero.ctaTry') }}
+            <UIcon
+              name="i-lucide-arrow-down"
+              class="size-3.5"
+            />
+          </NuxtLinkLocale>
         </div>
       </div>
 
@@ -226,7 +236,78 @@ onMounted(() => {
             style="transform-origin: 49.4% 32.2%"
           >
         </div>
+
+        <div
+          aria-hidden="true"
+          class="hero-card shadow-panel-lg absolute -left-10 top-[38%] flex items-center gap-3 rounded-xl border border-default bg-elevated/90 px-3.5 py-3 backdrop-blur lg:-left-4"
+        >
+          <AppSourceMark
+            source="github"
+            size="md"
+          />
+          <div class="whitespace-nowrap">
+            <div class="text-sm font-semibold text-highlighted">
+              {{ $t('playground.triggers.github.label') }}
+            </div>
+            <div class="mt-0.5 font-mono text-xs text-muted">
+              {{ $t('playground.triggers.github.event') }}
+            </div>
+          </div>
+        </div>
+
+        <div
+          aria-hidden="true"
+          class="hero-card hero-card-late shadow-panel-lg absolute -right-4 bottom-0 flex items-center gap-3 rounded-xl border border-primary/30 bg-elevated/90 px-3.5 py-3 backdrop-blur lg:right-0"
+        >
+          <span class="grid size-9 shrink-0 place-items-center rounded-lg bg-accent-mint text-neutral-950">
+            <UIcon
+              name="i-lucide-git-pull-request"
+              class="size-5"
+            />
+          </span>
+          <div class="whitespace-nowrap">
+            <div class="text-sm font-semibold text-highlighted">
+              {{ $t('playground.result.pr') }}
+            </div>
+            <div class="mt-0.5 flex items-center gap-1.5 font-mono text-xs text-primary">
+              <AppPulseDot
+                color="primary"
+                :pulse="false"
+              />
+              {{ $t('playground.result.preview') }}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 </template>
+
+<style scoped>
+.hero-card {
+  animation: hero-card-in 0.6s var(--ease-soft) 1.6s both, hero-card-float 6s ease-in-out 2.2s infinite;
+}
+
+.hero-card-late {
+  animation-delay: 2.6s, 3.2s;
+}
+
+@keyframes hero-card-in {
+  from {
+    opacity: 0;
+    translate: 0 10px;
+  }
+}
+
+@keyframes hero-card-float {
+  50% {
+    translate: 0 -6px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-card {
+    animation: none;
+  }
+}
+</style>

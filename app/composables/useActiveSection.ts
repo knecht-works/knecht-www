@@ -1,6 +1,6 @@
 // In document order. No nav item targets `cta`, it is listed so the spy clears
 // the previous section once the CTA is reached.
-const SECTION_IDS = ['integrations', 'use-cases', 'dashboard', 'discord', 'roadmap', 'updates', 'cta']
+const SECTION_IDS = ['playground', 'integrations', 'use-cases', 'dashboard', 'discord', 'roadmap', 'updates', 'cta']
 
 export const useActiveSection = () => useState<string>('active-section', () => '')
 

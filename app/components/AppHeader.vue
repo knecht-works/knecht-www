@@ -24,6 +24,7 @@ const { t } = useI18n()
 
 // Docs exist in English only, so their link stays unlocalized.
 const baseItems: { labelKey: string, to: string, localized?: boolean }[] = [
+  { labelKey: 'header.nav.playground', to: '/#playground' },
   { labelKey: 'header.nav.integrations', to: '/#integrations' },
   { labelKey: 'header.nav.useCases', to: '/#use-cases' },
   { labelKey: 'header.nav.updates', to: '/updates' },
