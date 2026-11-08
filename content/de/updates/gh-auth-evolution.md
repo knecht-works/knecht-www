@@ -19,8 +19,8 @@ Und genau da fing unser Problem an.
 
 Die erste Version von Knecht war eine OAuth App mit `repo`-Scope. Der Token, der den Login bestätigt hat, war gleichzeitig das Credential für alle Git-Operationen. Kein zweites Secret, nichts einzurichten. Praktisch, aber zweifach falsch:
 
-- **Der Scope ist zu grob.** Ein `repo`-Token kann alles, was der User kann. In jedem seiner Repos, nicht nur in den Projekten, die Knecht betreut. Feiner geht es bei OAuth-Scopes nicht.
-- **Das Credential hängt an einer Person.** Rotiert der User seinen Token oder verlässt die Agentur, kommt der Server an kein Repo mehr. Server-Infrastruktur, die auf dem Account eines Mitarbeiters steht, ist eine tickende Uhr.
+- **Der Scope ist zu grob:** Ein `repo`-Token kann alles, was der User kann. In jedem seiner Repos, nicht nur in den Projekten, die Knecht betreut. Feiner geht es bei OAuth-Scopes nicht.
+- **Das Credential hängt an einer Person:** Rotiert der User seinen Token oder verlässt die Agentur, kommt der Server an kein Repo mehr. Server-Infrastruktur, die auf dem Account eines Mitarbeiters steht, ist eine tickende Uhr.
 
 ## Was eine GitHub App anders macht
 

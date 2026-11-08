@@ -19,8 +19,8 @@ And exactly there our problem started.
 
 The first version of Knecht was an OAuth App with the `repo` scope. The token that confirmed the login was also the credential for all Git operations. There was no second secret and no setup. This was practical, but wrong in two ways:
 
-- **The scope is too wide.** A `repo` token can do everything that the user can do, in each of the user's repos, not only in the projects that Knecht maintains. OAuth scopes cannot be more precise than this.
-- **The credential belongs to one person.** If the user rotates the token or leaves the agency, the server loses access to all repos. Server infrastructure that depends on the account of one employee is a time bomb.
+- **The scope is too wide:** A `repo` token can do everything that the user can do, in each of the user's repos, not only in the projects that Knecht maintains. OAuth scopes cannot be more precise than this.
+- **The credential belongs to one person:** If the user rotates the token or leaves the agency, the server loses access to all repos. Server infrastructure that depends on the account of one employee is a time bomb.
 
 ## What a GitHub App does differently
 

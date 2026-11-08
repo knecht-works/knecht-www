@@ -84,7 +84,7 @@ In den Chrome DevTools führt der [Rendering-Tab](https://developer.chrome.com/d
 
 Mein erster Reflex war: "Blur wird doch überall unterstützt." Stimmt laut Caniuse, sagt aber nichts über Performance.
 
-**GPU-Beschleunigung kann ganz wegfallen.** Firefox rendert über WebRender, fällt aber auf vielen Linux-Setups (alte Intel-GPUs, proprietäre Nvidia-Treiber) auf [Software-Rendering](https://wiki.archlinux.org/title/Firefox/Tweaks) zurück. Dann läuft die Blur-Convolution auf der CPU, und aus "unmerklich" wird "ruckelt".
+**GPU-Beschleunigung kann ganz wegfallen:** Firefox rendert über WebRender, fällt aber auf vielen Linux-Setups (alte Intel-GPUs, proprietäre Nvidia-Treiber) auf [Software-Rendering](https://wiki.archlinux.org/title/Firefox/Tweaks) zurück. Dann läuft die Blur-Convolution auf der CPU, und aus "unmerklich" wird "ruckelt".
 
 ::callout{icon="i-lucide-lightbulb" color="primary"}
   Ein grüner Caniuse-Balken heißt "der Browser kennt das Feature", nicht "er macht es schnell, auch ohne GPU-Beschleunigung".

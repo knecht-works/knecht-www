@@ -84,7 +84,7 @@ In the Chrome DevTools, the [Rendering tab](https://developer.chrome.com/docs/de
 
 My first thought was that all browsers support blur. Caniuse confirms this, but support says nothing about performance.
 
-**GPU acceleration can be absent completely.** Firefox renders with WebRender, but on many Linux setups (old Intel GPUs, proprietary Nvidia drivers) it falls back to [software rendering](https://wiki.archlinux.org/title/Firefox/Tweaks). Then the blur convolution runs on the CPU, and a smooth effect becomes visible stutter.
+**GPU acceleration can be absent completely:** Firefox renders with WebRender, but on many Linux setups (old Intel GPUs, proprietary Nvidia drivers) it falls back to [software rendering](https://wiki.archlinux.org/title/Firefox/Tweaks). Then the blur convolution runs on the CPU, and a smooth effect becomes visible stutter.
 
 ::callout{icon="i-lucide-lightbulb" color="primary"}
   A green Caniuse bar means that the browser knows the feature. It does not mean that the browser is fast without GPU acceleration.
