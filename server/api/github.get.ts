@@ -1,5 +1,4 @@
-// Browsers never hit GitHub's anonymous rate limit (60 req/h per IP). Failed
-// lookups return null so the UI can hide the affected element.
+// Browsers never hit GitHub's anonymous rate limit (60 req/h per IP).
 // Keep in sync with GITHUB_REPO in app/utils/constants.ts.
 const GITHUB_REPO = 'knecht-works/knecht-cloud'
 
@@ -24,9 +23,9 @@ export default defineCachedEventHandler(async (event) => {
   const stars = repo.status === 'fulfilled' ? repo.value.stargazers_count : null
   const version = release.status === 'fulfilled' ? release.value.tag_name : null
 
-  // A fully failed lookup (e.g. rate limit) must not be cached for maxAge,
-  // otherwise nulls are served long after GitHub recovered.
-  if (stars === null && version === null) {
+  // Any failed lookup (e.g. rate limit) must not be cached for maxAge, otherwise
+  // nulls are served long after GitHub recovered. The client keeps its cached values.
+  if (stars === null || version === null) {
     throw createError({ statusCode: 502, statusMessage: 'GitHub API unavailable' })
   }
 
