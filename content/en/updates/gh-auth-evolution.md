@@ -5,6 +5,10 @@ tag: Security
 description: A deep dive into the GitHub connection of Knecht. Why an OAuth token is not enough, what a GitHub App does differently, and why we had to build the access control ourselves in the end.
 ---
 
+::note
+Since version 0.18, the login no longer depends on GitHub, and there are roles. How this works is in [Invite links, passwords and several owners](/updates/team-accounts).
+::
+
 The GitHub login worked from day one. Still, we rebuilt it three times.
 
 The reason is that "connect with GitHub" hides three separate questions, and people often mix them. Who sits in front of the dashboard? With what does the server clone repos and open PRs? And who is permitted to use this instance at all? At the start, we answered all three with a single token. This post shows the path from there to the current state, together with the GitHub quirks that we found on the way.
