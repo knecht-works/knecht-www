@@ -212,7 +212,7 @@
     "title": "Wo der Knecht gerade steht.",
     "intro": "Was Knecht heute kann, woran wir gerade arbeiten und was als Nächstes kommt.",
     "progressLabel": "Fortschritt bis zum öffentlichen Release",
-    "goal": "Die Beta läuft. Als Nächstes kommen die Jira-Integration und weitere Beta-Tester.",
+    "goal": "Die Beta läuft. Gerade arbeiten wir an den AI-Settings pro Projekt und suchen weitere Beta-Tester.",
     "status": {
       "done": "Fertig",
       "progress": "In Arbeit",
@@ -320,6 +320,42 @@
       "linearTrigger": {
         "title": "Linear Integration",
         "text": "Es können Linear Trigger eingestellt werden für Workflows."
+      },
+      "projectsUi": {
+        "title": "UI-Refresh Projekte",
+        "text": "Projektseite und Projekt-Settings bekommen ein aufgeräumtes, übersichtlicheres Design."
+      },
+      "globalAiRules": {
+        "title": "Globale AI-Regeln",
+        "text": "Regeln für den Agenten gelten einmal für die ganze Instanz, statt sie in jedem Projekt zu pflegen."
+      },
+      "workflowEditor": {
+        "title": "Workflow-Editor aufräumen",
+        "text": "Der Workflow-Editor wird übersichtlicher, damit Workflows schneller gebaut und gelesen sind."
+      },
+      "gitlabSupport": {
+        "title": "GitLab Support",
+        "text": "Projekte können auch aus GitLab kommen, nicht nur aus GitHub."
+      },
+      "slackIntegration": {
+        "title": "Slack Integration",
+        "text": "Knecht lässt sich mit Slack verbinden."
+      },
+      "resourceOverview": {
+        "title": "Ressourcen-Übersicht",
+        "text": "Die System-Settings zeigen, wie viel CPU, RAM und Speicher der Server gerade verbraucht."
+      },
+      "projectAiSettings": {
+        "title": "Projekt AI-Settings",
+        "text": "Provider, Modelle und Regeln für den Agenten lassen sich pro Projekt einstellen."
+      },
+      "mcpSupport": {
+        "title": "MCP Support",
+        "text": "Externe AI-Tools wie Claude Code greifen über MCP auf Runs, Logs und Workflows zu."
+      },
+      "sessionsRework": {
+        "title": "Sessions umbauen",
+        "text": "Ticket, PR und alle Runs dazu laufen in einer Session, auch ganz ohne Workflow."
       }
     }
   },

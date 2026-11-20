@@ -212,7 +212,7 @@
     "title": "Where Knecht Stands.",
     "intro": "What Knecht can do today, what we are working on, and what comes next.",
     "progressLabel": "Progress to the public release",
-    "goal": "The beta is running. Next up are the Jira integration and more beta testers.",
+    "goal": "The beta is running. Right now we are working on AI settings per project and looking for more beta testers.",
     "status": {
       "done": "Done",
       "progress": "In progress",
@@ -320,6 +320,42 @@
       "linearTrigger": {
         "title": "Linear Integration",
         "text": "Linear issues can start workflows."
+      },
+      "projectsUi": {
+        "title": "Projects UI Refresh",
+        "text": "The project page and project settings get a cleaner, clearer design."
+      },
+      "globalAiRules": {
+        "title": "Global AI Rules",
+        "text": "Rules for the agent apply once for the whole instance instead of being kept in every project."
+      },
+      "workflowEditor": {
+        "title": "Workflow Editor Cleanup",
+        "text": "The workflow editor gets clearer, so workflows are faster to build and to read."
+      },
+      "gitlabSupport": {
+        "title": "GitLab Support",
+        "text": "Projects can also come from GitLab, not only from GitHub."
+      },
+      "slackIntegration": {
+        "title": "Slack Integration",
+        "text": "Knecht can be connected to Slack."
+      },
+      "resourceOverview": {
+        "title": "Resource Overview",
+        "text": "The system settings show how much CPU, RAM and disk the server uses right now."
+      },
+      "projectAiSettings": {
+        "title": "Project AI Settings",
+        "text": "Provider, models and rules for the agent can be set per project."
+      },
+      "mcpSupport": {
+        "title": "MCP Support",
+        "text": "External AI tools like Claude Code reach runs, logs and workflows through MCP."
+      },
+      "sessionsRework": {
+        "title": "Sessions Rework",
+        "text": "The ticket, the PR and all their runs live in one session, even without a workflow."
       }
     }
   },
