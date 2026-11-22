@@ -129,36 +129,6 @@ html {
   filter: drop-shadow(0 26px 42px oklch(0 0 0 / 0.6));
 }
 
-/* Mirrors MOBILE_TILT_UP, MOBILE_TILT_DOWN and SCROLL_RANGE in AppHomeHero.vue.
-   Uses `rotate` so the JS click shake (written to `transform`) composes on top. */
-@keyframes mascot-tilt {
-  from {
-    rotate: 16deg;
-  }
-  to {
-    rotate: -16deg;
-  }
-}
-
-/* The head hangs before JS runs, so the wake-up in AppHomeHero.vue starts from
-   the right pose without a jump. Mirrors WAKE_DOWN. */
-@media (prefers-reduced-motion: no-preference) {
-  .mascot-head-asleep {
-    transform: rotate(-16deg);
-  }
-}
-
-@media (pointer: coarse) and (prefers-reduced-motion: no-preference) {
-  @supports ((animation-timeline: scroll()) and (animation-range: 0% 100%)) {
-    .mascot-head-scroll {
-      animation: mascot-tilt auto linear both;
-      animation-timeline: scroll(block root);
-      animation-range: 0px 600px;
-      will-change: transform, rotate;
-    }
-  }
-}
-
 @utility paused {
   animation-play-state: paused;
 }

@@ -1,27 +1,34 @@
 <script setup lang="ts">
 const localePath = useLocalePath()
 
-const headEl = useTemplateRef<HTMLImageElement>('headEl')
+const boxEl = useTemplateRef<HTMLDivElement>('boxEl')
+const canvasEl = useTemplateRef<HTMLCanvasElement>('canvasEl')
+const ready = ref(false)
 
-const MAX_TILT = 14 // degrees
-const MOBILE_TILT_UP = 16 // degrees the head looks up at the top of the page (mobile)
-const MOBILE_TILT_DOWN = 16 // degrees the head tilts down after scrolling SCROLL_RANGE
-const SCROLL_RANGE = 600 // px of scroll that maps to the full downward tilt
-const SHAKE_AMP = 13 // peak shake angle in degrees
-const SHAKE_FREQ = 32 // rad/s, about three head turns
-const SHAKE_DUR = 0.6 // seconds, click shake
-const WAKE_DOWN = 16 // degrees the head hangs while asleep, mirrored by .mascot-head-asleep
-const WAKE_HOLD = 1.2 // seconds the head keeps hanging while the hero fades in
-const WAKE_UP = 1.9 // seconds at which the head is upright and the shake starts
-const WAKE_SHAKE_DUR = 1.3 // seconds, longer than the click shake
+const DEG = Math.PI / 180
+const LOOK_YAW = 55 // degrees the neck turns to either side of the body
+const LOOK_PITCH = 22 // degrees the head looks up or down
+const LOOK_DEPTH = 0.9 // how far in front of the robot the cursor sits, in artwork heights
+const HEAD_X = 0.5 // head centre within the artwork box
+const HEAD_Y = 0.15
+const INTRO_HOLD = 0.4 // seconds the robot keeps looking away after it appears
+const INTRO_TURN = 0.9 // seconds the head takes to face the visitor before the wave starts
+const INTRO_YAW = 12 // degrees past the body's direction the head turns towards the visitor
+const SCROLL_PITCH = 16 // degrees the head looks up at the top of the page and down after SCROLL_RANGE (touch)
+const SCROLL_RANGE = 600 // px of scroll that maps to the full pitch range
+const WAVE_DUR = 1.9 // seconds
+const WAVE_ARM = 100 // degrees the upper arm lifts sideways
+const WAVE_FOREARM = 55 // degrees the forearm bends upwards
+const WAVE_SWING = 22 // degrees the forearm swings around that bend
+const WAVE_FREQ = 9 // rad/s
+const WAVE_PALM = 30 // degrees the wrist twists so the palm faces the viewer
+const WAVE_WRIST = 18 // degrees the hand swings, trailing the forearm
+const WAVE_KNUCKLE = 30 // degrees the fingers uncurl at the knuckle while waving
+const WAVE_FINGERTIP = 60 // degrees the fingertips uncurl on top of that
 
-type Overlay = { dur: number, at: (t: number) => number }
-const shake = (dur: number) => (t: number) => {
-  const rampIn = Math.min(1, t / 0.15)
-  const envelope = rampIn * rampIn * (1 - t / dur) ** 2
-  return SHAKE_AMP * Math.sin(t * SHAKE_FREQ) * envelope
-}
-const shakeMotion: Overlay = { dur: SHAKE_DUR, at: shake(SHAKE_DUR) }
+type Pose = { arm: number, forearm: number, palm: number, wrist: number, open: number }
+type Motion = { dur: number, at: (t: number, pose: Pose) => void }
+
 const ease = (x: number) => (x < 0.5 ? 4 * x * x * x : 1 - (-2 * x + 2) ** 3 / 2)
 const keyframed = (frames: [number, number][]) => (t: number) => {
   for (let i = 1; i < frames.length; i++) {
@@ -31,54 +38,84 @@ const keyframed = (frames: [number, number][]) => (t: number) => {
   }
   return frames[frames.length - 1]![1]
 }
-const wake = keyframed([
-  [0, -WAKE_DOWN],
-  [WAKE_HOLD, -WAKE_DOWN],
-  [WAKE_UP, 0]
-])
-const wakeShake = shake(WAKE_SHAKE_DUR)
-const wakeMotion: Overlay = {
-  dur: WAKE_UP + WAKE_SHAKE_DUR,
-  at: t => (t < WAKE_UP ? wake(t) : wakeShake(t - WAKE_UP))
+const lift = keyframed([[0, 0], [0.5, 1], [WAVE_DUR - 0.5, 1], [WAVE_DUR, 0]])
+const wave = (t: number, pose: Pose) => {
+  if (t >= WAVE_DUR) return
+  const raised = lift(t)
+  pose.arm += raised * WAVE_ARM
+  pose.forearm += raised * (WAVE_FOREARM + WAVE_SWING * Math.sin((t - 0.5) * WAVE_FREQ))
+  pose.palm += raised * WAVE_PALM
+  pose.open += raised
+  pose.wrist += raised * WAVE_WRIST * Math.sin((t - 0.5) * WAVE_FREQ - 0.8)
 }
+const waveMotion: Motion = { dur: WAVE_DUR, at: wave }
+let greet = () => {}
+const onMascotClick = () => greet()
 
-let triggerShake = () => {}
-const onMascotClick = () => triggerShake()
+onMounted(async () => {
+  const box = boxEl.value
+  const canvas = canvasEl.value
+  if (!box || !canvas) return
+  const still = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-onMounted(() => {
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  const el = headEl.value
-  if (reduce || !el) return
+  let unmounted = false
+  let cleanup = () => {}
+  onBeforeUnmount(() => {
+    unmounted = true
+    greet = () => {}
+    cleanup()
+  })
 
-  const fine = window.matchMedia('(pointer: fine)').matches
-  // On mobile, prefer the CSS scroll-driven tilt (see main.css): it runs on the
-  // compositor thread, so the URL bar resizing the viewport never janks it. Only
-  // fall back to the JS scroll handler when the browser lacks support.
-  const cssTilt = !fine && CSS.supports('(animation-timeline: scroll()) and (animation-range: 0% 100%)')
+  // Imported on demand so three.js stays out of the entry bundle.
+  const mascot = await import('~/utils/mascot')
+    .then(m => m.createMascot(canvas, '/assets/mascot.glb'))
+    .catch(() => null)
+  if (!mascot) return
+  if (unmounted) {
+    mascot.dispose()
+    return
+  }
+
+  const head = mascot.joints.head!
+  const arm = mascot.joints.arm_L!
+  const forearm = mascot.joints.forearm_L!
+  const armRest = arm.rotation.z
+  const hand = mascot.joints.hand_L!
+  const handRest = hand.rotation.clone()
+  const fingers = Object.entries(mascot.joints)
+    .filter(([name]) => name.startsWith('finger_L'))
+    .map(([name, joint]) => ({ joint, uncurl: name.endsWith('_tip') ? WAVE_FINGERTIP : WAVE_KNUCKLE }))
+  const bodyYaw = mascot.joints.mascot!.rotation.y / DEG
+  const restYaw = head.rotation.y / DEG
   const clamp = (v: number, min: number, max: number) => Math.min(max, Math.max(min, v))
 
-  let targetRot = 0
-  let curRot = 0
+  let targetYaw = restYaw
+  let targetPitch = 0
+  let yaw = restYaw
+  let pitch = 0
   let raf = 0
   let running = false
-  let overlay: Overlay | null = null
-  let overlayT0 = 0
+  let active: { motion: Motion, t0: number }[] = []
 
   const tick = () => {
-    curRot += (targetRot - curRot) * 0.12
+    yaw += (targetYaw - yaw) * 0.08
+    pitch += (targetPitch - pitch) * 0.08
 
-    let extra = 0
-    if (overlay) {
-      const t = (performance.now() - overlayT0) / 1000
-      if (t >= overlay.dur) {
-        overlay = null
-      } else {
-        extra = overlay.at(t)
-      }
-    }
+    const now = performance.now()
+    const pose: Pose = { arm: 0, forearm: 0, palm: 0, wrist: 0, open: 0 }
+    active = active.filter(a => now - a.t0 < a.motion.dur * 1000)
+    for (const a of active) a.motion.at((now - a.t0) / 1000, pose)
 
-    el.style.transform = `rotate(${(curRot + extra).toFixed(2)}deg)`
-    if (Math.abs(targetRot - curRot) > 0.01 || overlay) {
+    head.rotation.set(pitch * DEG, yaw * DEG, 0)
+    arm.rotation.z = armRest + pose.arm * DEG
+    forearm.rotation.z = pose.forearm * DEG
+    hand.rotation.y = handRest.y + pose.palm * DEG
+    hand.rotation.z = handRest.z + pose.wrist * DEG
+    for (const { joint, uncurl } of fingers) joint.rotation.z = pose.open * uncurl * DEG
+    mascot.render()
+    ready.value = true
+
+    if (active.length || Math.abs(targetYaw - yaw) > 0.01 || Math.abs(targetPitch - pitch) > 0.01) {
       raf = requestAnimationFrame(tick)
     } else {
       running = false
@@ -90,56 +127,82 @@ onMounted(() => {
       raf = requestAnimationFrame(tick)
     }
   }
-
-  const play = (motion: Overlay) => {
-    overlay = motion
-    overlayT0 = performance.now()
+  const play = (motion: Motion) => {
+    active = active.filter(a => a.motion !== motion)
+    active.push({ motion, t0: performance.now() })
     kick()
   }
 
-  triggerShake = () => play(shakeMotion)
+  if (!still) {
+    greet = () => {
+      play(waveMotion)
+    }
+  }
 
-  // CSS already renders the head hanging; from here JS owns the pose.
-  play(wakeMotion)
+  const resize = new ResizeObserver(() => {
+    mascot.setSize(box.clientWidth, box.clientHeight)
+    kick()
+  })
+  resize.observe(box)
 
-  let cleanup: () => void
-
-  if (cssTilt) {
-    // CSS drives the tilt via the `rotate` property; JS only adds the click
-    // shake on top through `transform`. Nothing to wire up here.
-    cleanup = () => {}
-  } else if (fine) {
+  let unlisten = () => {}
+  if (still) {
+    kick()
+  } else if (window.matchMedia('(pointer: fine)').matches) {
     const onMove = (e: MouseEvent) => {
-      // Let the wake-up finish before the head starts following the cursor.
-      if (overlay === wakeMotion) return
-      const r = el.getBoundingClientRect()
-      const dy = e.clientY - (r.top + r.height * 0.322) // cursor offset from the neck pivot
-      targetRot = clamp(-dy / 28, -MAX_TILT, MAX_TILT)
+      if (intro) return
+      const r = box.getBoundingClientRect()
+      const dx = e.clientX - (r.left + r.width * HEAD_X)
+      const dy = e.clientY - (r.top + r.height * HEAD_Y)
+      const depth = r.height * LOOK_DEPTH
+      targetYaw = clamp(Math.atan2(dx, depth) / DEG - bodyYaw, -LOOK_YAW, LOOK_YAW)
+      targetPitch = clamp(Math.atan2(dy, Math.hypot(dx, depth)) / DEG, -LOOK_PITCH, LOOK_PITCH)
+      kick()
+    }
+    const onLeave = () => {
+      targetYaw = restYaw
+      targetPitch = 0
       kick()
     }
     window.addEventListener('mousemove', onMove, { passive: true })
-    cleanup = () => window.removeEventListener('mousemove', onMove)
-  } else {
-    const rotForScroll = () => {
-      const p = clamp(window.scrollY / SCROLL_RANGE, 0, 1)
-      return MOBILE_TILT_UP - p * (MOBILE_TILT_UP + MOBILE_TILT_DOWN)
+    document.documentElement.addEventListener('mouseleave', onLeave)
+    unlisten = () => {
+      window.removeEventListener('mousemove', onMove)
+      document.documentElement.removeEventListener('mouseleave', onLeave)
     }
+  } else {
     const onScroll = () => {
-      targetRot = rotForScroll()
+      targetPitch = (clamp(window.scrollY / SCROLL_RANGE, 0, 1) * 2 - 1) * SCROLL_PITCH
       kick()
     }
-    // Snap to the current scroll position on load without animating in. The
-    // wake-up tick is already running and writes the pose on the next frame.
-    curRot = targetRot = rotForScroll()
+    onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
-    cleanup = () => window.removeEventListener('scroll', onScroll)
+    unlisten = () => window.removeEventListener('scroll', onScroll)
   }
 
-  onBeforeUnmount(() => {
-    triggerShake = () => {}
-    cleanup()
+  let intro = !still
+  const timers = still
+    ? []
+    : [
+        setTimeout(() => {
+          targetYaw = INTRO_YAW
+          kick()
+        }, INTRO_HOLD * 1000),
+        setTimeout(() => greet(), (INTRO_HOLD + INTRO_TURN) * 1000),
+        setTimeout(() => {
+          intro = false
+        }, (INTRO_HOLD + INTRO_TURN + WAVE_DUR) * 1000)
+      ]
+
+  cleanup = () => {
+    unlisten()
+    timers.forEach(clearTimeout)
+    resize.disconnect()
     cancelAnimationFrame(raf)
-  })
+    mascot.dispose()
+  }
+
+  mascot.setSize(box.clientWidth, box.clientHeight)
 })
 </script>
 
@@ -203,28 +266,25 @@ onMounted(() => {
         class="max-md:hidden md:col-span-5 md:relative md:ml-10"
       >
         <div
+          ref="boxEl"
           class="absolute left-1/2 top-0 aspect-[654/1199] h-[calc(100%+4rem)] w-auto -translate-x-1/2 cursor-pointer select-none"
           @click="onMascotClick"
         >
           <img
-            :src="'/assets/mascotLeft-body.svg'"
+            src="/assets/mascot.webp"
             :alt="$t('hero.mascotAlt')"
-            width="654"
-            height="1199"
-            fetchpriority="high"
-            class="drop-shadow-mascot absolute inset-0 h-full w-full object-contain"
+            width="1260"
+            height="1584"
+            loading="lazy"
+            class="drop-shadow-mascot pointer-events-none absolute bottom-0 left-[-30%] h-[120%] w-[175%] max-w-none"
+            :class="{ 'opacity-0': ready }"
           >
-          <img
-            ref="headEl"
-            :src="'/assets/mascotLeft-head.svg'"
-            alt=""
+          <canvas
+            ref="canvasEl"
             aria-hidden="true"
-            width="654"
-            height="1199"
-            fetchpriority="high"
-            class="mascot-head-asleep mascot-head-scroll absolute inset-0 h-full w-full object-contain will-change-transform"
-            style="transform-origin: 49.4% 32.2%"
-          >
+            class="drop-shadow-mascot pointer-events-none absolute bottom-0 max-w-none"
+            :class="{ 'opacity-0': !ready }"
+          />
         </div>
       </div>
     </div>
