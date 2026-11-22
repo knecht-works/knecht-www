@@ -40,7 +40,7 @@ const OCCLUDED = ['head_lining', 'yoke']
 const MAX_RADIUS = 20
 
 // The canvas is larger than the artwork box so a raised arm or a turned head is not clipped.
-const BLEED = { top: 0.2, right: 0.45, left: 0.3 }
+const BLEED = { top: 0.2, right: 0.45, left: 0.5 }
 const ARTWORK_ASPECT = 654 / 1199
 const INNER_LINE = 5.5 / 600
 const OUTER_LINE = 8 / 600
@@ -113,7 +113,8 @@ const lighting = (o: Object3D) => {
   return BODY
 }
 
-export async function createMascot(canvas: HTMLCanvasElement, url: string) {
+/** `mirrored` turns the rest pose to face right instead of left. */
+export async function createMascot(canvas: HTMLCanvasElement, url: string, mirrored = false) {
   const gltf = await new GLTFLoader().setMeshoptDecoder(MeshoptDecoder).loadAsync(url)
   const joints: Record<string, Object3D> = {}
   const ids = new Map<string, number>()
@@ -129,7 +130,12 @@ export async function createMascot(canvas: HTMLCanvasElement, url: string) {
     o.material = partMaterial(lit, shade, ids.get(key)!, lighting(o), OCCLUDED.includes(key))
   })
   for (const [name, [x, y, z]] of Object.entries(REST_POSE)) {
-    joints[name]!.rotation.set(x * DEG, y * DEG, z * DEG)
+    if (mirrored) {
+      const twin = name.replace(/_[LR]$/, side => (side === '_L' ? '_R' : '_L'))
+      joints[twin]!.rotation.set(x * DEG, -y * DEG, -z * DEG)
+    } else {
+      joints[name]!.rotation.set(x * DEG, y * DEG, z * DEG)
+    }
   }
   // Yaw first, so pitch and roll stay relative to where the head faces.
   joints.head!.rotation.order = 'YXZ'
@@ -233,6 +239,8 @@ export async function createMascot(canvas: HTMLCanvasElement, url: string) {
       radius.value = Math.ceil(outer.value) + 1
     },
     render() {
+      // A hidden box has no size, and drawing into empty targets logs a WebGL error.
+      if (!parts.width || !parts.height) return
       renderer.setRenderTarget(parts)
       renderer.render(scene, camera)
       run(edgePass, edges)
