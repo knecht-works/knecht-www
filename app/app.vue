@@ -20,10 +20,6 @@ useHead(() => ({
   ]
 }))
 
-useSeoMeta({
-  twitterCard: 'summary_large_image'
-})
-
 defineOgImage('Knecht')
 </script>
 

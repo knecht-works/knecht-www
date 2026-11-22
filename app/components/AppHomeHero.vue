@@ -23,60 +23,26 @@ const WAVE_SWING = 22 // degrees the forearm swings around that bend
 const WAVE_FREQ = 9 // rad/s
 const WAVE_PALM = 30 // degrees the wrist twists so the palm faces the viewer
 const WAVE_WRIST = 18 // degrees the hand swings, trailing the forearm
-const WAVE_KNUCKLE = 30 // degrees the fingers uncurl at the knuckle while waving
-const WAVE_FINGERTIP = 60 // degrees the fingertips uncurl on top of that
-const DANCE_BEAT = 0.45 // seconds per dance pose
-const DANCE_BOUNCE = 14 // degrees the knees dip on every beat
-const LEG_LENGTH = 2.8 // thigh plus shin in model units, to lower the hips by what the knees bend
 
-// Degrees added to a joint axis (`arm_L.z`), plus `open` (waving hand, 0 to 1) and `bend` (knees).
-type Pose = Record<string, number>
-type Motion = { dur: number, at: (t: number, pose: Pose) => void }
-
-const ease = (x: number) => (x < 0.5 ? 4 * x * x * x : 1 - (-2 * x + 2) ** 3 / 2)
 const keyframed = (frames: [number, number][]) => (t: number) => {
   for (let i = 1; i < frames.length; i++) {
     const [t0, a0] = frames[i - 1]!
     const [t1, a1] = frames[i]!
-    if (t <= t1) return a0 + (a1 - a0) * ease((t - t0) / (t1 - t0))
+    if (t <= t1) return a0 + (a1 - a0) * easeInOut((t - t0) / (t1 - t0))
   }
   return frames[frames.length - 1]![1]
 }
 const lift = keyframed([[0, 0], [0.5, 1], [WAVE_DUR - 0.5, 1], [WAVE_DUR, 0]])
-const add = (pose: Pose, key: string, value: number) => {
-  pose[key] = (pose[key] ?? 0) + value
-}
 const wave = (t: number, pose: Pose) => {
   if (t >= WAVE_DUR) return
   const raised = lift(t)
-  add(pose, 'arm_L.z', raised * WAVE_ARM)
-  add(pose, 'forearm_L.z', raised * (WAVE_FOREARM + WAVE_SWING * Math.sin((t - 0.5) * WAVE_FREQ)))
-  add(pose, 'hand_L.y', raised * WAVE_PALM)
-  add(pose, 'hand_L.z', raised * WAVE_WRIST * Math.sin((t - 0.5) * WAVE_FREQ - 0.8))
-  add(pose, 'open', raised)
+  addToPose(pose, 'arm_L.z', raised * WAVE_ARM)
+  addToPose(pose, 'forearm_L.z', raised * (WAVE_FOREARM + WAVE_SWING * Math.sin((t - 0.5) * WAVE_FREQ)))
+  addToPose(pose, 'hand_L.y', raised * WAVE_PALM)
+  addToPose(pose, 'hand_L.z', raised * WAVE_WRIST * Math.sin((t - 0.5) * WAVE_FREQ - 0.8))
+  addToPose(pose, 'open', raised)
 }
 const waveMotion: Motion = { dur: WAVE_DUR, at: wave }
-
-const GROOVE: Pose = { 'arm_R.z': -75, 'forearm_R.z': -35, 'arm_L.z': 45, 'torso.z': 6, 'head.z': -6 }
-const GROOVE_BACK: Pose = { 'arm_L.z': 75, 'forearm_L.z': 35, 'arm_R.z': -45, 'torso.z': -6, 'head.z': 6 }
-const PUMP: Pose = { 'arm_L.z': 80, 'forearm_L.z': 100, 'head.z': 12 }
-const CHEER: Pose = { 'arm_L.z': 135, 'forearm_L.z': 20, 'arm_R.z': -135, 'forearm_R.z': -20, 'bend': 12 }
-const POINT: Pose = { 'arm_R.z': -125, 'arm_L.z': 25, 'torso.z': 5, 'head.z': -8 }
-const DAB: Pose = { 'arm_L.z': 95, 'arm_R.z': -30, 'torso.z': -8, 'head.z': 15 }
-const DANCE = [GROOVE, GROOVE_BACK, GROOVE, GROOVE_BACK, PUMP, CHEER, CHEER, POINT, DAB]
-const REST: Pose = {}
-const dance = (t: number, pose: Pose) => {
-  const beat = Math.floor(t / DANCE_BEAT)
-  const from = DANCE[beat - 1] ?? REST
-  const to = DANCE[beat] ?? REST
-  // Poses snap in over the first part of a beat and hold for the rest.
-  const u = ease(Math.min(1, (t / DANCE_BEAT - beat) / 0.6))
-  for (const key in from) add(pose, key, from[key]! * (1 - u))
-  for (const key in to) add(pose, key, to[key]! * u)
-  const fade = Math.min(1, t / DANCE_BEAT, (danceMotion.dur - t) / DANCE_BEAT)
-  add(pose, 'bend', fade * DANCE_BOUNCE * (0.5 - 0.5 * Math.cos(t / DANCE_BEAT * 2 * Math.PI)))
-}
-const danceMotion: Motion = { dur: (DANCE.length + 1) * DANCE_BEAT, at: dance }
 
 let boogie = () => {}
 const onMascotClick = () => boogie()
@@ -106,14 +72,7 @@ onMounted(async () => {
   }
 
   const head = mascot.joints.head!
-  const pelvis = mascot.joints.pelvis!
-  const pelvisRest = pelvis.position.y
-  const posed = Object.entries(mascot.joints)
-    .filter(([name]) => name !== 'head')
-    .map(([name, joint]) => ({ name, joint, rest: joint.rotation.clone() }))
-  const fingers = Object.entries(mascot.joints)
-    .filter(([name]) => name.startsWith('finger_L'))
-    .map(([name, joint]) => ({ joint, uncurl: name.endsWith('_tip') ? WAVE_FINGERTIP : WAVE_KNUCKLE }))
+  const applyPose = createPoser(mascot.joints)
   const bodyYaw = mascot.joints.mascot!.rotation.y / DEG
   const restYaw = head.rotation.y / DEG
   const clamp = (v: number, min: number, max: number) => Math.min(max, Math.max(min, v))
@@ -135,22 +94,7 @@ onMounted(async () => {
     active = active.filter(a => now - a.t0 < a.motion.dur * 1000)
     for (const a of active) a.motion.at((now - a.t0) / 1000, pose)
 
-    const bend = pose.bend ?? 0
-    for (const side of ['L', 'R']) {
-      add(pose, `leg_${side}.x`, -bend)
-      add(pose, `shin_${side}.x`, 2 * bend)
-      add(pose, `foot_${side}.x`, -bend)
-    }
-    for (const { name, joint, rest } of posed) {
-      joint.rotation.set(
-        rest.x + (pose[`${name}.x`] ?? 0) * DEG,
-        rest.y + (pose[`${name}.y`] ?? 0) * DEG,
-        rest.z + (pose[`${name}.z`] ?? 0) * DEG
-      )
-    }
-    head.rotation.set(pitch * DEG, yaw * DEG, (pose['head.z'] ?? 0) * DEG)
-    pelvis.position.y = pelvisRest - LEG_LENGTH * (1 - Math.cos(bend * DEG))
-    for (const { joint, uncurl } of fingers) joint.rotation.z += (pose.open ?? 0) * uncurl * DEG
+    applyPose(pose, pitch, yaw)
     mascot.render()
     ready.value = true
 
@@ -314,10 +258,10 @@ onMounted(async () => {
           <img
             src="/assets/mascot.webp"
             :alt="$t('hero.mascotAlt')"
-            width="1260"
+            width="1404"
             height="1584"
             loading="lazy"
-            class="drop-shadow-mascot pointer-events-none absolute bottom-0 left-[-30%] h-[120%] w-[175%] max-w-none"
+            class="drop-shadow-mascot pointer-events-none absolute bottom-0 left-[-50%] h-[120%] w-[195%] max-w-none"
             :class="{ 'opacity-0': ready }"
           >
           <canvas

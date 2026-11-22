@@ -12,6 +12,10 @@ const error = ref('')
 // Honeypot, stays empty for real users.
 const website = ref('')
 
+const boxEl = useTemplateRef<HTMLDivElement>('boxEl')
+const canvasEl = useTemplateRef<HTMLCanvasElement>('canvasEl')
+const live = ref(false)
+
 const { t } = useI18n()
 const localePath = useLocalePath()
 
@@ -32,6 +36,51 @@ const typeItems = computed(() => [
   { value: 'agency', label: t('cta.details.type.agency') },
   { value: 'freelancer', label: t('cta.details.type.freelancer') }
 ])
+
+let unmounted = false
+let stopDance = () => {}
+onBeforeUnmount(() => {
+  unmounted = true
+  stopDance()
+})
+
+const celebrate = async () => {
+  const box = boxEl.value
+  const canvas = canvasEl.value
+  if (!box || !canvas || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+  // Imported on demand so three.js is only loaded for visitors who sign up.
+  const mascot = await import('~/utils/mascot')
+    .then(m => m.createMascot(canvas, '/assets/mascot.glb', true))
+    .catch(() => null)
+  if (!mascot) return
+  if (unmounted) {
+    mascot.dispose()
+    return
+  }
+
+  const applyPose = createPoser(mascot.joints)
+  const yaw = mascot.joints.head!.rotation.y * 180 / Math.PI
+  mascot.setSize(box.clientWidth, box.clientHeight)
+  const t0 = performance.now()
+  let raf = 0
+  const tick = () => {
+    const elapsed = (performance.now() - t0) / 1000
+    const pose: Pose = {}
+    if (elapsed < danceMotion.dur) {
+      danceMotion.at(elapsed, pose)
+      raf = requestAnimationFrame(tick)
+    }
+    applyPose(pose, 0, yaw)
+    mascot.render()
+    live.value = true
+  }
+  raf = requestAnimationFrame(tick)
+  stopDance = () => {
+    cancelAnimationFrame(raf)
+    mascot.dispose()
+  }
+}
 
 const submit = async () => {
   if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email.value)) {
@@ -56,6 +105,7 @@ const submit = async () => {
       }
     })
     done.value = true
+    celebrate()
   } catch {
     error.value = t('cta.errorFailed')
   } finally {
@@ -74,17 +124,29 @@ const submit = async () => {
       >
         <div class="cta-glow" />
 
-        <div class="relative flex flex-col items-center gap-8 px-4 py-6 lg:flex-row lg:gap-24 lg:p-14">
+        <div class="relative flex flex-col items-center gap-8 px-4 py-6 lg:flex-row lg:gap-16 lg:p-14">
           <div class="shrink-0">
-            <img
-              :src="'/assets/mascotRight.svg'"
-              alt=""
-              aria-hidden="true"
-              width="299"
-              height="560"
-              loading="lazy"
-              class="drop-shadow-mascot h-auto w-36 select-none lg:w-44 mx-auto"
+            <div
+              ref="boxEl"
+              class="relative mx-auto aspect-[654/1199] w-36 select-none lg:ml-8 lg:w-44"
             >
+              <img
+                src="/assets/mascotRight.webp"
+                alt=""
+                aria-hidden="true"
+                width="1404"
+                height="1584"
+                loading="lazy"
+                class="drop-shadow-mascot pointer-events-none absolute bottom-0 left-[-50%] h-[120%] w-[195%] max-w-none"
+                :class="{ 'opacity-0': live }"
+              >
+              <canvas
+                ref="canvasEl"
+                aria-hidden="true"
+                class="drop-shadow-mascot pointer-events-none absolute bottom-0 max-w-none"
+                :class="{ 'opacity-0': !live }"
+              />
+            </div>
           </div>
 
           <div class="flex-1">
@@ -208,6 +270,7 @@ const submit = async () => {
                       :placeholder="$t('cta.emailPlaceholder')"
                       size="xl"
                       :color="error ? 'error' : 'primary'"
+                      :highlight="!!error"
                       :disabled="loading"
                       class="w-full"
                       autocomplete="email"
@@ -226,7 +289,7 @@ const submit = async () => {
 
               <p
                 v-if="error"
-                class="mt-2.5 font-mono text-sm text-error"
+                class="mt-1.5 text-xs text-error"
               >
                 {{ error }}
               </p>

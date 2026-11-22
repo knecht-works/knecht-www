@@ -41,7 +41,6 @@ watch(isOpen, (value) => {
         <AssistantMessages
           :chat="chat"
           :faq-questions="faqQuestions"
-          class="flex flex-col gap-4"
           @ask-question="send"
         />
       </div>
