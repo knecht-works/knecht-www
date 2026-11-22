@@ -32,9 +32,9 @@ const BODY: Lighting = { light: new Vector3(0.35, 0.8, 0.5).normalize(), thresho
 // The head turns with the cursor. Lit from straight above, only its underside is shaded,
 // so no flat face switches tone while it moves.
 const HEAD: Lighting = { light: new Vector3(0, 1, 0), threshold: -0.5 }
-// Arms swing while waving. Only faces that point steeply down are shaded, so the forearm
-// keeps its tone through the whole swing.
-const ARM: Lighting = { light: new Vector3(0, 1, 0), threshold: -0.8 }
+// Arms and legs swing and bend. Only faces that point steeply down are shaded, so a limb
+// keeps its tone through the whole move.
+const LIMB: Lighting = { light: new Vector3(0, 1, 0), threshold: -0.8 }
 // Parts that sit in permanent shadow: they always take the shade tone of their material.
 const OCCLUDED = ['head_lining', 'yoke']
 const MAX_RADIUS = 20
@@ -101,10 +101,14 @@ const pass = (uniforms: Record<string, IUniform>, body: string) => new RawShader
     ${body}`
 })
 
+// A bent knee exposes the thigh's cut end, which would show as a dark stripe above the seam.
+const THIGH: Lighting = { light: new Vector3(0, 1, 0), threshold: -2 }
+
 const lighting = (o: Object3D) => {
   if (o.name.startsWith('head_')) return HEAD
+  if (/^leg_._upper/.test(o.name)) return THIGH
   for (let p = o.parent; p; p = p.parent) {
-    if (p.name.startsWith('arm_')) return ARM
+    if (p.name.startsWith('arm_') || p.name.startsWith('leg_')) return LIMB
   }
   return BODY
 }
