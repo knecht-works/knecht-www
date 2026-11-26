@@ -181,7 +181,7 @@
       "projects": "Projekte",
       "detail": "Projekt-Detail",
       "workflow": "Workflow-Editor",
-      "runningWorkflow": "Test Workflows"
+      "sessions": "Sessions"
     },
     "imageAlt": "Knecht {label} Vorschau",
     "browserAction": "Vorschau"

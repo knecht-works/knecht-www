@@ -12,18 +12,18 @@ const tabMeta = [
     id: 'detail',
     labelKey: 'demo.tabs.detail',
     image: '/assets/project.png',
-    url: '/projekte/test-craftcms'
+    url: '/projekte/search-homepage'
+  },
+  {
+    id: 'sessions',
+    labelKey: 'demo.tabs.sessions',
+    image: '/assets/sessions.png',
+    url: '/projekte/search-homepage/sessions'
   },
   {
     id: 'workflow',
     labelKey: 'demo.tabs.workflow',
     image: '/assets/workflow.png',
-    url: '/workflows/bug-fix'
-  },
-  {
-    id: 'running-workflow',
-    labelKey: 'demo.tabs.runningWorkflow',
-    image: '/assets/running-workflow.png',
     url: '/workflows/bug-fix'
   }
 ]
